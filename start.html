@@ -6,11 +6,25 @@
   </head>
   <body>
     <a-scene>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+      <!-- <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
       <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
       <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
       <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
+      <a-sky color="#ECECEC"></a-sky> -->
+
+      <a-box src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwyAUpVrklSTzZo5gRuPnSLHHcnmpxjuusJXILcBafnh0D92OJIIRF8grBrzfJVNUPDG8&usqp=CAU" position="0 0.8 -3.5" rotation="0 45 0"  height="0.025" width = "1.35" depth="1.35"></a-box>
+      <a-box src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGeAaWVIJrf3OL9um2HhXFL7O03uJDrPUvsg&usqp=CAU" position="0 0.76 -3.5" rotation="0 45 0"  height="0.075" width = "1.75" depth="1.75"></a-box>
+      <a-cylinder src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnLtIsLP2Mg-KSxh5Fci7oHjHUryNIrVUmiQ&usqp=CAU" position="0 0.25 -3.5" radius="0.05" height="1" color="#FFC65D"></a-cylinder>
+      <a-plane  src="https://www.glamourflooringla.com/wp-content/uploads/2019/04/ELBRUS-TEAK-CURUPAY-HARDWOOD-FLOORING-WOODLAND-HILLS.jpg" position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#AAAEEE"></a-plane> //floor
+      <a-plane src="https://media.istockphoto.com/photos/luxury-bar-with-drinks-and-bar-stools-picture-id1166260854?k=20&m=1166260854&s=170667a&w=0&h=V6csYTnioHogGilkw3QGsyc-xBBKYkG97SmJerLcF-w=" position="0 2 -6" rotation="0 0 0" width="4" height="4" color="#AAAEEE"></a-plane> //back wall
+      <a-plane src="walltexture.jpg" position="2 2 -4" rotation="0 -90 0" width="4" height="4" color="#AAAEEE"></a-plane> //right wall
+      <a-plane src="walltexture.jpg" position="-2 2 -4" rotation="0 -270 0" width="4" height="4" color="#AAAEEE"></a-plane> //left wall
+      <a-plane src="walltexture.jpg" position="0 4 -4" rotation="-270 0 0" width="4" height="4" color="#AAAEEE"></a-plane> //ceiling
+      
+  
+      <a-sky color="#AAAAAA"></a-sky>
     </a-scene>
+
+    <script src="animate.js"></script>
   </body>
 </html>
