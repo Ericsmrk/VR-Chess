@@ -9,4 +9,4 @@ Student Project for Software Engineering (CSCI 150).
 
 pee pee poo poo
 
-This is my change.
+Click on main_menu.html and then fire up live server to begin from landing page.
