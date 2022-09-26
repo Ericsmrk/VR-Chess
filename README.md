@@ -39,7 +39,7 @@ Student Project for Software Engineering (CSCI 150).
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/Ericsmrk/VR-Chess">
+  <a href="https://github.com/Ericsmrk/VR-Chess/images/chess.png">
     <img src="images/chess.png" alt="Logo" width="80" height="80">
   </a>
 
