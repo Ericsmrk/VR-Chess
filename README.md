@@ -1,12 +1,5 @@
 # VR-Chess
 
-Milestones
-Mini Milestone: Create hello world 
-Milestone one: Create a scene with two chairs and a table, with chess board and pieces can be moved. No collision functionality.
-Milestone two: User interface for choosing environment. Chess board is fully functional.
-Milestone X: Unity gaming services is active. Software is functioning and accessible by Steam users. 
-Student Project for Software Engineering (CSCI 150).
-
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
 <!--
@@ -94,16 +87,11 @@ fun playing against your friends in the most accessible immersive VR chess exper
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
+[![Game Link][product-screenshot]](https://ericsmrk.github.io/VR-Chess/)
 
 ### Built With
 
+* [![AFRAME][aframe.io]][AFRAME-url]
 * [![Next][Next.js]][Next-url]
 * [![React][React.js]][React-url]
 * [![Vue][Vue.js]][Vue-url]
@@ -206,9 +194,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Eric Smrkovsky - [@twitter_handle](https://twitter.com/eric_smrkovsky) - ericsmrkovsky@gmail.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [https://github.com/Ericsmrk/VR-Chess](https://github.com/Ericsmrk/VR-Chess)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
