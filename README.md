@@ -39,23 +39,25 @@ Student Project for Software Engineering (CSCI 150).
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/Ericsmrk/VR-Chess">
+    <img src="images/chess.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">!!!VR CHESS!!!</h3>
 
   <p align="center">
-    project_description
+    A multiplayer online VR Chess game. Play chess in various scenes with your
+friends from across the world! Become immersed in a virtual space, sharpen your Chess skills, and have
+fun playing against your friends in the most accessible immersive VR chess experience.
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Ericsmrk/VR-Chess"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://github.com/Ericsmrk/VR-Chess">View Demo(not yet)</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/Ericsmrk/VR-Chess">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/Ericsmrk/VR-Chess">Request Feature</a>
   </p>
 </div>
 
