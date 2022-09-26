@@ -32,16 +32,13 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/Ericsmrk/VR-Chess/blob/main/images/chess.PNG">
+  <a href="https://ericsmrk.github.io/VR-Chess/">
     <img src="https://github.com/Ericsmrk/VR-Chess/blob/main/images/chess.PNG" alt="Logo" width="400" height="400">
   </a>
 
 <h3 align="center">!!!VR CHESS!!!</h3>
 
   <p align="center">
-    A multiplayer online VR Chess game. Play chess in various scenes with your
-friends from across the world! Become immersed in a virtual space, sharpen your Chess skills, and have
-fun playing against your friends in the most accessible immersive VR chess experience.
     <br />
     <a href="https://github.com/Ericsmrk/VR-Chess"><strong>Explore the docs »</strong></a>
     <br />
@@ -62,6 +59,10 @@ fun playing against your friends in the most accessible immersive VR chess exper
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
+      
+    A multiplayer online VR Chess game. Play chess in various scenes with your
+friends from across the world! Become immersed in a virtual space, sharpen your Chess skills, and have
+fun playing against your friends in the most accessible immersive VR chess experience.
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -91,7 +92,7 @@ fun playing against your friends in the most accessible immersive VR chess exper
 
 ### Built With
 
-* [![AFRAME][aframe.io]][AFRAME-url]
+* [![Aframe][Aframe.io]][Aframe-url]
 * [![Next][Next.js]][Next-url]
 * [![React][React.js]][React-url]
 * [![Vue][Vue.js]][Vue-url]
