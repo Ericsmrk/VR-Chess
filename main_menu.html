@@ -1,12 +1,44 @@
-<html>
+<html lang="en">
+    <head>
+        <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+        <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
+        <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+        <title>Main Menu</title>
+
+    </head>
     <body>
+        <a-scene>
+
+
+
+
+            <!-- Mouse cursor so we can click on the scene with mouse or touch. -->
+            <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [gui-interactable]"></a-entity>
+            <a-entity id="leftHand" laser-controls="hand: left" raycaster="objects: [gui-interactable]"></a-entity>
+            <a-entity id="rightHand" laser-controls="hand: right" raycaster="objects: [gui-interactable]"></a-entity>
+
+            <!-- Camera + cursor. -->
+            <a-entity id="cameraRig" position="0 1.6 0">
+                <a-camera look-controls wasd-controls position="0 0 0">
+                </a-camera> <!-- /camera -->
+            </a-entity>
+
+            <a-entity environment="preset: forest"></a-entity>
+
+
+        </a-scene>
+
         <h1>VR Chess!</h1>
         <h2>Main Menu</h2>
         <h3><a href="new_game_options.html">Create Game</a></h3>
         <h3><a href="game_scene.html">Join Game</a></h3>
         <h4><a href="basic_room.html">Multiplayer Game</a></h4>
+
+
+
+
         <script>
-            var name = window.prompt("What is your GamerTag?");
+            let name = window.prompt("What is your GamerTag?");
             document.write("Sup, " + name);
         </script>
     </body>
