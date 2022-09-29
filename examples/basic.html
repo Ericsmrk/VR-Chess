@@ -23,7 +23,10 @@
 
     <!--   used for the pretty environment   -->
     <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
+<!--
 
+
+-->
     <!--   used to prevent players from spawning on top of each other so much  -->
     <script src="/js/spawn-in-circle.component.js"></script>
 
@@ -102,8 +105,11 @@
         </template>
         <!-- /Templates -->
       </a-assets>
-
-      <a-entity environment="preset:starry;groundColor:#000000;"></a-entity>
+<!--
+  <a-entity environment="preset:starry;groundColor:#000000;"></a-entity>
+  <a-entity environment="preset: forest"></a-entity>
+-->
+      <a-entity environment="preset: forest"></a-entity>
       <a-entity light="type:ambient;intensity:0.5"></a-entity>
 
       <!--   Here we declare only the local user's avatar, which we then broadcast to other users     -->
