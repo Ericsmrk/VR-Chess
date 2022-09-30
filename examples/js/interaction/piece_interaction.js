@@ -2,6 +2,7 @@ AFRAME.registerComponent('cursor-listener', {
 			  init: function () {
 				var lastIndex = -1;
 				var COLORS = ['red', 'green', 'blue'];
+				var POSITIONS = [1, 2, 3]
 
 				this.el.addEventListener('mouseenter', function(evt){
 					this.setAttribute('material', 'opacity', 0.5);
@@ -13,7 +14,7 @@ AFRAME.registerComponent('cursor-listener', {
 				  lastIndex = (lastIndex + 1) % COLORS.length;
 				  this.setAttribute('material', 'color', COLORS[lastIndex]);
 				  console.log('I was clicked at: ', evt.detail.intersection.point);
-				  this.setAttribute('position', {x:0, y:2, z:-3})
+				  this.setAttribute('position', {x:0, y:POSITIONS[lastIndex], z:-3})
 
 				  
 				});
