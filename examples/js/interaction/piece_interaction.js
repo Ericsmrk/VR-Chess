@@ -13,6 +13,7 @@ AFRAME.registerComponent('cursor-listener', {
 				  lastIndex = (lastIndex + 1) % COLORS.length;
 				  this.setAttribute('material', 'color', COLORS[lastIndex]);
 				  console.log('I was clicked at: ', evt.detail.intersection.point);
+				  this.setAttribute('position', {x:0, y:2, z:-3})
 
 				  
 				});
