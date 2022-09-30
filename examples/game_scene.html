@@ -4,17 +4,18 @@
 		<title>VR Chess: A start</title>
 		<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
 		<script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+		<script src="js/interaction/piece_interaction.js"></script>
 	
 	</head>
 	<body>
 		<a-scene>
-			<!-- we want the environment to be loaded first, prevents funky stuff from happenning-->
+
+				<!-- we want the environment to be loaded first, prevents funky stuff from happenning-->
 			<!-- mess around here to change the skybox/background scene stuff-->
 			<a-entity environment="preset: forest"></a-entity>
 
-
-			<a-box src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGeAaWVIJrf3OL9um2HhXFL7O03uJDrPUvsg&usqp=CAU" position="0 0.76 -3.5" rotation="0 45 0"  height="0.075" width = "1.75" depth="1.75"></a-box>
-			<a-cylinder src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnLtIsLP2Mg-KSxh5Fci7oHjHUryNIrVUmiQ&usqp=CAU" position="0 0.25 -3.5" radius="0.05" height="1" color="#FFC65D"></a-cylinder>
+			<!-- Camera and Cursor-->
+			
 			
 			<!------------------------------------------------------------------------ Entity/Asset Loading ------------------------------------------------------------------>
 			<a-asset-item id = "test" src="../src/models/sets/default/white/rook.gltf"></a-asset-item>
@@ -25,8 +26,16 @@
 			<a-entity gltf-model="#chair" position = "0 0 0" scale = ".25 .25 .25" rotation="0 180 0"></a-entity>
 
 
+			<!-------------------------------------------------------------------------Testing Area--------------------------------------------------------------------------->
+			<a-box src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGeAaWVIJrf3OL9um2HhXFL7O03uJDrPUvsg&usqp=CAU" position="0 0.76 -3.5" rotation="0 45 0"  height="0.075" width = "1.75" depth="1.75"></a-box>
+			<a-cylinder src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnLtIsLP2Mg-KSxh5Fci7oHjHUryNIrVUmiQ&usqp=CAU" position="0 0.25 -3.5" radius="0.05" height="1" color="#FFC65D"></a-cylinder>
+			
+		  
+				
+			
+
 		</a-scene>
 
 	</body>
-
+	
 </html>
