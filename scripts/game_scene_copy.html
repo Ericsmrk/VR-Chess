@@ -4,6 +4,7 @@
 		<title>VR Chess: A start</title>
 		<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
 		<script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+		<script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
 		<script src="js/interaction/piece_interaction.js"></script>
 	
 	</head>
@@ -26,36 +27,37 @@
 			  
 			<!------------------------------------------------------------------------ Entity/Asset Loading ------------------------------------------------------------------>
 			<!-- ROOK -->
-			<a-asset-item id = "rook_w" src="../src/models/sets/default/white/rook.gltf"></a-asset-item>
-			<a-entity gltf-model="#rook_w" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="2 1.5 -1" scale="0.2 0.2 0.2"></a-entity>
 			
-			<a-entity gltf-model="#rook_w" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="-1.5 1.5 -1" scale="0.2 0.2 0.2"></a-entity>
+			<a-asset-item id = "rook_w" src="../src/models/sets/default/white/rook.gltf"></a-asset-item>
+			<a-entity gltf-model="#rook_w" id="rookw_r" cursor-listener geometry="primitive: box" material="color: blue" position="2 1.5 -1" scale="0.2 0.2 0.2"></a-entity>
+
+			<a-entity gltf-model="#rook_w" id="rookw_l" cursor-listener geometry="primitive: box" material="color: blue" position="-1.5 1.5 -1" scale="0.2 0.2 0.2"></a-entity>
 
 			<a-asset-item id = "rook_b" src="../src/models/sets/default/black/rook.gltf"></a-asset-item>
-			<a-entity gltf-model="#rook_b" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="2 1.5 -4.5" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#rook_b" id="rookb_r" cursor-listener geometry="primitive: box" material="color: blue" position="2 1.5 -4.5" scale="0.2 0.2 0.2"></a-entity>
 			
-			<a-entity gltf-model="#rook_b" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="-1.5 1.5 -4.5" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#rook_b" id="rookb_l" cursor-listener geometry="primitive: box" material="color: blue" position="-1.5 1.5 -4.5" scale="0.2 0.2 0.2"></a-entity>
 
 			<!-- PAWN -->
 			<a-asset-item id = "pawn_w" src="../src/models/sets/default/white/pawn.gltf"></a-asset-item>
 			<a-asset-item id = "pawn" src="../src/models/sets/default/black/pawn.gltf"></a-asset-item>
-			<a-entity gltf-model="#pawn" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="-1.5 1.5 -4" scale="0.2 0.2 0.2"></a-entity>
-			<a-entity gltf-model="#pawn" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="-1 1.5 -4" scale="0.2 0.2 0.2"></a-entity>
-			<a-entity gltf-model="#pawn" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="-0.5 1.5 -4" scale="0.2 0.2 0.2"></a-entity>
-			<a-entity gltf-model="#pawn" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="0 1.5 -4" scale="0.2 0.2 0.2"></a-entity>
-			<a-entity gltf-model="#pawn" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="0.5 1.5 -4" scale="0.2 0.2 0.2"></a-entity>
-			<a-entity gltf-model="#pawn" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="1 1.5 -4" scale="0.2 0.2 0.2"></a-entity>
-			<a-entity gltf-model="#pawn" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="1.5 1.5 -4" scale="0.2 0.2 0.2"></a-entity>
-			<a-entity gltf-model="#pawn" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="2 1.5 -4" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#pawn" id="pawnb_a" cursor-listener geometry="primitive: box" material="color: blue" position="-1.5 1.5 -4" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#pawn" id="pawnb_b" cursor-listener geometry="primitive: box" material="color: blue" position="-1 1.5 -4" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#pawn" id="pawnb_c" cursor-listener geometry="primitive: box" material="color: blue" position="-0.5 1.5 -4" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#pawn" id="pawnb_d" cursor-listener geometry="primitive: box" material="color: blue" position="0 1.5 -4" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#pawn" id="pawnb_e" cursor-listener geometry="primitive: box" material="color: blue" position="0.5 1.5 -4" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#pawn" id="pawnb_f" cursor-listener geometry="primitive: box" material="color: blue" position="1 1.5 -4" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#pawn" id="pawnb_g" cursor-listener geometry="primitive: box" material="color: blue" position="1.5 1.5 -4" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#pawn" id="pawnb_h" cursor-listener geometry="primitive: box" material="color: blue" position="2 1.5 -4" scale="0.2 0.2 0.2"></a-entity>
 
-			<a-entity gltf-model="#pawn_w" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="-1.5 1.5 -1.5" scale="0.2 0.2 0.2"></a-entity>
-			<a-entity gltf-model="#pawn_w" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="-1 1.5 -1.5" scale="0.2 0.2 0.2"></a-entity>
-			<a-entity gltf-model="#pawn_w" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="-0.5 1.5 -1.5" scale="0.2 0.2 0.2"></a-entity>
-			<a-entity gltf-model="#pawn_w" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="0 1.5 -1.5" scale="0.2 0.2 0.2"></a-entity>
-			<a-entity gltf-model="#pawn_w" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="0.5 1.5 -1.5" scale="0.2 0.2 0.2"></a-entity>
-			<a-entity gltf-model="#pawn_w" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="1 1.5 -1.5" scale="0.2 0.2 0.2"></a-entity>
-			<a-entity gltf-model="#pawn_w" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="1.5 1.5 -1.5" scale="0.2 0.2 0.2"></a-entity>
-			<a-entity gltf-model="#pawn_w" id="box" cursor-listener geometry="primitive: box" material="color: blue" position="2 1.5 -1.5" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#pawn_w" id="pawnw_a" cursor-listener geometry="primitive: box" material="color: blue" position="-1.5 1.5 -1.5" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#pawn_w" id="pawnw_b" cursor-listener geometry="primitive: box" material="color: blue" position="-1 1.5 -1.5" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#pawn_w" id="pawnw_c" cursor-listener geometry="primitive: box" material="color: blue" position="-0.5 1.5 -1.5" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#pawn_w" id="pawnw_d" cursor-listener geometry="primitive: box" material="color: blue" position="0 1.5 -1.5" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#pawn_w" id="pawnw_e" cursor-listener geometry="primitive: box" material="color: blue" position="0.5 1.5 -1.5" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#pawn_w" id="pawnw_f" cursor-listener geometry="primitive: box" material="color: blue" position="1 1.5 -1.5" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#pawn_w" id="pawnw_g" cursor-listener geometry="primitive: box" material="color: blue" position="1.5 1.5 -1.5" scale="0.2 0.2 0.2"></a-entity>
+			<a-entity gltf-model="#pawn_w" id="pawnw_h" cursor-listener geometry="primitive: box" material="color: blue" position="2 1.5 -1.5" scale="0.2 0.2 0.2"></a-entity>
 			
 
 			
@@ -70,77 +72,79 @@
 
 
 			<!-------------------------------------------------------------------------Testing Area--------------------------------------------------------------------------->
-			<a-plane position="2 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane position="0.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane position="0 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-0.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="H1"position="2 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"
+			event-set__enter="_event: mouseenter; material.opacity:0.1"
+			event-set__leave="_event: mouseleave; material.opacity:1"></a-plane>
+			<a-plane id="G1"position="1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5" cursor-listener geometry="primitive: plane"></a-plane>
+			<a-plane id="F1"position="1 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+			<a-plane id="E1"position="0.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+			<a-plane id="D1"position="0 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="C1"position="-0.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="B1"position="-1 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="A1"position="-1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 
-			<a-plane position="2 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane position="0.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane position="0 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-0.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="H2"position="2 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="G2"position="1.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="F2"position="1 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+			<a-plane id="E2"position="0.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+			<a-plane id="D2"position="0 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="C2"position="-0.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="B2"position="-1 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="A2"position="-1.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 
-			<a-plane position="2 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane position="0.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane position="0 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-0.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="H3"position="2 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="G3"position="1.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="F3"position="1 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+			<a-plane id="E3"position="0.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+			<a-plane id="D3"position="0 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5" cursor-listener geometry="primitive: plane"></a-plane>
+			<a-plane id="C3"position="-0.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="B3"position="-1 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="A3"position="-1.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 
-			<a-plane position="2 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane position="0.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane position="0 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-0.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="H4"position="2 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="G4"position="1.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="F4"position="1 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+			<a-plane id="E4"position="0.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+			<a-plane id="D4"position="0 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="C4"position="-0.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="B4"position="-1 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="A4"position="-1.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 
-			<a-plane position="2 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane position="0.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane position="0 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-0.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="H5"position="2 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="G5"position="1.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="F5"position="1 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+			<a-plane id="E5"position="0.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+			<a-plane id="D5"position="0 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="C5"position="-0.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="B5"position="-1 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="A5"position="-1.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 
-			<a-plane position="2 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane position="0.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane position="0 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-0.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="H6"position="2 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="G6"position="1.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="F6"position="1 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+			<a-plane id="E6"position="0.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+			<a-plane id="D6"position="0 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="C6"position="-0.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="B6"position="-1 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="A6"position="-1.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 
-			<a-plane position="2 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane position="0.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane position="0 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-0.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="H7"position="2 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="G7"position="1.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="F7"position="1 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+			<a-plane id="E7"position="0.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+			<a-plane id="D7"position="0 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="C7"position="-0.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="B7"position="-1 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="A7"position="-1.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 
-			<a-plane position="2 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane position="0.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane position="0 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-0.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="H8"position="2 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="G8"position="1.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="F8"position="1 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+			<a-plane id="E8"position="0.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+			<a-plane id="D8"position="0 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="C8"position="-0.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="B8"position="-1 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="A8"position="-1.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 
 			
 			
