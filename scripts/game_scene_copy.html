@@ -9,6 +9,16 @@
 	</head>
 	<body>
 		<a-scene>
+			<a-entity environment="preset: forest"></a-entity>
+
+			<a-entity camera position="0.25 2.6 0"  look-controls wasd-controls>
+				<a-entity cursor="fuse: false; fuseTimeout: 500"
+						  position="0 0 -1"
+						  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+						  material="color: black; shader: flat">
+				</a-entity>
+			  </a-entity>
+			  
 			<a-assets>
 				<a-mixin gltf-model="#rook_w" id = "rook_w" src = "../src/models/sets/default/white/rook.gltf" cursor-listener geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
 				<a-mixin gltf-model="#rook_b" id = "rook_b" src = "../src/models/sets/default/black/rook.gltf" cursor-listener geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
@@ -19,25 +29,17 @@
 
 				<!-- we want the environment to be loaded first, prevents funky stuff from happenning-->
 			<!-- mess around here to change the skybox/background scene stuff-->
-			<a-entity environment="preset: forest"></a-entity>
-
+			
 			<!-- Camera and Cursor-->
-			<a-entity camera position="0.25 2.6 0"  look-controls wasd-controls>
-				<a-entity cursor="fuse: false; fuseTimeout: 500"
-						  position="0 0 -1"
-						  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-						  material="color: black; shader: flat">
-				</a-entity>
-			  </a-entity>
-			  
+			
 			  
 			<!------------------------------------------------------------------------ Entity/Asset Loading ------------------------------------------------------------------>
 			<!-- ROOK -->
 			<!-- replaced these with the mixins for promotions; will replace the promoting pawn with player's chosen piece (rook, knight, bishop, queen) -->
 			<!-- <a-asset-item id = "rook_w" src="../src/models/sets/default/white/rook.gltf"></a-asset-item> -->
 			<!-- <a-asset-item id = "rook_b" src="../src/models/sets/default/black/rook.gltf"></a-asset-item> -->
-			<a-entity mixin = "rook_w" id="box" position=" 2   1.5 -1  "></a-entity>
-			<a-entity mixin = "rook_w" id="box" position="-1.5 1.5 -1  "></a-entity>
+			<a-entity id="rook_w_r" mixin = "rook_w" position=" 2   1.5 -1  "></a-entity>
+			<a-entity mixin = "rook_w" id="bo" position="-1.5 1.5 -1  "></a-entity>
 
 			<a-entity mixin = "rook_b" id="box" position=" 2   1.5 -4.5"></a-entity>
 			<a-entity mixin = "rook_b" id="box" position="-1.5 1.5 -4.5"></a-entity>
@@ -74,23 +76,23 @@
 
 
 			<!-------------------------------------------------------------------------Testing Area--------------------------------------------------------------------------->
-			<a-plane position="2 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane position="0.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane position="0 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-0.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane  id="plane1" cursor-listener geometry="primitive plane"position="2 1.5 -1" color="blue" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane cursor-listener geometry="primitive plane"id="plane1" position="1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="f1" position="1 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+			<a-plane id="e1" position="0.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+			<a-plane id="d1" position="0 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="c1" position="-0.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="b1" position="-1 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="a1" position="-1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 
-			<a-plane position="2 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane position="0.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane position="0 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-0.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="h2" position="2 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="g2" position="1.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="f2" position="1 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+			<a-plane id="e2" position="0.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+			<a-plane id="d2" position="0 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="c2" position="-0.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="b2" position="-1 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane id="a2" position="-1.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 
 			<a-plane position="2 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 			<a-plane position="1.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
