@@ -113,7 +113,7 @@ AFRAME.registerComponent('cursor-listener', {
 						const endPosition = worldToBoard(evt.detail.intersection.point) //When you mouse up, that position is coppied to end position
 						console.log('Moving to: ', boardToChessTerm(endPosition))
 						
-						rook_w_r.object3D.position.copy(boardToWorld(endPosition)) //potiential idea for implementation, give each 
+						rook_w_r.object3D.position.copy(boardToWorld(endPosition)) //potiential idea for implementation, give each piece it's own js function like here? 
 						highlightPlane.object3D.position.copy(boardToWorld(endPosition))  
 						highlightPlane.setAttribute("color", "red");
 					};
