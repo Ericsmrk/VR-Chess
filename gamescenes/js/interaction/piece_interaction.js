@@ -5,7 +5,7 @@ AFRAME.registerComponent('cursor-listener', {
 				// Grab a reference to the plane we'll use to signify when
 				// we highlight a piece. It starts invisible, but well
 				// make it visible when we click on it
-
+				//<<<<<<< HEAD
 				const highlightPlane = document.querySelector('#highlight-plane');  
 				//#highlight-plane is a html element, that we are assigning to highlightPlane, which is a js element. 
 				//Note for Jose, understand what querySelector means. 
@@ -18,6 +18,7 @@ AFRAME.registerComponent('cursor-listener', {
 				/// o: I will let my mate know!
 				
 
+				//<<<<<<< HEAD
 				const object3D = this.el.object3D; //Jose: make sure you go back and understand 
 
 				// This function converts any position in the world
@@ -93,13 +94,12 @@ AFRAME.registerComponent('cursor-listener', {
 					if (!obj.detail.intersection) //if there's no intersection(if you don't click on the board) it yeets you
 						return;
 						
-					//I noticed that below, our sme added a cleanup event handler, wondering if this is needed for addEventListener
-					this.removeEventListener('mouseup', onMouseUp);
+					//<<<<<<< HEAD this was left over after a merge, might have messed things up by removing it, might have not. Not sure tbh. 
 
 					const startPosition = worldToBoard(obj.detail.intersection.point) //"obj.detail.intersection.point" understand and document this better, appears to grab the position
 					//translates from the world to the board. 
 					
-					highlightPlane.object3D.visible = true; //while mouse is down, the following three things happen. First the highlight becomes visible. 
+					highlightPlane.object3D.visible = true; //while mouse is down, the following three thigns happen. First the highlight becomes visible. 
 					highlightPlane.setAttribute("color", "blue"); //next it becomes blue 
 					highlightPlane.object3D.position.copy(boardToWorld(startPosition)) //This gives the first position to the highlight plane
 
