@@ -5,6 +5,7 @@ AFRAME.registerComponent('cursor-listener', {
 				// Grab a reference to the plane we'll use to signify when
 				// we highlight a piece. It starts invisible, but well
 				// make it visible when we click on it
+<<<<<<< HEAD
 				const highlightPlane = document.querySelector('#highlight-plane');  
 				//#highlight-plane is a html element, that we are assigning to highlightPlane, which is a js element. 
 				//Note for Jose, understand what querySelector means. 
@@ -12,11 +13,12 @@ AFRAME.registerComponent('cursor-listener', {
 				
 
 				
-				// SUGGESTION: mousevents are oldschool. consider pointer events  
+				// SUGGESTION: mousevents are oldschool. consider pointer events
 				// https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events
 				/// o: I will let my mate know!
 				
 
+<<<<<<< HEAD
 				const object3D = this.el.object3D; //Jose: make sure you go back and understand 
 
 				// This function converts any position in the world
@@ -86,11 +88,13 @@ AFRAME.registerComponent('cursor-listener', {
 					return `${columnLetter}${rowNumber}`;
 				}
 
+
 				this.el.addEventListener('mousedown', function (obj) {  //this.el points to what element you are about to click on, you're attaching event listen to that, mousedown fires the the 
 					//function following it. this.el gets assigned to obj as, like a reference? we think. 
 					if (!obj.detail.intersection) //if there's no intersection(if you don't click on the board) it yeets you
 						return;
 						
+<<<<<<< HEAD
 					const startPosition = worldToBoard(obj.detail.intersection.point) //"obj.detail.intersection.point" understand and document this better, appears to grab the position
 					//translates from the world to the board. 
 					
@@ -115,5 +119,6 @@ AFRAME.registerComponent('cursor-listener', {
 
 				  this.addEventListener('mouseup', onMouseUp);
 			  });
+			 
 			}
 });
