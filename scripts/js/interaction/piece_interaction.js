@@ -5,33 +5,19 @@ AFRAME.registerComponent('cursor-listener', {
 				// Grab a reference to the plane we'll use to signify when
 				// we highlight a piece. It starts invisible, but well
 				// make it visible when we click on it
-				const highlightPlane = document.querySelector('#highlight-plane');
-
-				//schema: {}, //THIS STORES DATA!!
-				var lastIndex = -1;
-				var COLORS = ['red', 'green', 'blue'];
-				var POSITIONS = [1, 2, 3] 
-				var posx = 0; 
-				var posy = 0;
-				var objID = "NULL";
-				var beforePos = "0";
-/*
-				function objectToPos(posObject){
-					return posObject.x + " " + posObject.y + " " + posObject.z;
-				}*/
+				const highlightPlane = document.querySelector('#highlight-plane');  
+				//#highlight-plane is a html element, that we are assigning to highlightPlane, which is a js element. 
+				//Note for Jose, understand what querySelector means. 
+				
+				
 
 				
-				// SUGGESTION: mousevents are oldschool. consider pointer events
+				// SUGGESTION: mousevents are oldschool. consider pointer events  
 				// https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events
 				/// o: I will let my mate know!
-				this.el.addEventListener('mouseenter', function(evt){
-					this.setAttribute('material', 'opacity', 0.5);
-				})
-				this.el.addEventListener('mouseleave', function(evt){
-					this.setAttribute('material', 'opacity', 1);
-				})
+				
 
-				const object3D = this.el.object3D;
+				const object3D = this.el.object3D; //Jose: make sure you go back and understand 
 
 				// This function converts any position in the world
 				// to a position in "chess space" (aka A4, B2, E8 that kinda thing)
@@ -41,7 +27,7 @@ AFRAME.registerComponent('cursor-listener', {
 
 				// returns a Vector2 (since chess is 2 dimensional)
 				// https://threejs.org/docs/index.html?q=vect#api/en/math/Vector2
-				const worldToBoard = (worldVector) => {
+				const worldToBoard = (worldVector) => {//Javascript is rood at times 
 					// Convert to "world space", relative to the center of the universe
 					// to "local space", where this position is described as
 					// "relative" to the center of the board.
@@ -100,28 +86,30 @@ AFRAME.registerComponent('cursor-listener', {
 					return `${columnLetter}${rowNumber}`;
 				}
 
-				this.el.addEventListener('mousedown', function (obj) {
-					if (!obj.detail.intersection)
+				this.el.addEventListener('mousedown', function (obj) {  //this.el points to what element you are about to click on, you're attaching event listen to that, mousedown fires the the 
+					//function following it. this.el gets assigned to obj as, like a reference? we think. 
+					if (!obj.detail.intersection) //if there's no intersection(if you don't click on the board) it yeets you
 						return;
 						
-					const startPosition = worldToBoard(obj.detail.intersection.point)
+					const startPosition = worldToBoard(obj.detail.intersection.point) //"obj.detail.intersection.point" understand and document this better, appears to grab the position
+					//translates from the world to the board. 
 					
-					highlightPlane.object3D.visible = true;
-					highlightPlane.setAttribute("color", "blue");
-					highlightPlane.object3D.position.copy(boardToWorld(startPosition))
+					highlightPlane.object3D.visible = true; //while mouse is down, the following three thigns happen. First the highlight becomes visible. 
+					highlightPlane.setAttribute("color", "blue"); //next it becomes blue 
+					highlightPlane.object3D.position.copy(boardToWorld(startPosition)) //This gives the first position to the highlight plane
 
-					console.log('Moving from: ', boardToChessTerm(startPosition))
+					console.log('Moving from: ', boardToChessTerm(startPosition)) //This lets us know where that is, helps with debuggin
 
-					const onMouseUp = (evt) => {
+					const onMouseUp = (evt) => { //understand the javascript stuff going on here. 
 						// Cleanup event handlers so we don't get _another_
 						// listener every time we click
-						this.removeEventListener('mouseup', onMouseUp);
+						this.removeEventListener('mouseup', onMouseUp); //ask about this. to whatever subject matter expert we can find 
 
-						const endPosition = worldToBoard(evt.detail.intersection.point)
+						const endPosition = worldToBoard(evt.detail.intersection.point) //When you mouse up, that position is coppied to end position
 						console.log('Moving to: ', boardToChessTerm(endPosition))
 						
-						rook_w_r.object3D.position.copy(boardToWorld(endPosition))
-						highlightPlane.object3D.position.copy(boardToWorld(endPosition))
+						rook_w_r.object3D.position.copy(boardToWorld(endPosition)) //potiential idea for implementation, give each 
+						highlightPlane.object3D.position.copy(boardToWorld(endPosition))  
 						highlightPlane.setAttribute("color", "red");
 					};
 
