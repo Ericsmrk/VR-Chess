@@ -1,7 +1,12 @@
 // The cursor listener represents the "whole" chessboard as a plane.
 // It's a 4x4 plane tiled sideways, so Z is "upwards" instead of Y.
 
-var myArray = [[0,1], [1,2]];
+AFRAME.registerComponent('squareProperties',{
+	schema: {
+		pieceID: {default: 'rook_w_r'}
+
+	}
+	})
 
 AFRAME.registerComponent('cursor-listener', {
 			init: function () {
@@ -10,18 +15,9 @@ AFRAME.registerComponent('cursor-listener', {
 				// make it visible when we click on it
 				const highlightPlane = document.querySelector('#highlight-plane');
 
-				
-
-				
 				// SUGGESTION: mousevents are oldschool. consider pointer events
 				// https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events
 				/// o: I will let my mate know!
-				this.el.addEventListener('mouseenter', function(evt){
-					this.setAttribute('material', 'opacity', 0.5);
-				})
-				this.el.addEventListener('mouseleave', function(evt){
-					this.setAttribute('material', 'opacity', 1);
-				})
 
 				const object3D = this.el.object3D;
 				
@@ -101,8 +97,11 @@ AFRAME.registerComponent('cursor-listener', {
 					if (!obj.detail.intersection)
 						return;
 						
-					console.log(myArray[1]);
+					//console.log(piecePositions.get('A1'));
 					const startPosition = worldToBoard(obj.detail.intersection.point)
+					//rather than position the plane, can I create a bunch of highlight planes and have this point detect the nearest one?
+					//highlight planes would ONLY reside underneath a piece, therefore an empty space would never trigger mousedown event <----cursor-plane triggers events, wouldnt work
+					//UNLESS, we set untriggerable planes ON TOP OF cursorplanes where there are empty squares <----Unsure if this would block the raycasting
 					
 
 					highlightPlane.object3D.visible = true;
