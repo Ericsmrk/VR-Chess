@@ -5,7 +5,7 @@ AFRAME.registerComponent('cursor-listener', {
 				// Grab a reference to the plane we'll use to signify when
 				// we highlight a piece. It starts invisible, but well
 				// make it visible when we click on it
-<<<<<<< HEAD
+				//<<<<<<< HEAD
 				const highlightPlane = document.querySelector('#highlight-plane');  
 				//#highlight-plane is a html element, that we are assigning to highlightPlane, which is a js element. 
 				//Note for Jose, understand what querySelector means. 
@@ -18,7 +18,7 @@ AFRAME.registerComponent('cursor-listener', {
 				/// o: I will let my mate know!
 				
 
-<<<<<<< HEAD
+				//<<<<<<< HEAD
 				const object3D = this.el.object3D; //Jose: make sure you go back and understand 
 
 				// This function converts any position in the world
@@ -94,7 +94,8 @@ AFRAME.registerComponent('cursor-listener', {
 					if (!obj.detail.intersection) //if there's no intersection(if you don't click on the board) it yeets you
 						return;
 						
-<<<<<<< HEAD
+					//<<<<<<< HEAD this was left over after a merge, might have messed things up by removing it, might have not. Not sure tbh. 
+
 					const startPosition = worldToBoard(obj.detail.intersection.point) //"obj.detail.intersection.point" understand and document this better, appears to grab the position
 					//translates from the world to the board. 
 					
