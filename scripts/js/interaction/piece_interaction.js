@@ -1,5 +1,8 @@
 // The cursor listener represents the "whole" chessboard as a plane.
 // It's a 4x4 plane tiled sideways, so Z is "upwards" instead of Y.
+
+var myArray = [[0,1], [1,2]];
+
 AFRAME.registerComponent('cursor-listener', {
 			init: function () {
 				// Grab a reference to the plane we'll use to signify when
@@ -7,18 +10,7 @@ AFRAME.registerComponent('cursor-listener', {
 				// make it visible when we click on it
 				const highlightPlane = document.querySelector('#highlight-plane');
 
-				//schema: {}, //THIS STORES DATA!!
-				var lastIndex = -1;
-				var COLORS = ['red', 'green', 'blue'];
-				var POSITIONS = [1, 2, 3] 
-				var posx = 0; 
-				var posy = 0;
-				var objID = "NULL";
-				var beforePos = "0";
-/*
-				function objectToPos(posObject){
-					return posObject.x + " " + posObject.y + " " + posObject.z;
-				}*/
+				
 
 				
 				// SUGGESTION: mousevents are oldschool. consider pointer events
@@ -32,6 +24,7 @@ AFRAME.registerComponent('cursor-listener', {
 				})
 
 				const object3D = this.el.object3D;
+				
 
 				// This function converts any position in the world
 				// to a position in "chess space" (aka A4, B2, E8 that kinda thing)
@@ -48,7 +41,11 @@ AFRAME.registerComponent('cursor-listener', {
 					// (note that the board is tiled "sideways" via the rotate attribute,
 					// to make it horizontal since by default <a-plane> is like upright
 					// instead of flat.)
+
+					
 					const localIntersection = object3D.worldToLocal(worldVector);
+					//if localIntersection.x & localIntersection.y (outside of range) return original pos
+					
 
 					// Normalize to 0 - 1 (the board is 4 units wide and positions go into the negative)
 					// Also discard the "z-axis" here - chess isn't 3d.
@@ -60,7 +57,7 @@ AFRAME.registerComponent('cursor-listener', {
 					boardPosition.multiplyScalar(8);
 					// Round to a whole number (chess isnt fractional)
 					boardPosition.ceil();
-					
+					console.log(boardPosition);
 					return boardPosition;
 				}
 				// Opposite of the function above, get the "world space" position
@@ -104,8 +101,10 @@ AFRAME.registerComponent('cursor-listener', {
 					if (!obj.detail.intersection)
 						return;
 						
+					console.log(myArray[1]);
 					const startPosition = worldToBoard(obj.detail.intersection.point)
 					
+
 					highlightPlane.object3D.visible = true;
 					highlightPlane.setAttribute("color", "blue");
 					highlightPlane.object3D.position.copy(boardToWorld(startPosition))
@@ -127,5 +126,6 @@ AFRAME.registerComponent('cursor-listener', {
 
 				  this.addEventListener('mouseup', onMouseUp);
 			  });
+			 
 			}
 });
