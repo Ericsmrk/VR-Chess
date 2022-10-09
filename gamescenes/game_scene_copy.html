@@ -9,18 +9,22 @@
 	</head>
 	<body>
 		<a-scene>
+			<!--Just for setting background scene-->
 			<a-entity environment="preset: forest"></a-entity>
-
+			
+			<!-- look-controls wasd-controls does movement-->
 			<a-entity camera position="0.25 2.6 0"  look-controls wasd-controls>
-				<a-entity cursor="fuse: false; fuseTimeout: 500"
+				<!--This is cursor, (the pretty thing in middle), raycaster is essetially lazer controls-->
+				<a-entity cursor="fuse: false; fuseTimeout: 500" 
 							raycaster="objects: #cursor-plane"
 							position="0 0 -1"
 							geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
 							material="color: black; shader: flat">
 				</a-entity>
 				</a-entity>
-				
+				<!--Just asset loading -->
 			<a-assets>
+				<!--mixin's are kind of like classes, grouping of attributes-->
 				<a-mixin gltf-model="#rook_w" id = "rook_w" src = "../src/models/sets/default/white/rook.gltf" geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
 				<a-mixin gltf-model="#rook_b" id = "rook_b" src = "../src/models/sets/default/black/rook.gltf" geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
 
@@ -31,7 +35,7 @@
 				<!-- we want the environment to be loaded first, prevents funky stuff from happenning-->
 			<!-- mess around here to change the skybox/background scene stuff-->
 			
-			<!-- Camera and Cursor-->
+			
 			
 				
 			<!------------------------------------------------------------------------ Entity/Asset Loading ------------------------------------------------------------------>
@@ -39,7 +43,9 @@
 			<!-- replaced these with the mixins for promotions; will replace the promoting pawn with player's chosen piece (rook, knight, bishop, queen) -->
 			<!-- <a-asset-item id = "rook_w" src="../src/models/sets/default/white/rook.gltf"></a-asset-item> -->
 			<!-- <a-asset-item id = "rook_b" src="../src/models/sets/default/black/rook.gltf"></a-asset-item> -->
-			<a-entity id="rook_w_r" mixin = "rook_w" position=" 2   1.5 -1  "></a-entity>
+			<a-entity id="rook_w_r" mixin = "rook_w" position=" 2   1.5 -1  "></a-entity> <!--rook that's white starting on the right side, the mixin brings in the 
+			assests it needs, and then position is what we are trying to play around with -->
+
 			<a-entity id="rook_w_l" mixin = "rook_w" position="-1.5 1.5 -1  "></a-entity>
 			
 
@@ -99,10 +105,11 @@
 				color="blue"
 				height="0.5"
 				width="0.5"
-			></a-plane>
+			></a-entity></a-plane>   <!--Was the left by mistake? the a-entity tag? -->
 
-			<a-plane id="h1" position="2 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane id="g1" position="1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane geometry="primitive plane" position="2 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+			<a-plane geometry="primitive plane" position="1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+
 			<a-plane id="f1" position="1 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
 			<a-plane id="e1" position="0.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
 			<a-plane id="d1" position="0 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
