@@ -14,7 +14,7 @@ AFRAME.registerComponent('cursor-listener', {
 				//that's why there's a hashtag in front of it. hightlightPlane is a js element. 
 				
 				
-
+                const elements = document.querySelectorAll('a-entity');//Gives us an array of ALL a-entitys
 
 				
 				// SUGGESTION: mousevents are oldschool. consider pointer events
@@ -93,13 +93,16 @@ AFRAME.registerComponent('cursor-listener', {
         }
 
 //------------------------------------------------------------Function for isSpaceOccupied-----------------------------------------------------------------------------
-
-const getPieceID = (boardPosition) => {
+//THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
+//THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
+//THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
+//THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
+const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
     var i = 7;
     var pieceID = "NULL"
     for(i; i <elements.length-2; i++){
-        console.log(i)
-        console.log("Comparing: " + boardToChessTerm(boardPosition) + " and " + elements[i].getAttribute('boardPos'))
+       // console.log(i)
+        //console.log("Comparing: " + boardToChessTerm(boardPosition) + " and " + elements[i].getAttribute('boardPos'))
         if(boardToChessTerm(boardPosition)==elements[i].getAttribute('boardPos')){
            
             pieceID = elements[i].id
@@ -107,8 +110,8 @@ const getPieceID = (boardPosition) => {
         }
     }
     return pieceID
-}//----------------------------------------------------------------------Implementation seemed like it may work but is extremely buggy*/
-
+}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         this.el.addEventListener('mousedown', function (obj) {  //this.el points to what element you are about to click on, you're attaching event listen to that, mousedown fires the the 
             //function following it. this.el gets assigned to obj as, like a reference? we think. 
@@ -220,77 +223,13 @@ const getPieceID = (boardPosition) => {
                         bishop_w_l.object3D.position.copy(boardToWorld(endPosition)) 
                         bishop_w_l.setAttribute('boardPos', boardToChessTerm(endPosition)) 
                         break;
-                    case "queen_w":
-                        queen_w.object3D.position.copy(boardToWorld(endPosition)) 
-                        queen_w.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                    case "queenw":
+                        queenw.object3D.position.copy(boardToWorld(endPosition)) 
+                        queenw.setAttribute('boardPos', boardToChessTerm(endPosition)) 
                         break;
-                    case "king_w":
-                        king_w.object3D.position.copy(boardToWorld(endPosition)) 
-                        king_w.setAttribute('boardPos', boardToChessTerm(endPosition)) 
-                        break;
-                    case "rook_w_r":
-                        rook_w_r.object3D.position.copy(boardToWorld(endPosition)) //potiential idea for implementation, give each piece it's own js function like here? 
-                        rook_w_r.setAttribute('boardPos', boardToChessTerm(endPosition))    //Updates the boardPos attribute
-                        break;
-                    case "rook_w_l":
-                        rook_w_l.object3D.position.copy(boardToWorld(endPosition)) 
-                        rook_w_l.setAttribute('boardPos', boardToChessTerm(endPosition)) 
-                        break;
-                    case "pawn_w_1": 
-                        pawn_w_1.object3D.position.copy(boardToWorld(endPosition)) 
-                        pawn_w_1.setAttribute('boardPos', boardToChessTerm(endPosition)) 
-                        break;
-                    case "pawn_w_2":
-                        pawn_w_2.object3D.position.copy(boardToWorld(endPosition)) 
-                        pawn_w_2.setAttribute('boardPos', boardToChessTerm(endPosition)) 
-                        break;
-                    case "pawn_w_3":
-                        pawn_w_3.object3D.position.copy(boardToWorld(endPosition)) 
-                        pawn_w_3.setAttribute('boardPos', boardToChessTerm(endPosition)) 
-                        break;
-                    case "pawn_w_4":
-                        pawn_w_4.object3D.position.copy(boardToWorld(endPosition)) 
-                        pawn_w_4.setAttribute('boardPos', boardToChessTerm(endPosition)) 
-                        break;
-                    case "pawn_w_5":
-                        pawn_w_5.object3D.position.copy(boardToWorld(endPosition)) 
-                        pawn_w_5.setAttribute('boardPos', boardToChessTerm(endPosition)) 
-                        break;
-                    case "pawn_w_6":
-                        pawn_w_6.object3D.position.copy(boardToWorld(endPosition)) 
-                        pawn_w_6.setAttribute('boardPos', boardToChessTerm(endPosition)) 
-                        break;
-                    case "pawn_w_7":
-                        pawn_w_7.object3D.position.copy(boardToWorld(endPosition)) 
-                        pawn_w_7.setAttribute('boardPos', boardToChessTerm(endPosition)) 
-                        break;
-                    case "pawn_w_8":
-                        pawn_w_8.object3D.position.copy(boardToWorld(endPosition)) 
-                        pawn_w_8.setAttribute('boardPos', boardToChessTerm(endPosition)) 
-                        break;
-                    case "knight_w_r":
-                        knight_w_r.object3D.position.copy(boardToWorld(endPosition)) 
-                        knight_w_r.setAttribute('boardPos', boardToChessTerm(endPosition)) 
-                        break;
-                    case "knight_w_l":
-                        knight_w_l.object3D.position.copy(boardToWorld(endPosition)) 
-                        knight_w_l.setAttribute('boardPos', boardToChessTerm(endPosition)) 
-                        break;
-                    case "bishop_w_r":
-                        bishop_w_r.object3D.position.copy(boardToWorld(endPosition)) 
-                        bishop_w_r.setAttribute('boardPos', boardToChessTerm(endPosition)) 
-                        break;
-                    case "bishop_w_l":
-                        bishop_w_l.object3D.position.copy(boardToWorld(endPosition)) 
-                        bishop_w_l.setAttribute('boardPos', boardToChessTerm(endPosition)) 
-                        break;
-                    case "queen_w":
-                        queen_w.object3D.position.copy(boardToWorld(endPosition)) 
-                        queen_w.setAttribute('boardPos', boardToChessTerm(endPosition)) 
-                        break;
-                    case "king_w":
-                        king_w.object3D.position.copy(boardToWorld(endPosition)) 
-                        king_w.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                    case "kingw":
+                        kingw.object3D.position.copy(boardToWorld(endPosition)) 
+                        kingw.setAttribute('boardPos', boardToChessTerm(endPosition)) 
                         break;
                     case "rook_b_r":
                         rook_b_r.object3D.position.copy(boardToWorld(endPosition)) //potiential idea for implementation, give each piece it's own js function like here? 
@@ -348,13 +287,13 @@ const getPieceID = (boardPosition) => {
                         bishop_b_l.object3D.position.copy(boardToWorld(endPosition)) 
                         bishop_b_l.setAttribute('boardPos', boardToChessTerm(endPosition)) 
                         break;
-                    case "queen_b":
-                        queen_b.object3D.position.copy(boardToWorld(endPosition)) 
-                        queen_b.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                    case "queenb":
+                        queenb.object3D.position.copy(boardToWorld(endPosition)) 
+                        queenb.setAttribute('boardPos', boardToChessTerm(endPosition)) 
                         break;
-                    case "king_b":
-                        king_b.object3D.position.copy(boardToWorld(endPosition)) 
-                        king_b.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                    case "kingb":
+                        kingb.object3D.position.copy(boardToWorld(endPosition)) 
+                        kingb.setAttribute('boardPos', boardToChessTerm(endPosition)) 
                         break;
                 }
                 
