@@ -3,15 +3,6 @@
 AFRAME.registerComponent('cursor-listener', {
 
 
-        const highlightPlane = document.querySelector('#highlight-plane');  
-        //#highlight-plane is a html element, that we are assigning to highlightPlane, which is a js element. 
-        //Note for Jose, understand what querySelector means. 
-        
-        const elements = document.querySelectorAll('a-entity');//Gives us an array of ALL a-entity's in game_scene_copy!!!!!
-        // SUGGESTION: mousevents are oldschool. consider pointer events
-        // https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events
-        /// o: I will let my mate know!
-
 			init: function () {
 				// Grab a reference to the plane we'll use to signify when
 				// we highlight a piece. It starts invisible, but well
