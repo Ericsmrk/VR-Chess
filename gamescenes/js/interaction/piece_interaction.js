@@ -1,28 +1,38 @@
 // The cursor listener represents the "whole" chessboard as a plane.
 // It's a 4x4 plane tiled sideways, so Z is "upwards" instead of Y.
 AFRAME.registerComponent('cursor-listener', {
-    init: function () {
-        // Grab a reference to the plane we'll use to signify when
-        // we highlight a piece. It starts invisible, but well
-        // make it visible when we click on it
-        //<<<<<<< HEAD
+
 
         const highlightPlane = document.querySelector('#highlight-plane');  
         //#highlight-plane is a html element, that we are assigning to highlightPlane, which is a js element. 
         //Note for Jose, understand what querySelector means. 
         
         const elements = document.querySelectorAll('a-entity');//Gives us an array of ALL a-entity's in game_scene_copy!!!!!
-        const RWrook = elements[7].getAttribute('id');//REMOVEABLE -- using to see if we can use elements[i].id dynamically (DOES NOT WORK)
-
-        const planes = document.querySelectorAll('a-plane');//This may be useful, gives us an array of ALL planes
-        
         // SUGGESTION: mousevents are oldschool. consider pointer events
         // https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events
         /// o: I will let my mate know!
-        
 
-        //<<<<<<< HEAD
-        const object3D = this.el.object3D; //Jose: make sure you go back and understand 
+			init: function () {
+				// Grab a reference to the plane we'll use to signify when
+				// we highlight a piece. It starts invisible, but well
+				// make it visible when we click on it
+				//<<<<<<< HEAD
+				const highlightPlane = document.querySelector('#highlight-plane');  
+				//#highlight-plane is a html element, that we are assigning to highlightPlane, which is a js element. 
+				//querySelector is just a method that calls up the DOM, and in this specific case goes "AYO GIMI THE FIRST highlight-plane YOU SEE"
+				//that's why there's a hashtag in front of it. hightlightPlane is a js element. 
+				
+				
+
+
+				
+				// SUGGESTION: mousevents are oldschool. consider pointer events
+				// https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events
+				/// o: I will let my mate know!
+       
+
+				//<<<<<<< HEAD
+				const object3D = this.el.object3D; //Jose: make sure you go back and understand 
 
         // This function converts any position in the world
         // to a position in "chess space" (aka A4, B2, E8 that kinda thing)
@@ -148,12 +158,15 @@ const getPieceID = (boardPosition) => {
             highlightPlane.setAttribute("color", "blue"); //next it becomes blue 
             highlightPlane.object3D.position.copy(boardToWorld(startPosition)) //This gives the first position to the highlight plane
 
+
             //console.log('Moving from: ', boardToChessTerm(startPosition)) //This lets us know where that is, helps with debuggin
 
-            const onMouseUp = (evt) => { //understand the javascript stuff going on here. 
+
+            const onMouseUp = (evt) => { //understand the javascript stuff going on here.  //understand the javascript stuff going on here. 
                 // Cleanup event handlers so we don't get _another_
                 // listener every time we click
-                this.removeEventListener('mouseup', onMouseUp); //ask about this. to whatever subject matter expert we can find 
+                this.removeEventListener('mouseup', onMouseUp); //ask about this. to whatever subject matter expert we can find  //ask about this. to whatever subject matter expert we can find 
+
 
                 const endPosition = worldToBoard(evt.detail.intersection.point) //When you mouse up, that position is coppied to end position
                 //console.log('Moving to: ', boardToChessTerm(endPosition))
@@ -354,8 +367,9 @@ const getPieceID = (boardPosition) => {
                         break;
                 }
                 
-                //console.log(rook_w_r.getAttribute('boardPos'))
+
                 highlightPlane.object3D.position.copy(boardToWorld(endPosition))  
+
                 highlightPlane.setAttribute("color", "red");
             };
 
