@@ -8,7 +8,8 @@ AFRAME.registerComponent('cursor-listener', {
 				//<<<<<<< HEAD
 				const highlightPlane = document.querySelector('#highlight-plane');  
 				//#highlight-plane is a html element, that we are assigning to highlightPlane, which is a js element. 
-				//Note for Jose, understand what querySelector means. 
+				//querySelector is just a method that calls up the DOM, and in this specific case goes "AYO GIMI THE FIRST highlight-plane YOU SEE"
+				//that's why there's a hashtag in front of it. hightlightPlane is a js element. 
 				
 				
 
