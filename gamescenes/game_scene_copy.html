@@ -11,11 +11,13 @@
 		<a-scene>
 			<!--Just for setting background scene-->
 			<a-entity environment="preset: forest"></a-entity>
+
 			
 			<!-- look-controls wasd-controls does movement-->
 			<a-entity camera position="0.25 2.6 0"  look-controls wasd-controls>
 				<!--This is cursor, (the pretty thing in middle), raycaster is essetially lazer controls-->
 				<a-entity cursor="fuse: false; fuseTimeout: 500" 
+
 							raycaster="objects: #cursor-plane"
 							position="0 0 -1"
 							geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
@@ -24,12 +26,32 @@
 				</a-entity>
 				<!--Just asset loading -->
 			<a-assets>
+
 				<!--mixin's are kind of like classes, grouping of attributes-->
 				<a-mixin gltf-model="#rook_w" id = "rook_w" src = "../src/models/sets/default/white/rook.gltf" geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
 				<a-mixin gltf-model="#rook_b" id = "rook_b" src = "../src/models/sets/default/black/rook.gltf" geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
 
-				<a-mixin gltf-model="#pawn_w" id = "pawn_w" src = "../src/models/sets/default/white/pawn.gltf" geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
-				<a-mixin gltf-model="#pawn_b" id = "pawn_b" src = "../src/models/sets/default/black/pawn.gltf" geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
+
+				<a-mixin gltf-model="#pawn_w" id = "pawn_w" src = "../src/models/sets/default/white/pawn.gltf" chess-piece geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
+				<a-mixin gltf-model="#pawn_b" id = "pawn_b" src = "../src/models/sets/default/black/pawn.gltf" chess-piece geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
+				
+				<a-mixin gltf-model="#king_w" id = "king_w" src = "../src/models/sets/default/white/king.gltf" chess-piece geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
+				<a-mixin gltf-model="#king_b" id = "king_b" src = "../src/models/sets/default/black/king.gltf" chess-piece geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
+
+				<a-mixin gltf-model="#queen_w" id = "queen_w" src = "../src/models/sets/default/white/queen.gltf" chess-piece geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
+				<a-mixin gltf-model="#queen_b" id = "queen_b" src = "../src/models/sets/default/black/queen.gltf" chess-piece geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
+			
+				<a-mixin gltf-model="#knight_w" id = "knight_w" src = "../src/models/sets/default/white/knight.gltf" chess-piece geometry="primitive: box" material="color: blue" rotation=" 0 180 0"scale="0.2 0.2 0.2"></a-mixin>
+				<a-mixin gltf-model="#knight_b" id = "knight_b" src = "../src/models/sets/default/black/knight.gltf" chess-piece geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
+				
+				<a-mixin gltf-model="#bishop_w" id = "bishop_w" src = "../src/models/sets/default/white/bishop.gltf" chess-piece geometry="primitive: box" material="color: blue" rotation=" 0 180 0"scale="0.2 0.2 0.2"></a-mixin>
+				<a-mixin gltf-model="#bishop_b" id = "bishop_b" src = "../src/models/sets/default/black/bishop.gltf" chess-piece geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
+
+				<a-mixin gltf-model="#king_w" id = "king_w" src = "../src/models/sets/default/white/king.gltf" chess-piece geometry="primitive: box" material="color: blue" rotation=" 0 180 0"scale="0.2 0.2 0.2"></a-mixin>
+				<a-mixin gltf-model="#king_b" id = "king_b" src = "../src/models/sets/default/black/bishop.gltf" chess-piece geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
+
+				<a-mixin gltf-model="#queen_w" id = "bishop_w" src = "../src/models/sets/default/white/bishop.gltf" chess-piece geometry="primitive: box" material="color: blue" rotation=" 0 180 0"scale="0.2 0.2 0.2"></a-mixin>
+				<a-mixin gltf-model="#queen_b" id = "bishop_b" src = "../src/models/sets/default/black/bishop.gltf" chess-piece geometry="primitive: box" material="color: blue" scale="0.2 0.2 0.2"></a-mixin>
 			</a-assets>
 
 				<!-- we want the environment to be loaded first, prevents funky stuff from happenning-->
@@ -43,34 +65,54 @@
 			<!-- replaced these with the mixins for promotions; will replace the promoting pawn with player's chosen piece (rook, knight, bishop, queen) -->
 			<!-- <a-asset-item id = "rook_w" src="../src/models/sets/default/white/rook.gltf"></a-asset-item> -->
 			<!-- <a-asset-item id = "rook_b" src="../src/models/sets/default/black/rook.gltf"></a-asset-item> -->
-			<a-entity id="rook_w_r" mixin = "rook_w" position=" 2   1.5 -1  "></a-entity> <!--rook that's white starting on the right side, the mixin brings in the 
-			assests it needs, and then position is what we are trying to play around with -->
 
-			<a-entity id="rook_w_l" mixin = "rook_w" position="-1.5 1.5 -1  "></a-entity>
+<!--rook that's white starting on the right side, the mixin brings in the 
+			assests it needs, and then position is what we are trying to play around with -->
+			<a-entity id="rook_w_r" mixin = "rook_w" boardPos="h1" position=" 2   1.5 -1  "></a-entity>
+			<a-entity id="rook_w_l" mixin = "rook_w" boardPos="a1" position="-1.5 1.5 -1  "></a-entity>
+
+			<a-entity id="knight_w_r" mixin = "knight_w" boardPos="g1" position=" 1.5   1.5 -1  "></a-entity>
+			<a-entity id="knight_w_l" mixin = "knight_w" boardPos="b1" position="-1 1.5 -1  "></a-entity>
+
+			<a-entity id="knight_b_r" mixin = "knight_b" boardPos="g8" position=" 1.5   1.5 -4.5  "></a-entity>
+			<a-entity id="knight_b_l" mixin = "knight_b" boardPos="b8" position="-1 1.5 -4.5  "></a-entity>
+
+			<a-entity id="bishop_w_r" mixin = "bishop_w" boardPos="f1" position=" 1  1.5 -1  "></a-entity>
+			<a-entity id="bishop_w_l" mixin = "bishop_w" boardPos="c1" position="-0.5 1.5 -1  "></a-entity>
+
+			<a-entity id="bishop_b_r" mixin = "bishop_b" boardPos="f8" position=" 1   1.5 -4.5  "></a-entity>
+			<a-entity id="bishop_b_l" mixin = "bishop_b" boardPos="c8" position="-0.5 1.5 -4.5  "></a-entity>
+
+			<a-entity id="king_b"  mixin = "king_b" boardPos="d8" position=" 0.5   1.5 -4.5  "></a-entity>
+			<a-entity id="queen_b" mixin = "queen_b" boardPos="e8" position=" 0   1.5 -4.5  "></a-entity>
+
+			<a-entity id="king_w"  mixin = "king_w" boardPos="e1" position=" 0   1.5 -1  "></a-entity>
+			<a-entity id="queen_w" mixin = "queen_w" boardPos="d1" position=" 0.5  1.5 -1  "></a-entity>
+
 			
 
-			<!--ignore everything down here. It's just for later-->
-			<a-entity mixin = "rook_b" id="box" position=" 2   1.5 -4.5"></a-entity>
-			<a-entity mixin = "rook_b" id="box" position="-1.5 1.5 -4.5"></a-entity>
+			
+			<a-entity id="rook_b_r"mixin = "rook_b"  boardPos="h8"position=" 2   1.5 -4.5"></a-entity>
+			<a-entity id="rook_b_w"mixin = "rook_b"  boardPos="a8"position="-1.5 1.5 -4.5"></a-entity>
 
 			<!-- PAWN -->
-			<a-entity mixin = "pawn_w" id="box" position="-1.5  1.5 -1.5"></a-entity>
-			<a-entity mixin = "pawn_w" id="box" position="-1    1.5 -1.5"></a-entity>
-			<a-entity mixin = "pawn_w" id="box" position="-0.5  1.5 -1.5"></a-entity>
-			<a-entity mixin = "pawn_w" id="box" position=" 0    1.5 -1.5"></a-entity>
-			<a-entity mixin = "pawn_w" id="box" position=" 0.5  1.5 -1.5"></a-entity>
-			<a-entity mixin = "pawn_w" id="box" position=" 1    1.5 -1.5"></a-entity>
-			<a-entity mixin = "pawn_w" id="box" position=" 1.5  1.5 -1.5"></a-entity>
-			<a-entity mixin = "pawn_w" id="box" position=" 2    1.5 -1.5"></a-entity>
+			<a-entity id="pawn_w_1"mixin = "pawn_w"  boardPos="a2"position="-1.5  1.5 -1.5"></a-entity>
+			<a-entity id="pawn_w_2"mixin = "pawn_w"  boardPos="b2"position="-1    1.5 -1.5"></a-entity>
+			<a-entity id="pawn_w_3"mixin = "pawn_w"  boardPos="c2"position="-0.5  1.5 -1.5"></a-entity>
+			<a-entity id="pawn_w_4"mixin = "pawn_w"  boardPos="d2"position=" 0    1.5 -1.5"></a-entity>
+			<a-entity id="pawn_w_5"mixin = "pawn_w"  boardPos="e2"position=" 0.5  1.5 -1.5"></a-entity>
+			<a-entity id="pawn_w_6"mixin = "pawn_w"  boardPos="f2"position=" 1    1.5 -1.5"></a-entity>
+			<a-entity id="pawn_w_7"mixin = "pawn_w"  boardPos="g2"position=" 1.5  1.5 -1.5"></a-entity>
+			<a-entity id="pawn_w_8"mixin = "pawn_w"  boardPos="h2"position=" 2    1.5 -1.5"></a-entity>
 			
-			<a-entity mixin = "pawn_b" id="box" position="-1.5  1.5 -4  "></a-entity>
-			<a-entity mixin = "pawn_b" id="box" position="-1    1.5 -4  "></a-entity>
-			<a-entity mixin = "pawn_b" id="box" position="-0.5  1.5 -4  "></a-entity>
-			<a-entity mixin = "pawn_b" id="box" position=" 0    1.5 -4  "></a-entity>
-			<a-entity mixin = "pawn_b" id="box" position=" 0.5  1.5 -4  "></a-entity>
-			<a-entity mixin = "pawn_b" id="box" position=" 1    1.5 -4  "></a-entity>
-			<a-entity mixin = "pawn_b" id="box" position=" 1.5  1.5 -4  "></a-entity>
-			<a-entity mixin = "pawn_b" id="box" position=" 2    1.5 -4  "></a-entity>
+			<a-entity id="pawn_b_1"mixin = "pawn_b"  boardPos="a7"position="-1.5  1.5 -4  "></a-entity>
+			<a-entity id="pawn_b_2"mixin = "pawn_b"  boardPos="b7"position="-1    1.5 -4  "></a-entity>
+			<a-entity id="pawn_b_3"mixin = "pawn_b"  boardPos="c7"position="-0.5  1.5 -4  "></a-entity>
+			<a-entity id="pawn_b_4"mixin = "pawn_b"  boardPos="d7"position=" 0    1.5 -4  "></a-entity>
+			<a-entity id="pawn_b_5"mixin = "pawn_b"  boardPos="e7"position=" 0.5  1.5 -4  "></a-entity>
+			<a-entity id="pawn_b_6"mixin = "pawn_b"  boardPos="f7"position=" 1    1.5 -4  "></a-entity>
+			<a-entity id="pawn_b_7"mixin = "pawn_b"  boardPos="g7"position=" 1.5  1.5 -4  "></a-entity>
+			<a-entity id="pawn_b_8"mixin = "pawn_b"  boardPos="h7"position=" 2    1.5 -4  "></a-entity>
 
 
 			
