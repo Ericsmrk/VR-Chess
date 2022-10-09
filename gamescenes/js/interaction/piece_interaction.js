@@ -6,12 +6,12 @@ AFRAME.registerComponent('cursor-listener', {
         // we highlight a piece. It starts invisible, but well
         // make it visible when we click on it
         //<<<<<<< HEAD
+
         const highlightPlane = document.querySelector('#highlight-plane');  
         //#highlight-plane is a html element, that we are assigning to highlightPlane, which is a js element. 
         //Note for Jose, understand what querySelector means. 
         
-        
-
+        const elements = document.querySelectorAll('a-entity');//Gives us an array of ALL a-entity's in game_scene_copy!!!!!
         
         // SUGGESTION: mousevents are oldschool. consider pointer events
         // https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events
@@ -94,6 +94,7 @@ AFRAME.registerComponent('cursor-listener', {
             if (!obj.detail.intersection) //if there's no intersection(if you don't click on the board) it yeets you
                 return;
                 
+            console.log(elements[10]);//print out all elements in 'elements'
             //<<<<<<< HEAD this was left over after a merge, might have messed things up by removing it, might have not. Not sure tbh. 
 
             const startPosition = worldToBoard(obj.detail.intersection.point) //"obj.detail.intersection.point" understand and document this better, appears to grab the position
