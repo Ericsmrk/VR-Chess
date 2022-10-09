@@ -1,0 +1,7 @@
+//creating new component for chess pieces               --DON'T KNOW IF THIS IS NECESSARY
+
+//component will contain information such as:
+//  1. 
+AFRAME.registerComponent('chess piece', {
+
+})

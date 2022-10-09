@@ -12,7 +12,7 @@ AFRAME.registerComponent('cursor-listener', {
         //Note for Jose, understand what querySelector means. 
         
         const elements = document.querySelectorAll('a-entity');//Gives us an array of ALL a-entity's in game_scene_copy!!!!!
-        
+        const RWrook = elements[7].getAttribute('id');//REMOVEABLE -- using to see if we can use elements[i].id dynamically (DOES NOT WORK)
         // SUGGESTION: mousevents are oldschool. consider pointer events
         // https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events
         /// o: I will let my mate know!
@@ -94,12 +94,29 @@ AFRAME.registerComponent('cursor-listener', {
             if (!obj.detail.intersection) //if there's no intersection(if you don't click on the board) it yeets you
                 return;
                 
-            console.log(elements[10]);//print out all elements in 'elements'
+            console.log(RWrook);//print out all elements in 'elements'
             //<<<<<<< HEAD this was left over after a merge, might have messed things up by removing it, might have not. Not sure tbh. 
 
             const startPosition = worldToBoard(obj.detail.intersection.point) //"obj.detail.intersection.point" understand and document this better, appears to grab the position
             //translates from the world to the board. 
-            
+
+//-----------------------------------------------SETTING ASIDE SPACE FOR LOGIC TO DETERMINE INFORMATION ABOUT SPACE CLICKED ON-----------------------------------------------------
+//      1. Is space currently occupied?         - maybe write separate function isSpaceOccupied(startPosition) to perform this
+                //-YES : Need to figure out how to determine what piece at that position.
+                    // - compare startPosition w/ while iterating through elements [this can be in terms of BoardPosition OR ChessTerms]
+                    // 
+                //-NO  : No piece should be allowed to move on mouseUp.
+
+            /* if(isSpaceOccupied){
+                var pieceID = "NULL";
+                var i = 0;
+                    while(startPosition!=elements[i].position){
+                        i++;
+                    }
+                pieceID = elements[i];
+            }
+            pieceID.object3D.position.copy(boardToWorld(endPosition));
+            */
             highlightPlane.object3D.visible = true; //while mouse is down, the following three thigns happen. First the highlight becomes visible. 
             highlightPlane.setAttribute("color", "blue"); //next it becomes blue 
             highlightPlane.object3D.position.copy(boardToWorld(startPosition)) //This gives the first position to the highlight plane
@@ -124,3 +141,4 @@ AFRAME.registerComponent('cursor-listener', {
      
     }
 });
+
