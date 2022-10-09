@@ -163,44 +163,195 @@ const getPieceID = (boardPosition) => {
                     case "rook_w_r":
                         rook_w_r.object3D.position.copy(boardToWorld(endPosition)) //potiential idea for implementation, give each piece it's own js function like here? 
                         rook_w_r.setAttribute('boardPos', boardToChessTerm(endPosition))    //Updates the boardPos attribute
+                        break;
                     case "rook_w_l":
                         rook_w_l.object3D.position.copy(boardToWorld(endPosition)) 
                         rook_w_l.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
                     case "pawn_w_1": 
                         pawn_w_1.object3D.position.copy(boardToWorld(endPosition)) 
                         pawn_w_1.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
                     case "pawn_w_2":
                         pawn_w_2.object3D.position.copy(boardToWorld(endPosition)) 
                         pawn_w_2.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
                     case "pawn_w_3":
                         pawn_w_3.object3D.position.copy(boardToWorld(endPosition)) 
                         pawn_w_3.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
                     case "pawn_w_4":
                         pawn_w_4.object3D.position.copy(boardToWorld(endPosition)) 
                         pawn_w_4.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
                     case "pawn_w_5":
                         pawn_w_5.object3D.position.copy(boardToWorld(endPosition)) 
                         pawn_w_5.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
                     case "pawn_w_6":
                         pawn_w_6.object3D.position.copy(boardToWorld(endPosition)) 
                         pawn_w_6.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
                     case "pawn_w_7":
                         pawn_w_7.object3D.position.copy(boardToWorld(endPosition)) 
                         pawn_w_7.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
                     case "pawn_w_8":
                         pawn_w_8.object3D.position.copy(boardToWorld(endPosition)) 
                         pawn_w_8.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
                     case "knight_w_r":
-
+                        knight_w_r.object3D.position.copy(boardToWorld(endPosition)) 
+                        knight_w_r.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
                     case "knight_w_l":
-
+                        knight_w_l.object3D.position.copy(boardToWorld(endPosition)) 
+                        knight_w_l.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
                     case "bishop_w_r":
-
+                        bishop_w_r.object3D.position.copy(boardToWorld(endPosition)) 
+                        bishop_w_r.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
                     case "bishop_w_l":
-
+                        bishop_w_l.object3D.position.copy(boardToWorld(endPosition)) 
+                        bishop_w_l.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
                     case "queen_w":
-
+                        queen_w.object3D.position.copy(boardToWorld(endPosition)) 
+                        queen_w.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
                     case "king_w":
+                        king_w.object3D.position.copy(boardToWorld(endPosition)) 
+                        king_w.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "rook_w_r":
+                        rook_w_r.object3D.position.copy(boardToWorld(endPosition)) //potiential idea for implementation, give each piece it's own js function like here? 
+                        rook_w_r.setAttribute('boardPos', boardToChessTerm(endPosition))    //Updates the boardPos attribute
+                        break;
+                    case "rook_w_l":
+                        rook_w_l.object3D.position.copy(boardToWorld(endPosition)) 
+                        rook_w_l.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "pawn_w_1": 
+                        pawn_w_1.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_w_1.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "pawn_w_2":
+                        pawn_w_2.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_w_2.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "pawn_w_3":
+                        pawn_w_3.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_w_3.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "pawn_w_4":
+                        pawn_w_4.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_w_4.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "pawn_w_5":
+                        pawn_w_5.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_w_5.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "pawn_w_6":
+                        pawn_w_6.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_w_6.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "pawn_w_7":
+                        pawn_w_7.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_w_7.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "pawn_w_8":
+                        pawn_w_8.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_w_8.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "knight_w_r":
+                        knight_w_r.object3D.position.copy(boardToWorld(endPosition)) 
+                        knight_w_r.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "knight_w_l":
+                        knight_w_l.object3D.position.copy(boardToWorld(endPosition)) 
+                        knight_w_l.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "bishop_w_r":
+                        bishop_w_r.object3D.position.copy(boardToWorld(endPosition)) 
+                        bishop_w_r.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "bishop_w_l":
+                        bishop_w_l.object3D.position.copy(boardToWorld(endPosition)) 
+                        bishop_w_l.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "queen_w":
+                        queen_w.object3D.position.copy(boardToWorld(endPosition)) 
+                        queen_w.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "king_w":
+                        king_w.object3D.position.copy(boardToWorld(endPosition)) 
+                        king_w.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "rook_b_r":
+                        rook_b_r.object3D.position.copy(boardToWorld(endPosition)) //potiential idea for implementation, give each piece it's own js function like here? 
+                        rook_b_r.setAttribute('boardPos', boardToChessTerm(endPosition))    //Updates the boardPos attribute
+                        break;
+                    case "rook_b_l":
+                        rook_b_l.object3D.position.copy(boardToWorld(endPosition)) 
+                        rook_b_l.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "pawn_b_1": 
+                        pawn_b_1.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_b_1.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "pawn_b_2":
+                        pawn_b_2.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_b_2.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "pawn_b_3":
+                        pawn_b_3.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_b_3.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "pawn_b_4":
+                        pawn_b_4.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_b_4.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "pawn_b_5":
+                        pawn_b_5.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_b_5.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "pawn_b_6":
+                        pawn_b_6.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_b_6.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "pawn_b_7":
+                        pawn_b_7.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_b_7.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "pawn_b_8":
+                        pawn_b_8.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_b_8.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "knight_b_r":
+                        knight_b_r.object3D.position.copy(boardToWorld(endPosition)) 
+                        knight_b_r.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "knight_b_l":
+                        knight_b_l.object3D.position.copy(boardToWorld(endPosition)) 
+                        knight_b_l.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "bishop_b_r":
+                        bishop_b_r.object3D.position.copy(boardToWorld(endPosition)) 
+                        bishop_b_r.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "bishop_b_l":
+                        bishop_b_l.object3D.position.copy(boardToWorld(endPosition)) 
+                        bishop_b_l.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "queen_b":
+                        queen_b.object3D.position.copy(boardToWorld(endPosition)) 
+                        queen_b.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
+                    case "king_b":
+                        king_b.object3D.position.copy(boardToWorld(endPosition)) 
+                        king_b.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                        break;
                 }
                 
                 //console.log(rook_w_r.getAttribute('boardPos'))
