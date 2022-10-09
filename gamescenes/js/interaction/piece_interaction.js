@@ -1,6 +1,7 @@
 // The cursor listener represents the "whole" chessboard as a plane.
 // It's a 4x4 plane tiled sideways, so Z is "upwards" instead of Y.
 AFRAME.registerComponent('cursor-listener', {
+
 			init: function () {
 				// Grab a reference to the plane we'll use to signify when
 				// we highlight a piece. It starts invisible, but well
@@ -17,7 +18,7 @@ AFRAME.registerComponent('cursor-listener', {
 				// SUGGESTION: mousevents are oldschool. consider pointer events
 				// https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events
 				/// o: I will let my mate know!
-				
+       
 
 				//<<<<<<< HEAD
 				const object3D = this.el.object3D; //Jose: make sure you go back and understand 
@@ -95,6 +96,7 @@ AFRAME.registerComponent('cursor-listener', {
             if (!obj.detail.intersection) //if there's no intersection(if you don't click on the board) it yeets you
                 return;
                 
+            console.log(elements[10]);//print out all elements in 'elements'
             //<<<<<<< HEAD this was left over after a merge, might have messed things up by removing it, might have not. Not sure tbh. 
 
             const startPosition = worldToBoard(obj.detail.intersection.point) //"obj.detail.intersection.point" understand and document this better, appears to grab the position
