@@ -13,6 +13,9 @@ AFRAME.registerComponent('cursor-listener', {
         
         const elements = document.querySelectorAll('a-entity');//Gives us an array of ALL a-entity's in game_scene_copy!!!!!
         const RWrook = elements[7].getAttribute('id');//REMOVEABLE -- using to see if we can use elements[i].id dynamically (DOES NOT WORK)
+
+        const planes = document.querySelectorAll('a-plane');//This may be useful, gives us an array of ALL planes
+        
         // SUGGESTION: mousevents are oldschool. consider pointer events
         // https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events
         /// o: I will let my mate know!
@@ -37,7 +40,7 @@ AFRAME.registerComponent('cursor-listener', {
             // to make it horizontal since by default <a-plane> is like upright
             // instead of flat.)
             const localIntersection = object3D.worldToLocal(worldVector);
-
+            //console.log(localIntersection);
             // Normalize to 0 - 1 (the board is 4 units wide and positions go into the negative)
             // Also discard the "z-axis" here - chess isn't 3d.
             const boardPosition = new THREE.Vector2(
@@ -88,18 +91,39 @@ AFRAME.registerComponent('cursor-listener', {
             return `${columnLetter}${rowNumber}`;
         }
 
+//------------------------------------------------------------Function for isSpaceOccupied-----------------------------------------------------------------------------
+
+const getPieceID = (boardPosition) => {
+    var i = 7;
+    var pieceID = "NULL"
+    for(i; i <elements.length-2; i++){
+        console.log(i)
+        console.log("Comparing: " + boardToChessTerm(boardPosition) + " and " + elements[i].getAttribute('boardPos'))
+        if(boardToChessTerm(boardPosition)==elements[i].getAttribute('boardPos')){
+           
+            pieceID = elements[i].id
+            return pieceID
+        }
+    }
+    return pieceID
+}//----------------------------------------------------------------------Implementation seemed like it may work but is extremely buggy*/
+
 
         this.el.addEventListener('mousedown', function (obj) {  //this.el points to what element you are about to click on, you're attaching event listen to that, mousedown fires the the 
             //function following it. this.el gets assigned to obj as, like a reference? we think. 
             if (!obj.detail.intersection) //if there's no intersection(if you don't click on the board) it yeets you
                 return;
-                
-            console.log(RWrook);//print out all elements in 'elements'
+            
             //<<<<<<< HEAD this was left over after a merge, might have messed things up by removing it, might have not. Not sure tbh. 
-
+            
             const startPosition = worldToBoard(obj.detail.intersection.point) //"obj.detail.intersection.point" understand and document this better, appears to grab the position
             //translates from the world to the board. 
-
+            const curPiece = getPieceID(startPosition)
+            console.log(curPiece)
+            if(curPiece=="NULL"){
+                console.log("NOPE!")
+                return;
+            }
 //-----------------------------------------------SETTING ASIDE SPACE FOR LOGIC TO DETERMINE INFORMATION ABOUT SPACE CLICKED ON-----------------------------------------------------
 //      1. Is space currently occupied?         - maybe write separate function isSpaceOccupied(startPosition) to perform this
                 //-YES : Need to figure out how to determine what piece at that position.
@@ -110,18 +134,21 @@ AFRAME.registerComponent('cursor-listener', {
             /* if(isSpaceOccupied){
                 var pieceID = "NULL";
                 var i = 0;
-                    while(startPosition!=elements[i].position){
+                    while(boardToChessTerm(startPosition)!=boardToChessTerm(elements[i].position)){
                         i++;
                     }
                 pieceID = elements[i];
             }
             pieceID.object3D.position.copy(boardToWorld(endPosition));
             */
+            
+
+
             highlightPlane.object3D.visible = true; //while mouse is down, the following three thigns happen. First the highlight becomes visible. 
             highlightPlane.setAttribute("color", "blue"); //next it becomes blue 
             highlightPlane.object3D.position.copy(boardToWorld(startPosition)) //This gives the first position to the highlight plane
 
-            console.log('Moving from: ', boardToChessTerm(startPosition)) //This lets us know where that is, helps with debuggin
+            //console.log('Moving from: ', boardToChessTerm(startPosition)) //This lets us know where that is, helps with debuggin
 
             const onMouseUp = (evt) => { //understand the javascript stuff going on here. 
                 // Cleanup event handlers so we don't get _another_
@@ -129,9 +156,54 @@ AFRAME.registerComponent('cursor-listener', {
                 this.removeEventListener('mouseup', onMouseUp); //ask about this. to whatever subject matter expert we can find 
 
                 const endPosition = worldToBoard(evt.detail.intersection.point) //When you mouse up, that position is coppied to end position
-                console.log('Moving to: ', boardToChessTerm(endPosition))
+                //console.log('Moving to: ', boardToChessTerm(endPosition))
                 
-                rook_w_r.object3D.position.copy(boardToWorld(endPosition)) //potiential idea for implementation, give each piece it's own js function like here? 
+                
+                switch(curPiece) {
+                    case "rook_w_r":
+                        rook_w_r.object3D.position.copy(boardToWorld(endPosition)) //potiential idea for implementation, give each piece it's own js function like here? 
+                        rook_w_r.setAttribute('boardPos', boardToChessTerm(endPosition))    //Updates the boardPos attribute
+                    case "rook_w_l":
+                        rook_w_l.object3D.position.copy(boardToWorld(endPosition)) 
+                        rook_w_l.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                    case "pawn_w_1": 
+                        pawn_w_1.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_w_1.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                    case "pawn_w_2":
+                        pawn_w_2.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_w_2.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                    case "pawn_w_3":
+                        pawn_w_3.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_w_3.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                    case "pawn_w_4":
+                        pawn_w_4.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_w_4.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                    case "pawn_w_5":
+                        pawn_w_5.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_w_5.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                    case "pawn_w_6":
+                        pawn_w_6.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_w_6.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                    case "pawn_w_7":
+                        pawn_w_7.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_w_7.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                    case "pawn_w_8":
+                        pawn_w_8.object3D.position.copy(boardToWorld(endPosition)) 
+                        pawn_w_8.setAttribute('boardPos', boardToChessTerm(endPosition)) 
+                    case "knight_w_r":
+
+                    case "knight_w_l":
+
+                    case "bishop_w_r":
+
+                    case "bishop_w_l":
+
+                    case "queen_w":
+
+                    case "king_w":
+                }
+                
+                //console.log(rook_w_r.getAttribute('boardPos'))
                 highlightPlane.object3D.position.copy(boardToWorld(endPosition))  
                 highlightPlane.setAttribute("color", "red");
             };
