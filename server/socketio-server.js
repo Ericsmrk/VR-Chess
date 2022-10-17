@@ -25,8 +25,8 @@ if (process.env.NODE_ENV === "development") {
   );
 }
 
-// Serve the files from the examples folder
-app.use(express.static(path.resolve(__dirname, "..", "examples")));
+// Serve the files from the gamescenes folder
+app.use(express.static(path.resolve(__dirname, "..", "gamescenes")));
 
 // Start Express http server
 const webServer = http.createServer(app);
