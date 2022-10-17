@@ -15,44 +15,44 @@
     ],
     "placeobjects":[
         {
-            "entity":{
-                "gltf-model":"#chair",
-                "position":{
-                    "x":2,
-                    "y":0,
-                    "z":0
-                },
-                "scale":{
-                    "x":0.25,
-                    "y":0.25,
-                    "z":0.25
-                },
-                "rotation":{
-                    "x":0,
-                    "y":180,
-                    "z":0
-                }
+            
+            "model":"#chair",
+            "position":{
+                "x":2,
+                "y":0,
+                "z":0
+            },
+            "scale":{
+                "x":0.25,
+                "y":0.25,
+                "z":0.25
+            },
+            "rotation":{
+                "x":0,
+                "y":180,
+                "z":0
             }
+        
         },
         {
-            "entity":{
-                "gltf-model":"#table",
-                "position":{
-                    "x":0,
-                    "y":0,
-                    "z":0
-                },
-                "scale":{
-                    "x":0.25,
-                    "y":0.25,
-                    "z":0.25
-                },
-                "rotation":{
-                    "x":0,
-                    "y":180,
-                    "z":0
-                }
+            
+            "model":"#table",
+            "position":{
+                "x":0,
+                "y":0,
+                "z":0
+            },
+            "scale":{
+                "x":0.25,
+                "y":0.25,
+                "z":0.25
+            },
+            "rotation":{
+                "x":0,
+                "y":180,
+                "z":0
             }
+            
         }        
     ],
     "specialobjects":[

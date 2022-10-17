@@ -11,7 +11,7 @@ AFRAME.registerComponent('loader', {
         //load assets
         
         
-
+/*
         let xest = document.createElement('a-asset-item');
         xest.setAttribute('id', 'chair');
         xest.setAttribute('src','../src/models/props/basic/chair.gltf')
@@ -21,30 +21,30 @@ AFRAME.registerComponent('loader', {
         yest.setAttribute('position', {x: 0, y: 0, z: 0}),
         yest.setAttribute('gltf-model', '#chair');
         ascene.appendChild(yest);
-      
+*/      
         
-        /*
+        
         for(let i in sceneData.loadobjects){
-            console.log(sceneData.loadobjects[i].id);
-            console.log(sceneData.loadobjects[i].src);
-            let thing = document.createElement('a-asset-item');
-            thing.setAttribute('id', JSON.stringify(sceneData.loadobjects[i].id));
-            thing.setAttribute('src,', JSON.stringify(sceneData.loadobjects[i].src));
-            ascene.appendChild(thing);
+            
+            let asset = document.createElement('a-asset-item');
+            asset.setAttribute('id', sceneData.loadobjects[i].id);
+            asset.setAttribute('src', sceneData.loadobjects[i].src);
+            ascene.appendChild(asset);
         }
 
         
             
         //place entities
-        for(let entity in sceneData.placeobjects){
-            let thing = document.createElement('a-entity');
-            thing.setAttribute('gltf-model', entity.gltf-model);
-            thing.setAttribute('position', entity.position);
-            thing.setAttribute('scale', entity.scale);
-            thing.setAttribute('rotation', entity.rotation);
-            ascene.appendChild(thing);
+        for(let i in sceneData.placeobjects){
+            let entity = document.createElement('a-entity');
+            console.log(sceneData.placeobjects[i]);
+            entity.setAttribute('gltf-model', sceneData.placeobjects[i].model);
+            entity.setAttribute('position', {x: 0, y: 0, z: 0});
+            //thing.setAttribute('scale', entity.scale);
+            //thing.setAttribute('rotation', entity.rotation);
+            ascene.appendChild(entity);
         }
-        */
+        
 
         //for(let special in sceneData['specialobjects']){
         //    document.write(special);
