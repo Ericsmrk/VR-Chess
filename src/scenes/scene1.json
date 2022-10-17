@@ -1,0 +1,69 @@
+{
+    "loadobjects":[
+        {
+            
+            "id":"chair",
+            "src":"../src/models/props/basic/chair.gltf"
+            
+        },
+        {
+            
+            "id":"table",
+            "src":"../src/models/props/basic/table.gltf"
+            
+        }  
+    ],
+    "placeobjects":[
+        {
+            
+            "model":"#chair",
+            "position":{
+                "x":2,
+                "y":0,
+                "z":0
+            },
+            "scale":{
+                "x":0.25,
+                "y":0.25,
+                "z":0.25
+            },
+            "rotation":{
+                "x":0,
+                "y":180,
+                "z":0
+            }
+        
+        },
+        {
+            
+            "model":"#table",
+            "position":{
+                "x":0,
+                "y":0,
+                "z":0
+            },
+            "scale":{
+                "x":0.25,
+                "y":0.25,
+                "z":0.25
+            },
+            "rotation":{
+                "x":0,
+                "y":180,
+                "z":0
+            }
+            
+        }        
+    ],
+    "specialobjects":[
+        {"type":"a-entity",
+        "properties":[
+            {
+                "attribute":"environment",
+                "data":"preset: forest"
+            }
+        ]
+
+        }
+    ]
+}
