@@ -197,6 +197,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Eric Smrkovsky - [@twitter_handle](https://twitter.com/eric_smrkovsky) - ericsmrkovsky@gmail.com
 Connor McLaughlin - [@twitter_handle](https://twitter.com/eric_smrkovsky) - connor.mclaughlin385@gmail.com
+Jacob Miller - miller_jacob49@outlook.com
 
 Project Link: [https://github.com/Ericsmrk/VR-Chess](https://github.com/Ericsmrk/VR-Chess)
 
