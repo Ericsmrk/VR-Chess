@@ -1,61 +1,48 @@
 AFRAME.registerComponent('loader', {
     init:function(){
         let sceneRequest = new XMLHttpRequest();
-        sceneRequest.open("GET","../src/scenes/scene1.json",false);
+        sceneRequest.open("GET",this.data,false); //this.data gotten from loader='data'
         sceneRequest.send();
-        //console.log(sceneRequest.responseText);
+        
         var sceneData = JSON.parse(sceneRequest.responseText);
         
         
         var ascene = document.querySelector('a-scene');
-        //load assets
-        
-        
-/*
-        let xest = document.createElement('a-asset-item');
-        xest.setAttribute('id', 'chair');
-        xest.setAttribute('src','../src/models/props/basic/chair.gltf')
-        ascene.appendChild(xest);
-        
-        let yest = document.createElement("a-entity");
-        yest.setAttribute('position', {x: 0, y: 0, z: 0}),
-        yest.setAttribute('gltf-model', '#chair');
-        ascene.appendChild(yest);
-*/      
-        
-        
-        for(let i in sceneData.loadobjects){
             
+        
+        for(let i in sceneData.objects){
+            //load model for normal entities
             let asset = document.createElement('a-asset-item');
-            asset.setAttribute('id', sceneData.loadobjects[i].id);
-            asset.setAttribute('src', sceneData.loadobjects[i].src);
-            ascene.appendChild(asset);
-        }
-
-        
+            asset.setAttribute('id', sceneData.objects[i].id); //get id
+            asset.setAttribute('src', sceneData.objects[i].src); //get model source
+            ascene.appendChild(asset); 
             
-        //place entities
-        for(let i in sceneData.placeobjects){
+            //place entities
             let entity = document.createElement('a-entity');
-            console.log(sceneData.placeobjects[i]);
-            entity.setAttribute('gltf-model', sceneData.placeobjects[i].model);
-            entity.setAttribute('position', {x: 0, y: 0, z: 0});
-            //thing.setAttribute('scale', entity.scale);
-            //thing.setAttribute('rotation', entity.rotation);
+            entity.setAttribute('gltf-model', '#' + sceneData.objects[i].id); //modelname must include #
+            entity.setAttribute('position', sceneData.objects[i].position);
+            entity.setAttribute('scale', sceneData.objects[i].scale);
+            entity.setAttribute('rotation', sceneData.objects[i].rotation);
             ascene.appendChild(entity);
         }
-        
 
-        //for(let special in sceneData['specialobjects']){
-        //    document.write(special);
-        //}
-        
-        //<a-asset-item id = chair src='../src/models/props/basic/chair.gltf'></a-asset-item>"
+        //used for oddball objects, for example, a-environment.
+        for(let i in sceneData.specialobjects){
+            let special = document.createElement(sceneData.specialobjects[i].type);
+            for(let j in sceneData.specialobjects[i].properties){
+                special.setAttribute(sceneData.specialobjects[i].properties[j].attribute, sceneData.specialobjects[i].properties[j].data);
+            }
+            ascene.appendChild(special);
+        }
+
+
+        //examples in html
+        //<a-asset-item id = table src='../src/models/props/basic/table.gltf'></a-asset-item>"
         //<a-entity gltf-model='#table' position = '0 0 0' scale = '.25 .25 .25' rotation='0 0 0'></a-entity>
         
     }
 
-    //loadScene();
+    
 
 
 }
