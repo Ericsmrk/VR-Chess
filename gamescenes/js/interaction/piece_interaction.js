@@ -113,6 +113,17 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+//-------------------------------------------mousehover to highlight piece-----------------------------------------------------------------
+        this.el.addEventListener('mouseover', function(obj){
+            const hoverPosition = worldToBoard(obj.detail.intersection.point)
+
+
+
+            highlightPlane.object3D.visible=true;
+            highlightPlane.setAttribute("color", "green");
+            highlightPlane.object3d.position.copy(boardToWorld(startPosition))
+        })
+
         this.el.addEventListener('mousedown', function (obj) {  //this.el points to what element you are about to click on, you're attaching event listen to that, mousedown fires the the 
             //function following it. this.el gets assigned to obj as, like a reference? we think. 
             if (!obj.detail.intersection) //if there's no intersection(if you don't click on the board) it yeets you
