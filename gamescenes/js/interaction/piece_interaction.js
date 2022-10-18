@@ -14,7 +14,7 @@ AFRAME.registerComponent('cursor-listener', {
 				//that's why there's a hashtag in front of it. hightlightPlane is a js element. 
 				
 				
-                const elements = document.querySelectorAll('a-entity');//Gives us an array of ALL a-entitys
+                const elements = document.querySelectorAll('mixin');//Gives us an array of ALL a-entitys
 
 				
 				// SUGGESTION: mousevents are oldschool. consider pointer events
@@ -98,7 +98,7 @@ AFRAME.registerComponent('cursor-listener', {
 //THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
 //THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
 const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
-    var i = 7;
+    var i = 0;
     var pieceID = "NULL"
     for(i; i <elements.length-2; i++){
        // console.log(i)
