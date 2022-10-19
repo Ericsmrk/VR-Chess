@@ -98,7 +98,7 @@ AFRAME.registerComponent('cursor-listener', {
 //THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
 //THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
 const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
-    var i = 0;
+    var i = 7;
     var pieceID = "NULL"
 
     while(elements[i].id!="rook_w_r"){
