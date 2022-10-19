@@ -20,7 +20,7 @@ AFRAME.registerComponent('cursor-listener', {
 				// SUGGESTION: mousevents are oldschool. consider pointer events
 				// https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events
 				/// o: I will let my mate know!
-       
+                
 
 				//<<<<<<< HEAD
 				const object3D = this.el.object3D; //Jose: make sure you go back and understand 
@@ -100,7 +100,12 @@ AFRAME.registerComponent('cursor-listener', {
 const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
     var i = 7;
     var pieceID = "NULL"
-    for(i; i <elements.length-2; i++){
+
+    while(elements[i].id!="rook_w_r"){
+        i++;
+    }
+
+    for(i; i <40; i++){
        // console.log(i)
         //console.log("Comparing: " + boardToChessTerm(boardPosition) + " and " + elements[i].getAttribute('boardPos'))
         if(boardToChessTerm(boardPosition)==elements[i].getAttribute('boardPos')){
