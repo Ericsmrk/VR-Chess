@@ -14,7 +14,7 @@
 			<a-entity environment="preset: forest"></a-entity>
 
             <a-assets>
-                <a-asset-item id="textfont1" src="assets/fonts/PermanentMarker-Regular.ttf"></a-asset-item>
+                <a-asset-item id="textfont1" src="src/fonts/PermanentMarker-Regular.ttf"></a-asset-item>
             </a-assets>
 
             <a-gui-flex-container
@@ -32,7 +32,7 @@
                     radius="0"
                     onclick="testButtonAction1"
                     value="test button"
-                    font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                    font-family="src/fonts/PermanentMarker-Regular.ttf"
                     font-size="0.35"
                     margin="0 0 0.05 0"
                     toggle="true"
@@ -83,7 +83,7 @@
 		}
 
 		window.testButtonAction1 = function () {
-			window.location.href = 'game_scene_copy.html';
+			window.location.href = 'game_scene.html';
 		}
 
 
@@ -150,7 +150,7 @@
 		window.onload = function() {
 			controls = new initControls();
 			setValue();
-			var gui = new dat.GUI();
+			var gui = new data.GUI();
 			gui.add(controls, 'value').onChange(setValue);
 			gui.addColor(controls, 'fontColor').onChange(setValue);
 			gui.addColor(controls, 'hoverColor').onChange(setValue);
@@ -171,7 +171,7 @@
 
 		function setValue() {
 			data.setAttribute('value',controls.value);
-			data.setAttribute('font-family',"assets/fonts/"+controls.fontFamily+"-Regular.ttf");
+			data.setAttribute('font-family',"src/fonts/"+controls.fontFamily+"-Regular.ttf");
 			data.setAttribute('font-size',controls.fontSize);
 			data.setAttribute('font-color',controls.fontColor);
 			data.setAttribute('active-color',controls.activeColor);
