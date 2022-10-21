@@ -98,12 +98,18 @@ AFRAME.registerComponent('cursor-listener', {
 //THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
 //THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
 const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
-    var i = 7;
+    var i = 0;
     var pieceID = "NULL"
+    var temp = elements[i].id
 
-    while(elements[i].id!="rook_w_r"){
+    while(temp!="rook_w_r"){
         i++;
+        temp = elements[i].id
     }
+
+    
+
+
 
     for(i; i <40; i++){
        // console.log(i)
@@ -118,16 +124,7 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-//-------------------------------------------mousehover to highlight piece-----------------------------------------------------------------
-        this.el.addEventListener('mouseover', function(obj){
-            const hoverPosition = worldToBoard(obj.detail.intersection.point)
 
-
-
-            highlightPlane.object3D.visible=true;
-            highlightPlane.setAttribute("color", "green");
-            highlightPlane.object3d.position.copy(boardToWorld(startPosition))
-        })
 
         this.el.addEventListener('mousedown', function (obj) {  //this.el points to what element you are about to click on, you're attaching event listen to that, mousedown fires the the 
             //function following it. this.el gets assigned to obj as, like a reference? we think. 
