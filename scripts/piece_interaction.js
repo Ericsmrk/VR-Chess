@@ -1,9 +1,11 @@
 // The cursor listener represents the "whole" chessboard as a plane.
 // It's a 4x4 plane tiled sideways, so Z is "upwards" instead of Y.
 AFRAME.registerComponent('cursor-listener', {
+    /*schema:{
+        curHolding: {default:' '}
+    },  */      
 
-
-			init: function () {
+    init: function () {
 				// Grab a reference to the plane we'll use to signify when
 				// we highlight a piece. It starts invisible, but well
 				// make it visible when we click on it
@@ -14,9 +16,9 @@ AFRAME.registerComponent('cursor-listener', {
 				//that's why there's a hashtag in front of it. hightlightPlane is a js element. 
 				
 				
-                const elements = document.querySelectorAll('a-entity');//Gives us an array of ALL a-entitys
+                //const elements = document.querySelectorAll('a-entity');//Gives us an array of ALL a-entitys
                 const pieces = document.querySelectorAll('.chessguy');
-				
+				//this.
 				// SUGGESTION: mousevents are oldschool. consider pointer events
 				// https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events
 				/// o: I will let my mate know!
@@ -91,6 +93,7 @@ AFRAME.registerComponent('cursor-listener', {
             const rowNumber = boardPosition.y;
             return `${columnLetter}${rowNumber}`;
         }
+        
 
 //------------------------------------------------------------Function for isSpaceOccupied-----------------------------------------------------------------------------
 //THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
@@ -124,7 +127,14 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+      
+        //Attempts at holding animation. The main problem is getting the actual piece object, if 
+        this.el.addEventListener('mousedown', function (target) {
+            
+            
 
+        });
+//*/        
 
         this.el.addEventListener('mousedown', function (obj) {  //this.el points to what element you are about to click on, you're attaching event listen to that, mousedown fires the the 
             //function following it. this.el gets assigned to obj as, like a reference? we think. 
@@ -137,6 +147,7 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
             //translates from the world to the board. 
             const curPiece = getPieceID(startPosition)
             console.log(curPiece)
+            //this.data.curHolding = curPiece;
             if(curPiece=="NULL"){
                 console.log("NOPE!")
                 return;
@@ -167,6 +178,10 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
 
 
             //console.log('Moving from: ', boardToChessTerm(startPosition)) //This lets us know where that is, helps with debuggin
+
+            
+            
+
 
 
             const onMouseUp = (evt) => { //understand the javascript stuff going on here.  //understand the javascript stuff going on here. 
@@ -320,5 +335,29 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
       });
      
     }
+    /*
+    ,
+    tick:function(time, timedelta){
+        if(this.data.curHolding!= ' '){
+            var position = document.querySelector('a-scene').camera.el.object3D.position; 
+            var rotation = document.querySelector('a-scene').camera.el.object3D.rotation;
+            var distance = 2;
+            var x = position.x; var y = position.y; var z = position.z;
+            console.log(rotation.x);
+            x -= distance*Math.sin(rotation.x+(Math.PI/2))*Math.sin(rotation.y);
+            y -= distance*Math.cos(rotation.x+(Math.PI/2));
+            z -= distance*Math.sin(rotation.x+(Math.PI/2))*Math.cos(rotation.y);
+            
+            curobject = document.querySelector('#' + this.data.curHolding);
+            curobject.object3D.position.set(x,y,z);  
+            
+            
+            console.log('x= ' +x +' y= ' + y +' z= ' + z);
+        }
+            
+           
+            
+    }
+    */
 });
 
