@@ -11,8 +11,8 @@
 	</head>
 	<body>
 		<a-scene>
-			<!--Just for setting background scene-->
-			<a-entity environment="preset: forest"></a-entity>
+			<!--Just for setting background scene
+			<a-entity environment="preset: forest"></a-entity>-->
 
 			
 			<!-- look-controls wasd-controls does movement-->
@@ -65,51 +65,51 @@
 
 <!--rook that's white starting on the right side, the mixin brings in the 
 			assests it needs, and then position is what we are trying to play around with -->
-			<a-entity id="rook_w_r" mixin = "rook_w" boardPos="h1" position=" 2   1.5 -1  "></a-entity>
-			<a-entity id="rook_w_l" mixin = "rook_w" boardPos="a1" position="-1.5 1.5 -1  "></a-entity>
+			<a-entity class="chessguy" id="rook_w_r" mixin = "rook_w" boardPos="h1" position=" 2   1.5 -1  "></a-entity>
+			<a-entity class="chessguy" id="rook_w_l" mixin = "rook_w" boardPos="a1" position="-1.5 1.5 -1  "></a-entity>
 
-			<a-entity id="knight_w_r" mixin = "knight_w" boardPos="g1" position=" 1.5   1.5 -1  "></a-entity>
-			<a-entity id="knight_w_l" mixin = "knight_w" boardPos="b1" position="-1 1.5 -1  "></a-entity>
+			<a-entity class="chessguy" id="knight_w_r" mixin = "knight_w" boardPos="g1" position=" 1.5   1.5 -1  "></a-entity>
+			<a-entity class="chessguy" id="knight_w_l" mixin = "knight_w" boardPos="b1" position="-1 1.5 -1  "></a-entity>
 
-			<a-entity id="knight_b_r" mixin = "knight_b" boardPos="g8" position=" 1.5   1.5 -4.5  "></a-entity>
-			<a-entity id="knight_b_l" mixin = "knight_b" boardPos="b8" position="-1 1.5 -4.5  "></a-entity>
+			<a-entity class="chessguy" id="knight_b_r" mixin = "knight_b" boardPos="g8" position=" 1.5   1.5 -4.5  "></a-entity>
+			<a-entity class="chessguy" id="knight_b_l" mixin = "knight_b" boardPos="b8" position="-1 1.5 -4.5  "></a-entity>
 
-			<a-entity id="bishop_w_r" mixin = "bishop_w" boardPos="f1" position=" 1  1.5 -1  "></a-entity>
-			<a-entity id="bishop_w_l" mixin = "bishop_w" boardPos="c1" position="-0.5 1.5 -1  "></a-entity>
+			<a-entity class="chessguy" id="bishop_w_r" mixin = "bishop_w" boardPos="f1" position=" 1  1.5 -1  "></a-entity>
+			<a-entity class="chessguy" id="bishop_w_l" mixin = "bishop_w" boardPos="c1" position="-0.5 1.5 -1  "></a-entity>
 
-			<a-entity id="bishop_b_r" mixin = "bishop_b" boardPos="f8" position=" 1   1.5 -4.5  "></a-entity>
-			<a-entity id="bishop_b_l" mixin = "bishop_b" boardPos="c8" position="-0.5 1.5 -4.5  "></a-entity>
+			<a-entity class="chessguy" id="bishop_b_r" mixin = "bishop_b" boardPos="f8" position=" 1   1.5 -4.5  "></a-entity>
+			<a-entity class="chessguy" id="bishop_b_l" mixin = "bishop_b" boardPos="c8" position="-0.5 1.5 -4.5  "></a-entity>
 
-			<a-entity id="kingb"  mixin = "king_b" boardPos="e8" position=" 0.5   1.5 -4.5  "></a-entity>
-			<a-entity id="queenb" mixin = "queen_b" boardPos="d8" position=" 0   1.5 -4.5  "></a-entity>
+			<a-entity class="chessguy" id="kingb"  mixin = "king_b" boardPos="e8" position=" 0.5   1.5 -4.5  "></a-entity>
+			<a-entity class="chessguy" id="queenb" mixin = "queen_b" boardPos="d8" position=" 0   1.5 -4.5  "></a-entity>
 
-			<a-entity id="kingw"  mixin = "king_w" boardPos="e1" position=" 0.5   1.5 -1  "></a-entity>
-			<a-entity id="queenw" mixin = "queen_w" boardPos="d1" position=" 0  1.5 -1  "></a-entity>
-
-			
+			<a-entity class="chessguy" id="kingw"  mixin = "king_w" boardPos="e1" position=" 0.5   1.5 -1  "></a-entity>
+			<a-entity class="chessguy" id="queenw" mixin = "queen_w" boardPos="d1" position=" 0  1.5 -1  "></a-entity>
 
 			
-			<a-entity id="rook_b_r"mixin = "rook_b"  boardPos="h8"position=" 2   1.5 -4.5"></a-entity>
-			<a-entity id="rook_b_w"mixin = "rook_b"  boardPos="a8"position="-1.5 1.5 -4.5"></a-entity>
+
+			
+			<a-entity class="chessguy" id="rook_b_r"mixin = "rook_b"  boardPos="h8"position=" 2   1.5 -4.5"></a-entity>
+			<a-entity class="chessguy" id="rook_b_w"mixin = "rook_b"  boardPos="a8"position="-1.5 1.5 -4.5"></a-entity>
 
 			<!-- PAWN -->
-			<a-entity id="pawn_w_1"mixin = "pawn_w"  boardPos="a2"position="-1.5  1.5 -1.5"></a-entity>
-			<a-entity id="pawn_w_2"mixin = "pawn_w"  boardPos="b2"position="-1    1.5 -1.5"></a-entity>
-			<a-entity id="pawn_w_3"mixin = "pawn_w"  boardPos="c2"position="-0.5  1.5 -1.5"></a-entity>
-			<a-entity id="pawn_w_4"mixin = "pawn_w"  boardPos="d2"position=" 0    1.5 -1.5"></a-entity>
-			<a-entity id="pawn_w_5"mixin = "pawn_w"  boardPos="e2"position=" 0.5  1.5 -1.5"></a-entity>
-			<a-entity id="pawn_w_6"mixin = "pawn_w"  boardPos="f2"position=" 1    1.5 -1.5"></a-entity>
-			<a-entity id="pawn_w_7"mixin = "pawn_w"  boardPos="g2"position=" 1.5  1.5 -1.5"></a-entity>
-			<a-entity id="pawn_w_8"mixin = "pawn_w"  boardPos="h2"position=" 2    1.5 -1.5"></a-entity>
+			<a-entity class="chessguy" id="pawn_w_1"mixin = "pawn_w"  boardPos="a2"position="-1.5  1.5 -1.5"></a-entity>
+			<a-entity class="chessguy" id="pawn_w_2"mixin = "pawn_w"  boardPos="b2"position="-1    1.5 -1.5"></a-entity>
+			<a-entity class="chessguy" id="pawn_w_3"mixin = "pawn_w"  boardPos="c2"position="-0.5  1.5 -1.5"></a-entity>
+			<a-entity class="chessguy" id="pawn_w_4"mixin = "pawn_w"  boardPos="d2"position=" 0    1.5 -1.5"></a-entity>
+			<a-entity class="chessguy" id="pawn_w_5"mixin = "pawn_w"  boardPos="e2"position=" 0.5  1.5 -1.5"></a-entity>
+			<a-entity class="chessguy" id="pawn_w_6"mixin = "pawn_w"  boardPos="f2"position=" 1    1.5 -1.5"></a-entity>
+			<a-entity class="chessguy" id="pawn_w_7"mixin = "pawn_w"  boardPos="g2"position=" 1.5  1.5 -1.5"></a-entity>
+			<a-entity class="chessguy" id="pawn_w_8"mixin = "pawn_w"  boardPos="h2"position=" 2    1.5 -1.5"></a-entity>
 			
-			<a-entity id="pawn_b_1"mixin = "pawn_b"  boardPos="a7"position="-1.5  1.5 -4  "></a-entity>
-			<a-entity id="pawn_b_2"mixin = "pawn_b"  boardPos="b7"position="-1    1.5 -4  "></a-entity>
-			<a-entity id="pawn_b_3"mixin = "pawn_b"  boardPos="c7"position="-0.5  1.5 -4  "></a-entity>
-			<a-entity id="pawn_b_4"mixin = "pawn_b"  boardPos="d7"position=" 0    1.5 -4  "></a-entity>
-			<a-entity id="pawn_b_5"mixin = "pawn_b"  boardPos="e7"position=" 0.5  1.5 -4  "></a-entity>
-			<a-entity id="pawn_b_6"mixin = "pawn_b"  boardPos="f7"position=" 1    1.5 -4  "></a-entity>
-			<a-entity id="pawn_b_7"mixin = "pawn_b"  boardPos="g7"position=" 1.5  1.5 -4  "></a-entity>
-			<a-entity id="pawn_b_8"mixin = "pawn_b"  boardPos="h7"position=" 2    1.5 -4  "></a-entity>
+			<a-entity class="chessguy" id="pawn_b_1"mixin = "pawn_b"  boardPos="a7"position="-1.5  1.5 -4  "></a-entity>
+			<a-entity class="chessguy" id="pawn_b_2"mixin = "pawn_b"  boardPos="b7"position="-1    1.5 -4  "></a-entity>
+			<a-entity class="chessguy" id="pawn_b_3"mixin = "pawn_b"  boardPos="c7"position="-0.5  1.5 -4  "></a-entity>
+			<a-entity class="chessguy" id="pawn_b_4"mixin = "pawn_b"  boardPos="d7"position=" 0    1.5 -4  "></a-entity>
+			<a-entity class="chessguy" id="pawn_b_5"mixin = "pawn_b"  boardPos="e7"position=" 0.5  1.5 -4  "></a-entity>
+			<a-entity class="chessguy" id="pawn_b_6"mixin = "pawn_b"  boardPos="f7"position=" 1    1.5 -4  "></a-entity>
+			<a-entity class="chessguy" id="pawn_b_7"mixin = "pawn_b"  boardPos="g7"position=" 1.5  1.5 -4  "></a-entity>
+			<a-entity class="chessguy" id="pawn_b_8"mixin = "pawn_b"  boardPos="h7"position=" 2    1.5 -4  "></a-entity>
 
 
 			
@@ -219,9 +219,9 @@
 			<a-plane position="-1 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 			<a-plane position="-1.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 
-			<!--
+			
 				<a-entity loader="/src/scenes/scene2.json"></a-entity>
-				loads a scene json
+			<!--	loads a scene json
 			-->
 			
 		</a-scene>
