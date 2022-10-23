@@ -15,7 +15,7 @@ AFRAME.registerComponent('cursor-listener', {
 				
 				
                 const elements = document.querySelectorAll('a-entity');//Gives us an array of ALL a-entitys
-
+                const pieces = document.querySelectorAll('.chessguy');
 				
 				// SUGGESTION: mousevents are oldschool. consider pointer events
 				// https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events
@@ -100,23 +100,23 @@ AFRAME.registerComponent('cursor-listener', {
 const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
     var i = 0;
     var pieceID = "NULL"
-    var temp = elements[i].id
-
+    //var temp = elements[i].id
+/*
     while(temp!="rook_w_r"){
         i++;
         temp = elements[i].id
     }
-
+*/
     
 
 
 
-    for(i; i <40; i++){
+    for(i; i <32; i++){
        // console.log(i)
         //console.log("Comparing: " + boardToChessTerm(boardPosition) + " and " + elements[i].getAttribute('boardPos'))
-        if(boardToChessTerm(boardPosition)==elements[i].getAttribute('boardPos')){
-           
-            pieceID = elements[i].id
+        if(boardToChessTerm(boardPosition)==pieces[i].getAttribute('boardPos')){
+            //console.log(pieces[i].id);
+            pieceID = pieces[i].id
             return pieceID
         }
     }
