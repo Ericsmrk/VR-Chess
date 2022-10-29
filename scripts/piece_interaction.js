@@ -74,6 +74,19 @@ AFRAME.registerComponent('cursor-listener', {
             // And turn it into a world space vector!
             return object3D.localToWorld(localPosition)
         };
+        var dPx = 2.5
+        var dPz = -1
+        var dPit_w = 0;
+        var dPit_b = 0;
+        const deadPieceW = [new THREE.Vector3(dPx, 1.6, dPz), new THREE.Vector3(dPx, 1.6, dPz-0.5),new THREE.Vector3(dPx, 1.6, dPz-1.0),new THREE.Vector3(dPx, 1.6, dPz-1.5),
+            new THREE.Vector3(dPx, 1.6, dPz-2.0), new THREE.Vector3(dPx, 1.6, dPz-2.5), new THREE.Vector3(dPx, 1.6, dPz-3.0), new THREE.Vector3(dPx, 1.6, dPz-3.5),
+            new THREE.Vector3(dPx+0.5, 1.6, dPz),new THREE.Vector3(dPx+0.5, 1.6, dPz-0.5),new THREE.Vector3(dPx+0.5, 1.6, dPz-1.0),new THREE.Vector3(dPx+0.5, 1.6, dPz-1.5),
+            new THREE.Vector3(dPx+0.5, 1.6, dPz-2.0),new THREE.Vector3(dPx+0.5, 1.6, dPz-2.5),new THREE.Vector3(dPx+0.5, 1.6, dPz-3.0),new THREE.Vector3(dPx+0.5, 1.6, dPz-3.5)]
+        dPx = -2
+        const deadPieceB = [new THREE.Vector3(dPx, 1.6, dPz), new THREE.Vector3(dPx, 1.6, dPz-0.5),new THREE.Vector3(dPx, 1.6, dPz-1.0),new THREE.Vector3(dPx, 1.6, dPz-1.5),
+            new THREE.Vector3(dPx, 1.6, dPz-2.0), new THREE.Vector3(dPx, 1.6, dPz-2.5), new THREE.Vector3(dPx, 1.6, dPz-3.0), new THREE.Vector3(dPx, 1.6, dPz-3.5),
+            new THREE.Vector3(dPx-0.5, 1.6, dPz),new THREE.Vector3(dPx-0.5, 1.6, dPz-0.5),new THREE.Vector3(dPx-0.5, 1.6, dPz-1.0),new THREE.Vector3(dPx-0.5, 1.6, dPz-1.5),
+            new THREE.Vector3(dPx-0.5, 1.6, dPz-2.0),new THREE.Vector3(dPx-0.5, 1.6, dPz-2.5),new THREE.Vector3(dPx-0.5, 1.6, dPz-3.0),new THREE.Vector3(dPx-0.5, 1.6, dPz-3.5)]    
         // convert a "chess space" position to a string like "C4", "D1"
         const boardToChessTerm = (boardPosition) => {
             // Chess board looks like
@@ -104,16 +117,6 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
     var i = 0;
     var pieceID = "NULL"
     var curPieceID = -1;
-    //var temp = elements[i].id
-/*
-    while(temp!="rook_w_r"){
-        i++;
-        temp = elements[i].id
-    }
-*/
-    
-
-    
 
     for(i; i <32; i++){
        // console.log(i)
@@ -146,6 +149,7 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
             //<<<<<<< HEAD this was left over after a merge, might have messed things up by removing it, might have not. Not sure tbh. 
             
             const startPosition = worldToBoard(obj.detail.intersection.point) //"obj.detail.intersection.point" understand and document this better, appears to grab the position
+            
             //translates from the world to the board. 
             const curPiece = getPieceID(startPosition)
             console.log(curPiece)
@@ -154,6 +158,13 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
                 console.log("NOPE!")
                 return;
             }
+
+//****************************************************************************************************************************************************** */
+            console.log(pieces[curPiece].id[0]) //can use this to check against an occupied spot, if space occupied, check if it same color as piece being moved
+                                                    //if yes, do nothing
+                                                    //if no, KILL
+
+
 //-----------------------------------------------SETTING ASIDE SPACE FOR LOGIC TO DETERMINE INFORMATION ABOUT SPACE CLICKED ON-----------------------------------------------------
 //      1. Is space currently occupied?         - maybe write separate function isSpaceOccupied(startPosition) to perform this
                 //-YES : Need to figure out how to determine what piece at that position.
@@ -193,14 +204,64 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
 
 
                 const endPosition = worldToBoard(evt.detail.intersection.point) //When you mouse up, that position is coppied to end position
+
                 
+    //****************************************************************************************************************************************************** */
+                console.log(pieces[curPiece].id[0]) //can use this to check against an occupied spot, if space occupied, check if it same color as piece being moved
+                //if yes, do nothing
+                //if no, KILL
+                const endPosPiece = getPieceID(endPosition)
+                if(endPosPiece == -1){
+                    console.log("End position empty")
+                    pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))
+                    pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
+                
+                
+
+                }
+                else{
+                    console.log("End " + pieces[endPosPiece].id)
+                    if(pieces[curPiece].id[0] == pieces[endPosPiece].id[0]){
+                        //means pieces are the same color, DO NOT MOVE
+                        console.log("Pieces same color, INVALID MOVE")
+
+                    }
+                    else{   //KILL/CAPTURE FUNCTION WILL BE PLACED HERE!
+                        console.log(pieces[curPiece].id)
+                        pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))
+                        pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
+                        console.log(pieces[curPiece].getAttribute('boardPos'))
+
+                        //KILL/CAPTURE
+                        if(pieces[curPiece].id[0] == 'w'){
+                            pieces[endPosPiece].object3D.position.copy(deadPieceW[dPit_w])
+                            pieces[endPosPiece].setAttribute('boardPos', "dead")
+                            dPit_w++
+                        }else{
+                            pieces[endPosPiece].object3D.position.copy(deadPieceB[dPit_b])
+                            pieces[endPosPiece].setAttribute('boardPos', "dead")
+                            dPit_b++
+                        }
+                        
+                        
+                
+                
+
+                
+                    }
+                }
+
+                highlightPlane.object3D.position.copy(boardToWorld(endPosition))   //positioning highlight plane at endPosition
+                highlightPlane.setAttribute("color", "red");  
+                
+                /*
                 console.log(pieces[curPiece].id)
                 pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))
                 
                 
 
                 highlightPlane.object3D.position.copy(boardToWorld(endPosition))   //positioning highlight plane at endPosition
-                highlightPlane.setAttribute("color", "red");                        //coloring plane after drop
+                highlightPlane.setAttribute("color", "red");     */                   //coloring plane after drop
             };
 
           this.addEventListener('mouseup', onMouseUp);
