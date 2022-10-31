@@ -7,7 +7,7 @@
 		<script src="scripts/piece_interaction.js"></script>
 		<script src="scripts/chess_piece_component.js"></script>
 		<script src="scripts/Loader.js"></script>
-	
+		<script src="scripts/setAtts.js"></script>
 	</head>
 	<body>
 		<a-scene>
@@ -16,7 +16,7 @@
 
 			
 			<!-- look-controls wasd-controls does movement-->
-			<a-entity camera position="0.25 3.6 1"  look-controls="pointerLockEnabled: true" wasd-controls>
+			<a-entity camera position="0.25 1.6 1"  look-controls="pointerLockEnabled: true" wasd-controls>
 				<!--This is cursor, (the pretty thing in middle), raycaster is essetially lazer controls-->
 				<a-entity cursor="fuse: false; fuseTimeout: 500" 
 
@@ -25,7 +25,8 @@
 							geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
 							material="color: black; shader: flat">
 				</a-entity>
-				</a-entity>
+			</a-entity>
+			
 				<!--Just asset loading -->
 			<a-assets>
 
@@ -129,12 +130,12 @@
 				id="cursor-plane"
 				cursor-listener
 				geometry="primitive plane"
-				position=".25, 1.51, -2.75"
+				position=".25, 0.801, -2.75"
 				visible="false"
 				rotation="-90 0 0"
 				height="4"
-				width="4"
-			></a-plane>
+				width="4" 
+			></a-plane><!--Height and Width need to be scaled to 0.64-->
 			<!-- This plane is used for highlighting, and is moved around by the "cursor-listener" component-->
 			<a-plane
 				id="highlight-plane"
@@ -145,10 +146,11 @@
 				height="0.5"
 				width="0.5"
 			></a-plane>   <!--Was the left by mistake? the a-entity tag? -->
-
+<!--
 			<a-plane geometry="primitive plane" position="2 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 			<a-plane geometry="primitive plane" position="1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 
+			
 			<a-plane id="f1" position="1 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
 			<a-plane id="e1" position="0.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
 			<a-plane id="d1" position="0 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
@@ -219,10 +221,11 @@
 			<a-plane position="-1 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 			<a-plane position="-1.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 
-			
-				<a-entity loader="/src/scenes/scene2.json"></a-entity>
-			<!--	loads a scene json
 			-->
+				<a-entity loader="/src/scenes/scene2.json"></a-entity>
+			<!--	loads a scene json-->	
+				<a-entity setatts></a-entity>
+			<!--	sets attributes to be applied to many pieces-->	
 			
 		</a-scene>
 
