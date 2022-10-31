@@ -16,13 +16,13 @@
 
 			
 			<!-- look-controls wasd-controls does movement-->
-			<a-entity camera position="0.25 1.6 1"  look-controls="pointerLockEnabled: true" wasd-controls>
+			<a-entity camera position="0.25 1.2 1"  look-controls="pointerLockEnabled: true" wasd-controls>
 				<!--This is cursor, (the pretty thing in middle), raycaster is essetially lazer controls-->
 				<a-entity cursor="fuse: false; fuseTimeout: 500" 
 
 							raycaster="objects: #cursor-plane"
-							position="0 0 -1"
-							geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+							position="0 0 -0.2"
+							geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003"
 							material="color: black; shader: flat">
 				</a-entity>
 			</a-entity>
@@ -133,8 +133,8 @@
 				position=".25, 0.801, -2.75"
 				visible="false"
 				rotation="-90 0 0"
-				height="4"
-				width="4" 
+				height="0.64"
+				width="0.64" 
 			></a-plane><!--Height and Width need to be scaled to 0.64-->
 			<!-- This plane is used for highlighting, and is moved around by the "cursor-listener" component-->
 			<a-plane
