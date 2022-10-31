@@ -16,7 +16,7 @@
 
 			
 			<!-- look-controls wasd-controls does movement-->
-			<a-entity camera position="0.25 1.2 1"  look-controls="pointerLockEnabled: true" wasd-controls>
+			<a-entity camera position="0.25 1.2 -2"  look-controls="pointerLockEnabled: true" wasd-controls="acceleration:10">
 				<!--This is cursor, (the pretty thing in middle), raycaster is essetially lazer controls-->
 				<a-entity cursor="fuse: false; fuseTimeout: 500" 
 
@@ -143,8 +143,9 @@
 				geometry="primitive plane"
 				rotation="-90 0 0"
 				color="blue"
-				height="0.5"
-				width="0.5"
+				opacity="0.5"
+				height="0.08"
+				width="0.08"
 			></a-plane>   <!--Was the left by mistake? the a-entity tag? -->
 <!--
 			<a-plane geometry="primitive plane" position="2 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
