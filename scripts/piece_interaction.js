@@ -46,15 +46,17 @@ AFRAME.registerComponent('cursor-listener', {
             //console.log(localIntersection);
             // Normalize to 0 - 1 (the board is 4 units wide and positions go into the negative)
             // Also discard the "z-axis" here - chess isn't 3d.
+            console.log(localIntersection);
             const boardPosition = new THREE.Vector2(
-                (localIntersection.x / 4) + 0.5,
-                (localIntersection.y / 4) + 0.5
+                (localIntersection.x / 0.64) + 0.5,
+                (localIntersection.y / 0.64) + 0.5
             );
+            console.log(boardPosition);
             // Multiply by all the chess positions (chess boards are 8x8)
             boardPosition.multiplyScalar(8);
             // Round to a whole number (chess isnt fractional)
             boardPosition.ceil();
-            
+            console.log(boardPosition);
             return boardPosition;
         }
         // Opposite of the function above, get the "world space" position
@@ -67,26 +69,35 @@ AFRAME.registerComponent('cursor-listener', {
             // subtract -1 to that is goes (-1 to +1)
             localPosition.add(new THREE.Vector3(-1, -1, 0))
             // and now it goes from (-2 to +2) (which is the size of our board - we're almost done)
-            localPosition.multiplyScalar(2)
+            localPosition.multiplyScalar(0.32)
             // and since we rounded the number down, we need to add
             // a bit to make it to the middle of the square
-            localPosition.add(new THREE.Vector3(-0.25, -0.25, 0))
+            localPosition.add(new THREE.Vector3(-0.25*.16, -0.25*.16, 0))
             // And turn it into a world space vector!
             return object3D.localToWorld(localPosition)
         };
-        var dPx = 2.5
-        var dPz = -1
+        var scl = 0.16;
+        var repos = 0.25*(1-0.16);
+        var dPx = 2.5*0.16+repos;
+        var dPz = -2.75+(0.04*7);
+        
+        var dPy = 0.8;
+        
+        
         var dPit_w = 0;
         var dPit_b = 0;
-        const deadPieceW = [new THREE.Vector3(dPx, 1.6, dPz), new THREE.Vector3(dPx, 1.6, dPz-0.5),new THREE.Vector3(dPx, 1.6, dPz-1.0),new THREE.Vector3(dPx, 1.6, dPz-1.5),
-            new THREE.Vector3(dPx, 1.6, dPz-2.0), new THREE.Vector3(dPx, 1.6, dPz-2.5), new THREE.Vector3(dPx, 1.6, dPz-3.0), new THREE.Vector3(dPx, 1.6, dPz-3.5),
-            new THREE.Vector3(dPx+0.5, 1.6, dPz),new THREE.Vector3(dPx+0.5, 1.6, dPz-0.5),new THREE.Vector3(dPx+0.5, 1.6, dPz-1.0),new THREE.Vector3(dPx+0.5, 1.6, dPz-1.5),
-            new THREE.Vector3(dPx+0.5, 1.6, dPz-2.0),new THREE.Vector3(dPx+0.5, 1.6, dPz-2.5),new THREE.Vector3(dPx+0.5, 1.6, dPz-3.0),new THREE.Vector3(dPx+0.5, 1.6, dPz-3.5)]
-        dPx = -2
-        const deadPieceB = [new THREE.Vector3(dPx, 1.6, dPz), new THREE.Vector3(dPx, 1.6, dPz-0.5),new THREE.Vector3(dPx, 1.6, dPz-1.0),new THREE.Vector3(dPx, 1.6, dPz-1.5),
-            new THREE.Vector3(dPx, 1.6, dPz-2.0), new THREE.Vector3(dPx, 1.6, dPz-2.5), new THREE.Vector3(dPx, 1.6, dPz-3.0), new THREE.Vector3(dPx, 1.6, dPz-3.5),
-            new THREE.Vector3(dPx-0.5, 1.6, dPz),new THREE.Vector3(dPx-0.5, 1.6, dPz-0.5),new THREE.Vector3(dPx-0.5, 1.6, dPz-1.0),new THREE.Vector3(dPx-0.5, 1.6, dPz-1.5),
-            new THREE.Vector3(dPx-0.5, 1.6, dPz-2.0),new THREE.Vector3(dPx-0.5, 1.6, dPz-2.5),new THREE.Vector3(dPx-0.5, 1.6, dPz-3.0),new THREE.Vector3(dPx-0.5, 1.6, dPz-3.5)]    
+        const deadPieceW = [new THREE.Vector3(dPx, dPy, dPz), new THREE.Vector3(dPx, dPy, dPz-0.5*scl),new THREE.Vector3(dPx, dPy, dPz-1.0*scl),new THREE.Vector3(dPx, dPy, dPz-1.5*scl),
+            new THREE.Vector3(dPx, dPy, dPz-2.0*scl), new THREE.Vector3(dPx, dPy, dPz-2.5*scl), new THREE.Vector3(dPx, dPy, dPz-3.0*scl), new THREE.Vector3(dPx, dPy, dPz-3.5*scl),
+            new THREE.Vector3(dPx+0.5*scl, dPy, dPz),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-0.5*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-1.0*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-1.5*scl),
+            new THREE.Vector3(dPx+0.5*scl, dPy, dPz-2.0*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-2.5*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-3.0*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-3.5*scl)]
+           
+        
+        dPx = -2*(0.16)+repos;
+        const deadPieceB = [new THREE.Vector3(dPx, dPy, dPz), new THREE.Vector3(dPx, dPy, dPz-0.5*scl),new THREE.Vector3(dPx, dPy, dPz-1.0*scl),new THREE.Vector3(dPx, dPy, dPz-1.5*scl),
+            new THREE.Vector3(dPx, dPy, dPz-2.0*scl), new THREE.Vector3(dPx, dPy, dPz-2.5*scl), new THREE.Vector3(dPx, dPy, dPz-3.0*scl), new THREE.Vector3(dPx, dPy, dPz-3.5*scl),
+            new THREE.Vector3(dPx-0.5*scl, dPy, dPz),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-0.5*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-1.0*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-1.5*scl),
+            new THREE.Vector3(dPx-0.5*scl, dPy, dPz-2.0*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-2.5*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-3.0*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-3.5*scl)]
+        
         // convert a "chess space" position to a string like "C4", "D1"
         const boardToChessTerm = (boardPosition) => {
             // Chess board looks like
