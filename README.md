@@ -43,7 +43,7 @@
     <a href="https://github.com/Ericsmrk/VR-Chess/wiki"><strong>Explore the documentation »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Ericsmrk/VR-Chess">View Demo(not yet)</a>
+    <a href="https://youtu.be/F_E9Rb2Gowc">View Demo(not yet)</a>
     <br />
   </p>
 </div>
