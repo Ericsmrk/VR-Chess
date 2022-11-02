@@ -35,7 +35,7 @@
   <a href="https://cdotli.github.io/Milestone1/">
     <img src="https://github.com/Ericsmrk/VR-Chess/blob/main/images/chess.PNG" alt="Logo" width="400" height="400">
   </a>
-
+<h3 align="center">click photo to play</h3>
 <h3 align="center">!!!VR CHESS!!!</h3>
 
   <p align="center">
