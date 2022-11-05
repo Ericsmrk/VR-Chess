@@ -236,15 +236,7 @@ AFRAME.registerComponent('cursor-listener', {
             return curPieceID
         }
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
-
       
-        //Attempts at holding animation. The main problem is getting the actual piece object, if 
-        this.el.addEventListener('mousedown', function (target) {
-            
-            
-
-        });
-//*/        
 
         this.el.addEventListener('mousedown', function (obj) {  //this.el points to what element you are about to click on, you're attaching event listen to that, mousedown fires the the 
             //function following it. this.el gets assigned to obj as, like a reference? we think. 
@@ -265,7 +257,10 @@ AFRAME.registerComponent('cursor-listener', {
                 console.log("NOPE!")
                 return;
             }
-
+            pieceTarget = boardToWorld(startPosition);//get piece position for storing it later
+            let pieceToAnimate = pieces[curPiece];
+            pieceToAnimate.setAttribute('holdable', 'x:'+pieceTarget.x+';y:'+pieceTarget.y+';z:'+pieceTarget.z);
+            //starts the holding component
 //****************************************************************************************************************************************************** */
             console.log(pieces[curPiece].id[0]) //can use this to check against an occupied spot, if space occupied, check if it same color as piece being moved
                                                     //if yes, do nothing
@@ -292,9 +287,11 @@ AFRAME.registerComponent('cursor-listener', {
 
             const onMouseUp = (evt) => { //understand the javascript stuff going on here.  //understand the javascript stuff going on here. 
                 // Cleanup event handlers so we don't get _another_
-                // listener every time we click
+                // listener every time we click  
                 this.removeEventListener('mouseup', onMouseUp); //ask about this. to whatever subject matter expert we can find  //ask about this. to whatever subject matter expert we can find 
-
+                
+                let pieceToAnimate = pieces[curPiece];//removing attribute set to stop and reset postion
+                pieceToAnimate.removeAttribute('holdable');
 
                 const endPosition = worldToBoard(evt.detail.intersection.point) //When you mouse up, that position is coppied to end position
 
@@ -319,7 +316,7 @@ AFRAME.registerComponent('cursor-listener', {
                     if(pieces[curPiece].id[0] == pieces[endPosPiece].id[0]){
                         //means pieces are the same color, DO NOT MOVE
                         console.log("Pieces same color, INVALID MOVE")
-
+                        
                     }
                     else{   //KILL/CAPTURE FUNCTION WILL BE PLACED HERE!
                         //isMoveValid()
