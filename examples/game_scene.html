@@ -52,12 +52,14 @@
 					template: '#rook_w_template',
 					components: [
 						'position',
-						{	
-							property: 'boardPos'
-						}
+						'boardPos'
+						
+						
 					]
 				});
 			}
+
+			
 
 			const components = NAF.schemas.getComponentsOriginal(template);
 			return components;
@@ -113,35 +115,15 @@
 
 				<a-mixin gltf-model="#queen_w" id = "queen_w" src = "/src/models/sets/default/white/queen.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
 				<a-mixin gltf-model="#queen_b" id = "queen_b" src = "/src/models/sets/default/black/queen.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
-			
-			<a-mixin gltf-model="#rook_b" id="rook_b" src="/src/models/sets/default/black/rook.gltf" chess-piece
-				scale="0.2 0.2 0.2"></a-mixin>
 
+				<a-mixin gltf-model="#pawn_w" id="pawn_w" src="/src/models/sets/default/white/pawn.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
+				<a-mixin gltf-model="#pawn_b" id="pawn_b" src="/src/models/sets/default/black/pawn.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>	
 
-			<a-mixin gltf-model="#pawn_w" id="pawn_w" src="/src/models/sets/default/white/pawn.gltf" chess-piece
-				scale="0.2 0.2 0.2"></a-mixin>
-			<a-mixin gltf-model="#pawn_b" id="pawn_b" src="/src/models/sets/default/black/pawn.gltf" chess-piece
-				scale="0.2 0.2 0.2"></a-mixin>
+				<a-mixin gltf-model="#knight_w" id="knight_w" src="/src/models/sets/default/white/knight.gltf" chess-piece rotation=" 0 180 0" scale="0.2 0.2 0.2"></a-mixin>
+				<a-mixin gltf-model="#knight_b" id="knight_b" src="/src/models/sets/default/black/knight.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
 
-			<a-mixin gltf-model="#king_w" id="king_w" src="/src/models/sets/default/white/king.gltf" chess-piece
-				scale="0.2 0.2 0.2"></a-mixin>
-			<a-mixin gltf-model="#king_b" id="king_b" src="/src/models/sets/default/black/king.gltf" chess-piece
-				scale="0.2 0.2 0.2"></a-mixin>
-
-			<a-mixin gltf-model="#queen_w" id="queen_w" src="/src/models/sets/default/white/queen.gltf" chess-piece
-				scale="0.2 0.2 0.2"></a-mixin>
-			<a-mixin gltf-model="#queen_b" id="queen_b" src="/src/models/sets/default/black/queen.gltf" chess-piece
-				scale="0.2 0.2 0.2"></a-mixin>
-
-			<a-mixin gltf-model="#knight_w" id="knight_w" src="/src/models/sets/default/white/knight.gltf" chess-piece
-				rotation=" 0 180 0" scale="0.2 0.2 0.2"></a-mixin>
-			<a-mixin gltf-model="#knight_b" id="knight_b" src="/src/models/sets/default/black/knight.gltf" chess-piece
-				scale="0.2 0.2 0.2"></a-mixin>
-
-			<a-mixin gltf-model="#bishop_w" id="bishop_w" src="/src/models/sets/default/white/bishop.gltf" chess-piece
-				rotation=" 0 180 0" scale="0.2 0.2 0.2"></a-mixin>
-			<a-mixin gltf-model="#bishop_b" id="bishop_b" src="/src/models/sets/default/black/bishop.gltf" chess-piece
-				scale="0.2 0.2 0.2"></a-mixin>
+				<a-mixin gltf-model="#bishop_w" id="bishop_w" src="/src/models/sets/default/white/bishop.gltf" chess-piece rotation=" 0 180 0" scale="0.2 0.2 0.2"></a-mixin>
+				<a-mixin gltf-model="#bishop_b" id="bishop_b" src="/src/models/sets/default/black/bishop.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
 
 			<!--I will try to keep most NAF stuff down here-->
 			<!--This is the template for the networked entity. 
@@ -222,13 +204,16 @@
 		<!--rook that's white starting on the right side, the mixin brings in the 
 			assests it needs, and then position is what we are trying to play around with -->
 		<a-entity id="w_rook_r"
-		networked="template:#rook_w_template;networkId:rookwr;persistent:true; owner:rookwr;"
+		networked="template:#rook_w_template;networkId:rookwr;persistent:true; owner:rookwr;" 
 		></a-entity>
 
 		<a-entity class="chessguy" id="w_rook_l" mixin="rook_w" boardPos="a1" position="-1.5 1.5 -1  "></a-entity>
 
-		<a-entity class="chessguy" id="w_knight_r" mixin="knight_w" boardPos="g1" position=" 1.5   1.5 -1  "></a-entity>
-		<a-entity class="chessguy" id="w_knight_l" mixin="knight_w" boardPos="b1" position="-1 1.5 -1  "></a-entity>
+			<a-entity class="chessguy" id="w_knight_r" mixin="knight_w" boardPos="g1" position=" 1.5   1.5 -1  "></a-entity>
+			<a-entity class="chessguy" id="w_knight_l" mixin="knight_w" boardPos="b1" position="-1 1.5 -1  "></a-entity>
+
+			<a-entity class="chessguy" id="b_knight_r" mixin="knight_b" boardPos="g8" position=" 1.5   1.5 -4.5  "></a-entity>
+			<a-entity class="chessguy" id="b_knight_l" mixin="knight_b" boardPos="b8" position="-1 1.5 -4.5  "></a-entity>
 
 			<a-entity class="chessguy" id="w_bishop_r" mixin = "bishop_w" boardPos="f1" position=" 1  1.5 -1  "></a-entity>
 			<a-entity class="chessguy" id="w_bishop_l" mixin = "bishop_w" boardPos="c1" position="-0.5 1.5 -1  "></a-entity>
