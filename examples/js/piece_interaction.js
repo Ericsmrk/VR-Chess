@@ -18,6 +18,16 @@ AFRAME.registerComponent('cursor-listener', {
 				
                 //const elements = document.querySelectorAll('a-entity');//Gives us an array of ALL a-entitys
                 const pieces = document.querySelectorAll('.chessguy');
+
+                const spaces = ["a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8",
+                "b1", "ba2", "b3", "b4", "b5", "b6", "b7", "b8",
+                "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8",
+                "d1", "d2", "d3", "d4", "d5", "d6", "d7", "d8",
+                "e1", "e2", "e3", "e4", "e5", "e6", "e7", "e8",
+                "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8",
+                "g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8",
+                "h1", "h2", "h3", "h4", "h5", "h6", "h7", "h8"]
+                
 				//this.
 				// SUGGESTION: mousevents are oldschool. consider pointer events
 				// https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events
@@ -46,7 +56,6 @@ AFRAME.registerComponent('cursor-listener', {
             //console.log(localIntersection);
             // Normalize to 0 - 1 (the board is 4 units wide and positions go into the negative)
             // Also discard the "z-axis" here - chess isn't 3d.
-            console.log(localIntersection);
             const boardPosition = new THREE.Vector2(
                 (localIntersection.x / 0.64) + 0.5,
                 (localIntersection.y / 0.64) + 0.5
@@ -112,35 +121,120 @@ AFRAME.registerComponent('cursor-listener', {
                 [7, 'g'],
                 [8, 'h'],
             ]);
-
+            console.log(boardPosition.x)
             const columnLetter = letters.get(boardPosition.x);
             const rowNumber = boardPosition.y;
             return `${columnLetter}${rowNumber}`;
         }
-        
+
+        const modBoardToChessTerm = (boardPosition, x, y) => {
+            // Chess board looks like
+            // https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Starting_position_in_a_chess_game.jpg/1920px-Starting_position_in_a_chess_game.jpg
+            const letters = new Map([
+                [1, 'a'],
+                [2, 'b'],
+                [3, 'c'],
+                [4, 'd'],
+                [5, 'e'],
+                [6, 'f'],
+                [7, 'g'],
+                [8, 'h'],
+            ]);
+
+            const columnLetter = letters.get(boardPosition.x+y);
+            const rowNumber = (boardPosition.y+x);
+            return `${columnLetter}${rowNumber}`;
+        }
+//------------------------------------------------------------Function for isMoveValid---------------------------------------------------
+
+        const isMoveValid = (curP, sPos, ePos) => {
+
+            console.log("isMoveValid??" + curP.getAttribute('boardPos') + " " + boardToChessTerm(ePos))
+            const id = curP.id[2] + curP.id[3]
+            
+            console.log(id)
+            if(curP.id[0]=='w'){
+                switch(id){
+                    case 'pa':
+                        if(curP.getAttribute('pawnMoved') == 'false'){
+                            //move up 1
+                            if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos,1 ,0)) && getPieceID(modBoardPos(sPos,1,0))==-1){
+                                console.log("YAY")
+                                curP.setAttribute('pawnMoved', 'true');
+                                return true;
+                            }
+                            //move up 2 (first turn)
+                            else if( boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, 2, 0)) && getPieceID(modBoardPos(sPos, 2, 0))==-1){
+                                curP.setAttribute('pawnMoved', 'true');
+                                return true;
+                            }
+                            //kill to the right
+                            else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, 1, 1)) && getPieceID(modBoardPos(sPos,1,1))!=-1){
+                                curP.setAttribute('pawnMoved', 'true');
+                                return true;
+                            }
+                            //kill to the left
+                            else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, 1, -1)) && getPieceID(modBoardPos(sPos,1,-1))!=-1){
+                                curP.setAttribute('pawnMoved', 'true');
+                                return true;
+                            }
+                            //invalid move
+                            else{
+                                return false;
+                            }
+                        }
+                        else {
+                            //move up 1
+                            if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos,1 ,0)) && getPieceID(modBoardPos(sPos,1,0))==-1){
+                                return true;
+                            }
+                            //kill to the right
+                            else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, 1, 1)) && getPieceID(modBoardPos(sPos,1,1))!=-1){
+                                return true;
+                            }
+                            //kill to the left
+                            else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, 1, -1)) && getPieceID(modBoardPos(sPos,1,-1))!=-1){
+                                return true;
+                            }
+                            //invalid move
+                            else{
+                                return false;
+                            }
+                        }
+                        
+                }
+                    
+            }
+
+            
+        }
 
 //------------------------------------------------------------Function for isSpaceOccupied-----------------------------------------------------------------------------
-//THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
-//THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
-//THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
-//THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
-const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHANGED!!
-    var i = 0;
-    var pieceID = "NULL"
-    var curPieceID = -1;
+        const modBoardPos = (boardPosition, x, y) => {              //***********LOOK INTO THIS*************** */
+            console.log(boardPosition.x, + " " + boardPosition.y)
+            newPos = new THREE.Vector2(boardPosition.x, boardPosition.y)
+            newPos.x = boardPosition.x + y;
+            newPos.y = boardPosition.y + x;
+            console.log("New: " + newPos.x, + " " + newPos.y)
+            return newPos;
+        }
+        const getPieceID = (boardPosition) => { 
+            var i = 0;
+            var pieceID = "NULL"
+            var curPieceID = -1;
 
-    for(i; i <32; i++){
-       // console.log(i)
-        //console.log("Comparing: " + boardToChessTerm(boardPosition) + " and " + elements[i].getAttribute('boardPos'))
-        if(boardToChessTerm(boardPosition)==pieces[i].getAttribute('boardPos')){
-            //console.log(pieces[i].id);
-            curPieceID = i;
-            pieceID = pieces[i].id
+            for(i; i <32; i++){
+            // console.log(i)
+                //console.log("Comparing: " + boardToChessTerm(boardPosition) + " and " + elements[i].getAttribute('boardPos'))
+                if(boardToChessTerm(boardPosition)==pieces[i].getAttribute('boardPos')){
+                    //console.log(pieces[i].id);
+                    curPieceID = i;
+                    pieceID = pieces[i].id
+                    return curPieceID
+                }
+            }
             return curPieceID
         }
-    }
-    return curPieceID
-}
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
       
 
@@ -149,10 +243,12 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
             if (!obj.detail.intersection) //if there's no intersection(if you don't click on the board) it yeets you
                 return;
             
+            
+           
             //<<<<<<< HEAD this was left over after a merge, might have messed things up by removing it, might have not. Not sure tbh. 
             
             const startPosition = worldToBoard(obj.detail.intersection.point) //"obj.detail.intersection.point" understand and document this better, appears to grab the position
-            
+            console.log(boardToChessTerm(startPosition))
             //translates from the world to the board. 
             const curPiece = getPieceID(startPosition)
             console.log(curPiece)
@@ -171,30 +267,16 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
                                                     //if no, KILL
 
 
-//-----------------------------------------------SETTING ASIDE SPACE FOR LOGIC TO DETERMINE INFORMATION ABOUT SPACE CLICKED ON-----------------------------------------------------
-//      1. Is space currently occupied?         - maybe write separate function isSpaceOccupied(startPosition) to perform this
-                //-YES : Need to figure out how to determine what piece at that position.
-                    // - compare startPosition w/ while iterating through elements [this can be in terms of BoardPosition OR ChessTerms]
-                    // 
-                //-NO  : No piece should be allowed to move on mouseUp.
 
-            /* if(isSpaceOccupied){
-                var pieceID = "NULL";
-                var i = 0;
-                    while(boardToChessTerm(startPosition)!=boardToChessTerm(elements[i].position)){
-                        i++;
-                    }
-                pieceID = elements[i];
-            }
-            pieceID.object3D.position.copy(boardToWorld(endPosition));
-            */
             
 
 
             highlightPlane.object3D.visible = true; //while mouse is down, the following three thigns happen. First the highlight becomes visible. 
             highlightPlane.setAttribute("color", "blue"); //next it becomes blue 
             highlightPlane.object3D.position.copy(boardToWorld(startPosition)) //This gives the first position to the highlight plane
-
+            
+           
+         
 
             //console.log('Moving from: ', boardToChessTerm(startPosition)) //This lets us know where that is, helps with debuggin
 
@@ -220,10 +302,12 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
                 //if no, KILL
                 const endPosPiece = getPieceID(endPosition)
                 if(endPosPiece == -1){
+
+                    if(isMoveValid(pieces[curPiece], startPosition, endPosition)){
                     console.log("End position empty")
                     pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))
                     pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
-                
+                    }
                 
 
                 }
@@ -235,6 +319,7 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
                         
                     }
                     else{   //KILL/CAPTURE FUNCTION WILL BE PLACED HERE!
+                        //isMoveValid()
                         console.log(pieces[curPiece].id)
                         pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))
                         pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
