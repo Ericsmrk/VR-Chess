@@ -8,10 +8,6 @@
 		<script src="js/chess_piece_component.js"></script>
 		<script src="js/Loader.js"></script>
 		<script src="js/setAtts.js"></script>
-
-		
-		
-
 	</head>
 	<body>
 		<a-scene>
@@ -35,6 +31,8 @@
 			<a-assets>
 
 				<!--mixin's are kind of like classes, grouping of attributes-->
+				<a-mixin id = "highPlane" visible="false" geometry="primitive plane" rotation="-90 0 0" color="blue" opacity="0.5" height="0.08" width="0.08"></a-mixin>
+
 				<a-mixin gltf-model="#rook_w" id = "rook_w" src = "/src/models/sets/default/white/rook.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
 				<a-mixin gltf-model="#rook_b" id = "rook_b" src = "/src/models/sets/default/black/rook.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
 
@@ -98,14 +96,14 @@
 			<a-entity class="chessguy" id="b_rook_w"mixin = "rook_b"  boardPos="a8"position="-1.5 1.5 -4.5"></a-entity>
 
 			<!-- PAWN -->
-			<a-entity class="chessguy" id="w_pawn_1"mixin = "pawn_w"  boardPos="a2"position="-1.5  1.5 -1.5"></a-entity>
-			<a-entity class="chessguy" id="w_pawn_2"mixin = "pawn_w"  boardPos="b2"position="-1    1.5 -1.5"></a-entity>
-			<a-entity class="chessguy" id="w_pawn_3"mixin = "pawn_w"  boardPos="c2"position="-0.5  1.5 -1.5"></a-entity>
-			<a-entity class="chessguy" id="w_pawn_4"mixin = "pawn_w"  boardPos="d2"position=" 0    1.5 -1.5"></a-entity>
-			<a-entity class="chessguy" id="w_pawn_5"mixin = "pawn_w"  boardPos="e2"position=" 0.5  1.5 -1.5"></a-entity>
-			<a-entity class="chessguy" id="w_pawn_6"mixin = "pawn_w"  boardPos="f2"position=" 1    1.5 -1.5"></a-entity>
-			<a-entity class="chessguy" id="w_pawn_7"mixin = "pawn_w"  boardPos="g2"position=" 1.5  1.5 -1.5"></a-entity>
-			<a-entity class="chessguy" id="w_pawn_8"mixin = "pawn_w"  boardPos="h2"position=" 2    1.5 -1.5"></a-entity>
+			<a-entity class="chessguy" id="w_pawn_1"mixin = "pawn_w"  boardPos="a2"pawnMoved='false' position="-1.5  1.5 -1.5"></a-entity>
+			<a-entity class="chessguy" id="w_pawn_2"mixin = "pawn_w"  boardPos="b2"pawnMoved='false' position="-1    1.5 -1.5"></a-entity>
+			<a-entity class="chessguy" id="w_pawn_3"mixin = "pawn_w"  boardPos="c2"pawnMoved='false' position="-0.5  1.5 -1.5"></a-entity>
+			<a-entity class="chessguy" id="w_pawn_4"mixin = "pawn_w"  boardPos="d2"pawnMoved='false' position=" 0    1.5 -1.5"></a-entity>
+			<a-entity class="chessguy" id="w_pawn_5"mixin = "pawn_w"  boardPos="e2"pawnMoved='false' position=" 0.5  1.5 -1.5"></a-entity>
+			<a-entity class="chessguy" id="w_pawn_6"mixin = "pawn_w"  boardPos="f2"pawnMoved='false' position=" 1    1.5 -1.5"></a-entity>
+			<a-entity class="chessguy" id="w_pawn_7"mixin = "pawn_w"  boardPos="g2"pawnMoved='false' position=" 1.5  1.5 -1.5"></a-entity>
+			<a-entity class="chessguy" id="w_pawn_8"mixin = "pawn_w"  boardPos="h2" pawnMoved='false'  position=" 2    1.5 -1.5"></a-entity>
 			
 			<a-entity class="chessguy" id="b_pawn_1"mixin = "pawn_b"  boardPos="a7"position="-1.5  1.5 -4  "></a-entity>
 			<a-entity class="chessguy" id="b_pawn_2"mixin = "pawn_b"  boardPos="b7"position="-1    1.5 -4  "></a-entity>
@@ -143,14 +141,9 @@
 			<!-- This plane is used for highlighting, and is moved around by the "cursor-listener" component-->
 			<a-plane
 				id="highlight-plane"
-				visible="false"
-				geometry="primitive plane"
-				rotation="-90 0 0"
-				color="blue"
-				opacity="0.5"
-				height="0.08"
-				width="0.08"
-			></a-plane>   <!--Was the left by mistake? the a-entity tag? -->
+				id = "highPlane" visible="false" geometry="primitive plane" rotation="-90 0 0" color="blue" opacity="0.5" height="0.08" width="0.08"
+			></a-plane>
+
 <!--
 			<a-plane geometry="primitive plane" position="2 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 			<a-plane geometry="primitive plane" position="1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
