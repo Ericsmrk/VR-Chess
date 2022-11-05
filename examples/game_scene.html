@@ -44,6 +44,20 @@
 				});
 			}
 
+			if (!NAF.schemas.hasTemplate('#rook_w_template')) {
+				//anyways, after the if, it adds said schema and the properties below. every component needs a new, component area. 
+				//as shown below. 
+				NAF.schemas.add({
+					template: '#rook_w_template',
+					components: [
+						'position',
+						{	
+							property: 'boardPos'
+						}
+					]
+				});
+			}
+
 			const components = NAF.schemas.getComponentsOriginal(template);
 			return components;
 		};
@@ -83,10 +97,10 @@
 			
 
 			<!--mixin's are kind of like classes, grouping of attributes-->
-			<!--
-				<a-mixin gltf-model="#rook_w" id="rook_w" src="/src/models/sets/default/white/rook.gltf" chess-piece
+			
+			<a-mixin gltf-model="#rook_w" id="rook_w" src="/src/models/sets/default/white/rook.gltf" chess-piece
 				scale="0.2 0.2 0.2"></a-mixin>
-			-->
+			
 			
 			<a-mixin gltf-model="#rook_b" id="rook_b" src="/src/models/sets/default/black/rook.gltf" chess-piece
 				scale="0.2 0.2 0.2"></a-mixin>
@@ -138,9 +152,11 @@
 
 			<!--so a word of caution, I'm 75% certain this will not work with mixins
 				if it does not, rip apart mixins, throw them in here-->
+
+				<!--IMPORTANT: temporarily removing chess-piece while I try to get networked aframe to work-->
 			<template id="rook_w_template">
-				<a-entity gltf-model="#rook_w_asset" chess-piece
-				scale="0.2 0.2 0.2"></a-entity>
+				<a-entity gltf-model="#rook_w_asset" class="chessguy" chess-piece
+				scale="0.2 0.2 0.2" boardPos="h1" position=" 2 1.5 -1  "> </a-entity>
 			</template>"
 
 
@@ -193,12 +209,11 @@
 
 		<!--rook that's white starting on the right side, the mixin brings in the 
 			assests it needs, and then position is what we are trying to play around with -->
-		<a-entity class="chessguy" id="w_rook_r" chess-piece
-		scale="0.2 0.2 0.2" boardPos="h1" position=" 2 1.5 -1  "
+		<a-entity id="w_rook_r"
 		networked="template:#rook_w_template;networkId:rookwr;persistent:true; owner:rookwr;"
 		></a-entity>
 
-		<!--<a-entity class="chessguy" id="w_rook_l" mixin="rook_w" boardPos="a1" position="-1.5 1.5 -1  "></a-entity> -->
+		<a-entity class="chessguy" id="w_rook_l" mixin="rook_w" boardPos="a1" position="-1.5 1.5 -1  "></a-entity>
 
 		<a-entity class="chessguy" id="w_knight_r" mixin="knight_w" boardPos="g1" position=" 1.5   1.5 -1  "></a-entity>
 		<a-entity class="chessguy" id="w_knight_l" mixin="knight_w" boardPos="b1" position="-1 1.5 -1  "></a-entity>
