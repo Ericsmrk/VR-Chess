@@ -86,12 +86,10 @@ AFRAME.registerComponent('cursor-listener', {
                 (localIntersection.x / 0.64) + 0.5,
                 (localIntersection.y / 0.64) + 0.5
             );
-            console.log(boardPosition);
             // Multiply by all the chess positions (chess boards are 8x8)
             boardPosition.multiplyScalar(8);
             // Round to a whole number (chess isnt fractional)
             boardPosition.ceil();
-            console.log(boardPosition);
             return boardPosition;
         }
 
@@ -129,7 +127,6 @@ AFRAME.registerComponent('cursor-listener', {
                 [7, 'g'],
                 [8, 'h'],
             ]);
-            console.log(boardPosition.x)
             const columnLetter = letters.get(boardPosition.x);
             const rowNumber = boardPosition.y;
             return `${columnLetter}${rowNumber}`;
@@ -139,10 +136,10 @@ AFRAME.registerComponent('cursor-listener', {
 //This section is going to become HUGE!!
         const isMoveValid = (curP, sPos, ePos) => {
 
-            console.log("isMoveValid??" + curP.getAttribute('boardPos') + " " + boardToChessTerm(ePos))
+//Will logic for NON-PAWN be same for each color????
+
             const id = curP.id[2] + curP.id[3]
-            
-            console.log(id)
+            const ePosChessTerm = boardToChessTerm(ePos)    //replace with variable
             if(curP.id[0]=='w'){
                 switch(id){
                     case 'pa':  //All logic for WHITE PAWNs, important to note the BLACK PAWNs will require different logic(opposite of this)
@@ -151,7 +148,6 @@ AFRAME.registerComponent('cursor-listener', {
                             //**************Could change this to where pawnMoved is checked only for the second move, but will cause pawnMoved to be accessed everytime??******* */
                             //move up 1
                             if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos,1 ,0)) && getPieceID(modBoardPos(sPos,1,0))==-1){
-                                console.log("YAY")
                                 curP.setAttribute('pawnMoved', 'true');
                                 return true;
                             }
@@ -193,6 +189,22 @@ AFRAME.registerComponent('cursor-listener', {
                                 return false;
                             }
                         }
+                    case 'ki':  //logic for WHITE KING
+                        if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, 0)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -1, 0))){
+                            return true
+                        }
+                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, 1)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -1, 1))){
+                            return true
+                        }
+                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, -1)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -1, -1))){
+                            return true
+                        }
+                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 0, 1)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 0, -1))){
+                            return true
+                       }
+                       else{
+                        return false
+                       }
                 }
                     
             }
@@ -222,12 +234,14 @@ AFRAME.registerComponent('cursor-listener', {
                             }
                             //invalid move
                             else{
+                                console.log('invalid move')
                                 return false;
                             }
                         }
                         else{ //movement allowed after PAWN has moved once
                              //move up 1
                              if(boardToChessTerm(ePos)==boardToChessTerm(modBoardPos(sPos, -1, 0)) && getPieceID(modBoardPos(sPos, -1, 0))==-1){
+                                
                                 return true
                             }
                             //move up 2 (first turn)
@@ -244,6 +258,7 @@ AFRAME.registerComponent('cursor-listener', {
                             }
                             //invalid move
                             else{
+                                console.log('invalid move')
                                 return false;
                             }
                         }
@@ -256,11 +271,9 @@ AFRAME.registerComponent('cursor-listener', {
 //------------------------------------------------------------ MODBOARDPOS AND GETPIECEID FUNCTIONS -----------------------------------------------------------------------------
         //Allows me to check availability of a square for piece movements such as PAWN kill for diagnol kills
         const modBoardPos = (boardPosition, x, y) => {              //***********LOOK INTO THIS*************** */
-            console.log(boardPosition.x, + " " + boardPosition.y)
             newPos = new THREE.Vector2(boardPosition.x, boardPosition.y)
             newPos.x = boardPosition.x + y;
             newPos.y = boardPosition.y + x;
-            console.log("New: " + newPos.x, + " " + newPos.y)
             return newPos;
         }
         //returns piece # in the pieces array
@@ -326,8 +339,8 @@ AFRAME.registerComponent('cursor-listener', {
                 if(endPosPiece == -1){  //checking if space is empty, allow move
 
                     if(isMoveValid(pieces[curPiece], startPosition, endPosition)){
-                    pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))
-                    pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
+                        pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))
+                        pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
                     }
                 }
                 else{   //if space IS OCCUPIED
@@ -339,21 +352,22 @@ AFRAME.registerComponent('cursor-listener', {
                     }
                     else{   //KILL/CAPTURE FUNCTION WILL BE PLACED HERE!  ---> Pieces are not some color, KILL
                         //isMoveValid()
-                        console.log(pieces[curPiece].id)        
-                        pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))      //Move piece into new position
-                        pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
-                        console.log(pieces[curPiece].getAttribute('boardPos'))
+                        if(isMoveValid(pieces[curPiece], startPosition, endPosition)){      
+                            pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))      //Move piece into new position
+                            pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
+                            console.log(pieces[curPiece].getAttribute('boardPos'))
 
-                        //KILL/CAPTURE      --> Move KILLED piece into graveyard
-                        if(pieces[curPiece].id[0] == 'w'){  //if white, move into white graveyard
-                            pieces[endPosPiece].object3D.position.copy(deadPieceW[dPit_w])
-                            pieces[endPosPiece].setAttribute('boardPos', "dead")
-                            dPit_w++
-                        }else{                              //if black, move into black graveyard
-                            pieces[endPosPiece].object3D.position.copy(deadPieceB[dPit_b])
-                            pieces[endPosPiece].setAttribute('boardPos', "dead")
-                            dPit_b++
-                        }                
+                            //KILL/CAPTURE      --> Move KILLED piece into graveyard
+                            if(pieces[curPiece].id[0] == 'w'){  //if white, move into white graveyard
+                                pieces[endPosPiece].object3D.position.copy(deadPieceW[dPit_w])
+                                pieces[endPosPiece].setAttribute('boardPos', "dead")
+                                dPit_w++
+                            }else{                              //if black, move into black graveyard
+                                pieces[endPosPiece].object3D.position.copy(deadPieceB[dPit_b])
+                                pieces[endPosPiece].setAttribute('boardPos', "dead")
+                                dPit_b++
+                            }     
+                        }           
                     }
                 }
 
