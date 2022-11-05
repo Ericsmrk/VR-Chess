@@ -136,7 +136,10 @@ AFRAME.registerComponent('cursor-listener', {
 //This section is going to become HUGE!!
         const isMoveValid = (curP, sPos, ePos) => {
 
+//Will logic for NON-PAWN be same for each color????
+
             const id = curP.id[2] + curP.id[3]
+            const ePosChessTerm = boardToChessTerm(ePos)    //replace with variable
             if(curP.id[0]=='w'){
                 switch(id){
                     case 'pa':  //All logic for WHITE PAWNs, important to note the BLACK PAWNs will require different logic(opposite of this)
@@ -171,7 +174,6 @@ AFRAME.registerComponent('cursor-listener', {
                         else {  //movement allowed after PAWN has moved once
                             //move up 1
                             if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos,1 ,0)) && getPieceID(modBoardPos(sPos,1,0))==-1){
-                                console.log(getPieceID(modBoardPos(sPos,1,0)))
                                 return true;
                             }
                             //kill to the right
@@ -187,6 +189,22 @@ AFRAME.registerComponent('cursor-listener', {
                                 return false;
                             }
                         }
+                    case 'ki':  //logic for WHITE KING
+                        if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, 0)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -1, 0))){
+                            return true
+                        }
+                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, 1)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -1, 1))){
+                            return true
+                        }
+                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, -1)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -1, -1))){
+                            return true
+                        }
+                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 0, 1)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 0, -1))){
+                            return true
+                       }
+                       else{
+                        return false
+                       }
                 }
                     
             }
