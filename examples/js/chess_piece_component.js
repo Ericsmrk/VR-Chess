@@ -4,6 +4,9 @@
 //  1. It's current position on the chess board i.e. a2, b3 etc
 AFRAME.registerComponent('chess-piece', {
     schema:{
-        boardPos: {type: 'string', default: 'NULL'}
+        boardPos: {type: 'string', default: 'NULL'},
+        pieceType: {type: 'string', default:'NULL'},
+        pawnMoved: {type: 'bool', default: 'false'}
+
     }
 })
