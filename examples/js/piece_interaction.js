@@ -16,9 +16,10 @@ AFRAME.registerComponent('cursor-listener', {
 				//that's why there's a hashtag in front of it. hightlightPlane is a js element. 
 				
 				
-                //const elements = document.querySelectorAll('a-entity');//Gives us an array of ALL a-entitys
+                //Gives us an array of ALL .chessguys
                 const pieces = document.querySelectorAll('.chessguy');
 
+                //I MAY use this to make things easier with logic..not sure right now
                 const spaces = ["a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8",
                 "b1", "ba2", "b3", "b4", "b5", "b6", "b7", "b8",
                 "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8",
@@ -27,6 +28,30 @@ AFRAME.registerComponent('cursor-listener', {
                 "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8",
                 "g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8",
                 "h1", "h2", "h3", "h4", "h5", "h6", "h7", "h8"]
+
+//*************************************************************************** VARIABLES FOR GRAVEYARD ************************************************************************************************ */
+            var scl = 0.16;
+            var repos = 0.25*(1-0.16);
+            var dPx = 2.5*0.16+repos;
+            var dPz = -2.75+(0.04*7);
+            
+            var dPy = 0.8;
+            
+            
+            var dPit_w = 0;
+            var dPit_b = 0;
+            const deadPieceW = [new THREE.Vector3(dPx, dPy, dPz), new THREE.Vector3(dPx, dPy, dPz-0.5*scl),new THREE.Vector3(dPx, dPy, dPz-1.0*scl),new THREE.Vector3(dPx, dPy, dPz-1.5*scl),
+                new THREE.Vector3(dPx, dPy, dPz-2.0*scl), new THREE.Vector3(dPx, dPy, dPz-2.5*scl), new THREE.Vector3(dPx, dPy, dPz-3.0*scl), new THREE.Vector3(dPx, dPy, dPz-3.5*scl),
+                new THREE.Vector3(dPx+0.5*scl, dPy, dPz),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-0.5*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-1.0*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-1.5*scl),
+                new THREE.Vector3(dPx+0.5*scl, dPy, dPz-2.0*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-2.5*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-3.0*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-3.5*scl)]
+            
+            
+            dPx = -2*(0.16)+repos;
+            const deadPieceB = [new THREE.Vector3(dPx, dPy, dPz), new THREE.Vector3(dPx, dPy, dPz-0.5*scl),new THREE.Vector3(dPx, dPy, dPz-1.0*scl),new THREE.Vector3(dPx, dPy, dPz-1.5*scl),
+            new THREE.Vector3(dPx, dPy, dPz-2.0*scl), new THREE.Vector3(dPx, dPy, dPz-2.5*scl), new THREE.Vector3(dPx, dPy, dPz-3.0*scl), new THREE.Vector3(dPx, dPy, dPz-3.5*scl),
+            new THREE.Vector3(dPx-0.5*scl, dPy, dPz),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-0.5*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-1.0*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-1.5*scl),
+            new THREE.Vector3(dPx-0.5*scl, dPy, dPz-2.0*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-2.5*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-3.0*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-3.5*scl)]
+ 
                 
 				//this.
 				// SUGGESTION: mousevents are oldschool. consider pointer events
@@ -37,6 +62,7 @@ AFRAME.registerComponent('cursor-listener', {
 				//<<<<<<< HEAD
 				const object3D = this.el.object3D; //Jose: make sure you go back and understand 
 
+//************************************************************************** WORLD TO BOARD FUNCTION ****************************************************************************************** */                
         // This function converts any position in the world
         // to a position in "chess space" (aka A4, B2, E8 that kinda thing)
         // (and does no checks, you can get insane chess position if you put
@@ -68,6 +94,8 @@ AFRAME.registerComponent('cursor-listener', {
             console.log(boardPosition);
             return boardPosition;
         }
+
+//************************************************************************ BOARD TO WORLD FUNCTION ********************************************************************************* */
         // Opposite of the function above, get the "world space" position
         // from a "chess space" position
         const boardToWorld = (boardPosition) => {
@@ -85,28 +113,8 @@ AFRAME.registerComponent('cursor-listener', {
             // And turn it into a world space vector!
             return object3D.localToWorld(localPosition)
         };
-        var scl = 0.16;
-        var repos = 0.25*(1-0.16);
-        var dPx = 2.5*0.16+repos;
-        var dPz = -2.75+(0.04*7);
-        
-        var dPy = 0.8;
-        
-        
-        var dPit_w = 0;
-        var dPit_b = 0;
-        const deadPieceW = [new THREE.Vector3(dPx, dPy, dPz), new THREE.Vector3(dPx, dPy, dPz-0.5*scl),new THREE.Vector3(dPx, dPy, dPz-1.0*scl),new THREE.Vector3(dPx, dPy, dPz-1.5*scl),
-            new THREE.Vector3(dPx, dPy, dPz-2.0*scl), new THREE.Vector3(dPx, dPy, dPz-2.5*scl), new THREE.Vector3(dPx, dPy, dPz-3.0*scl), new THREE.Vector3(dPx, dPy, dPz-3.5*scl),
-            new THREE.Vector3(dPx+0.5*scl, dPy, dPz),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-0.5*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-1.0*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-1.5*scl),
-            new THREE.Vector3(dPx+0.5*scl, dPy, dPz-2.0*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-2.5*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-3.0*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-3.5*scl)]
-           
-        
-        dPx = -2*(0.16)+repos;
-        const deadPieceB = [new THREE.Vector3(dPx, dPy, dPz), new THREE.Vector3(dPx, dPy, dPz-0.5*scl),new THREE.Vector3(dPx, dPy, dPz-1.0*scl),new THREE.Vector3(dPx, dPy, dPz-1.5*scl),
-            new THREE.Vector3(dPx, dPy, dPz-2.0*scl), new THREE.Vector3(dPx, dPy, dPz-2.5*scl), new THREE.Vector3(dPx, dPy, dPz-3.0*scl), new THREE.Vector3(dPx, dPy, dPz-3.5*scl),
-            new THREE.Vector3(dPx-0.5*scl, dPy, dPz),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-0.5*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-1.0*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-1.5*scl),
-            new THREE.Vector3(dPx-0.5*scl, dPy, dPz-2.0*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-2.5*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-3.0*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-3.5*scl)]
-        
+
+//******************************************************************** BOARD TO CHESS TERM FUNCTION ********************************************************************************** */
         // convert a "chess space" position to a string like "C4", "D1"
         const boardToChessTerm = (boardPosition) => {
             // Chess board looks like
@@ -127,26 +135,8 @@ AFRAME.registerComponent('cursor-listener', {
             return `${columnLetter}${rowNumber}`;
         }
 
-        const modBoardToChessTerm = (boardPosition, x, y) => {
-            // Chess board looks like
-            // https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Starting_position_in_a_chess_game.jpg/1920px-Starting_position_in_a_chess_game.jpg
-            const letters = new Map([
-                [1, 'a'],
-                [2, 'b'],
-                [3, 'c'],
-                [4, 'd'],
-                [5, 'e'],
-                [6, 'f'],
-                [7, 'g'],
-                [8, 'h'],
-            ]);
-
-            const columnLetter = letters.get(boardPosition.x+y);
-            const rowNumber = (boardPosition.y+x);
-            return `${columnLetter}${rowNumber}`;
-        }
-//------------------------------------------------------------Function for isMoveValid---------------------------------------------------
-
+//------------------------------------------------------------Function for isMoveValid-----------------------------------------------------------------------------------------------------
+//This section is going to become HUGE!!
         const isMoveValid = (curP, sPos, ePos) => {
 
             console.log("isMoveValid??" + curP.getAttribute('boardPos') + " " + boardToChessTerm(ePos))
@@ -155,8 +145,10 @@ AFRAME.registerComponent('cursor-listener', {
             console.log(id)
             if(curP.id[0]=='w'){
                 switch(id){
-                    case 'pa':
-                        if(curP.getAttribute('pawnMoved') == 'false'){
+                    case 'pa':  //All logic for WHITE PAWNs, important to note the BLACK PAWNs will require different logic(opposite of this)
+                        if(curP.getAttribute('pawnMoved') == 'false'){  //movement allowed if PAWN has NOT moved yet
+
+                            //**************Could change this to where pawnMoved is checked only for the second move, but will cause pawnMoved to be accessed everytime??******* */
                             //move up 1
                             if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos,1 ,0)) && getPieceID(modBoardPos(sPos,1,0))==-1){
                                 console.log("YAY")
@@ -183,7 +175,7 @@ AFRAME.registerComponent('cursor-listener', {
                                 return false;
                             }
                         }
-                        else {
+                        else {  //movement allowed after PAWN has moved once
                             //move up 1
                             if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos,1 ,0)) && getPieceID(modBoardPos(sPos,1,0))==-1){
                                 return true;
@@ -201,15 +193,68 @@ AFRAME.registerComponent('cursor-listener', {
                                 return false;
                             }
                         }
-                        
                 }
                     
+            }
+            else if(curP.id[0]=='b'){
+                switch(id){
+                    case 'pa': //All logic for BLACK PAWNs, important to note the WHITE PAWNs will require different logic(opposite of this)
+                        if(curP.getAttribute('pawnMoved') == 'false'){ //movement allowed if PAWN has NOT moved yet
+                            //move up 1
+                            if(boardToChessTerm(ePos)==boardToChessTerm(modBoardPos(sPos, -1, 0)) && getPieceID(modBoardPos(sPos, -1, 0))==-1){
+                                curP.setAttribute('pawnMoved', 'true')
+                                return true
+                            }
+                            //move up 2 (first turn)
+                            else if( boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -2, 0)) && getPieceID(modBoardPos(sPos, -2, 0))==-1){
+                                curP.setAttribute('pawnMoved', 'true');
+                                return true;
+                            }
+                            //kill to the right
+                            else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -1, 1)) && getPieceID(modBoardPos(sPos,-1,1))!=-1){
+                                curP.setAttribute('pawnMoved', 'true');
+                                return true;
+                            }
+                            //kill to the left
+                            else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -1, -1)) && getPieceID(modBoardPos(sPos,-1,-1))!=-1){
+                                curP.setAttribute('pawnMoved', 'true');
+                                return true;
+                            }
+                            //invalid move
+                            else{
+                                return false;
+                            }
+                        }
+                        else{ //movement allowed after PAWN has moved once
+                             //move up 1
+                             if(boardToChessTerm(ePos)==boardToChessTerm(modBoardPos(sPos, -1, 0)) && getPieceID(modBoardPos(sPos, -1, 0))==-1){
+                                return true
+                            }
+                            //move up 2 (first turn)
+                            else if( boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -2, 0)) && getPieceID(modBoardPos(sPos, -2, 0))==-1){
+                                return true;
+                            }
+                            //kill to the right
+                            else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -1, 1)) && getPieceID(modBoardPos(sPos,-1,1))!=-1){
+                                return true;
+                            }
+                            //kill to the left
+                            else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -1, -1)) && getPieceID(modBoardPos(sPos,-1,-1))!=-1){
+                                return true;
+                            }
+                            //invalid move
+                            else{
+                                return false;
+                            }
+                        }
+                }
             }
 
             
         }
 
-//------------------------------------------------------------Function for isSpaceOccupied-----------------------------------------------------------------------------
+//------------------------------------------------------------ MODBOARDPOS AND GETPIECEID FUNCTIONS -----------------------------------------------------------------------------
+        //Allows me to check availability of a square for piece movements such as PAWN kill for diagnol kills
         const modBoardPos = (boardPosition, x, y) => {              //***********LOOK INTO THIS*************** */
             console.log(boardPosition.x, + " " + boardPosition.y)
             newPos = new THREE.Vector2(boardPosition.x, boardPosition.y)
@@ -218,6 +263,7 @@ AFRAME.registerComponent('cursor-listener', {
             console.log("New: " + newPos.x, + " " + newPos.y)
             return newPos;
         }
+        //returns piece # in the pieces array
         const getPieceID = (boardPosition) => { 
             var i = 0;
             var pieceID = "NULL"
@@ -233,19 +279,15 @@ AFRAME.registerComponent('cursor-listener', {
                     return curPieceID
                 }
             }
-            return curPieceID
+            return curPieceID   //returns a # that can be used in pieces array
         }
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------- MOUSEDOWN ADDEVENTLISTENER BEGINS -------------------------------------------------------------------------------------------------
       
 
         this.el.addEventListener('mousedown', function (obj) {  //this.el points to what element you are about to click on, you're attaching event listen to that, mousedown fires the the 
             //function following it. this.el gets assigned to obj as, like a reference? we think. 
             if (!obj.detail.intersection) //if there's no intersection(if you don't click on the board) it yeets you
                 return;
-            
-            
-           
-            //<<<<<<< HEAD this was left over after a merge, might have messed things up by removing it, might have not. Not sure tbh. 
             
             const startPosition = worldToBoard(obj.detail.intersection.point) //"obj.detail.intersection.point" understand and document this better, appears to grab the position
             console.log(boardToChessTerm(startPosition))
@@ -261,30 +303,13 @@ AFRAME.registerComponent('cursor-listener', {
             let pieceToAnimate = pieces[curPiece];
             pieceToAnimate.setAttribute('holdable', 'x:'+pieceTarget.x+';y:'+pieceTarget.y+';z:'+pieceTarget.z);
             //starts the holding component
-//****************************************************************************************************************************************************** */
-            console.log(pieces[curPiece].id[0]) //can use this to check against an occupied spot, if space occupied, check if it same color as piece being moved
-                                                    //if yes, do nothing
-                                                    //if no, KILL
 
-
-
-            
-
-
+//************************************************************* SETTING HIGHLIGHT PLANE **************************************************************************************** */
             highlightPlane.object3D.visible = true; //while mouse is down, the following three thigns happen. First the highlight becomes visible. 
             highlightPlane.setAttribute("color", "blue"); //next it becomes blue 
             highlightPlane.object3D.position.copy(boardToWorld(startPosition)) //This gives the first position to the highlight plane
             
-           
-         
-
-            //console.log('Moving from: ', boardToChessTerm(startPosition)) //This lets us know where that is, helps with debuggin
-
-            
-            
-
-
-
+//*********************************************************** DEFINITION FOR EVENT OCCURING ON MOUSE UP****************************************************************************************** */
             const onMouseUp = (evt) => { //understand the javascript stuff going on here.  //understand the javascript stuff going on here. 
                 // Cleanup event handlers so we don't get _another_
                 // listener every time we click  
@@ -296,94 +321,50 @@ AFRAME.registerComponent('cursor-listener', {
                 const endPosition = worldToBoard(evt.detail.intersection.point) //When you mouse up, that position is coppied to end position
 
                 
-    //****************************************************************************************************************************************************** */
-                console.log(pieces[curPiece].id[0]) //can use this to check against an occupied spot, if space occupied, check if it same color as piece being moved
-                //if yes, do nothing
-                //if no, KILL
+//*********************************************************** LOGIC TO PREVENT OCCUPIED SPACE MOVES ******************************************************************************************* */
                 const endPosPiece = getPieceID(endPosition)
-                if(endPosPiece == -1){
+                if(endPosPiece == -1){  //checking if space is empty, allow move
 
                     if(isMoveValid(pieces[curPiece], startPosition, endPosition)){
-                    console.log("End position empty")
                     pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))
                     pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
                     }
-                
-
                 }
-                else{
+                else{   //if space IS OCCUPIED
+
                     console.log("End " + pieces[endPosPiece].id)
-                    if(pieces[curPiece].id[0] == pieces[endPosPiece].id[0]){
+                    if(pieces[curPiece].id[0] == pieces[endPosPiece].id[0]){    //if pieces are same color
                         //means pieces are the same color, DO NOT MOVE
                         console.log("Pieces same color, INVALID MOVE")
-                        
                     }
-                    else{   //KILL/CAPTURE FUNCTION WILL BE PLACED HERE!
+                    else{   //KILL/CAPTURE FUNCTION WILL BE PLACED HERE!  ---> Pieces are not some color, KILL
                         //isMoveValid()
-                        console.log(pieces[curPiece].id)
-                        pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))
+                        console.log(pieces[curPiece].id)        
+                        pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))      //Move piece into new position
                         pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
                         console.log(pieces[curPiece].getAttribute('boardPos'))
 
-                        //KILL/CAPTURE
-                        if(pieces[curPiece].id[0] == 'w'){
+                        //KILL/CAPTURE      --> Move KILLED piece into graveyard
+                        if(pieces[curPiece].id[0] == 'w'){  //if white, move into white graveyard
                             pieces[endPosPiece].object3D.position.copy(deadPieceW[dPit_w])
                             pieces[endPosPiece].setAttribute('boardPos', "dead")
                             dPit_w++
-                        }else{
+                        }else{                              //if black, move into black graveyard
                             pieces[endPosPiece].object3D.position.copy(deadPieceB[dPit_b])
                             pieces[endPosPiece].setAttribute('boardPos', "dead")
                             dPit_b++
-                        }
-                        
-                        
-                
-                
-
-                
+                        }                
                     }
                 }
 
                 highlightPlane.object3D.position.copy(boardToWorld(endPosition))   //positioning highlight plane at endPosition
                 highlightPlane.setAttribute("color", "red");  
-                
-                /*
-                console.log(pieces[curPiece].id)
-                pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))
-                
-                
 
-                highlightPlane.object3D.position.copy(boardToWorld(endPosition))   //positioning highlight plane at endPosition
-                highlightPlane.setAttribute("color", "red");     */                   //coloring plane after drop
             };
 
           this.addEventListener('mouseup', onMouseUp);
       });
      
     }
-    /*
-    ,
-    tick:function(time, timedelta){
-        if(this.data.curHolding!= ' '){
-            var position = document.querySelector('a-scene').camera.el.object3D.position; 
-            var rotation = document.querySelector('a-scene').camera.el.object3D.rotation;
-            var distance = 2;
-            var x = position.x; var y = position.y; var z = position.z;
-            console.log(rotation.x);
-            x -= distance*Math.sin(rotation.x+(Math.PI/2))*Math.sin(rotation.y);
-            y -= distance*Math.cos(rotation.x+(Math.PI/2));
-            z -= distance*Math.sin(rotation.x+(Math.PI/2))*Math.cos(rotation.y);
-            
-            curobject = document.querySelector('#' + this.data.curHolding);
-            curobject.object3D.position.set(x,y,z);  
-            
-            
-            console.log('x= ' +x +' y= ' + y +' z= ' + z);
-        }
-            
-           
-            
-    }
-    */
 });
 
