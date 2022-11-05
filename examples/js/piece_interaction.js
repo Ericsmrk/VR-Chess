@@ -305,7 +305,7 @@ AFRAME.registerComponent('cursor-listener', {
             const startPosition = worldToBoard(obj.detail.intersection.point) //"obj.detail.intersection.point" understand and document this better, appears to grab the position
             console.log(boardToChessTerm(startPosition))
             //translates from the world to the board. 
-            const curPiece = getPieceID(startPosition)
+            const curPiece = getPieceID(startPosition) 
             console.log(curPiece)
             //this.data.curHolding = curPiece;
             if(curPiece== (-1)){
@@ -325,7 +325,10 @@ AFRAME.registerComponent('cursor-listener', {
 //*********************************************************** DEFINITION FOR EVENT OCCURING ON MOUSE UP****************************************************************************************** */
             const onMouseUp = (evt) => { //understand the javascript stuff going on here.  //understand the javascript stuff going on here. 
                 // Cleanup event handlers so we don't get _another_
-                // listener every time we click  
+                // listener every time we click
+                NAF.utils.takeOwnership(pieces[curPiece]); //this is a function that takes ownership of the rook. please work
+                //pretty sure the above line is correct but if everything else fine change to pices[curPiece].id
+                //console.log("pieces[curPiece].id: " + pieces[curPiece].id)
                 this.removeEventListener('mouseup', onMouseUp); //ask about this. to whatever subject matter expert we can find  //ask about this. to whatever subject matter expert we can find 
                 
                 let pieceToAnimate = pieces[curPiece];//removing attribute set to stop and reset postion
