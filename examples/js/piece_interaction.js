@@ -264,6 +264,9 @@ AFRAME.registerComponent('cursor-listener', {
                         }
                 }
             }
+            else if(curP.id=='w_rook_r'){
+                return true
+            }
 
             
         }
@@ -284,9 +287,8 @@ AFRAME.registerComponent('cursor-listener', {
 
             for(i; i <32; i++){
             // console.log(i)
-                //console.log("Comparing: " + boardToChessTerm(boardPosition) + " and " + elements[i].getAttribute('boardPos'))
                 if(boardToChessTerm(boardPosition)==pieces[i].getAttribute('boardPos')){
-                    //console.log(pieces[i].id);
+                    
                     curPieceID = i;
                     pieceID = pieces[i].id
                     return curPieceID
@@ -341,7 +343,7 @@ AFRAME.registerComponent('cursor-listener', {
                 const endPosPiece = getPieceID(endPosition)
                 if(endPosPiece == -1){  //checking if space is empty, allow move
 
-                    if(isMoveValid(pieces[curPiece], startPosition, endPosition)){
+                    if(true){      //isMoveValid(pieces[curPiece], startPosition, endPosition)
                         pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))
                         pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
                     }
@@ -355,7 +357,7 @@ AFRAME.registerComponent('cursor-listener', {
                     }
                     else{   //KILL/CAPTURE FUNCTION WILL BE PLACED HERE!  ---> Pieces are not some color, KILL
                         //isMoveValid()
-                        if(isMoveValid(pieces[curPiece], startPosition, endPosition)){      
+                        if(true){      //isMoveValid(pieces[curPiece], startPosition, endPosition) 
                             pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))      //Move piece into new position
                             pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
                             console.log(pieces[curPiece].getAttribute('boardPos'))
