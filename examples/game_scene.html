@@ -1,44 +1,107 @@
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>VR Chess: A start</title>
-		<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-		<script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
-		<script src="js/piece_interaction.js"></script>
-		<script src="js/chess_piece_component.js"></script>
-		<script src="js/Loader.js"></script>
-		<script src="js/setAtts.js"></script>
-		<script src="js/holdable_component.js"></script>
 
-		
-		
+<head>
+	<meta charset="utf-8" />
+	<title>VR Chess: A start</title>
+	<!--A frame itself-->
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+	<!--NAF stuffs-->
+	<!--make sure currVersions work-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.5.0/socket.io.slim.js"></script>
+	<script src="/easyrtc/easyrtc.js"></script>
+	<script src="/dist/networked-aframe.js"></script>
 
-	</head>
-	<body>
-		<a-scene>
-			<!--Just for setting background scene
-			<a-entity environment="preset: forest"></a-entity>-->
+	<!--Environment and chess js stuff-->
+	<script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+	<script
+		src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
+	<script src="/js/spawn-in-circle.component.js"></script>
 
-			
-			<!-- look-controls wasd-controls does movement-->
-			<a-entity camera position="0.25 1.2 -2"  look-controls="pointerLockEnabled: true" wasd-controls="acceleration:10">
-				<!--This is cursor, (the pretty thing in middle), raycaster is essetially lazer controls-->
-				<a-entity cursor="fuse: false; fuseTimeout: 500" 
+	<script src="js/piece_interaction.js"></script>
+	<script src="js/chess_piece_component.js"></script>
+	<script src="js/Loader.js"></script>
+	<script src="js/setAtts.js"></script>
+	<script src="js/holdable_component.js"></script>
 
-							raycaster="objects: #cursor-plane"
-							position="0 0 -0.2"
-							geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003"
-							material="color: black; shader: flat">
+	<!--did you think we were done? Oh you sweet summer child
+		up next, the H U G E Custom schema for the avatar-->
+	<script>
+		// see issue https://github.com/networked-aframe/networked-aframe/issues/267
+		NAF.schemas.getComponentsOriginal = NAF.schemas.getComponents;
+
+		NAF.schemas.getComponents = (template) => {
+			if (!NAF.schemas.hasTemplate('#avatar-template')) {
+				NAF.schemas.add({
+					template: '#avatar-template',
+					components: [
+						'position',
+						'rotation',
+						{
+							selector: '.head',
+							component: 'material',
+							property: 'color'
+						}
+					]
+				});
+			}
+
+			if (!NAF.schemas.hasTemplate('#rook_w_template')) {
+				//anyways, after the if, it adds said schema and the properties below. every component needs a new, component area. 
+				//as shown below. 
+				NAF.schemas.add({
+					template: '#rook_w_template',
+					components: [
+						'position',
+						{	
+							property: 'boardPos'
+						}
+					]
+				});
+			}
+
+			const components = NAF.schemas.getComponentsOriginal(template);
+			return components;
+		};
+	</script>
+
+</head>
+
+<body>
+	<a-scene networked-scene="
+		room: notBasic;
+		debug: true;
+		adapters: easyrtc;">
+
+		<!--leaving here for now but please please please delete me if the avatars and chess pieces work and move
+			This is cursor, (the pretty thing in middle), raycaster is essetially lazer controls
+
+			<a-entity camera position="0.25 1.2 -2" look-controls="pointerLockEnabled: true" wasd-controls="acceleration:10">
+
+				
+
+				<a-entity cursor="fuse: false; fuseTimeout: 500" raycaster="objects: #cursor-plane" position="0 0 -0.2"
+					geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003" material="color: black; shader: flat">
 				</a-entity>
 			</a-entity>
 			
-				<!--Just asset loading -->
+			<!--Just asset loading -->
 			<a-assets>
-
-				<!--mixin's are kind of like classes, grouping of attributes-->
 				<a-mixin id = "highPlane" visible="false" geometry="primitive plane" rotation="-90 0 0" color="blue" opacity="0.5" height="0.08" width="0.08"></a-mixin>
 
+			
+				<a-asset-item id="rook_w_asset" src="src/models/sets/default/white/rook.gltf">
+			  
+				</a-asset-item>
+				
+	
+				<!--mixin's are kind of like classes, grouping of attributes-->
+				
+				<a-mixin gltf-model="#rook_w" id="rook_w" src="/src/models/sets/default/white/rook.gltf" chess-piece
+					scale="0.2 0.2 0.2"></a-mixin>
+
+				<!--mixin's are kind of like classes, grouping of attributes
 				<a-mixin gltf-model="#rook_w" id = "rook_w" src = "/src/models/sets/default/white/rook.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
+				-->
 				<a-mixin gltf-model="#rook_b" id = "rook_b" src = "/src/models/sets/default/black/rook.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
 
 
@@ -51,36 +114,121 @@
 				<a-mixin gltf-model="#queen_w" id = "queen_w" src = "/src/models/sets/default/white/queen.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
 				<a-mixin gltf-model="#queen_b" id = "queen_b" src = "/src/models/sets/default/black/queen.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
 			
-				<a-mixin gltf-model="#knight_w" id = "knight_w" src = "/src/models/sets/default/white/knight.gltf" chess-piece rotation=" 0 180 0"scale="0.2 0.2 0.2"></a-mixin>
-				<a-mixin gltf-model="#knight_b" id = "knight_b" src = "/src/models/sets/default/black/knight.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
-				
-				<a-mixin gltf-model="#bishop_w" id = "bishop_w" src = "/src/models/sets/default/white/bishop.gltf" chess-piece rotation=" 0 180 0"scale="0.2 0.2 0.2"></a-mixin>
-				<a-mixin gltf-model="#bishop_b" id = "bishop_b" src = "/src/models/sets/default/black/bishop.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
+			<a-mixin gltf-model="#rook_b" id="rook_b" src="/src/models/sets/default/black/rook.gltf" chess-piece
+				scale="0.2 0.2 0.2"></a-mixin>
 
-			</a-assets>
 
-				<!-- we want the environment to be loaded first, prevents funky stuff from happenning-->
-			<!-- mess around here to change the skybox/background scene stuff-->
-			
-			
-			
-				
-			<!------------------------------------------------------------------------ Entity/Asset Loading ------------------------------------------------------------------>
-			<!-- ROOK -->
-			<!-- replaced these with the mixins for promotions; will replace the promoting pawn with player's chosen piece (rook, knight, bishop, queen) -->
-			<!-- <a-asset-item id = "rook_w" src="../src/models/sets/default/white/rook.gltf"></a-asset-item> -->
-			<!-- <a-asset-item id = "rook_b" src="../src/models/sets/default/black/rook.gltf"></a-asset-item> -->
+			<a-mixin gltf-model="#pawn_w" id="pawn_w" src="/src/models/sets/default/white/pawn.gltf" chess-piece
+				scale="0.2 0.2 0.2"></a-mixin>
+			<a-mixin gltf-model="#pawn_b" id="pawn_b" src="/src/models/sets/default/black/pawn.gltf" chess-piece
+				scale="0.2 0.2 0.2"></a-mixin>
 
-<!--rook that's white starting on the right side, the mixin brings in the 
+			<a-mixin gltf-model="#king_w" id="king_w" src="/src/models/sets/default/white/king.gltf" chess-piece
+				scale="0.2 0.2 0.2"></a-mixin>
+			<a-mixin gltf-model="#king_b" id="king_b" src="/src/models/sets/default/black/king.gltf" chess-piece
+				scale="0.2 0.2 0.2"></a-mixin>
+
+			<a-mixin gltf-model="#queen_w" id="queen_w" src="/src/models/sets/default/white/queen.gltf" chess-piece
+				scale="0.2 0.2 0.2"></a-mixin>
+			<a-mixin gltf-model="#queen_b" id="queen_b" src="/src/models/sets/default/black/queen.gltf" chess-piece
+				scale="0.2 0.2 0.2"></a-mixin>
+
+			<a-mixin gltf-model="#knight_w" id="knight_w" src="/src/models/sets/default/white/knight.gltf" chess-piece
+				rotation=" 0 180 0" scale="0.2 0.2 0.2"></a-mixin>
+			<a-mixin gltf-model="#knight_b" id="knight_b" src="/src/models/sets/default/black/knight.gltf" chess-piece
+				scale="0.2 0.2 0.2"></a-mixin>
+
+			<a-mixin gltf-model="#bishop_w" id="bishop_w" src="/src/models/sets/default/white/bishop.gltf" chess-piece
+				rotation=" 0 180 0" scale="0.2 0.2 0.2"></a-mixin>
+			<a-mixin gltf-model="#bishop_b" id="bishop_b" src="/src/models/sets/default/black/bishop.gltf" chess-piece
+				scale="0.2 0.2 0.2"></a-mixin>
+
+			<!--I will try to keep most NAF stuff down here-->
+			<!--This is the template for the networked entity. 
+							You can see that it has a template, and a networked component. 
+							-->
+			<!-- Avatar -->
+			<template id="avatar-template">
+				<a-entity class="avatar">
+					<a-sphere class="head" scale="0.45 0.5 0.4"></a-sphere>
+					<a-entity class="face" position="0 0.05 0">
+						<a-sphere class="eye" color="#efefef" position="0.16 0.1 -0.35" scale="0.12 0.12 0.12">
+							<a-sphere class="pupil" color="#000" position="0 0 -1" scale="0.2 0.2 0.2"></a-sphere>
+						</a-sphere>
+						<a-sphere class="eye" color="#efefef" position="-0.16 0.1 -0.35" scale="0.12 0.12 0.12">
+							<a-sphere class="pupil" color="#000" position="0 0 -1" scale="0.2 0.2 0.2"></a-sphere>
+						</a-sphere>
+					</a-entity>
+				</a-entity>
+			</template>
+
+			<!--so a word of caution, I'm 75% certain this will not work with mixins
+				if it does not, rip apart mixins, throw them in here-->
+
+				<!--IMPORTANT: temporarily removing chess-piece while I try to get networked aframe to work-->
+			<template id="rook_w_template">
+				<a-entity gltf-model="#rook_w_asset" class="chessguy" chess-piece
+				scale="0.2 0.2 0.2" boardPos="h1" position=" 2 1.5 -1  "> </a-entity>
+			</template>"
+
+
+
+		</a-assets>
+
+		<!-- we want the environment to be loaded first, prevents funky stuff from happenning-->
+		<!-- mess around here to change the skybox/background scene stuff-->
+
+
+		<!--Avatar-->
+		<a-entity id="cameraRig">
+
+			<!--Curious, camera in the networked version doesnt have stuff like position
+							wasd-controls,look, etc defined up above. intresting. Lets see whats going on 
+							up there
+					
+							nvm, I guess camera, also more curious yup, it doesn't appear that camera has a 
+							template. You would think that may be something that needs to be synced, but I guess
+							not. How strange
+					 
+							-->
+			<!--two extra thigns to observe here. Glitch doesn't like comments where 
+							html attributes should be. anyways, an entity inside of cameraRig, is networked
+							but, the entity outside is not. we placed our raycaster within camera, so it should be fine
+					-->
+			<a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" camera
+				position="0.25 1.2 -2" spawn-in-circle="radius:3" look-controls="pointerLockEnabled: true"
+				wasd-controls>
+				<!--This is the raycaster, controlsl what you look at, and the ring. 
+							  If for some reason, you feel you've done everything to try and make sure 
+							  naf should be working, please double check this. 
+							  -->
+				<a-entity cursor="fuse: false; fuseTimeout: 500" raycaster="objects: #cursor-plane" position="0 0 -0.2"
+					geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003"
+					material="color: black; shader: flat">
+				</a-entity>
+
+
+				<a-sphere class="head" visible="false" random-color></a-sphere>
+			</a-entity>
+		</a-entity>
+
+
+		<!------------------------------------------------------------------------ Entity/Asset Loading ------------------------------------------------------------------>
+		<!-- ROOK -->
+		<!-- replaced these with the mixins for promotions; will replace the promoting pawn with player's chosen piece (rook, knight, bishop, queen) -->
+		<!-- <a-asset-item id = "rook_w" src="../src/models/sets/default/white/rook.gltf"></a-asset-item> -->
+		<!-- <a-asset-item id = "rook_b" src="../src/models/sets/default/black/rook.gltf"></a-asset-item> -->
+
+		<!--rook that's white starting on the right side, the mixin brings in the 
 			assests it needs, and then position is what we are trying to play around with -->
-			<a-entity class="chessguy" id="w_rook_r" mixin = "rook_w" boardPos="h1" position=" 2   1.5 -1  "></a-entity>
-			<a-entity class="chessguy" id="w_rook_l" mixin = "rook_w" boardPos="a1" position="-1.5 1.5 -1  "></a-entity>
+		<a-entity id="w_rook_r"
+		networked="template:#rook_w_template;networkId:rookwr;persistent:true; owner:rookwr;"
+		></a-entity>
 
-			<a-entity class="chessguy" id="w_knight_r" mixin = "knight_w" boardPos="g1" position=" 1.5   1.5 -1  "></a-entity>
-			<a-entity class="chessguy" id="w_knight_l" mixin = "knight_w" boardPos="b1" position="-1 1.5 -1  "></a-entity>
+		<a-entity class="chessguy" id="w_rook_l" mixin="rook_w" boardPos="a1" position="-1.5 1.5 -1  "></a-entity>
 
-			<a-entity class="chessguy" id="b_knight_r" mixin = "knight_b" boardPos="g8" position=" 1.5   1.5 -4.5  "></a-entity>
-			<a-entity class="chessguy" id="b_knight_l" mixin = "knight_b" boardPos="b8" position="-1 1.5 -4.5  "></a-entity>
+		<a-entity class="chessguy" id="w_knight_r" mixin="knight_w" boardPos="g1" position=" 1.5   1.5 -1  "></a-entity>
+		<a-entity class="chessguy" id="w_knight_l" mixin="knight_w" boardPos="b1" position="-1 1.5 -1  "></a-entity>
 
 			<a-entity class="chessguy" id="w_bishop_r" mixin = "bishop_w" boardPos="f1" position=" 1  1.5 -1  "></a-entity>
 			<a-entity class="chessguy" id="w_bishop_l" mixin = "bishop_w" boardPos="c1" position="-0.5 1.5 -1  "></a-entity>
@@ -224,13 +372,37 @@
 			<a-plane position="-1.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 
 			-->
-				<a-entity loader="/src/scenes/scene2.json"></a-entity>
-			<!--	loads a scene json-->	
-				<a-entity setatts></a-entity>
-			<!--	sets attributes to be applied to many pieces-->	
-			
-		</a-scene>
+		<a-entity loader="/src/scenes/scene2.json"></a-entity>
+		<!--	loads a scene json-->
+		<a-entity setatts></a-entity>
+		<!--	sets attributes to be applied to many pieces-->
 
-	</body>
-	
+	</a-scene>
+
+	<script>
+		// Define custom schema for syncing avatar color, set by random-color
+		// NAF.schemas.add({
+		//   template: '#avatar-template',
+		//   components: [
+		//     'position',
+		//     'rotation',
+		//     {
+		//       selector: '.head',
+		//       component: 'material',
+		//       property: 'color'
+		//     }
+		//   ]
+		// });
+  
+		// Called by Networked-Aframe when connected to server
+		function onConnect() {
+		  console.log("onConnect", new Date());
+		  document.body.addEventListener('clientConnected', function (evt) {
+			console.error('clientConnected event. clientId =', evt.detail.clientId);
+		  });
+		}
+	  </script>
+
+</body>
+
 </html>
