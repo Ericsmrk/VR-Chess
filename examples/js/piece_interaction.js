@@ -211,7 +211,7 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
             const onMouseUp = (evt) => { //understand the javascript stuff going on here.  //understand the javascript stuff going on here. 
                 // Cleanup event handlers so we don't get _another_
                 // listener every time we click
-                NAF.utils.takeOwnership(w_rook_r); //this is a function that takes ownership of the rook. please work
+                NAF.utils.takeOwnership(pieces[curPiece]); //this is a function that takes ownership of the rook. please work
                 //console.log("pieces[curPiece].id: " + pieces[curPiece].id)
                 this.removeEventListener('mouseup', onMouseUp); //ask about this. to whatever subject matter expert we can find  //ask about this. to whatever subject matter expert we can find 
 
