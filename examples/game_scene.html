@@ -8,6 +8,7 @@
 		<script src="js/chess_piece_component.js"></script>
 		<script src="js/Loader.js"></script>
 		<script src="js/setAtts.js"></script>
+		<script src="js/holdable_component.js"></script>
 
 		
 		
@@ -70,7 +71,7 @@
 
 <!--rook that's white starting on the right side, the mixin brings in the 
 			assests it needs, and then position is what we are trying to play around with -->
-			<a-entity  class="chessguy" id="w_rook_r" mixin = "rook_w" boardPos="h1" position=" 2   1.5 -1  "></a-entity>
+			<a-entity class="chessguy" id="w_rook_r" mixin = "rook_w" boardPos="h1" position=" 2   1.5 -1  "></a-entity>
 			<a-entity class="chessguy" id="w_rook_l" mixin = "rook_w" boardPos="a1" position="-1.5 1.5 -1  "></a-entity>
 
 			<a-entity class="chessguy" id="w_knight_r" mixin = "knight_w" boardPos="g1" position=" 1.5   1.5 -1  "></a-entity>
@@ -91,7 +92,6 @@
 			<a-entity class="chessguy" id="w_king"  mixin = "king_w" boardPos="e1" position=" 0.5   1.5 -1  "></a-entity>
 			<a-entity class="chessguy" id="w_queen" mixin = "queen_w" boardPos="d1" position=" 0  1.5 -1  "></a-entity>
 
-			
 
 			
 			<a-entity class="chessguy" id="b_rook_r"mixin = "rook_b"  boardPos="h8"position=" 2   1.5 -4.5"></a-entity>
