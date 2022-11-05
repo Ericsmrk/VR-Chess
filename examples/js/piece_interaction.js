@@ -162,7 +162,7 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
             const startPosition = worldToBoard(obj.detail.intersection.point) //"obj.detail.intersection.point" understand and document this better, appears to grab the position
             
             //translates from the world to the board. 
-            const curPiece = getPieceID(startPosition)
+            const curPiece = getPieceID(startPosition) 
             console.log(curPiece)
             //this.data.curHolding = curPiece;
             if(curPiece== (-1)){
@@ -211,6 +211,9 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
             const onMouseUp = (evt) => { //understand the javascript stuff going on here.  //understand the javascript stuff going on here. 
                 // Cleanup event handlers so we don't get _another_
                 // listener every time we click
+                NAF.utils.takeOwnership(pieces[curPiece]); //this is a function that takes ownership of the rook. please work
+                //pretty sure the above line is correct but if everything else fine change to pices[curPiece].id
+                //console.log("pieces[curPiece].id: " + pieces[curPiece].id)
                 this.removeEventListener('mouseup', onMouseUp); //ask about this. to whatever subject matter expert we can find  //ask about this. to whatever subject matter expert we can find 
 
 
@@ -225,6 +228,8 @@ const getPieceID = (boardPosition) => { //THIS WILL BREAK IF ENVIRONMENT IS CHAN
                 if(endPosPiece == -1){
                     console.log("End position empty")
                     pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))
+                    //for logging purposes
+                    console.log("boardToChessTerm(endPosition): " + boardToChessTerm(endPosition))
                     pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
                 
                 
