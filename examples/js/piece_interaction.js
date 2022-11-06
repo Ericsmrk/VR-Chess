@@ -329,6 +329,8 @@ AFRAME.registerComponent('cursor-listener', {
                 // Cleanup event handlers so we don't get _another_
                 // listener every time we click
                 NAF.utils.takeOwnership(pieces[curPiece]); //this is a function that takes ownership of the rook. please work
+                //pretty sure the above line is correct but if everything else fine change to pices[curPiece].id
+                //console.log("pieces[curPiece].id: " + pieces[curPiece].id)
                 this.removeEventListener('mouseup', onMouseUp); //ask about this. to whatever subject matter expert we can find  //ask about this. to whatever subject matter expert we can find 
                 
                 let pieceToAnimate = pieces[curPiece];//removing attribute set to stop and reset postion
@@ -361,7 +363,6 @@ AFRAME.registerComponent('cursor-listener', {
                             console.log(pieces[curPiece].getAttribute('boardPos'))
 
                             //KILL/CAPTURE      --> Move KILLED piece into graveyard
-                            //temporarily setting to true so that I can test NAF
                             if(pieces[curPiece].id[0] == 'w'){  //if white, move into white graveyard
                                 pieces[endPosPiece].object3D.position.copy(deadPieceW[dPit_w])
                                 pieces[endPosPiece].setAttribute('boardPos', "dead")
