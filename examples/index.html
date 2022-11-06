@@ -40,7 +40,7 @@
                 </a-gui-button>
 
 				<a-gui-button
-                    id="btn1"
+                    id="btn2"
                     width="2.5" 
                     height="0.7" 
                     base-depth="0.05" 
@@ -48,7 +48,41 @@
                     gap="0.1"
                     radius="0"
                     onclick="testButtonAction2"
-                    value="test button"
+                    value="Light Mode"
+                    font-family="src/fonts/PermanentMarker-Regular.ttf"
+                    font-size="0.35"
+                    margin="0 0 0.05 0"
+                    toggle="true"
+                >
+                </a-gui-button>
+
+				<a-gui-button
+                    id="btn3"
+                    width="2.5" 
+                    height="0.7" 
+                    base-depth="0.05" 
+                    depth="0.2"
+                    gap="0.1"
+                    radius="0"
+                    onclick="testButtonAction3"
+                    value="Dynamic Dark"
+                    font-family="src/fonts/PermanentMarker-Regular.ttf"
+                    font-size="0.35"
+                    margin="0 0 0.05 0"
+                    toggle="true"
+                >
+                </a-gui-button>
+
+				<a-gui-button
+                    id="btn4"
+                    width="2.5" 
+                    height="0.7" 
+                    base-depth="0.05" 
+                    depth="0.2"
+                    gap="0.1"
+                    radius="0"
+                    onclick="testButtonAction4"
+                    value="Dynamic light"
                     font-family="src/fonts/PermanentMarker-Regular.ttf"
                     font-size="0.35"
                     margin="0 0 0.05 0"
@@ -103,18 +137,16 @@
 			window.location.href = 'game_scene.html';
 		}
 
-
-
 		window.testButtonAction2 = function () {
 			window.location.href = 'game_scene_light.html';
 		}
 
 		window.testButtonAction3 = function () {
-			console.log("clicked GUI");
+			window.location.href = 'game_scene_dynamic.html';
 		}
 
 		window.testButtonAction4 = function () {
-			console.log("clicked GUI");
+			window.location.href = 'game_scene_dynamic_light.html';
 		}
 
 		window.testButtonAction5 = function () {
@@ -208,20 +240,6 @@
 
 	</script>
 
-		<!--
-		<h1>VR Chess!</h1>
-        <h2>Main Menu</h2>
-        <h3><a href="new_game_options.html">Create Game</a></h3>
-        <h3><a href="game_scene.html">Join Game</a></h3>
-        <h4><a href="gameScene1.html">Multiplayer Game</a></h4>
-        <h4><a href="chris1.html">Test</a></h4>
-        <h3><a href="loader_test.html">Dynamic Loader</a></h3>
-        <script>
-            var name = window.prompt("What is your GamerTag?");
-            document.write("Sup,  " + name);
-        </script>
-
-		-->
         
 
     </body>
