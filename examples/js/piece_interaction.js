@@ -140,143 +140,153 @@ AFRAME.registerComponent('cursor-listener', {
 
             const id = curP.id[2] + curP.id[3]
             const ePosChessTerm = boardToChessTerm(ePos)    //replace with variable
-            if(curP.id[0]=='w'){
+            
                 switch(id){
                     case 'pa':  //All logic for WHITE PAWNs, important to note the BLACK PAWNs will require different logic(opposite of this)
-                        if(curP.getAttribute('pawnMoved') == 'false'){  //movement allowed if PAWN has NOT moved yet
+                        if(curP.id[0]=='w'){
+                            if(curP.getAttribute('pawnMoved') == 'false'){  //movement allowed if PAWN has NOT moved yet
 
-                            //**************Could change this to where pawnMoved is checked only for the second move, but will cause pawnMoved to be accessed everytime??******* */
-                            //move up 1
-                            if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos,1 ,0)) && getPieceID(modBoardPos(sPos,1,0))==-1){
-                                curP.setAttribute('pawnMoved', 'true');
-                                return true;
+                                //**************Could change this to where pawnMoved is checked only for the second move, but will cause pawnMoved to be accessed everytime??******* */
+                                //move up 1
+                                if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos,0 ,1)) && getPieceID(modBoardPos(sPos,0,1))==-1){
+                                    curP.setAttribute('pawnMoved', 'true');
+                                    return true;
+                                }
+                                //move up 2 (first turn)
+                                else if( boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, 0, 2)) && getPieceID(modBoardPos(sPos, 0, 2))==-1){
+                                    curP.setAttribute('pawnMoved', 'true');
+                                    return true;
+                                }
+                                //kill to the right
+                                else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, 1, 1)) && getPieceID(modBoardPos(sPos,1,1))!=-1){
+                                    curP.setAttribute('pawnMoved', 'true');
+                                    return true;
+                                }
+                                //kill to the left
+                                else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -1, 1)) && getPieceID(modBoardPos(sPos,-1,1))!=-1){
+                                    curP.setAttribute('pawnMoved', 'true');
+                                    return true;
+                                }
+                                //invalid move
+                                else{
+                                    return false;
+                                }
                             }
-                            //move up 2 (first turn)
-                            else if( boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, 2, 0)) && getPieceID(modBoardPos(sPos, 2, 0))==-1){
-                                curP.setAttribute('pawnMoved', 'true');
-                                return true;
-                            }
-                            //kill to the right
-                            else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, 1, 1)) && getPieceID(modBoardPos(sPos,1,1))!=-1){
-                                curP.setAttribute('pawnMoved', 'true');
-                                return true;
-                            }
-                            //kill to the left
-                            else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, 1, -1)) && getPieceID(modBoardPos(sPos,1,-1))!=-1){
-                                curP.setAttribute('pawnMoved', 'true');
-                                return true;
-                            }
-                            //invalid move
-                            else{
-                                return false;
+                            else {  //movement allowed after PAWN has moved once
+                                //move up 1
+                                if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos,0 ,1)) && getPieceID(modBoardPos(sPos,0,1))==-1){
+                                    return true;
+                                }
+                                //kill to the right
+                                else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, 1, 1)) && getPieceID(modBoardPos(sPos,1,1))!=-1){
+                                    return true;
+                                }
+                                //kill to the left
+                                else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -1, 1)) && getPieceID(modBoardPos(sPos,-1,1))!=-1){
+                                    return true;
+                                }
+                                //invalid move
+                                else{
+                                    return false;
+                                }
                             }
                         }
-                        else {  //movement allowed after PAWN has moved once
-                            //move up 1
-                            if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos,1 ,0)) && getPieceID(modBoardPos(sPos,1,0))==-1){
-                                return true;
+                        else if(curP.id[0]=='b'){
+                            if(curP.getAttribute('pawnMoved') == 'false'){ //movement allowed if PAWN has NOT moved yet
+                                //move up 1
+                                if(boardToChessTerm(ePos)==boardToChessTerm(modBoardPos(sPos, -1, 0)) && getPieceID(modBoardPos(sPos, -1, 0))==-1){
+                                    curP.setAttribute('pawnMoved', 'true')
+                                    return true
+                                }
+                                //move up 2 (first turn)
+                                else if( boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -2, 0)) && getPieceID(modBoardPos(sPos, -2, 0))==-1){
+                                    curP.setAttribute('pawnMoved', 'true');
+                                    return true;
+                                }
+                                //kill to the right
+                                else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -1, 1)) && getPieceID(modBoardPos(sPos,-1,1))!=-1){
+                                    curP.setAttribute('pawnMoved', 'true');
+                                    return true;
+                                }
+                                //kill to the left
+                                else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -1, -1)) && getPieceID(modBoardPos(sPos,-1,-1))!=-1){
+                                    curP.setAttribute('pawnMoved', 'true');
+                                    return true;
+                                }
+                                //invalid move
+                                else{
+                                    console.log('invalid move')
+                                    return false;
+                                }
                             }
-                            //kill to the right
-                            else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, 1, 1)) && getPieceID(modBoardPos(sPos,1,1))!=-1){
-                                return true;
-                            }
-                            //kill to the left
-                            else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, 1, -1)) && getPieceID(modBoardPos(sPos,1,-1))!=-1){
-                                return true;
-                            }
-                            //invalid move
-                            else{
-                                return false;
+                            else{ //movement allowed after PAWN has moved once
+                                    //move up 1
+                                    if(boardToChessTerm(ePos)==boardToChessTerm(modBoardPos(sPos, -1, 0)) && getPieceID(modBoardPos(sPos, -1, 0))==-1){
+                                    
+                                    return true
+                                }
+                                //move up 2 (first turn)
+                                else if( boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -2, 0)) && getPieceID(modBoardPos(sPos, -2, 0))==-1){
+                                    return true;
+                                }
+                                //kill to the right
+                                else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -1, 1)) && getPieceID(modBoardPos(sPos,-1,1))!=-1){
+                                    return true;
+                                }
+                                //kill to the left
+                                else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -1, -1)) && getPieceID(modBoardPos(sPos,-1,-1))!=-1){
+                                    return true;
+                                }
+                                //invalid move
+                                else{
+                                    console.log('invalid move')
+                                    return false;
+                                }
                             }
                         }
-                    case 'ki':  //logic for WHITE KING
-                        if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, 0)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -1, 0))){
+                    case 'ki':  //logic for ALL KING
+                        if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 0, 1)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 0, -1))){
                             return true
                         }
-                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, 1)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -1, 1))){
+                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, 1)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, -1))){
                             return true
                         }
-                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, -1)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -1, -1))){
+                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -1, 1)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -1, -1))){
                             return true
                         }
-                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 0, 1)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 0, -1))){
+                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, 0)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -1, 0))){
                             return true
                        }
                        else{
                         return false
                        }
-                }
+                    case 'kn':
+                        if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, 2)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, -2))){
+                            return true
+                        }
+                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, -2)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, - 1, -2))){
+                            return true
+                        }
+                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 2, 1)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 2, -1))){
+                            return true
+                        }
+                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -2, 1)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -2, -1))){
+                            return true
+                        }
+                        else{
+                            return false
+                        }
+                    }
                     
-            }
-            else if(curP.id[0]=='b'){
-                switch(id){
-                    case 'pa': //All logic for BLACK PAWNs, important to note the WHITE PAWNs will require different logic(opposite of this)
-                        if(curP.getAttribute('pawnMoved') == 'false'){ //movement allowed if PAWN has NOT moved yet
-                            //move up 1
-                            if(boardToChessTerm(ePos)==boardToChessTerm(modBoardPos(sPos, -1, 0)) && getPieceID(modBoardPos(sPos, -1, 0))==-1){
-                                curP.setAttribute('pawnMoved', 'true')
-                                return true
-                            }
-                            //move up 2 (first turn)
-                            else if( boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -2, 0)) && getPieceID(modBoardPos(sPos, -2, 0))==-1){
-                                curP.setAttribute('pawnMoved', 'true');
-                                return true;
-                            }
-                            //kill to the right
-                            else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -1, 1)) && getPieceID(modBoardPos(sPos,-1,1))!=-1){
-                                curP.setAttribute('pawnMoved', 'true');
-                                return true;
-                            }
-                            //kill to the left
-                            else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -1, -1)) && getPieceID(modBoardPos(sPos,-1,-1))!=-1){
-                                curP.setAttribute('pawnMoved', 'true');
-                                return true;
-                            }
-                            //invalid move
-                            else{
-                                console.log('invalid move')
-                                return false;
-                            }
-                        }
-                        else{ //movement allowed after PAWN has moved once
-                             //move up 1
-                             if(boardToChessTerm(ePos)==boardToChessTerm(modBoardPos(sPos, -1, 0)) && getPieceID(modBoardPos(sPos, -1, 0))==-1){
-                                
-                                return true
-                            }
-                            //move up 2 (first turn)
-                            else if( boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -2, 0)) && getPieceID(modBoardPos(sPos, -2, 0))==-1){
-                                return true;
-                            }
-                            //kill to the right
-                            else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -1, 1)) && getPieceID(modBoardPos(sPos,-1,1))!=-1){
-                                return true;
-                            }
-                            //kill to the left
-                            else if(boardToChessTerm(ePos) == boardToChessTerm(modBoardPos(sPos, -1, -1)) && getPieceID(modBoardPos(sPos,-1,-1))!=-1){
-                                return true;
-                            }
-                            //invalid move
-                            else{
-                                console.log('invalid move')
-                                return false;
-                            }
-                        }
                 }
-            }
-            else if(curP.id=='w_rook_r'){
-                return true
-            }
-
-            
-        }
+        
 
 //------------------------------------------------------------ MODBOARDPOS AND GETPIECEID FUNCTIONS -----------------------------------------------------------------------------
         //Allows me to check availability of a square for piece movements such as PAWN kill for diagnol kills
         const modBoardPos = (boardPosition, x, y) => {              //***********LOOK INTO THIS*************** */
             newPos = new THREE.Vector2(boardPosition.x, boardPosition.y)
-            newPos.x = boardPosition.x + y;
-            newPos.y = boardPosition.y + x;
+            newPos.x = boardPosition.x + x;
+            newPos.y = boardPosition.y + y;
             return newPos;
         }
         //returns piece # in the pieces array
@@ -343,7 +353,7 @@ AFRAME.registerComponent('cursor-listener', {
                 const endPosPiece = getPieceID(endPosition)
                 if(endPosPiece == -1){  //checking if space is empty, allow move
 
-                    if(true){      //isMoveValid(pieces[curPiece], startPosition, endPosition)
+                    if(isMoveValid(pieces[curPiece], startPosition, endPosition)){      //isMoveValid(pieces[curPiece], startPosition, endPosition)
                         pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))
                         pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
                     }
@@ -357,7 +367,7 @@ AFRAME.registerComponent('cursor-listener', {
                     }
                     else{   //KILL/CAPTURE FUNCTION WILL BE PLACED HERE!  ---> Pieces are not some color, KILL
                         //isMoveValid()
-                        if(true){      //isMoveValid(pieces[curPiece], startPosition, endPosition) 
+                        if(isMoveValid(pieces[curPiece], startPosition, endPosition)){      //isMoveValid(pieces[curPiece], startPosition, endPosition) 
                             pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))      //Move piece into new position
                             pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
                             console.log(pieces[curPiece].getAttribute('boardPos'))
