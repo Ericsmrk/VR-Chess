@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,7 +13,7 @@
 	<script src="/dist/networked-aframe.js"></script>
 
 	<!--Environment and chess js stuff-->
-	<script src="https://unpkg.com/aframe-environment-component@1.3.0/dist/aframe-environment-component.min.js"></script>
+	<script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
 	<script src="/js/spawn-in-circle.component.js"></script>
 
 	<script src="js/piece_interaction.js"></script>
@@ -43,17 +44,20 @@
 				});
 			}
 
-			if (!NAF.schemas.hasTemplate('#rook_w_template')) {
+			
+			if (!NAF.schemas.hasTemplate('#chess-piece-template')) {
 				//anyways, after the if, it adds said schema and the properties below. every component needs a new, component area. 
 				//as shown below. 
 				NAF.schemas.add({
-					template: '#rook_w_template',
+					template: '#chess-piece-template',
 					components: [
 						'position',
 						'boardPos'
 					]
 				});
 			}
+
+			/*
 			
 			if (!NAF.schemas.hasTemplate('#rook_w_r_template')) {
 				NAF.schemas.add({
@@ -145,8 +149,16 @@
 				});
 			}
 
-
-
+			if (!NAF.schemas.hasTemplate('#bishop_b_r_template')) {
+				NAF.schemas.add({
+					template: '#bishop_b_r_template',
+					components: [
+						'position',
+						'boardPos'
+					]
+				});
+			}
+			*/
 			
 
 			const components = NAF.schemas.getComponentsOriginal(template);
@@ -154,13 +166,19 @@
 		};
 	</script>
 
+	<script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
+
+
 </head>
 
 <body>
 	<a-scene networked-scene="
 		room: notBasic;
 		debug: true;
-		adapters: easyrtc;">
+		adapters: easyrtc;
+		"
+		
+		>
 
 		<!--leaving here for now but please please please delete me if the avatars and chess pieces work and move
 			This is cursor, (the pretty thing in middle), raycaster is essetially lazer controls
@@ -176,133 +194,160 @@
 			
 			<!--Just asset loading -->
 			<a-assets>
-				<a-mixin id = "highPlane" visible="false" geometry="primitive plane" rotation="-90 0 0" color="blue" opacity="0.5" height="0.08" width="0.08"></a-mixin>
-
+			
+			
+			
+				<a-mixin id="highPlane" visible="false" geometry="primitive plane" rotation="-90 0 0" color="blue" opacity="0.5"
+					height="0.08" width="0.08"></a-mixin>
+			
 			
 				<a-asset-item id="rook_w_asset" src="src/models/sets/default/white/rook.gltf">
 				</a-asset-item>
-				
+			
 				<a-asset-item id="rook_b_asset" src="src/models/sets/default/black/rook.gltf">
 				</a-asset-item>
-
+			
 				<a-asset-item id="knight_w_asset" src="src/models/sets/default/white/knight.gltf">
 				</a-asset-item>
-
+			
 				<a-asset-item id="knight_b_asset" src="src/models/sets/default/black/knight.gltf">
 				</a-asset-item>
-
+			
 				<a-asset-item id="bishop_w_asset" src="src/models/sets/default/white/bishop.gltf">
+				</a-asset-item>
+			
+				<a-asset-item id="bishop_b_asset" src="src/models/sets/default/black/bishop.gltf">
+				</a-asset-item>
+
+				<a-asset-item id="pawn_w_asset" src="src/models/sets/default/white/pawn.gltf">
+				</a-asset-item>
+
+				<a-asset-item id="pawn_b_asset" src="src/models/sets/default/black/pawn.gltf">
+				</a-asset-item>
+
+				<a-asset-item id="queen_w_asset" src="src/models/sets/default/white/queen.gltf">
+				</a-asset-item>
+
+				<a-asset-item id="queen_b_asset" src="src/models/sets/default/black/queen.gltf">
+				</a-asset-item>
+
+				<a-asset-item id="king_w_asset" src="src/models/sets/default/white/king.gltf">
+				</a-asset-item>
+
+				<a-asset-item id="king_b_asset" src="src/models/sets/default/black/king.gltf">
 				</a-asset-item>
 
 				
-	
-				<!--mixin's are kind of like classes, grouping of attributes-->
-				
-				<a-mixin gltf-model="#rook_w" id="rook_w" src="/src/models/sets/default/white/rook.gltf" chess-piece
-					scale="0.2 0.2 0.2"></a-mixin>
-
-				<!--mixin's are kind of like classes, grouping of attributes
-				<a-mixin gltf-model="#rook_w" id = "rook_w" src = "/src/models/sets/default/white/rook.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
-				-->
-				<a-mixin gltf-model="#rook_b" id = "rook_b" src = "/src/models/sets/default/black/rook.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
-
-
-				<a-mixin gltf-model="#pawn_w" id = "pawn_w" src = "/src/models/sets/default/white/pawn.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
-				<a-mixin gltf-model="#pawn_b" id = "pawn_b" src = "/src/models/sets/default/black/pawn.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
-				
-				<a-mixin gltf-model="#king_w" id = "king_w" src = "/src/models/sets/default/white/king.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
-				<a-mixin gltf-model="#king_b" id = "king_b" src = "/src/models/sets/default/black/king.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
-
-				<a-mixin gltf-model="#queen_w" id = "queen_w" src = "/src/models/sets/default/white/queen.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
-				<a-mixin gltf-model="#queen_b" id = "queen_b" src = "/src/models/sets/default/black/queen.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
-
-				<a-mixin gltf-model="#pawn_w" id="pawn_w" src="/src/models/sets/default/white/pawn.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
-				<a-mixin gltf-model="#pawn_b" id="pawn_b" src="/src/models/sets/default/black/pawn.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>	
-
-				<a-mixin gltf-model="#knight_w" id="knight_w" src="/src/models/sets/default/white/knight.gltf" chess-piece rotation=" 0 180 0" scale="0.2 0.2 0.2"></a-mixin>
-				<a-mixin gltf-model="#knight_b" id="knight_b" src="/src/models/sets/default/black/knight.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
-
-				<a-mixin gltf-model="#bishop_w" id="bishop_w" src="/src/models/sets/default/white/bishop.gltf" chess-piece rotation=" 0 180 0" scale="0.2 0.2 0.2"></a-mixin>
-				<a-mixin gltf-model="#bishop_b" id="bishop_b" src="/src/models/sets/default/black/bishop.gltf" chess-piece scale="0.2 0.2 0.2"></a-mixin>
-
-			<!--I will try to keep most NAF stuff down here-->
-			<!--This is the template for the networked entity. 
-							You can see that it has a template, and a networked component. 
-							-->
-			<!-- Avatar -->
-			<template id="avatar-template">
-				<a-entity class="avatar">
-					<a-sphere class="head" scale="0.45 0.5 0.4"></a-sphere>
-					<a-entity class="face" position="0 0.05 0">
-						<a-sphere class="eye" color="#efefef" position="0.16 0.1 -0.35" scale="0.12 0.12 0.12">
-							<a-sphere class="pupil" color="#000" position="0 0 -1" scale="0.2 0.2 0.2"></a-sphere>
-						</a-sphere>
-						<a-sphere class="eye" color="#efefef" position="-0.16 0.1 -0.35" scale="0.12 0.12 0.12">
-							<a-sphere class="pupil" color="#000" position="0 0 -1" scale="0.2 0.2 0.2"></a-sphere>
-						</a-sphere>
-					</a-entity>
-				</a-entity>
-			</template>
-
-			<!--so a word of caution, I'm 75% certain this will not work with mixins
-				if it does not, rip apart mixins, throw them in here-->
-
-				<!--IMPORTANT: temporarily removing chess-piece while I try to get networked aframe to work-->
-			<template id="rook_w_template">
-				<a-entity gltf-model="#rook_w_asset" class="chessguy" chess-piece
-				scale="0.2 0.2 0.2" boardPos="h1" position=" 2 1.5 -1  "> </a-entity>
-			</template>
-
-			<template id="rook_w_r_template">
-				<a-entity gltf-model="#rook_w_asset" class="chessguy" chess-piece
-				scale="0.2 0.2 0.2" boardPos="a1" position="-1.5 1.5 -1"> </a-entity>
-			</template>
 			
+			
+				<a-mixin gltf-model="#pawn_w" id="pawn_w" src="/src/models/sets/default/white/pawn.gltf" chess-piece
+					scale="0.2 0.2 0.2"></a-mixin>
+				<a-mixin gltf-model="#pawn_b" id="pawn_b" src="/src/models/sets/default/black/pawn.gltf" chess-piece
+					scale="0.2 0.2 0.2"></a-mixin>
+			
+				<a-mixin gltf-model="#king_w" id="king_w" src="/src/models/sets/default/white/king.gltf" chess-piece
+					scale="0.2 0.2 0.2"></a-mixin>
+				<a-mixin gltf-model="#king_b" id="king_b" src="/src/models/sets/default/black/king.gltf" chess-piece
+					scale="0.2 0.2 0.2"></a-mixin>
+			
+				<a-mixin gltf-model="#queen_w" id="queen_w" src="/src/models/sets/default/white/queen.gltf" chess-piece
+					scale="0.2 0.2 0.2"></a-mixin>
+				<a-mixin gltf-model="#queen_b" id="queen_b" src="/src/models/sets/default/black/queen.gltf" chess-piece
+					scale="0.2 0.2 0.2"></a-mixin>
+			
+				<a-mixin gltf-model="#pawn_w" id="pawn_w" src="/src/models/sets/default/white/pawn.gltf" chess-piece
+					scale="0.2 0.2 0.2"></a-mixin>
+				<a-mixin gltf-model="#pawn_b" id="pawn_b" src="/src/models/sets/default/black/pawn.gltf" chess-piece
+					scale="0.2 0.2 0.2"></a-mixin>
+			
+				<!--I will try to keep most NAF stuff down here-->
+				<!--This is the template for the networked entity. 
+										You can see that it has a template, and a networked component. 
+										-->
+				<!-- Avatar -->
+				<template id="avatar-template">
+					<a-entity class="avatar">
+						<a-sphere class="head" scale="0.45 0.5 0.4"></a-sphere>
+						<a-entity class="face" position="0 0.05 0">
+							<a-sphere class="eye" color="#efefef" position="0.16 0.1 -0.35" scale="0.12 0.12 0.12">
+								<a-sphere class="pupil" color="#000" position="0 0 -1" scale="0.2 0.2 0.2"></a-sphere>
+							</a-sphere>
+							<a-sphere class="eye" color="#efefef" position="-0.16 0.1 -0.35" scale="0.12 0.12 0.12">
+								<a-sphere class="pupil" color="#000" position="0 0 -1" scale="0.2 0.2 0.2"></a-sphere>
+							</a-sphere>
+						</a-entity>
+					</a-entity>
+				</template>
+			
+				<!--so a word of caution, I'm 75% certain this will not work with mixins
+							if it does not, rip apart mixins, throw them in here-->
+			
+				<!--IMPORTANT: temporarily removing chess-piece while I try to get networked aframe to work-->
+				
+				<!--Universal chess template-->
+				<template id="chess-piece-template">
+					<a-entity class="chessguy" chess-piece>
+					</a-entity>
+				</template>
 
-			<template id="rook_b_r_template">
-				<a-entity gltf-model="#rook_b_asset" class="chessguy" chess-piece
-				scale="0.2 0.2 0.2" boardPos="h8" position=" 2  1.5 -4.5"> </a-entity>
-			</template>
+				<!--
+				<template id="rook_w_template">
+					<a-entity gltf-model="#rook_w_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="h1"
+						position=" 2 1.5 -1  "> </a-entity>
+				</template>
+			
+				<template id="rook_w_r_template">
+					<a-entity gltf-model="#rook_w_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="a1"
+						position="-1.5 1.5 -1"> </a-entity>
+				</template>
+			
+			
+				<template id="rook_b_r_template">
+					<a-entity gltf-model="#rook_b_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="h8"
+						position=" 2  1.5 -4.5"> </a-entity>
+				</template>
+			
+				<template id="rook_b_l_template">
+					<a-entity gltf-model="#rook_b_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="a8"
+						position="-1.5 1.5 -4.5"> </a-entity>
+				</template>
+			
+				<template id="knight_w_r_template">
+					<a-entity gltf-model="#knight_w_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="g1"
+						position=" 1.5 1.5 -1"> </a-entity>
+				</template>
+			
+				<template id="knight_w_l_template">
+					<a-entity gltf-model="#knight_w_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="b1"
+						position="-1 1.5 -1"> </a-entity>
+				</template>
+			
+				<template id="knight_b_r_template">
+					<a-entity gltf-model="#knight_b_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="g8"
+						position=" 1.5 1.5 -4.5"> </a-entity>
+				</template>
+			
+				<template id="knight_b_l_template">
+					<a-entity gltf-model="#knight_b_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="b8"
+						position="-1 1.5 -4.5"> </a-entity>
+				</template>
+			
+				<template id="bishop_w_r_template">
+					<a-entity gltf-model="#bishop_w_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="f1"
+						position=" 1 1.5 -1"> </a-entity>
+				</template>
+			
+				<template id="bishop_b_r_template">
+					<a-entity  class="chessguy" chess-piece > </a-entity>
+				</template>
 
-			<template id="rook_b_l_template">
-				<a-entity gltf-model="#rook_b_asset" class="chessguy" chess-piece
-				scale="0.2 0.2 0.2" boardPos="a8" position="-1.5 1.5 -4.5"> </a-entity>
-			</template>
+			-->
 
-			<template id="knight_w_r_template">
-				<a-entity gltf-model="#knight_w_asset" class="chessguy" chess-piece
-				scale="0.2 0.2 0.2" boardPos="g1" position=" 1.5 1.5 -1"> </a-entity>
-			</template>
-
-			<template id="knight_w_l_template">
-				<a-entity gltf-model="#knight_w_asset" class="chessguy" chess-piece
-				scale="0.2 0.2 0.2" boardPos="b1" position="-1 1.5 -1"> </a-entity>
-			</template>
-
-			<template id="knight_b_r_template">
-				<a-entity gltf-model="#knight_b_asset" class="chessguy" chess-piece
-				scale="0.2 0.2 0.2" boardPos="g8" position=" 1.5 1.5 -4.5"> </a-entity>
-			</template>
-
-			<template id="knight_b_l_template">
-				<a-entity gltf-model="#knight_b_asset" class="chessguy" chess-piece
-				scale="0.2 0.2 0.2" boardPos="b8" position="-1 1.5 -4.5"> </a-entity>
-			</template>
-
-			<template id="bishop_w_r_template">
-				<a-entity gltf-model="#bishop_w_asset" class="chessguy" chess-piece
-				scale="0.2 0.2 0.2" boardPos="f1" position=" 1 1.5 -1"> </a-entity>
-			</template>
-
-			<template id="bishop_w_l_template">
-				<a-entity gltf-model="#bishop_w_asset" class="chessguy" chess-piece
-				scale="0.2 0.2 0.2" boardPos="c1" position="-0.5 1.5 -1"> </a-entity>
-			</template>
-
-
-
-
-		</a-assets>
+			
+			
+			
+			
+			</a-assets>
 
 		<!-- we want the environment to be loaded first, prevents funky stuff from happenning-->
 		<!-- mess around here to change the skybox/background scene stuff-->
@@ -351,59 +396,142 @@
 		<!--rook that's white starting on the right side, the mixin brings in the 
 			assests it needs, and then position is what we are trying to play around with -->
 		<a-entity id="w_rook_r"
-		networked="template:#rook_w_template;networkId:rookwr;persistent:true; owner:rookwr;" 
+		networked="template:#chess-piece-template;networkId:rookwr;persistent:true; owner:rookwr;" 
+		scale="0.2 0.2 0.2" boardPos="h1" position=" 2 1.5 -1  " gltf-model="#rook_w_asset"
 		></a-entity>
 
 		<a-entity id="w_rook_l"
-		networked="template:#rook_w_r_template;networkId:rookwl;persistent:true; owner:rookwl;"
+		networked="template:#chess-piece-template;networkId:rookwl;persistent:true; owner:rookwl;"
+		scale="0.2 0.2 0.2" boardPos="a1" position="-1.5 1.5 -1" gltf-model="#rook_w_asset"
 		></a-entity>
 		
 		<a-entity id="b_rook_r"
-		networked="template:#rook_b_r_template;networkId:rookbr;persistent:true; owner:rookbr;"
+		networked="template:#chess-piece-template;networkId:rookbr;persistent:true; owner:rookbr;"
+		scale="0.2 0.2 0.2" boardPos="h8" position=" 2 1.5 -4.5" gltf-model="#rook_b_asset"
 		></a-entity>
 
 		<a-entity id="b_rook_l"
-		networked="template:#rook_b_l_template;networkId:rookbl;persistent:true; owner:rookbl;"
+		networked="template:#chess-piece-template;networkId:rookbl;persistent:true; owner:rookbl;"
+		scale="0.2 0.2 0.2" boardPos="a8" position="-1.5 1.5 -4.5" gltf-model="#rook_b_asset"
 		></a-entity>
 
 		<a-entity id="w_knight_r"
-		networked="template:#knight_w_r_template;networkId:knightwr;persistent:true; owner:knightwr;"
+		networked="template:#chess-piece-template;networkId:knightwr;persistent:true; owner:knightwr;"
+		scale="0.2 0.2 0.2" boardPos="g1" position="1.5 1.5 -1" gltf-model="#knight_w_asset"
 		></a-entity>
 
 		<a-entity id="w_knight_l"
-		networked="template:#knight_w_l_template;networkId:knightwl;persistent:true; owner:knightwl;"
+		networked="template:#chess-piece-template;networkId:knightwl;persistent:true; owner:knightwl;"
+		scale="0.2 0.2 0.2" boardPos="b1" position="-1 1.5 -1" gltf-model="#knight_w_asset"
 		></a-entity>
 		
 		<a-entity id="b_knight_r"
-		networked="template:#knight_b_r_template;networkId:knightbr;persistent:true; owner:knightbr;"
+		networked="template:#chess-piece-template;networkId:knightbr;persistent:true; owner:knightbr;"
+		scale="0.2 0.2 0.2" boardPos="g8" position=" 1.5 1.5 -4.5" gltf-model="#knight_b_asset"
 		></a-entity>
 
 		<a-entity id="b_knight_l"
-		networked="template:#knight_b_l_template;networkId:knightbl;persistent:true; owner:knightbr;"
+		networked="template:#chess-piece-template;networkId:knightbl;persistent:true; owner:knightbr;"
+		scale="0.2 0.2 0.2" boardPos="b8" position="-1 1.5 -4.5" gltf-model="#knight_b_asset"
 		></a-entity>
 		
 		<a-entity id="w_bishop_r"
-		networked="template:#bishop_w_r_template;networkId:bishopwr;persistent:true; owner:bishopwr;"
+		networked="template:#chess-piece-template;networkId:bishopwr;persistent:true; owner:bishopwr;"
+		scale="0.2 0.2 0.2" boardPos="f1" position="1 1.5 -1" gltf-model="#bishop_w_asset"
 		></a-entity>
 
 		<a-entity id="w_bishop_l"
-		networked="template:#bishop_w_l_template;networkId:bishopwl;persistent:true; owner:bishopwl;"
+		networked="template:#chess-piece-template;networkId:bishopwl;persistent:true; owner:bishopwl;"
+		scale="0.2 0.2 0.2" boardPos="c1" position="-0.5 1.5 -1" gltf-model="#bishop_w_asset"
 		></a-entity>
 
-		<a-entity class="chessguy" id="b_bishop_r" mixin="bishop_b" boardPos="f8" position=" 1   1.5 -4.5  "></a-entity>
-		<a-entity class="chessguy" id="b_bishop_l" mixin="bishop_b" boardPos="c8" position="-0.5 1.5 -4.5  "></a-entity>
+		<a-entity id="b_bishop_r"
+		networked="template:#chess-piece-template;networkId:bishopbr;persistent:true; owner:bishopbr;" 
+		scale="0.2 0.2 0.2" boardPos="f8" position=" 1 1.5 -4.5" gltf-model="#bishop_b_asset"
+		></a-entity>
+
+		<a-entity id="b_bishop_l"
+		networked="template:#chess-piece-template;networkId:bishopbl;persistent:true; owner:bishopbl;" 
+		scale="0.2 0.2 0.2" boardPos="c8" position="-0.5 1.5 -4.5" gltf-model="#bishop_b_asset"
+		></a-entity>
+
 		
-		<a-entity class="chessguy" id="b_king" mixin="king_b" boardPos="e8" position=" 0.5   1.5 -4.5  "></a-entity>
+		<a-entity id="b_king"
+		networked="template:#chess-piece-template;networkId:kingb;persistent:true; owner:kingb;"
+		scale="0.2 0.2 0.2" boardPos="e8" position="0.5 1.5 -4.5" gltf-model="#king_b_asset"
+		></a-entity>
+
+		<a-entity id="b_queen"
+		networked="template:#chess-piece-template;networkId:queenb;persistent:true; owner:queenb;"
+		scale="0.2 0.2 0.2" boardPos="d8" position="0 1.5 -4.5" gltf-model="#queen_b_asset"
+		></a-entity>
+
+		<a-entity id="w_king"
+		networked="template:#chess-piece-template;networkId:kingw;persistent:true; owner:kingw;"
+		scale="0.2 0.2 0.2" boardPos="e1" position="0.5 1.5 -1" gltf-model="#king_w_asset"
+		></a-entity>
+
+		<a-entity id="w_queen"
+		networked="template:#chess-piece-template;networkId:queenw;persistent:true; owner:queenw;"
+		scale="0.2 0.2 0.2" boardPos="d1" position="0 1.5 -1" gltf-model="#queen_w_asset"
+		></a-entity>
+
+		<!--
+			<a-entity class="chessguy" id="b_king" mixin="king_b" boardPos="e8" position=" 0.5   1.5 -4.5  "></a-entity>
 		<a-entity class="chessguy" id="b_queen" mixin="queen_b" boardPos="d8" position=" 0   1.5 -4.5  "></a-entity>
-		
 		<a-entity class="chessguy" id="w_king" mixin="king_w" boardPos="e1" position=" 0.5   1.5 -1  "></a-entity>
 		<a-entity class="chessguy" id="w_queen" mixin="queen_w" boardPos="d1" position=" 0  1.5 -1  "></a-entity>
+
+		-->
+		
+		
+		
 		
 		
 		
 		
 		<!-- PAWN -->
-		<a-entity class="chessguy" id="w_pawn_1" mixin="pawn_w" boardPos="a2" pawnMoved='false' position="-1.5  1.5 -1.5">
+		<a-entity id="w_pawn_1"
+		networked="template:#chess-piece-template;networkId:pawnw1;persistent:true; owner:pawnw1;"
+		scale="0.2 0.2 0.2" boardPos="a2" position="-1.5 1.5 -1.5" gltf-model="#pawn_w_asset"
+		></a-entity>
+
+		<a-entity id="w_pawn_2"
+		networked="template:#chess-piece-template;networkId:pawnw2;persistent:true; owner:pawnw2;"
+		scale="0.2 0.2 0.2" boardPos="b2" position="-1 1.5 -1.5" gltf-model="#pawn_w_asset"
+		></a-entity>
+
+		<a-entity id="w_pawn_3"
+		networked="template:#chess-piece-template;networkId:pawnw3;persistent:true; owner:pawnw3;"
+		scale="0.2 0.2 0.2" boardPos="c2" position="-0.5 1.5 -1.5" gltf-model="#pawn_w_asset"
+		></a-entity>
+
+		<a-entity id="w_pawn_4"
+		networked="template:#chess-piece-template;networkId:pawnw4;persistent:true; owner:pawnw4;"
+		scale="0.2 0.2 0.2" boardPos="d2" position="0 1.5 -1.5" gltf-model="#pawn_w_asset"
+		></a-entity>
+
+		<a-entity id="w_pawn_5"
+		networked="template:#chess-piece-template;networkId:pawnw5;persistent:true; owner:pawnw5;"
+		scale="0.2 0.2 0.2" boardPos="e2" position="0.5 1.5 -1.5" gltf-model="#pawn_w_asset"
+		></a-entity>
+
+		<a-entity id="w_pawn_6"
+		networked="template:#chess-piece-template;networkId:pawnw6;persistent:true; owner:pawnw6;"
+		scale="0.2 0.2 0.2" boardPos="f2" position="1 1.5 -1.5" gltf-model="#pawn_w_asset"
+		></a-entity>
+
+		<a-entity id="w_pawn_7"
+		networked="template:#chess-piece-template;networkId:pawnw7;persistent:true; owner:pawnw7;"
+		scale="0.2 0.2 0.2" boardPos="g2" position="1.5 1.5 -1.5" gltf-model="#pawn_w_asset"
+		></a-entity>
+
+		<a-entity id="w_pawn_8"
+		networked="template:#chess-piece-template;networkId:pawnw8;persistent:true; owner:pawnw8;"
+		scale="0.2 0.2 0.2" boardPos="h2" position="2 1.5 -1.5" gltf-model="#pawn_w_asset"
+		></a-entity>
+
+		<!--<a-entity class="chessguy" id="w_pawn_1" mixin="pawn_w" boardPos="a2" pawnMoved='false' position="-1.5  1.5 -1.5">
 		</a-entity>
 		<a-entity class="chessguy" id="w_pawn_2" mixin="pawn_w" boardPos="b2" pawnMoved='false' position="-1    1.5 -1.5">
 		</a-entity>
@@ -418,9 +546,56 @@
 		<a-entity class="chessguy" id="w_pawn_7" mixin="pawn_w" boardPos="g2" pawnMoved='false' position=" 1.5  1.5 -1.5">
 		</a-entity>
 		<a-entity class="chessguy" id="w_pawn_8" mixin="pawn_w" boardPos="h2" pawnMoved='false' position=" 2    1.5 -1.5">
-		</a-entity>
+		</a-entity>-->
 		
-		<a-entity class="chessguy" id="b_pawn_1" mixin="pawn_b" boardPos="a7" position="-1.5  1.5 -4  "></a-entity>
+		<!--
+
+
+		-->
+
+		<a-entity id="b_pawn_1"
+		networked="template:#chess-piece-template;networkId:pawnb1;persistent:true; owner:pawnb1;"
+		scale-="0.2 0.2 0.2" boardPos="a7" position="-1.5 1.5 -4" gltf-model="#pawn_b_asset"
+		></a-entity>
+
+		<a-entity id="b_pawn_2"
+		networked="template:#chess-piece-template;networkId:pawnb2;persistent:true; owner:pawnb2;"
+		scale-="0.2 0.2 0.2" boardPos="b7" position="-1 1.5 -4" gltf-model="#pawn_b_asset"
+		></a-entity>
+
+		<a-entity id="b_pawn_3"
+		networked="template:#chess-piece-template;networkId:pawnb3;persistent:true; owner:pawnb3;"
+		scale-="0.2 0.2 0.2" boardPos="c7" position="-0.5 1.5 -4" gltf-model="#pawn_b_asset"
+		></a-entity>
+
+		<a-entity id="b_pawn_4"
+		networked="template:#chess-piece-template;networkId:pawnb4;persistent:true; owner:pawnb4;"
+		scale-="0.2 0.2 0.2" boardPos="d7" position="0 1.5 -4" gltf-model="#pawn_b_asset"
+		></a-entity>
+
+		<a-entity id="b_pawn_5"
+		networked="template:#chess-piece-template;networkId:pawnb5;persistent:true; owner:pawnb5;"
+		scale-="0.2 0.2 0.2" boardPos="e7" position="0.5 1.5 -4" gltf-model="#pawn_b_asset"
+		></a-entity>
+
+		<a-entity id="b_pawn_6"
+		networked="template:#chess-piece-template;networkId:pawnb6;persistent:true; owner:pawnb6;"
+		scale-="0.2 0.2 0.2" boardPos="f7" position="1 1.5 -4" gltf-model="#pawn_b_asset"
+		></a-entity>
+
+		<a-entity id="b_pawn_7"
+		networked="template:#chess-piece-template;networkId:pawnb7;persistent:true; owner:pawnb7;"
+		scale-="0.2 0.2 0.2" boardPos="g7" position="1.5 1.5 -4" gltf-model="#pawn_b_asset"
+		></a-entity>
+
+		<a-entity id="b_pawn_8"
+		networked="template:#chess-piece-template;networkId:pawnb8;persistent:true; owner:pawnb8;"
+		scale-="0.2 0.2 0.2" boardPos="h7" position="2 1.5 -4" gltf-model="#pawn_b_asset"
+		></a-entity>
+
+		<!--
+
+<a-entity class="chessguy" id="b_pawn_1" mixin="pawn_b" boardPos="a7" position="-1.5  1.5 -4  "></a-entity>
 		<a-entity class="chessguy" id="b_pawn_2" mixin="pawn_b" boardPos="b7" position="-1    1.5 -4  "></a-entity>
 		<a-entity class="chessguy" id="b_pawn_3" mixin="pawn_b" boardPos="c7" position="-0.5  1.5 -4  "></a-entity>
 		<a-entity class="chessguy" id="b_pawn_4" mixin="pawn_b" boardPos="d7" position=" 0    1.5 -4  "></a-entity>
@@ -428,6 +603,8 @@
 		<a-entity class="chessguy" id="b_pawn_6" mixin="pawn_b" boardPos="f7" position=" 1    1.5 -4  "></a-entity>
 		<a-entity class="chessguy" id="b_pawn_7" mixin="pawn_b" boardPos="g7" position=" 1.5  1.5 -4  "></a-entity>
 		<a-entity class="chessguy" id="b_pawn_8" mixin="pawn_b" boardPos="h7" position=" 2    1.5 -4  "></a-entity>
+		-->
+		
 		
 		
 		
@@ -450,82 +627,7 @@
 		<a-plane id="highlight-plane" id="highPlane" visible="false" geometry="primitive plane" rotation="-90 0 0" color="blue"
 			opacity="0.5" height="0.08" width="0.08"></a-plane>
 		
-		<!--
-					<a-plane geometry="primitive plane" position="2 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane geometry="primitive plane" position="1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
 		
-					
-					<a-plane id="f1" position="1 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-					<a-plane id="e1" position="0.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-					<a-plane id="d1" position="0 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane id="c1" position="-0.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane id="b1" position="-1 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane id="a1" position="-1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-		
-					<a-plane id="h2" position="2 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane id="g2" position="1.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane id="f2" position="1 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-					<a-plane id="e2" position="0.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-					<a-plane id="d2" position="0 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane id="c2" position="-0.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane id="b2" position="-1 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane id="a2" position="-1.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-		
-					<a-plane position="2 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="1.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="1 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-					<a-plane position="0.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-					<a-plane position="0 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-0.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-1 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-1.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-		
-					<a-plane position="2 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="1.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="1 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-					<a-plane position="0.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-					<a-plane position="0 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-0.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-1 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-1.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-		
-					<a-plane position="2 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="1.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="1 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-					<a-plane position="0.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-					<a-plane position="0 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-0.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-1 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-1.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-		
-					<a-plane position="2 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="1.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="1 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-					<a-plane position="0.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-					<a-plane position="0 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-0.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-1 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-1.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-		
-					<a-plane position="2 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="1.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="1 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-					<a-plane position="0.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-					<a-plane position="0 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-0.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-1 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-1.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-		
-					<a-plane position="2 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="1.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="1 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-					<a-plane position="0.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-					<a-plane position="0 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-0.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-1 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-					<a-plane position="-1.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-		
-					-->
 		<a-entity loader="/src/scenes/scene2.json"></a-entity>
 		<!--	loads a scene json-->
 		<a-entity setatts></a-entity>
