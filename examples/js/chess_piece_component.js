@@ -8,7 +8,7 @@ AFRAME.registerComponent('chess-piece', {
     schema:{
         boardPos: {type: 'string', default: 'NULL'},
         pieceType: {type: 'string', default:'NULL'},
-        pawnMoved: {type: 'bool', default: 'false'}
+        pawnMoved: {type: 'bool', default: 'False'}
 
     }
 })
