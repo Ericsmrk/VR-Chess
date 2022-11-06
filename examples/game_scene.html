@@ -12,9 +12,7 @@
 	<script src="/dist/networked-aframe.js"></script>
 
 	<!--Environment and chess js stuff-->
-	<script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
-	<script
-		src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
+	<script src="https://unpkg.com/aframe-environment-component@1.3.0/dist/aframe-environment-component.min.js"></script>
 	<script src="/js/spawn-in-circle.component.js"></script>
 
 	<script src="js/piece_interaction.js"></script>
@@ -127,6 +125,26 @@
 				});
 			}
 
+			if (!NAF.schemas.hasTemplate('#bishop_w_r_template')) {
+				NAF.schemas.add({
+					template: '#bishop_w_r_template',
+					components: [
+						'position',
+						'boardPos'
+					]
+				});
+			}
+
+			if (!NAF.schemas.hasTemplate('#bishop_w_l_template')) {
+				NAF.schemas.add({
+					template: '#bishop_w_l_template',
+					components: [
+						'position',
+						'boardPos'
+					]
+				});
+			}
+
 
 
 			
@@ -154,7 +172,7 @@
 				<a-entity cursor="fuse: false; fuseTimeout: 500" raycaster="objects: #cursor-plane" position="0 0 -0.2"
 					geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003" material="color: black; shader: flat">
 				</a-entity>
-			</a-entity>
+			</a-entity> -->
 			
 			<!--Just asset loading -->
 			<a-assets>
@@ -168,15 +186,14 @@
 				</a-asset-item>
 
 				<a-asset-item id="knight_w_asset" src="src/models/sets/default/white/knight.gltf">
-				
-			  
 				</a-asset-item>
 
 				<a-asset-item id="knight_b_asset" src="src/models/sets/default/black/knight.gltf">
 				</a-asset-item>
 
-				<a-asset-item id="knight_b_asset" src="src/models/sets/default/black/knight.gltf">
+				<a-asset-item id="bishop_w_asset" src="src/models/sets/default/white/bishop.gltf">
 				</a-asset-item>
+
 				
 	
 				<!--mixin's are kind of like classes, grouping of attributes-->
@@ -272,6 +289,16 @@
 				scale="0.2 0.2 0.2" boardPos="b8" position="-1 1.5 -4.5"> </a-entity>
 			</template>
 
+			<template id="bishop_w_r_template">
+				<a-entity gltf-model="#bishop_w_asset" class="chessguy" chess-piece
+				scale="0.2 0.2 0.2" boardPos="f1" position=" 1 1.5 -1"> </a-entity>
+			</template>
+
+			<template id="bishop_w_l_template">
+				<a-entity gltf-model="#bishop_w_asset" class="chessguy" chess-piece
+				scale="0.2 0.2 0.2" boardPos="c1" position="-0.5 1.5 -1"> </a-entity>
+			</template>
+
 
 
 
@@ -355,16 +382,14 @@
 		networked="template:#knight_b_l_template;networkId:knightbl;persistent:true; owner:knightbr;"
 		></a-entity>
 		
-		<!--
-		<a-entity class="chessguy" id="b_knight_r" mixin="knight_b" boardPos="g8" position=" 1.5   1.5 -4.5  "></a-entity>
-					<a-entity class="chessguy" id="b_knight_l" mixin="knight_b" boardPos="b8" position="-1 1.5 -4.5  "></a-entity>
-		
-					-->
-		
-		
-		<a-entity class="chessguy" id="w_bishop_r" mixin="bishop_w" boardPos="f1" position=" 1  1.5 -1  "></a-entity>
-		<a-entity class="chessguy" id="w_bishop_l" mixin="bishop_w" boardPos="c1" position="-0.5 1.5 -1  "></a-entity>
-		
+		<a-entity id="w_bishop_r"
+		networked="template:#bishop_w_r_template;networkId:bishopwr;persistent:true; owner:bishopwr;"
+		></a-entity>
+
+		<a-entity id="w_bishop_l"
+		networked="template:#bishop_w_l_template;networkId:bishopwl;persistent:true; owner:bishopwl;"
+		></a-entity>
+
 		<a-entity class="chessguy" id="b_bishop_r" mixin="bishop_b" boardPos="f8" position=" 1   1.5 -4.5  "></a-entity>
 		<a-entity class="chessguy" id="b_bishop_l" mixin="bishop_b" boardPos="c8" position="-0.5 1.5 -4.5  "></a-entity>
 		
