@@ -92,7 +92,25 @@
 				});
 			}
 
-			
+			if (!NAF.schemas.hasTemplate('#knigh_w_r_template')) {
+				NAF.schemas.add({
+					template: '#knigh_w_r_template',
+					components: [
+						'position',
+						'boardPos'
+					]
+				});
+			}
+
+			if (!NAF.schemas.hasTemplate('#knigh_w_l_template')) {
+				NAF.schemas.add({
+					template: '#knigh_w_l_template',
+					components: [
+						'position',
+						'boardPos'
+					]
+				});
+			}
 
 			
 			//don't touch this or we'll throw hands
@@ -133,6 +151,9 @@
 				</a-asset-item>
 				
 				<a-asset-item id="rook_b_asset" src="src/models/sets/default/black/rook.gltf">
+				</a-asset-item>
+
+				<a-asset-item id="knight_w_asset" src="src/models/sets/default/white/knight.gltf">
 				</a-asset-item>
 				
 	
@@ -193,8 +214,6 @@
 			</template>
 			
 
-		
-		<!--Keeping the black and white pieces seperate-->
 			<template id="rook_b_r_template">
 				<a-entity gltf-model="#rook_b_asset" class="chessguy" chess-piece
 				scale="0.2 0.2 0.2" boardPos="h8" position=" 2  1.5 -4.5"> </a-entity>
@@ -203,6 +222,16 @@
 			<template id="rook_b_l_template">
 				<a-entity gltf-model="#rook_b_asset" class="chessguy" chess-piece
 				scale="0.2 0.2 0.2" boardPos="a8" position="-1.5 1.5 -4.5"> </a-entity>
+			</template>
+
+			<template id="knight_w_r_template">
+				<a-entity gltf-model="#knight_w_asset" class="chessguy" chess-piece
+				scale="0.2 0.2 0.2" boardPos="g1" position=" 1.5 1.5 -1"> </a-entity>
+			</template>
+
+			<template id="knight_w_l_template">
+				<a-entity gltf-model="#knight_w_asset" class="chessguy" chess-piece
+				scale="0.2 0.2 0.2" boardPos="b1" position="-1 1.5 -1"> </a-entity>
 			</template>
 
 
@@ -270,8 +299,13 @@
 		networked="template:#rook_b_l_template;networkId:rookbl;persistent:true; owner:rookbl;"
 		></a-entity>
 
-			<a-entity class="chessguy" id="w_knight_r" mixin="knight_w" boardPos="g1" position=" 1.5   1.5 -1  "></a-entity>
-			<a-entity class="chessguy" id="w_knight_l" mixin="knight_w" boardPos="b1" position="-1 1.5 -1  "></a-entity>
+		<a-entity id="w_knight_r"
+		networked="template:#knight_w_r_template;networkId:knightwr;persistent:true; owner:knightwr;"
+		></a-entity>
+
+		<a-entity id="w_knight_l"
+		networked="template:#knight_w_l_template;networkId:knightwl;persistent:true; owner:knightwl;"
+		></a-entity>
 
 			<a-entity class="chessguy" id="b_knight_r" mixin="knight_b" boardPos="g8" position=" 1.5   1.5 -4.5  "></a-entity>
 			<a-entity class="chessguy" id="b_knight_l" mixin="knight_b" boardPos="b8" position="-1 1.5 -4.5  "></a-entity>
