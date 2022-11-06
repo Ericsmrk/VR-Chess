@@ -53,11 +53,81 @@
 					components: [
 						'position',
 						'boardPos'
-						
-						
 					]
 				});
 			}
+			
+			if (!NAF.schemas.hasTemplate('#rook_w_r_template')) {
+				NAF.schemas.add({
+					template: '#rook_w_r_template',
+					components: [
+						'position',
+						'boardPos'
+					]
+				});
+			}
+
+			if (!NAF.schemas.hasTemplate('#rook_b_r_template')) {
+				NAF.schemas.add({
+					template: '#rook_b_r_template',
+					components: [
+						'position',
+						'boardPos'
+					]
+				});
+			}
+
+			if (!NAF.schemas.hasTemplate('#rook_b_l_template')) {
+				NAF.schemas.add({
+					template: '#rook_b_l_template',
+					components: [
+						'position',
+						'boardPos'
+					]
+				});
+			}
+
+			if (!NAF.schemas.hasTemplate('#knigh_w_r_template')) {
+				NAF.schemas.add({
+					template: '#knight_w_r_template',
+					components: [
+						'position',
+						'boardPos'
+					]
+				});
+			}
+
+			if (!NAF.schemas.hasTemplate('#knigh_w_l_template')) {
+				NAF.schemas.add({
+					template: '#knight_w_l_template',
+					components: [
+						'position',
+						'boardPos'
+					]
+				});
+			}
+
+			if (!NAF.schemas.hasTemplate('#knight_b_r_template')) {
+				NAF.schemas.add({
+					template: '#knight_b_r_template',
+					components: [
+						'position',
+						'boardPos'
+					]
+				});
+			}
+
+			if (!NAF.schemas.hasTemplate('#knight_b_l_template')) {
+				NAF.schemas.add({
+					template: '#knight_b_l_template',
+					components: [
+						'position',
+						'boardPos'
+					]
+				});
+			}
+
+
 
 			
 
@@ -92,7 +162,20 @@
 
 			
 				<a-asset-item id="rook_w_asset" src="src/models/sets/default/white/rook.gltf">
+				</a-asset-item>
+				
+				<a-asset-item id="rook_b_asset" src="src/models/sets/default/black/rook.gltf">
+				</a-asset-item>
+
+				<a-asset-item id="knight_w_asset" src="src/models/sets/default/white/knight.gltf">
+				
 			  
+				</a-asset-item>
+
+				<a-asset-item id="knight_b_asset" src="src/models/sets/default/black/knight.gltf">
+				</a-asset-item>
+
+				<a-asset-item id="knight_b_asset" src="src/models/sets/default/black/knight.gltf">
 				</a-asset-item>
 				
 	
@@ -151,7 +234,44 @@
 			<template id="rook_w_template">
 				<a-entity gltf-model="#rook_w_asset" class="chessguy" chess-piece
 				scale="0.2 0.2 0.2" boardPos="h1" position=" 2 1.5 -1  "> </a-entity>
-			</template>"
+			</template>
+
+			<template id="rook_w_r_template">
+				<a-entity gltf-model="#rook_w_asset" class="chessguy" chess-piece
+				scale="0.2 0.2 0.2" boardPos="a1" position="-1.5 1.5 -1"> </a-entity>
+			</template>
+			
+
+			<template id="rook_b_r_template">
+				<a-entity gltf-model="#rook_b_asset" class="chessguy" chess-piece
+				scale="0.2 0.2 0.2" boardPos="h8" position=" 2  1.5 -4.5"> </a-entity>
+			</template>
+
+			<template id="rook_b_l_template">
+				<a-entity gltf-model="#rook_b_asset" class="chessguy" chess-piece
+				scale="0.2 0.2 0.2" boardPos="a8" position="-1.5 1.5 -4.5"> </a-entity>
+			</template>
+
+			<template id="knight_w_r_template">
+				<a-entity gltf-model="#knight_w_asset" class="chessguy" chess-piece
+				scale="0.2 0.2 0.2" boardPos="g1" position=" 1.5 1.5 -1"> </a-entity>
+			</template>
+
+			<template id="knight_w_l_template">
+				<a-entity gltf-model="#knight_w_asset" class="chessguy" chess-piece
+				scale="0.2 0.2 0.2" boardPos="b1" position="-1 1.5 -1"> </a-entity>
+			</template>
+
+			<template id="knight_b_r_template">
+				<a-entity gltf-model="#knight_b_asset" class="chessguy" chess-piece
+				scale="0.2 0.2 0.2" boardPos="g8" position=" 1.5 1.5 -4.5"> </a-entity>
+			</template>
+
+			<template id="knight_b_l_template">
+				<a-entity gltf-model="#knight_b_asset" class="chessguy" chess-piece
+				scale="0.2 0.2 0.2" boardPos="b8" position="-1 1.5 -4.5"> </a-entity>
+			</template>
+
 
 
 
@@ -207,186 +327,210 @@
 		networked="template:#rook_w_template;networkId:rookwr;persistent:true; owner:rookwr;" 
 		></a-entity>
 
-		<a-entity class="chessguy" id="w_rook_l" mixin="rook_w" boardPos="a1" position="-1.5 1.5 -1  "></a-entity>
+		<a-entity id="w_rook_l"
+		networked="template:#rook_w_r_template;networkId:rookwl;persistent:true; owner:rookwl;"
+		></a-entity>
+		
+		<a-entity id="b_rook_r"
+		networked="template:#rook_b_r_template;networkId:rookbr;persistent:true; owner:rookbr;"
+		></a-entity>
 
-			<a-entity class="chessguy" id="w_knight_r" mixin="knight_w" boardPos="g1" position=" 1.5   1.5 -1  "></a-entity>
-			<a-entity class="chessguy" id="w_knight_l" mixin="knight_w" boardPos="b1" position="-1 1.5 -1  "></a-entity>
+		<a-entity id="b_rook_l"
+		networked="template:#rook_b_l_template;networkId:rookbl;persistent:true; owner:rookbl;"
+		></a-entity>
 
-			<a-entity class="chessguy" id="b_knight_r" mixin="knight_b" boardPos="g8" position=" 1.5   1.5 -4.5  "></a-entity>
-			<a-entity class="chessguy" id="b_knight_l" mixin="knight_b" boardPos="b8" position="-1 1.5 -4.5  "></a-entity>
+		<a-entity id="w_knight_r"
+		networked="template:#knight_w_r_template;networkId:knightwr;persistent:true; owner:knightwr;"
+		></a-entity>
 
-			<a-entity class="chessguy" id="w_bishop_r" mixin = "bishop_w" boardPos="f1" position=" 1  1.5 -1  "></a-entity>
-			<a-entity class="chessguy" id="w_bishop_l" mixin = "bishop_w" boardPos="c1" position="-0.5 1.5 -1  "></a-entity>
+		<a-entity id="w_knight_l"
+		networked="template:#knight_w_l_template;networkId:knightwl;persistent:true; owner:knightwl;"
+		></a-entity>
+		
+		<a-entity id="b_knight_r"
+		networked="template:#knight_b_r_template;networkId:knightbr;persistent:true; owner:knightbr;"
+		></a-entity>
 
-			<a-entity class="chessguy" id="b_bishop_r" mixin = "bishop_b" boardPos="f8" position=" 1   1.5 -4.5  "></a-entity>
-			<a-entity class="chessguy" id="b_bishop_l" mixin = "bishop_b" boardPos="c8" position="-0.5 1.5 -4.5  "></a-entity>
-
-			<a-entity class="chessguy" id="b_king"  mixin = "king_b" boardPos="e8" position=" 0.5   1.5 -4.5  "></a-entity>
-			<a-entity class="chessguy" id="b_queen" mixin = "queen_b" boardPos="d8" position=" 0   1.5 -4.5  "></a-entity>
-
-			<a-entity class="chessguy" id="w_king"  mixin = "king_w" boardPos="e1" position=" 0.5   1.5 -1  "></a-entity>
-			<a-entity class="chessguy" id="w_queen" mixin = "queen_w" boardPos="d1" position=" 0  1.5 -1  "></a-entity>
-
-
-			
-			<a-entity class="chessguy" id="b_rook_r"mixin = "rook_b"  boardPos="h8"position=" 2   1.5 -4.5"></a-entity>
-			<a-entity class="chessguy" id="b_rook_w"mixin = "rook_b"  boardPos="a8"position="-1.5 1.5 -4.5"></a-entity>
-
-			<!-- PAWN -->
-			<a-entity class="chessguy" id="w_pawn_1"mixin = "pawn_w"  boardPos="a2"pawnMoved='false' position="-1.5  1.5 -1.5"></a-entity>
-			<a-entity class="chessguy" id="w_pawn_2"mixin = "pawn_w"  boardPos="b2"pawnMoved='false' position="-1    1.5 -1.5"></a-entity>
-			<a-entity class="chessguy" id="w_pawn_3"mixin = "pawn_w"  boardPos="c2"pawnMoved='false' position="-0.5  1.5 -1.5"></a-entity>
-			<a-entity class="chessguy" id="w_pawn_4"mixin = "pawn_w"  boardPos="d2"pawnMoved='false' position=" 0    1.5 -1.5"></a-entity>
-			<a-entity class="chessguy" id="w_pawn_5"mixin = "pawn_w"  boardPos="e2"pawnMoved='false' position=" 0.5  1.5 -1.5"></a-entity>
-			<a-entity class="chessguy" id="w_pawn_6"mixin = "pawn_w"  boardPos="f2"pawnMoved='false' position=" 1    1.5 -1.5"></a-entity>
-			<a-entity class="chessguy" id="w_pawn_7"mixin = "pawn_w"  boardPos="g2"pawnMoved='false' position=" 1.5  1.5 -1.5"></a-entity>
-			<a-entity class="chessguy" id="w_pawn_8"mixin = "pawn_w"  boardPos="h2" pawnMoved='false'  position=" 2    1.5 -1.5"></a-entity>
-			
-			<a-entity class="chessguy" id="b_pawn_1"mixin = "pawn_b"  boardPos="a7"position="-1.5  1.5 -4  "></a-entity>
-			<a-entity class="chessguy" id="b_pawn_2"mixin = "pawn_b"  boardPos="b7"position="-1    1.5 -4  "></a-entity>
-			<a-entity class="chessguy" id="b_pawn_3"mixin = "pawn_b"  boardPos="c7"position="-0.5  1.5 -4  "></a-entity>
-			<a-entity class="chessguy" id="b_pawn_4"mixin = "pawn_b"  boardPos="d7"position=" 0    1.5 -4  "></a-entity>
-			<a-entity class="chessguy" id="b_pawn_5"mixin = "pawn_b"  boardPos="e7"position=" 0.5  1.5 -4  "></a-entity>
-			<a-entity class="chessguy" id="b_pawn_6"mixin = "pawn_b"  boardPos="f7"position=" 1    1.5 -4  "></a-entity>
-			<a-entity class="chessguy" id="b_pawn_7"mixin = "pawn_b"  boardPos="g7"position=" 1.5  1.5 -4  "></a-entity>
-			<a-entity class="chessguy" id="b_pawn_8"mixin = "pawn_b"  boardPos="h7"position=" 2    1.5 -4  "></a-entity>
-
-
-			
-			
-			
-			
-			
-			<!-- PROPS 
-			<a-asset-item id = chair src="../src/models/props/basic/chair.gltf"></a-asset-item>
-			
-			<a-entity gltf-model="#chair" position = "0 0 0" scale = ".25 .25 .25" rotation="0 180 0"></a-entity>-->
-			<!-------------------------------------------------------------------------Testing Area--------------------------------------------------------------------------->
-			<!--These peices represent the squares, or planes. For now as you can see, we've only set up a couple for testing essentially-->
-			
-			<!-- This plane is used to detect clicks on the chessboard-->
-			<a-plane
-				id="cursor-plane"
-				cursor-listener
-				geometry="primitive plane"
-				position=".25, 0.801, -2.75"
-				visible="false"
-				rotation="-90 0 0"
-				height="0.64"
-				width="0.64" 
-			></a-plane><!--Height and Width need to be scaled to 0.64-->
-			<!-- This plane is used for highlighting, and is moved around by the "cursor-listener" component-->
-			<a-plane
-				id="highlight-plane"
-				id = "highPlane" visible="false" geometry="primitive plane" rotation="-90 0 0" color="blue" opacity="0.5" height="0.08" width="0.08"
-			></a-plane>
-
-<!--
-			<a-plane geometry="primitive plane" position="2 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane geometry="primitive plane" position="1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-
-			
-			<a-plane id="f1" position="1 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane id="e1" position="0.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane id="d1" position="0 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane id="c1" position="-0.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane id="b1" position="-1 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane id="a1" position="-1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-
-			<a-plane id="h2" position="2 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane id="g2" position="1.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane id="f2" position="1 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane id="e2" position="0.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane id="d2" position="0 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane id="c2" position="-0.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane id="b2" position="-1 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane id="a2" position="-1.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-
-			<a-plane position="2 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane position="0.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane position="0 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-0.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-
-			<a-plane position="2 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane position="0.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane position="0 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-0.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-
-			<a-plane position="2 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane position="0.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane position="0 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-0.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-
-			<a-plane position="2 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane position="0.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane position="0 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-0.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-
-			<a-plane position="2 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane position="0.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane position="0 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-0.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-
-			<a-plane position="2 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="1 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
-			<a-plane position="0.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
-			<a-plane position="0 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-0.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-			<a-plane position="-1.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
-
-			-->
+		<a-entity id="b_knight_l"
+		networked="template:#knight_b_l_template;networkId:knightbl;persistent:true; owner:knightbr;"
+		></a-entity>
+		
+		<!--
+		<a-entity class="chessguy" id="b_knight_r" mixin="knight_b" boardPos="g8" position=" 1.5   1.5 -4.5  "></a-entity>
+					<a-entity class="chessguy" id="b_knight_l" mixin="knight_b" boardPos="b8" position="-1 1.5 -4.5  "></a-entity>
+		
+					-->
+		
+		
+		<a-entity class="chessguy" id="w_bishop_r" mixin="bishop_w" boardPos="f1" position=" 1  1.5 -1  "></a-entity>
+		<a-entity class="chessguy" id="w_bishop_l" mixin="bishop_w" boardPos="c1" position="-0.5 1.5 -1  "></a-entity>
+		
+		<a-entity class="chessguy" id="b_bishop_r" mixin="bishop_b" boardPos="f8" position=" 1   1.5 -4.5  "></a-entity>
+		<a-entity class="chessguy" id="b_bishop_l" mixin="bishop_b" boardPos="c8" position="-0.5 1.5 -4.5  "></a-entity>
+		
+		<a-entity class="chessguy" id="b_king" mixin="king_b" boardPos="e8" position=" 0.5   1.5 -4.5  "></a-entity>
+		<a-entity class="chessguy" id="b_queen" mixin="queen_b" boardPos="d8" position=" 0   1.5 -4.5  "></a-entity>
+		
+		<a-entity class="chessguy" id="w_king" mixin="king_w" boardPos="e1" position=" 0.5   1.5 -1  "></a-entity>
+		<a-entity class="chessguy" id="w_queen" mixin="queen_w" boardPos="d1" position=" 0  1.5 -1  "></a-entity>
+		
+		
+		
+		
+		<!-- PAWN -->
+		<a-entity class="chessguy" id="w_pawn_1" mixin="pawn_w" boardPos="a2" pawnMoved='false' position="-1.5  1.5 -1.5">
+		</a-entity>
+		<a-entity class="chessguy" id="w_pawn_2" mixin="pawn_w" boardPos="b2" pawnMoved='false' position="-1    1.5 -1.5">
+		</a-entity>
+		<a-entity class="chessguy" id="w_pawn_3" mixin="pawn_w" boardPos="c2" pawnMoved='false' position="-0.5  1.5 -1.5">
+		</a-entity>
+		<a-entity class="chessguy" id="w_pawn_4" mixin="pawn_w" boardPos="d2" pawnMoved='false' position=" 0    1.5 -1.5">
+		</a-entity>
+		<a-entity class="chessguy" id="w_pawn_5" mixin="pawn_w" boardPos="e2" pawnMoved='false' position=" 0.5  1.5 -1.5">
+		</a-entity>
+		<a-entity class="chessguy" id="w_pawn_6" mixin="pawn_w" boardPos="f2" pawnMoved='false' position=" 1    1.5 -1.5">
+		</a-entity>
+		<a-entity class="chessguy" id="w_pawn_7" mixin="pawn_w" boardPos="g2" pawnMoved='false' position=" 1.5  1.5 -1.5">
+		</a-entity>
+		<a-entity class="chessguy" id="w_pawn_8" mixin="pawn_w" boardPos="h2" pawnMoved='false' position=" 2    1.5 -1.5">
+		</a-entity>
+		
+		<a-entity class="chessguy" id="b_pawn_1" mixin="pawn_b" boardPos="a7" position="-1.5  1.5 -4  "></a-entity>
+		<a-entity class="chessguy" id="b_pawn_2" mixin="pawn_b" boardPos="b7" position="-1    1.5 -4  "></a-entity>
+		<a-entity class="chessguy" id="b_pawn_3" mixin="pawn_b" boardPos="c7" position="-0.5  1.5 -4  "></a-entity>
+		<a-entity class="chessguy" id="b_pawn_4" mixin="pawn_b" boardPos="d7" position=" 0    1.5 -4  "></a-entity>
+		<a-entity class="chessguy" id="b_pawn_5" mixin="pawn_b" boardPos="e7" position=" 0.5  1.5 -4  "></a-entity>
+		<a-entity class="chessguy" id="b_pawn_6" mixin="pawn_b" boardPos="f7" position=" 1    1.5 -4  "></a-entity>
+		<a-entity class="chessguy" id="b_pawn_7" mixin="pawn_b" boardPos="g7" position=" 1.5  1.5 -4  "></a-entity>
+		<a-entity class="chessguy" id="b_pawn_8" mixin="pawn_b" boardPos="h7" position=" 2    1.5 -4  "></a-entity>
+		
+		
+		
+		
+		
+		
+		
+		<!-- PROPS 
+					<a-asset-item id = chair src="../src/models/props/basic/chair.gltf"></a-asset-item>
+					
+					<a-entity gltf-model="#chair" position = "0 0 0" scale = ".25 .25 .25" rotation="0 180 0"></a-entity>-->
+		<!-------------------------------------------------------------------------Testing Area--------------------------------------------------------------------------->
+		<!--These peices represent the squares, or planes. For now as you can see, we've only set up a couple for testing essentially-->
+		
+		<!-- This plane is used to detect clicks on the chessboard-->
+		<a-plane id="cursor-plane" cursor-listener geometry="primitive plane" position=".25, 0.801, -2.75" visible="false"
+			rotation="-90 0 0" height="0.64" width="0.64"></a-plane>
+		<!--Height and Width need to be scaled to 0.64-->
+		<!-- This plane is used for highlighting, and is moved around by the "cursor-listener" component-->
+		<a-plane id="highlight-plane" id="highPlane" visible="false" geometry="primitive plane" rotation="-90 0 0" color="blue"
+			opacity="0.5" height="0.08" width="0.08"></a-plane>
+		
+		<!--
+					<a-plane geometry="primitive plane" position="2 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane geometry="primitive plane" position="1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+		
+					
+					<a-plane id="f1" position="1 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+					<a-plane id="e1" position="0.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+					<a-plane id="d1" position="0 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane id="c1" position="-0.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane id="b1" position="-1 1.5 -1" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane id="a1" position="-1.5 1.5 -1" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+		
+					<a-plane id="h2" position="2 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane id="g2" position="1.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane id="f2" position="1 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+					<a-plane id="e2" position="0.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+					<a-plane id="d2" position="0 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane id="c2" position="-0.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane id="b2" position="-1 1.5 -1.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane id="a2" position="-1.5 1.5 -1.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+		
+					<a-plane position="2 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="1.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="1 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+					<a-plane position="0.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+					<a-plane position="0 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-0.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-1 1.5 -2" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-1.5 1.5 -2" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+		
+					<a-plane position="2 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="1.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="1 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+					<a-plane position="0.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+					<a-plane position="0 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-0.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-1 1.5 -2.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-1.5 1.5 -2.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+		
+					<a-plane position="2 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="1.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="1 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+					<a-plane position="0.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+					<a-plane position="0 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-0.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-1 1.5 -3" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-1.5 1.5 -3" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+		
+					<a-plane position="2 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="1.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="1 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+					<a-plane position="0.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+					<a-plane position="0 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-0.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-1 1.5 -3.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-1.5 1.5 -3.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+		
+					<a-plane position="2 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="1.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="1 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+					<a-plane position="0.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+					<a-plane position="0 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-0.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-1 1.5 -4" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-1.5 1.5 -4" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+		
+					<a-plane position="2 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="1.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="1 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>  
+					<a-plane position="0.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane> 
+					<a-plane position="0 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-0.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-1 1.5 -4.5" color="black" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+					<a-plane position="-1.5 1.5 -4.5" color="white" rotation="-90  0 90" opacity = 1 scale="0.5 0.5 0.5"></a-plane>
+		
+					-->
 		<a-entity loader="/src/scenes/scene2.json"></a-entity>
 		<!--	loads a scene json-->
 		<a-entity setatts></a-entity>
 		<!--	sets attributes to be applied to many pieces-->
+		
+		</a-scene>
+		
+		<script>
+			// Define custom schema for syncing avatar color, set by random-color
+			// NAF.schemas.add({
+			//   template: '#avatar-template',
+			//   components: [
+			//     'position',
+			//     'rotation',
+			//     {
+			//       selector: '.head',
+			//       component: 'material',
+			//       property: 'color'
+			//     }
+			//   ]
+			// });
 
-	</a-scene>
-
-	<script>
-		// Define custom schema for syncing avatar color, set by random-color
-		// NAF.schemas.add({
-		//   template: '#avatar-template',
-		//   components: [
-		//     'position',
-		//     'rotation',
-		//     {
-		//       selector: '.head',
-		//       component: 'material',
-		//       property: 'color'
-		//     }
-		//   ]
-		// });
-  
-		// Called by Networked-Aframe when connected to server
-		function onConnect() {
-		  console.log("onConnect", new Date());
-		  document.body.addEventListener('clientConnected', function (evt) {
-			console.error('clientConnected event. clientId =', evt.detail.clientId);
-		  });
-		}
-	  </script>
+			// Called by Networked-Aframe when connected to server
+			function onConnect() {
+				console.log("onConnect", new Date());
+				document.body.addEventListener('clientConnected', function (evt) {
+					console.error('clientConnected event. clientId =', evt.detail.clientId);
+				});
+			}
+		</script>
 
 </body>
 
