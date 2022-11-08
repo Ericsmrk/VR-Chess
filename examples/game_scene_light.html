@@ -57,110 +57,6 @@
 				});
 			}
 
-			/*
-			
-			if (!NAF.schemas.hasTemplate('#rook_w_r_template')) {
-				NAF.schemas.add({
-					template: '#rook_w_r_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#rook_b_r_template')) {
-				NAF.schemas.add({
-					template: '#rook_b_r_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#rook_b_l_template')) {
-				NAF.schemas.add({
-					template: '#rook_b_l_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#knigh_w_r_template')) {
-				NAF.schemas.add({
-					template: '#knight_w_r_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#knigh_w_l_template')) {
-				NAF.schemas.add({
-					template: '#knight_w_l_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#knight_b_r_template')) {
-				NAF.schemas.add({
-					template: '#knight_b_r_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#knight_b_l_template')) {
-				NAF.schemas.add({
-					template: '#knight_b_l_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#bishop_w_r_template')) {
-				NAF.schemas.add({
-					template: '#bishop_w_r_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#bishop_w_l_template')) {
-				NAF.schemas.add({
-					template: '#bishop_w_l_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#bishop_b_r_template')) {
-				NAF.schemas.add({
-					template: '#bishop_b_r_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-			*/
-			
-
 			const components = NAF.schemas.getComponentsOriginal(template);
 			return components;
 		};
@@ -290,63 +186,6 @@
 					</a-entity>
 				</template>
 
-				<!--
-				<template id="rook_w_template">
-					<a-entity gltf-model="#rook_w_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="h1"
-						position=" 2 1.5 -1  "> </a-entity>
-				</template>
-			
-				<template id="rook_w_r_template">
-					<a-entity gltf-model="#rook_w_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="a1"
-						position="-1.5 1.5 -1"> </a-entity>
-				</template>
-			
-			
-				<template id="rook_b_r_template">
-					<a-entity gltf-model="#rook_b_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="h8"
-						position=" 2  1.5 -4.5"> </a-entity>
-				</template>
-			
-				<template id="rook_b_l_template">
-					<a-entity gltf-model="#rook_b_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="a8"
-						position="-1.5 1.5 -4.5"> </a-entity>
-				</template>
-			
-				<template id="knight_w_r_template">
-					<a-entity gltf-model="#knight_w_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="g1"
-						position=" 1.5 1.5 -1"> </a-entity>
-				</template>
-			
-				<template id="knight_w_l_template">
-					<a-entity gltf-model="#knight_w_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="b1"
-						position="-1 1.5 -1"> </a-entity>
-				</template>
-			
-				<template id="knight_b_r_template">
-					<a-entity gltf-model="#knight_b_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="g8"
-						position=" 1.5 1.5 -4.5"> </a-entity>
-				</template>
-			
-				<template id="knight_b_l_template">
-					<a-entity gltf-model="#knight_b_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="b8"
-						position="-1 1.5 -4.5"> </a-entity>
-				</template>
-			
-				<template id="bishop_w_r_template">
-					<a-entity gltf-model="#bishop_w_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="f1"
-						position=" 1 1.5 -1"> </a-entity>
-				</template>
-			
-				<template id="bishop_b_r_template">
-					<a-entity  class="chessguy" chess-piece > </a-entity>
-				</template>
-
-			-->
-
-			
-			
-			
-			
 			</a-assets>
 
 		<!-- we want the environment to be loaded first, prevents funky stuff from happenning-->
@@ -476,20 +315,6 @@
 		scale="0.2 0.2 0.2" boardPos="d1" position="0 1.5 -1" gltf-model="#queen_w_asset"
 		></a-entity>
 
-		<!--
-			<a-entity class="chessguy" id="b_king" mixin="king_b" boardPos="e8" position=" 0.5   1.5 -4.5  "></a-entity>
-		<a-entity class="chessguy" id="b_queen" mixin="queen_b" boardPos="d8" position=" 0   1.5 -4.5  "></a-entity>
-		<a-entity class="chessguy" id="w_king" mixin="king_w" boardPos="e1" position=" 0.5   1.5 -1  "></a-entity>
-		<a-entity class="chessguy" id="w_queen" mixin="queen_w" boardPos="d1" position=" 0  1.5 -1  "></a-entity>
-
-		-->
-		
-		
-		
-		
-		
-		
-		
 		<!-- PAWN -->
 		<a-entity id="w_pawn_1"
 		networked="template:#chess-piece-template;networkId:pawnw1;persistent:true; owner:pawnw1;"
