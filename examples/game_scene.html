@@ -21,6 +21,7 @@
 	<script src="js/Loader.js"></script>
 	<script src="js/setAtts.js"></script>
 	<script src="js/holdable_component.js"></script>
+	<script src="js/piece_color_component.js"></script>
 
 	<!--did you think we were done? Oh you sweet summer child
 		up next, the H U G E Custom schema for the avatar-->
@@ -403,7 +404,7 @@
 
 		<a-entity id="w_rook_l"
 		networked="template:#chess-piece-template;networkId:rookwl;persistent:true; owner:rookwl;"
-		scale="0.2 0.2 0.2" boardPos="a1" position="-1.5 1.5 -1" gltf-model="#rook_w_asset"
+		scale="0.2 0.2 0.2" boardPos="a1" position="-1.5 1.5 -1" gltf-model="#rook_w_asset" material piece-color
 		></a-entity>
 		
 		<a-entity id="b_rook_r"
