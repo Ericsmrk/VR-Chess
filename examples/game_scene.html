@@ -197,7 +197,9 @@
 			<!--Just asset loading -->
 			<a-assets>
 			
-			
+				<audio id="sound1" class="soundFX"src = "src/sounds/InitSound.mp3"></audio>
+				<audio id="badSound" class="soundFX"src = "src/sounds/badSound.mp3"></audio>
+				<audio id="pieceMovedSound" class="soundFX"src = "src/sounds/InitSound.mp3"></audio>
 			
 				<a-mixin id="highPlane" visible="false" geometry="primitive plane" rotation="-90 0 0" color="blue" opacity="0.5"
 					height="0.08" width="0.08"></a-mixin>
@@ -356,7 +358,7 @@
 
 
 		<!--Avatar-->
-		<a-entity id="cameraRig">
+		<a-entity id="cameraRig" >
 
 			<!--Curious, camera in the networked version doesnt have stuff like position
 							wasd-controls,look, etc defined up above. intresting. Lets see whats going on 
@@ -419,12 +421,12 @@
 
 		<a-entity id="w_knight_r"
 		networked="template:#chess-piece-template;networkId:knightwr;persistent:true; owner:knightwr;"
-		scale="0.2 0.2 0.2" boardPos="g1" position="1.5 1.5 -1" gltf-model="#knight_w_asset"
+		scale="0.2 0.2 0.2" boardPos="g1" position="1.5 1.5 -1" rotation="0 180 0"gltf-model="#knight_w_asset"
 		></a-entity>
 
 		<a-entity id="w_knight_l"
 		networked="template:#chess-piece-template;networkId:knightwl;persistent:true; owner:knightwl;"
-		scale="0.2 0.2 0.2" boardPos="b1" position="-1 1.5 -1" gltf-model="#knight_w_asset"
+		scale="0.2 0.2 0.2" boardPos="b1" position="-1 1.5 -1" rotation="0 180 0"gltf-model="#knight_w_asset"
 		></a-entity>
 		
 		<a-entity id="b_knight_r"
@@ -623,7 +625,7 @@
 		
 		<!-- This plane is used to detect clicks on the chessboard-->
 		<a-plane id="cursor-plane" cursor-listener geometry="primitive plane" position=".25, 0.801, -2.75" visible="false"
-			rotation="-90 0 0" height="0.64" width="0.64"></a-plane>
+			rotation="-90 0 0" height="0.64" width="0.64" ></a-plane>	<!--sound="src: #someSound; on: click"-->
 		<!--Height and Width need to be scaled to 0.64-->
 		<!-- This plane is used for highlighting, and is moved around by the "cursor-listener" component-->
 		<a-plane id="highlight-plane" id="highPlane" visible="false" geometry="primitive plane" rotation="-90 0 0" color="blue"
@@ -638,6 +640,8 @@
 		</a-scene>
 		
 		<script>
+
+
 			// Define custom schema for syncing avatar color, set by random-color
 			// NAF.schemas.add({
 			//   template: '#avatar-template',
@@ -652,11 +656,14 @@
 			//   ]
 			// });
 
+			
+
 			// Called by Networked-Aframe when connected to server
 			function onConnect() {
 				console.log("onConnect", new Date());
 				document.body.addEventListener('clientConnected', function (evt) {
 					console.error('clientConnected event. clientId =', evt.detail.clientId);
+
 				});
 			}
 		</script>

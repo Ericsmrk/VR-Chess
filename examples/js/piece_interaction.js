@@ -19,6 +19,10 @@ AFRAME.registerComponent('cursor-listener', {
                 //Gives us an array of ALL .chessguys
                 const pieces = document.querySelectorAll('.chessguy');
 
+                //SOUND!?!?!?!
+                const sounds = document.querySelectorAll('.soundFX')
+                console.log(sounds.size)
+
                 //I MAY use this to make things easier with logic..not sure right now
                 const spaces = ["a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8",
                 "b1", "ba2", "b3", "b4", "b5", "b6", "b7", "b8",
@@ -259,10 +263,10 @@ AFRAME.registerComponent('cursor-listener', {
                        }
 //------------------------------------------------------------------------ KNIGHT ---------------------------------------------------------------------------------------------
                     case 'kn':
-                        if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, 2)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, -2))){
+                        if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, 2)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -1, 2))){
                             return true
                         }
-                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, -2)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, - 1, -2))){
+                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, -2)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -1, -2))){
                             return true
                         }
                         else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 2, 1)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 2, -1))){
@@ -617,6 +621,13 @@ AFRAME.registerComponent('cursor-listener', {
             if (!obj.detail.intersection) //if there's no intersection(if you don't click on the board) it yeets you
                 return;
             
+            let initSound = new Audio('src/sounds/InitSound.mp3')
+            let badSound = new Audio('src/sounds/badSound.mp3')
+            let loading = new Audio('src/sounds/loading.mp3')
+            initSound.play()
+            loading.load()
+            
+            
             const startPosition = worldToBoard(obj.detail.intersection.point) //"obj.detail.intersection.point" understand and document this better, appears to grab the position
             console.log(boardToChessTerm(startPosition))
             //translates from the world to the board. 
@@ -645,7 +656,7 @@ AFRAME.registerComponent('cursor-listener', {
                 //pretty sure the above line is correct but if everything else fine change to pices[curPiece].id
                 //console.log("pieces[curPiece].id: " + pieces[curPiece].id)
                 this.removeEventListener('mouseup', onMouseUp); //ask about this. to whatever subject matter expert we can find  //ask about this. to whatever subject matter expert we can find 
-                
+
                 let pieceToAnimate = pieces[curPiece];//removing attribute set to stop and reset postion
                 pieceToAnimate.removeAttribute('holdable');
 
@@ -659,6 +670,11 @@ AFRAME.registerComponent('cursor-listener', {
                     if(isMoveValid(pieces[curPiece], startPosition, endPosition)){      //isMoveValid(pieces[curPiece], startPosition, endPosition)
                         pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))
                         pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
+                        initSound.load()
+                        initSound.play()
+                    }
+                    else{
+                        badSound.play()
                     }
                 }
                 else{   //if space IS OCCUPIED
@@ -666,6 +682,7 @@ AFRAME.registerComponent('cursor-listener', {
                     console.log("End " + pieces[endPosPiece].id)
                     if(pieces[curPiece].id[0] == pieces[endPosPiece].id[0]){    //if pieces are same color
                         //means pieces are the same color, DO NOT MOVE
+                        badSound.play()
                         console.log("Pieces same color, INVALID MOVE")
                     }
                     else{   //KILL/CAPTURE FUNCTION WILL BE PLACED HERE!  ---> Pieces are not some color, KILL
@@ -674,15 +691,17 @@ AFRAME.registerComponent('cursor-listener', {
                             pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))      //Move piece into new position
                             pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
                             console.log(pieces[curPiece].getAttribute('boardPos'))
-
+                            
                             //KILL/CAPTURE      --> Move KILLED piece into graveyard
                             if(pieces[curPiece].id[0] == 'w'){  //if white, move into white graveyard
                                 pieces[endPosPiece].object3D.position.copy(deadPieceW[dPit_w])
                                 pieces[endPosPiece].setAttribute('boardPos', "dead")
+                                loading.play()
                                 dPit_w++
                             }else{                              //if black, move into black graveyard
                                 pieces[endPosPiece].object3D.position.copy(deadPieceB[dPit_b])
                                 pieces[endPosPiece].setAttribute('boardPos', "dead")
+                                loading.play()
                                 dPit_b++
                             }     
                         }           
