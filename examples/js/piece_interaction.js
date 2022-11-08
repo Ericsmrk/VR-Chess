@@ -621,8 +621,8 @@ AFRAME.registerComponent('cursor-listener', {
             if (!obj.detail.intersection) //if there's no intersection(if you don't click on the board) it yeets you
                 return;
             
-            let initSound = new Audio('src/sounds/InitSound.mp3')
-            let badSound = new Audio('src/sounds/badSound.mp3')
+            let initSound = new Audio('src/sounds/move-self.mp3')
+            let badSound = new Audio('src/sounds/notify.mp3')
             let loading = new Audio('src/sounds/loading.mp3')
             initSound.play()
             loading.load()
