@@ -259,10 +259,10 @@ AFRAME.registerComponent('cursor-listener', {
                        }
 //------------------------------------------------------------------------ KNIGHT ---------------------------------------------------------------------------------------------
                     case 'kn':
-                        if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, 2)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, -2))){
+                        if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, 2)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -1, 2))){
                             return true
                         }
-                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, -2)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, - 1, -2))){
+                        else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 1, -2)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, -1, -2))){
                             return true
                         }
                         else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 2, 1)) || ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 2, -1))){
