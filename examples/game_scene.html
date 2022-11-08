@@ -23,6 +23,8 @@
 	<script src="js/holdable_component.js"></script>
 	<script src="js/piece_color_component.js"></script>
 
+	<script src="color_changer.component.js"></script>
+
 	<!--did you think we were done? Oh you sweet summer child
 		up next, the H U G E Custom schema for the avatar-->
 	<script>
@@ -46,11 +48,11 @@
 			}
 
 			
-			if (!NAF.schemas.hasTemplate('#chess-piece-template')) {
+			if (!NAF.schemas.hasTemplate('#chess-piece-template-w')) {
 				//anyways, after the if, it adds said schema and the properties below. every component needs a new, component area. 
 				//as shown below. 
 				NAF.schemas.add({
-					template: '#chess-piece-template',
+					template: '#chess-piece-template-w',
 					components: [
 						'position',
 						'boardPos',
@@ -59,109 +61,6 @@
 				});
 			}
 
-			/*
-			
-			if (!NAF.schemas.hasTemplate('#rook_w_r_template')) {
-				NAF.schemas.add({
-					template: '#rook_w_r_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#rook_b_r_template')) {
-				NAF.schemas.add({
-					template: '#rook_b_r_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#rook_b_l_template')) {
-				NAF.schemas.add({
-					template: '#rook_b_l_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#knigh_w_r_template')) {
-				NAF.schemas.add({
-					template: '#knight_w_r_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#knigh_w_l_template')) {
-				NAF.schemas.add({
-					template: '#knight_w_l_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#knight_b_r_template')) {
-				NAF.schemas.add({
-					template: '#knight_b_r_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#knight_b_l_template')) {
-				NAF.schemas.add({
-					template: '#knight_b_l_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#bishop_w_r_template')) {
-				NAF.schemas.add({
-					template: '#bishop_w_r_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#bishop_w_l_template')) {
-				NAF.schemas.add({
-					template: '#bishop_w_l_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-
-			if (!NAF.schemas.hasTemplate('#bishop_b_r_template')) {
-				NAF.schemas.add({
-					template: '#bishop_b_r_template',
-					components: [
-						'position',
-						'boardPos'
-					]
-				});
-			}
-			*/
-			
 
 			const components = NAF.schemas.getComponentsOriginal(template);
 			return components;
@@ -289,68 +188,17 @@
 				<!--IMPORTANT: temporarily removing chess-piece while I try to get networked aframe to work-->
 				
 				<!--Universal chess template-->
-				<template id="chess-piece-template">
-					<a-entity class="chessguy" chess-piece>
+				<template id="chess-piece-template-w">
+					<a-entity class="chessguy" chess-piece material piece-color-w>
 					</a-entity>
 				</template>
 
-				<!--
-				<template id="rook_w_template">
-					<a-entity gltf-model="#rook_w_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="h1"
-						position=" 2 1.5 -1  "> </a-entity>
-				</template>
-			
-				<template id="rook_w_r_template">
-					<a-entity gltf-model="#rook_w_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="a1"
-						position="-1.5 1.5 -1"> </a-entity>
-				</template>
-			
-			
-				<template id="rook_b_r_template">
-					<a-entity gltf-model="#rook_b_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="h8"
-						position=" 2  1.5 -4.5"> </a-entity>
-				</template>
-			
-				<template id="rook_b_l_template">
-					<a-entity gltf-model="#rook_b_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="a8"
-						position="-1.5 1.5 -4.5"> </a-entity>
-				</template>
-			
-				<template id="knight_w_r_template">
-					<a-entity gltf-model="#knight_w_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="g1"
-						position=" 1.5 1.5 -1"> </a-entity>
-				</template>
-			
-				<template id="knight_w_l_template">
-					<a-entity gltf-model="#knight_w_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="b1"
-						position="-1 1.5 -1"> </a-entity>
-				</template>
-			
-				<template id="knight_b_r_template">
-					<a-entity gltf-model="#knight_b_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="g8"
-						position=" 1.5 1.5 -4.5"> </a-entity>
-				</template>
-			
-				<template id="knight_b_l_template">
-					<a-entity gltf-model="#knight_b_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="b8"
-						position="-1 1.5 -4.5"> </a-entity>
-				</template>
-			
-				<template id="bishop_w_r_template">
-					<a-entity gltf-model="#bishop_w_asset" class="chessguy" chess-piece scale="0.2 0.2 0.2" boardPos="f1"
-						position=" 1 1.5 -1"> </a-entity>
-				</template>
-			
-				<template id="bishop_b_r_template">
-					<a-entity  class="chessguy" chess-piece > </a-entity>
+				<template id="chess-piece-template-b">
+					<a-entity class="chessguy" chess-piece material piece-color-b>
+					</a-entity>
 				</template>
 
-			-->
 
-			
-			
-			
-			
 			</a-assets>
 
 		<!-- we want the environment to be loaded first, prevents funky stuff from happenning-->
@@ -400,22 +248,22 @@
 		<!--rook that's white starting on the right side, the mixin brings in the 
 			assests it needs, and then position is what we are trying to play around with -->
 		<a-entity id="w_rook_r"
-		networked="template:#chess-piece-template;networkId:rookwr;persistent:true; owner:rookwr;" 
+		networked="template:#chess-piece-template-w;networkId:rookwr;persistent:true; owner:rookwr;" 
 		scale="0.2 0.2 0.2" boardPos="h1" position=" 2 1.5 -1  " gltf-model="#rook_w_asset"
 		></a-entity>
 
 		<a-entity id="w_rook_l"
-		networked="template:#chess-piece-template;networkId:rookwl;persistent:true; owner:rookwl;"
-		scale="0.2 0.2 0.2" boardPos="a1" position="-1.5 1.5 -1" gltf-model="#rook_w_asset" material piece-color
+		networked="template:#chess-piece-template-w;networkId:rookwl;persistent:true; owner:rookwl;"
+		scale="0.2 0.2 0.2" boardPos="a1" position="-1.5 1.5 -1" gltf-model="#rook_w_asset" 
 		></a-entity>
 		
 		<a-entity id="b_rook_r"
-		networked="template:#chess-piece-template;networkId:rookbr;persistent:true; owner:rookbr;"
+		networked="template:#chess-piece-template-b;networkId:rookbr;persistent:true; owner:rookbr;"
 		scale="0.2 0.2 0.2" boardPos="h8" position=" 2 1.5 -4.5" gltf-model="#rook_b_asset"
 		></a-entity>
 
 		<a-entity id="b_rook_l"
-		networked="template:#chess-piece-template;networkId:rookbl;persistent:true; owner:rookbl;"
+		networked="template:#chess-piece-template-b;networkId:rookbl;persistent:true; owner:rookbl;"
 		scale="0.2 0.2 0.2" boardPos="a8" position="-1.5 1.5 -4.5" gltf-model="#rook_b_asset"
 		></a-entity>
 
@@ -430,53 +278,53 @@
 		></a-entity>
 		
 		<a-entity id="b_knight_r"
-		networked="template:#chess-piece-template;networkId:knightbr;persistent:true; owner:knightbr;"
+		networked="template:#chess-piece-template-b;networkId:knightbr;persistent:true; owner:knightbr;"
 		scale="0.2 0.2 0.2" boardPos="g8" position=" 1.5 1.5 -4.5" gltf-model="#knight_b_asset"
 		></a-entity>
 
 		<a-entity id="b_knight_l"
-		networked="template:#chess-piece-template;networkId:knightbl;persistent:true; owner:knightbr;"
+		networked="template:#chess-piece-template-b;networkId:knightbl;persistent:true; owner:knightbr;"
 		scale="0.2 0.2 0.2" boardPos="b8" position="-1 1.5 -4.5" gltf-model="#knight_b_asset"
 		></a-entity>
 		
 		<a-entity id="w_bishop_r"
-		networked="template:#chess-piece-template;networkId:bishopwr;persistent:true; owner:bishopwr;"
-		scale="0.2 0.2 0.2" boardPos="f1" position="1 1.5 -1" gltf-model="#bishop_w_asset"
+		networked="template:#chess-piece-template-w;networkId:bishopwr;persistent:true; owner:bishopwr;"
+		scale="0.2 0.2 0.2" boardPos="f1" position="1 1.5 -1" gltf-model="#bishop_w_asset" 
 		></a-entity>
 
 		<a-entity id="w_bishop_l"
-		networked="template:#chess-piece-template;networkId:bishopwl;persistent:true; owner:bishopwl;"
+		networked="template:#chess-piece-template-w;networkId:bishopwl;persistent:true; owner:bishopwl;"
 		scale="0.2 0.2 0.2" boardPos="c1" position="-0.5 1.5 -1" gltf-model="#bishop_w_asset"
 		></a-entity>
 
 		<a-entity id="b_bishop_r"
-		networked="template:#chess-piece-template;networkId:bishopbr;persistent:true; owner:bishopbr;" 
+		networked="template:#chess-piece-template-b;networkId:bishopbr;persistent:true; owner:bishopbr;" 
 		scale="0.2 0.2 0.2" boardPos="f8" position=" 1 1.5 -4.5" gltf-model="#bishop_b_asset"
 		></a-entity>
 
 		<a-entity id="b_bishop_l"
-		networked="template:#chess-piece-template;networkId:bishopbl;persistent:true; owner:bishopbl;" 
+		networked="template:#chess-piece-template-b;networkId:bishopbl;persistent:true; owner:bishopbl;" 
 		scale="0.2 0.2 0.2" boardPos="c8" position="-0.5 1.5 -4.5" gltf-model="#bishop_b_asset"
 		></a-entity>
 
 		
 		<a-entity id="b_king"
-		networked="template:#chess-piece-template;networkId:kingb;persistent:true; owner:kingb;"
+		networked="template:#chess-piece-template-b;networkId:kingb;persistent:true; owner:kingb;"
 		scale="0.2 0.2 0.2" boardPos="e8" position="0.5 1.5 -4.5" gltf-model="#king_b_asset"
 		></a-entity>
 
 		<a-entity id="b_queen"
-		networked="template:#chess-piece-template;networkId:queenb;persistent:true; owner:queenb;"
+		networked="template:#chess-piece-template-b;networkId:queenb;persistent:true; owner:queenb;"
 		scale="0.2 0.2 0.2" boardPos="d8" position="0 1.5 -4.5" gltf-model="#queen_b_asset"
 		></a-entity>
 
 		<a-entity id="w_king"
-		networked="template:#chess-piece-template;networkId:kingw;persistent:true; owner:kingw;"
+		networked="template:#chess-piece-template-w;networkId:kingw;persistent:true; owner:kingw;"
 		scale="0.2 0.2 0.2" boardPos="e1" position="0.5 1.5 -1" gltf-model="#king_w_asset"
 		></a-entity>
 
 		<a-entity id="w_queen"
-		networked="template:#chess-piece-template;networkId:queenw;persistent:true; owner:queenw;"
+		networked="template:#chess-piece-template-w;networkId:queenw;persistent:true; owner:queenw;"
 		scale="0.2 0.2 0.2" boardPos="d1" position="0 1.5 -1" gltf-model="#queen_w_asset"
 		></a-entity>
 
@@ -489,49 +337,49 @@
 		-->
 		
 		
-		
+		<!--whites are pos -1 and -1.5 in final axis-->
 		
 		
 		
 		
 		<!-- PAWN -->
 		<a-entity id="w_pawn_1"
-		networked="template:#chess-piece-template;networkId:pawnw1;persistent:true; owner:pawnw1;"
+		networked="template:#chess-piece-template-w;networkId:pawnw1;persistent:true; owner:pawnw1;"
 		scale="0.2 0.2 0.2" boardPos="a2" position="-1.5 1.5 -1.5" gltf-model="#pawn_w_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="w_pawn_2"
-		networked="template:#chess-piece-template;networkId:pawnw2;persistent:true; owner:pawnw2;"
+		networked="template:#chess-piece-template-w;networkId:pawnw2;persistent:true; owner:pawnw2;"
 		scale="0.2 0.2 0.2" boardPos="b2" position="-1 1.5 -1.5" gltf-model="#pawn_w_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="w_pawn_3"
-		networked="template:#chess-piece-template;networkId:pawnw3;persistent:true; owner:pawnw3;"
+		networked="template:#chess-piece-template-w;networkId:pawnw3;persistent:true; owner:pawnw3;"
 		scale="0.2 0.2 0.2" boardPos="c2" position="-0.5 1.5 -1.5" gltf-model="#pawn_w_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="w_pawn_4"
-		networked="template:#chess-piece-template;networkId:pawnw4;persistent:true; owner:pawnw4;"
+		networked="template:#chess-piece-template-w;networkId:pawnw4;persistent:true; owner:pawnw4;"
 		scale="0.2 0.2 0.2" boardPos="d2" position="0 1.5 -1.5" gltf-model="#pawn_w_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="w_pawn_5"
-		networked="template:#chess-piece-template;networkId:pawnw5;persistent:true; owner:pawnw5;"
+		networked="template:#chess-piece-template-w;networkId:pawnw5;persistent:true; owner:pawnw5;"
 		scale="0.2 0.2 0.2" boardPos="e2" position="0.5 1.5 -1.5" gltf-model="#pawn_w_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="w_pawn_6"
-		networked="template:#chess-piece-template;networkId:pawnw6;persistent:true; owner:pawnw6;"
+		networked="template:#chess-piece-template-w;networkId:pawnw6;persistent:true; owner:pawnw6;"
 		scale="0.2 0.2 0.2" boardPos="f2" position="1 1.5 -1.5" gltf-model="#pawn_w_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="w_pawn_7"
-		networked="template:#chess-piece-template;networkId:pawnw7;persistent:true; owner:pawnw7;"
+		networked="template:#chess-piece-template-w;networkId:pawnw7;persistent:true; owner:pawnw7;"
 		scale="0.2 0.2 0.2" boardPos="g2" position="1.5 1.5 -1.5" gltf-model="#pawn_w_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="w_pawn_8"
-		networked="template:#chess-piece-template;networkId:pawnw8;persistent:true; owner:pawnw8;"
+		networked="template:#chess-piece-template-w;networkId:pawnw8;persistent:true; owner:pawnw8;"
 		scale="0.2 0.2 0.2" boardPos="h2" position="2 1.5 -1.5" gltf-model="#pawn_w_asset"
 		pawnMoved="false"></a-entity>
 
@@ -558,42 +406,42 @@
 		-->
 
 		<a-entity id="b_pawn_1"
-		networked="template:#chess-piece-template;networkId:pawnb1;persistent:true; owner:pawnb1;"
+		networked="template:#chess-piece-template-b;networkId:pawnb1;persistent:true; owner:pawnb1;"
 		scale-="0.2 0.2 0.2" boardPos="a7" position="-1.5 1.5 -4" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_2"
-		networked="template:#chess-piece-template;networkId:pawnb2;persistent:true; owner:pawnb2;"
+		networked="template:#chess-piece-template-b;networkId:pawnb2;persistent:true; owner:pawnb2;"
 		scale-="0.2 0.2 0.2" boardPos="b7" position="-1 1.5 -4" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_3"
-		networked="template:#chess-piece-template;networkId:pawnb3;persistent:true; owner:pawnb3;"
+		networked="template:#chess-piece-template-b;networkId:pawnb3;persistent:true; owner:pawnb3;"
 		scale-="0.2 0.2 0.2" boardPos="c7" position="-0.5 1.5 -4" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_4"
-		networked="template:#chess-piece-template;networkId:pawnb4;persistent:true; owner:pawnb4;"
+		networked="template:#chess-piece-template-b;networkId:pawnb4;persistent:true; owner:pawnb4;"
 		scale-="0.2 0.2 0.2" boardPos="d7" position="0 1.5 -4" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_5"
-		networked="template:#chess-piece-template;networkId:pawnb5;persistent:true; owner:pawnb5;"
+		networked="template:#chess-piece-template-b;networkId:pawnb5;persistent:true; owner:pawnb5;"
 		scale-="0.2 0.2 0.2" boardPos="e7" position="0.5 1.5 -4" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_6"
-		networked="template:#chess-piece-template;networkId:pawnb6;persistent:true; owner:pawnb6;"
+		networked="template:#chess-piece-template-b;networkId:pawnb6;persistent:true; owner:pawnb6;"
 		scale-="0.2 0.2 0.2" boardPos="f7" position="1 1.5 -4" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_7"
-		networked="template:#chess-piece-template;networkId:pawnb7;persistent:true; owner:pawnb7;"
+		networked="template:#chess-piece-template-b;networkId:pawnb7;persistent:true; owner:pawnb7;"
 		scale-="0.2 0.2 0.2" boardPos="g7" position="1.5 1.5 -4" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_8"
-		networked="template:#chess-piece-template;networkId:pawnb8;persistent:true; owner:pawnb8;"
+		networked="template:#chess-piece-template-b;networkId:pawnb8;persistent:true; owner:pawnb8;"
 		scale-="0.2 0.2 0.2" boardPos="h7" position="2 1.5 -4" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
