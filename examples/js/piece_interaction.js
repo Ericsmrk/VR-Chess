@@ -60,7 +60,7 @@ AFRAME.registerComponent('cursor-listener', {
                 
 
 				//<<<<<<< HEAD
-				const object3D = this.el.object3D; //Jose: make sure you go back and understand 
+				const object3D = this.el.object3D; //Jose: make sure you go back and understand. Narrarator: he did not go back and understand
 
 //************************************************************************** WORLD TO BOARD FUNCTION ****************************************************************************************** */                
         // This function converts any position in the world
@@ -641,7 +641,7 @@ AFRAME.registerComponent('cursor-listener', {
             const onMouseUp = (evt) => { //understand the javascript stuff going on here.  //understand the javascript stuff going on here. 
                 // Cleanup event handlers so we don't get _another_
                 // listener every time we click
-                NAF.utils.takeOwnership(pieces[curPiece]); //this is a function that takes ownership of the rook. please work
+                NAF.utils.takeOwnership(pieces[curPiece]); //this is a function that takes ownership of all pieces. It work
                 //pretty sure the above line is correct but if everything else fine change to pices[curPiece].id
                 //console.log("pieces[curPiece].id: " + pieces[curPiece].id)
                 this.removeEventListener('mouseup', onMouseUp); //ask about this. to whatever subject matter expert we can find  //ask about this. to whatever subject matter expert we can find 
