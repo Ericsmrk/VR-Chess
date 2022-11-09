@@ -1,4 +1,4 @@
-AFRAME.registerComponent('piece-color-w', {
+AFRAME.registerComponent('piece-color', {
     init: function () {
       // Wait for model to load.
       this.el.addEventListener('model-loaded', () => {
@@ -7,25 +7,8 @@ AFRAME.registerComponent('piece-color-w', {
         const obj = this.el.getObject3D('mesh');
         // Go over the submeshes and modify materials we want.
         obj.traverse(node => {
-            console.log('red')
-            node.material.color.set('gray');
-          
-        });
-      });
-    }
-  });
-
-  AFRAME.registerComponent('piece-color-b', {
-    init: function () {
-      // Wait for model to load.
-      this.el.addEventListener('model-loaded', () => {
-        // Grab the mesh / scene.
-        
-        const obj = this.el.getObject3D('mesh');
-        // Go over the submeshes and modify materials we want.
-        obj.traverse(node => {
-            console.log('red')
-            node.material.color.set('blue');
+            //console.log('red')
+            node.material.color.set(this.data);
           
         });
       });
