@@ -79,6 +79,18 @@ the loader is used to change scenes as we like via a json file, I would defer to
 
 
 
+Script documentaion for game_scene.html
+
+You'll notice that our above description left out a lot, practically all of the scripts. 
+
+We can go over the lines in lines 6-29 in more depth later, but for now 
+the ones from line 6-17 are from frameworks. No touchy.
+
+Lines 18-29 are from our own scripts.
+
+At line 33, you'll noitce we have our custom schemas, in short, they allow for things other than 
+just position or rotation to be synced accross the network. 
+
 
 
 
