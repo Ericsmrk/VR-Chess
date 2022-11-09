@@ -1,0 +1,25 @@
+Okay so, easiest way to get started understanding the VR Chess project
+is to start with our main game scene. 
+
+game_scene.html is a an html file which contains the game scene itself
+which is under the tag, <a-scene>
+
+Everything visually seem on start up when loading up, specifically 
+the game_scene.html site will be within this tag. 
+Lets call this section, section 1.0 for reference. 
+
+below that, have a script tag, which is used add event listeners,
+or just let us know we are connected, once we connect. 
+It fires, expectedly, when you connect. 
+
+Within a-scene you'll see a the networked-scene component and some attributes for
+tldr: This lets NAF know this is a networked scene. Please see comments or the NAF
+documentaion for more information 
+
+Below that, you'll see <a-assets> which is where we load our assets.
+This is where we load our models, textures, and sounds.
+This is where we can also give them a unique id, which we can reference
+
+at the very top, you'll see audio tags, which are used to load our sounds
+below that, you'll see models being loaded, 
+
