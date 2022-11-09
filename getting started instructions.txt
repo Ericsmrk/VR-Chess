@@ -10,6 +10,9 @@ then click open in vs code
 
 NOTE: DID NOT USE OUTDATED BOILERPLATE
 
+(Note: These instructions are outdated. Need to be updated for node.js. 
+tldr: install node.js, npm install, npm start)
+
 HOST LOCALLY (can use this as a default if you don't want to use gh pages)
 (install python)
 open a terminal inside of the project folder you made
