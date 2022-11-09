@@ -508,9 +508,14 @@
 
 			// Called by Networked-Aframe when connected to server
 			function onConnect() {
+				//var clients = new array();
+
 				console.log("onConnect", new Date());
+				//clients.push(1)
 				document.body.addEventListener('clientConnected', function (evt) {
 					console.error('clientConnected event. clientId =', evt.detail.clientId);
+
+					//clients.push(evt.detail.clientId)
 
 				});
 			}
