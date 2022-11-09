@@ -1,0 +1,96 @@
+Okay so, easiest way to get started understanding the VR Chess project
+is to start with our main game scene. 
+
+game_scene.html is a an html file which contains the game scene itself
+which is under the tag, <a-scene> (line 94 at the moment)
+
+Everything visually seem on start up when loading up, specifically 
+the game_scene.html site will be within this tag. 
+Lets call this section, section 1.0 for reference. 
+
+below that, have a script tag, which is used add event listeners,
+or just let us know we are connected, once we connect. 
+It fires, expectedly, when you connect. 
+
+Within a-scene you'll see a the networked-scene component and some attributes for
+tldr: This lets NAF know this is a networked scene. Please see comments or the NAF
+documentaion for more information 
+
+Below that, you'll see <a-assets> which is where we load our assets.
+This is where we load our models, textures, and sounds.
+This is where we can also give them a unique id, which we can reference
+
+at the very top, you'll see audio tags, which are used to load our sounds
+below that, you'll see models being loaded, 
+
+Finally, below that you get to the stars of the show. 
+Templates for the Avatars, and the Chess Pieces.
+In short, these are the templates for the entities that will be spawned
+when we connect to the server. More indepth explation is avaliable here:
+https://github.com/networked-aframe/networked-aframe#documentation 
+
+Finally at the end of all that, begining at line 180, we begin to build the scene
+itself.
+we'll call this section 2.0 for reference.
+
+First, we have a camera, which is the camera that we will be using to view the scene.
+It also contains a cursor, which is used to interact with the scene.
+The cursor is a raycaster, which is used to detect when we are looking at an object
+and when we click on it.
+
+You'll also notice it's directly tied to the avatar template. Everything in the avatar template
+gets dumped here. 
+
+Next is section 2.1 the chess pieces themselves 
+
+
+
+
+
+
+
+
+
+right below that, is the magic that makes this game work
+section 2.2, the invisible plane and highlight square. 
+This part I would also refer to Jacob for more indepth explination.
+tldr: This invisible plane is used to detect when we click or look at a 
+square on the board. It also contains the highlight square, which is used
+to show where we are looking at. You'll note that there is only one highlight 
+square, and it is moved around the board. This is because we only want one
+highlight square at a time.
+
+you'll also note none of these pieces are networked, as the position for the invisible plane
+does not change, nor any of it's attributes. It's just a static entity we pull values from 
+and use as a skeleton for placement. 
+
+After that, section 2.3, loader 
+
+the loader is used to change scenes as we like via a json file, I would defer to Brett for this part
+
+
+
+
+
+
+
+
+
+
+
+
+Script documentaion for game_scene.html
+
+You'll notice that our above description left out a lot, practically all of the scripts. 
+
+We can go over the lines in lines 6-29 in more depth later, but for now 
+the ones from line 6-17 are from frameworks. No touchy.
+
+Lines 18-29 are from our own scripts.
+
+At line 33, you'll noitce we have our custom schemas, in short, they allow for things other than 
+just position or rotation to be synced accross the network. 
+
+
+
+
