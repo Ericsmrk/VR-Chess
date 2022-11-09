@@ -50,12 +50,25 @@
 				});
 			}
 
-			
-			if (!NAF.schemas.hasTemplate('#chess-piece-template-w')) {
-				//anyways, after the if, it adds said schema and the properties below. every component needs a new, component area. 
-				//as shown below. 
+			//what you see right here is what allows the pieces to move over the network at all 
+			//it's also what allows for logic. 
+			if (!NAF.schemas.hasTemplate('#chess-piece-template-w')) { //this line essentially says "if the template doesn't exist, create it"
+				//it's what prevent duplicates over the network (along with the ownership system)
 				NAF.schemas.add({
-					template: '#chess-piece-template-w',
+					template: '#chess-piece-template-w', //each schema is tied to a template
+					components: [
+						//these attributes will be synced over the network
+						'position',
+						'boardPos',
+						'pawnMoved'
+					]
+				});
+			}
+
+			//same thing, but for the black pieces. Seperated for colors 
+			if (!NAF.schemas.hasTemplate('#chess-piece-template-b')) {
+				NAF.schemas.add({
+					template: '#chess-piece-template-b',
 					components: [
 						'position',
 						'boardPos',
@@ -64,7 +77,7 @@
 				});
 			}
 
-
+			
 			const components = NAF.schemas.getComponentsOriginal(template);
 			return components;
 		};
@@ -76,6 +89,8 @@
 </head>
 
 <body>
+	<!--networked scene is what lets NAF know this is a networked scene, and starts up the processes related to that. 
+	underneath that is options avaliable to us-->
 	<a-scene networked-scene="
 		room: notBasic;
 		debug: true;
@@ -84,18 +99,6 @@
 		
 		>
 
-		<!--leaving here for now but please please please delete me if the avatars and chess pieces work and move
-			This is cursor, (the pretty thing in middle), raycaster is essetially lazer controls
-
-			<a-entity camera position="0.25 1.2 -2" look-controls="pointerLockEnabled: true" wasd-controls="acceleration:10">
-
-				
-
-				<a-entity cursor="fuse: false; fuseTimeout: 500" raycaster="objects: #cursor-plane" position="0 0 -0.2"
-					geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003" material="color: black; shader: flat">
-				</a-entity>
-			</a-entity> -->
-			
 			<!--Just asset loading -->
 			<a-assets>
 			
@@ -143,33 +146,6 @@
 				<a-asset-item id="king_b_asset" src="src/models/sets/default/black/king.gltf">
 				</a-asset-item>
 
-				
-			
-			
-				<a-mixin gltf-model="#pawn_w" id="pawn_w" src="/src/models/sets/default/white/pawn.gltf" chess-piece
-					scale="0.2 0.2 0.2"></a-mixin>
-				<a-mixin gltf-model="#pawn_b" id="pawn_b" src="/src/models/sets/default/black/pawn.gltf" chess-piece
-					scale="0.2 0.2 0.2"></a-mixin>
-			
-				<a-mixin gltf-model="#king_w" id="king_w" src="/src/models/sets/default/white/king.gltf" chess-piece
-					scale="0.2 0.2 0.2"></a-mixin>
-				<a-mixin gltf-model="#king_b" id="king_b" src="/src/models/sets/default/black/king.gltf" chess-piece
-					scale="0.2 0.2 0.2"></a-mixin>
-			
-				<a-mixin gltf-model="#queen_w" id="queen_w" src="/src/models/sets/default/white/queen.gltf" chess-piece
-					scale="0.2 0.2 0.2"></a-mixin>
-				<a-mixin gltf-model="#queen_b" id="queen_b" src="/src/models/sets/default/black/queen.gltf" chess-piece
-					scale="0.2 0.2 0.2"></a-mixin>
-			
-				<a-mixin gltf-model="#pawn_w" id="pawn_w" src="/src/models/sets/default/white/pawn.gltf" chess-piece
-					scale="0.2 0.2 0.2"></a-mixin>
-				<a-mixin gltf-model="#pawn_b" id="pawn_b" src="/src/models/sets/default/black/pawn.gltf" chess-piece
-					scale="0.2 0.2 0.2"></a-mixin>
-			
-				<!--I will try to keep most NAF stuff down here-->
-				<!--This is the template for the networked entity. 
-										You can see that it has a template, and a networked component. 
-										-->
 				<!-- Avatar -->
 				<template id="avatar-template">
 					<a-entity class="avatar" scale="0.4 0.4 0.4">
@@ -184,13 +160,10 @@
 						</a-entity>
 					</a-entity>
 				</template>
-			
-				<!--so a word of caution, I'm 75% certain this will not work with mixins
-							if it does not, rip apart mixins, throw them in here-->
-			
-				<!--IMPORTANT: temporarily removing chess-piece while I try to get networked aframe to work-->
 				
 				<!--Universal chess template-->
+				<!--this gets added to all networked peices. It ties together the schemas, these universal attributes and the ones below
+				when connected, these attribtues and components will be added to the entities which have a networked component, and the correct template-->
 				<template id="chess-piece-template-w">
 					<a-entity class="chessguy" chess-piece material piece-color="gray">
 					</a-entity>
@@ -204,26 +177,9 @@
 
 			</a-assets>
 
-		<!-- we want the environment to be loaded first, prevents funky stuff from happenning-->
-		<!-- mess around here to change the skybox/background scene stuff-->
-
-
 		<!--Avatar-->
 		<a-entity id="cameraRig" >
 
-			<!--Curious, camera in the networked version doesnt have stuff like position
-							wasd-controls,look, etc defined up above. intresting. Lets see whats going on 
-							up there
-					
-							nvm, I guess camera, also more curious yup, it doesn't appear that camera has a 
-							template. You would think that may be something that needs to be synced, but I guess
-							not. How strange
-					 
-							-->
-			<!--two extra thigns to observe here. Glitch doesn't like comments where 
-							html attributes should be. anyways, an entity inside of cameraRig, is networked
-							but, the entity outside is not. we placed our raycaster within camera, so it should be fine
-					-->
 			<a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" camera
 				position="0.25 1.2 -2" spawn-in-circle="radius:3" look-controls="pointerLockEnabled: true"
 				wasd-controls="acceleration:10" movement-controls>
@@ -236,7 +192,6 @@
 					material="color: black; shader: flat" touch-controls>
 				</a-entity>
 
-
 				<a-sphere class="head" visible="false" random-color></a-sphere>
 			</a-entity>
 		</a-entity>
@@ -245,8 +200,7 @@
 		<!------------------------------------------------------------------------ Entity/Asset Loading ------------------------------------------------------------------>
 		<!-- ROOK -->
 		<!-- replaced these with the mixins for promotions; will replace the promoting pawn with player's chosen piece (rook, knight, bishop, queen) -->
-		<!-- <a-asset-item id = "rook_w" src="../src/models/sets/default/white/rook.gltf"></a-asset-item> -->
-		<!-- <a-asset-item id = "rook_b" src="../src/models/sets/default/black/rook.gltf"></a-asset-item> -->
+
 
 		<!--rook that's white starting on the right side, the mixin brings in the 
 			assests it needs, and then position is what we are trying to play around with -->
@@ -254,7 +208,11 @@
 		networked="template:#chess-piece-template-w;networkId:rookwr;persistent:true; owner:rookwr;" 
 		scale="0.2 0.2 0.2" boardPos="h1" position=" 2 1.5 -1  " gltf-model="#rook_w_asset"
 		></a-entity>
-
+		
+		<!--so as you can see, this is generally what a chess piece entity looks like
+		you have an ID which is vital, scale which should never change, the model which we can reskin, and 
+		boardPos and position, both of which are critical for chess movement and logic
+		finally the fun part, networked.-->
 		<a-entity id="w_rook_l"
 		networked="template:#chess-piece-template-w;networkId:rookwl;persistent:true; owner:rookwl;"
 		scale="0.2 0.2 0.2" boardPos="a1" position="-1.5 1.5 -1" gltf-model="#rook_w_asset" 
@@ -331,19 +289,7 @@
 		scale="0.2 0.2 0.2" boardPos="d1" position="0 1.5 -1" gltf-model="#queen_w_asset"
 		></a-entity>
 
-		<!--
-			<a-entity class="chessguy" id="b_king" mixin="king_b" boardPos="e8" position=" 0.5   1.5 -4.5  "></a-entity>
-		<a-entity class="chessguy" id="b_queen" mixin="queen_b" boardPos="d8" position=" 0   1.5 -4.5  "></a-entity>
-		<a-entity class="chessguy" id="w_king" mixin="king_w" boardPos="e1" position=" 0.5   1.5 -1  "></a-entity>
-		<a-entity class="chessguy" id="w_queen" mixin="queen_w" boardPos="d1" position=" 0  1.5 -1  "></a-entity>
 
-		-->
-		
-		
-		<!--whites are pos -1 and -1.5 in final axis-->
-		
-		
-		
 		
 		<!-- PAWN -->
 		<a-entity id="w_pawn_1"
@@ -386,28 +332,6 @@
 		scale="0.2 0.2 0.2" boardPos="h2" position="2 1.5 -1.5" gltf-model="#pawn_w_asset"
 		pawnMoved="false"></a-entity>
 
-		<!--<a-entity class="chessguy" id="w_pawn_1" mixin="pawn_w" boardPos="a2" pawnMoved='false' position="-1.5  1.5 -1.5">
-		</a-entity>
-		<a-entity class="chessguy" id="w_pawn_2" mixin="pawn_w" boardPos="b2" pawnMoved='false' position="-1    1.5 -1.5">
-		</a-entity>
-		<a-entity class="chessguy" id="w_pawn_3" mixin="pawn_w" boardPos="c2" pawnMoved='false' position="-0.5  1.5 -1.5">
-		</a-entity>
-		<a-entity class="chessguy" id="w_pawn_4" mixin="pawn_w" boardPos="d2" pawnMoved='false' position=" 0    1.5 -1.5">
-		</a-entity>
-		<a-entity class="chessguy" id="w_pawn_5" mixin="pawn_w" boardPos="e2" pawnMoved='false' position=" 0.5  1.5 -1.5">
-		</a-entity>
-		<a-entity class="chessguy" id="w_pawn_6" mixin="pawn_w" boardPos="f2" pawnMoved='false' position=" 1    1.5 -1.5">
-		</a-entity>
-		<a-entity class="chessguy" id="w_pawn_7" mixin="pawn_w" boardPos="g2" pawnMoved='false' position=" 1.5  1.5 -1.5">
-		</a-entity>
-		<a-entity class="chessguy" id="w_pawn_8" mixin="pawn_w" boardPos="h2" pawnMoved='false' position=" 2    1.5 -1.5">
-		</a-entity>-->
-		
-		<!--
-
-
-		-->
-
 		<a-entity id="b_pawn_1"
 		networked="template:#chess-piece-template-b;networkId:pawnb1;persistent:true; owner:pawnb1;"
 		scale-="0.2 0.2 0.2" boardPos="a7" position="-1.5 1.5 -4" gltf-model="#pawn_b_asset"
@@ -447,25 +371,6 @@
 		networked="template:#chess-piece-template-b;networkId:pawnb8;persistent:true; owner:pawnb8;"
 		scale-="0.2 0.2 0.2" boardPos="h7" position="2 1.5 -4" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
-
-		<!--
-
-<a-entity class="chessguy" id="b_pawn_1" mixin="pawn_b" boardPos="a7" position="-1.5  1.5 -4  "></a-entity>
-		<a-entity class="chessguy" id="b_pawn_2" mixin="pawn_b" boardPos="b7" position="-1    1.5 -4  "></a-entity>
-		<a-entity class="chessguy" id="b_pawn_3" mixin="pawn_b" boardPos="c7" position="-0.5  1.5 -4  "></a-entity>
-		<a-entity class="chessguy" id="b_pawn_4" mixin="pawn_b" boardPos="d7" position=" 0    1.5 -4  "></a-entity>
-		<a-entity class="chessguy" id="b_pawn_5" mixin="pawn_b" boardPos="e7" position=" 0.5  1.5 -4  "></a-entity>
-		<a-entity class="chessguy" id="b_pawn_6" mixin="pawn_b" boardPos="f7" position=" 1    1.5 -4  "></a-entity>
-		<a-entity class="chessguy" id="b_pawn_7" mixin="pawn_b" boardPos="g7" position=" 1.5  1.5 -4  "></a-entity>
-		<a-entity class="chessguy" id="b_pawn_8" mixin="pawn_b" boardPos="h7" position=" 2    1.5 -4  "></a-entity>
-		-->
-		
-		
-		
-		
-		
-		
-		
 		
 		<!-- PROPS 
 					<a-asset-item id = chair src="../src/models/props/basic/chair.gltf"></a-asset-item>
@@ -491,23 +396,6 @@
 		</a-scene>
 		
 		<script>
-
-
-			// Define custom schema for syncing avatar color, set by random-color
-			// NAF.schemas.add({
-			//   template: '#avatar-template',
-			//   components: [
-			//     'position',
-			//     'rotation',
-			//     {
-			//       selector: '.head',
-			//       component: 'material',
-			//       property: 'color'
-			//     }
-			//   ]
-			// });
-
-			
 
 			// Called by Networked-Aframe when connected to server
 			function onConnect() {
