@@ -26,7 +26,7 @@
 	<script src="color_changer.component.js"></script>
 
 	<script src="movement-controls.js"></script>
-	
+	<script src="touch-controls.js"></script>
 
 	<!--did you think we were done? Oh you sweet summer child
 		up next, the H U G E Custom schema for the avatar-->
@@ -226,14 +226,14 @@
 					-->
 			<a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" camera
 				position="0.25 1.2 -2" spawn-in-circle="radius:3" look-controls="pointerLockEnabled: true"
-				wasd-controls="acceleration:10">
+				wasd-controls="acceleration:10" movement-controls>
 				<!--This is the raycaster, controlsl what you look at, and the ring. 
 							  If for some reason, you feel you've done everything to try and make sure 
 							  naf should be working, please double check this. 
 							  -->
 				<a-entity cursor="fuse: false; fuseTimeout: 500" raycaster="objects: #cursor-plane" position="0 0 -0.2"
 					geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003"
-					material="color: black; shader: flat">
+					material="color: black; shader: flat" touch-controls>
 				</a-entity>
 
 
