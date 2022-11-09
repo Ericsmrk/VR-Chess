@@ -445,11 +445,11 @@ AFRAME.registerComponent('cursor-listener', {
                         case 'qu':
                             var iterAnti = 13
                             while(iter<14){
-                                if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, straightMoves[iter], 0))){   //side movements
+                                if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 0, straightMoves[iter]))){   //forward movements
                                     direction = 0
                                     break
                                 }
-                                else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, 0, straightMoves[iter]))){  //forward movements
+                                else if(ePosChessTerm == boardToChessTerm(modBoardPos(sPos, straightMoves[iter], 0))){  //side movements
                                     direction = 1
                                     break
                                 }
