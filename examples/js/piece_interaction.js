@@ -35,9 +35,8 @@ AFRAME.registerComponent('cursor-listener', {
 
 //*************************************************************************** VARIABLES FOR GRAVEYARD ************************************************************************************************ */
             var scl = 0.16;
-            var repos = 0.25*(1-0.16);
-            var dPx = 2.5*0.16+repos;
-            var dPz = -2.75+(0.04*7);
+            var dPx =-0.04 +2.5*0.16;
+            var dPz = 0.04*7;
             
             var dPy = 0.8;
             
@@ -50,7 +49,7 @@ AFRAME.registerComponent('cursor-listener', {
                 new THREE.Vector3(dPx+0.5*scl, dPy, dPz-2.0*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-2.5*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-3.0*scl),new THREE.Vector3(dPx+0.5*scl, dPy, dPz-3.5*scl)]
             
             
-            dPx = -2*(0.16)+repos;
+            dPx =-0.04 -2*0.16;
             const deadPieceB = [new THREE.Vector3(dPx, dPy, dPz), new THREE.Vector3(dPx, dPy, dPz-0.5*scl),new THREE.Vector3(dPx, dPy, dPz-1.0*scl),new THREE.Vector3(dPx, dPy, dPz-1.5*scl),
             new THREE.Vector3(dPx, dPy, dPz-2.0*scl), new THREE.Vector3(dPx, dPy, dPz-2.5*scl), new THREE.Vector3(dPx, dPy, dPz-3.0*scl), new THREE.Vector3(dPx, dPy, dPz-3.5*scl),
             new THREE.Vector3(dPx-0.5*scl, dPy, dPz),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-0.5*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-1.0*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-1.5*scl),

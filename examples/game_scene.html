@@ -213,7 +213,7 @@
 			assests it needs, and then position is what we are trying to play around with -->
 		<a-entity id="w_rook_r"
 		networked="template:#chess-piece-template-w;networkId:rookwr;persistent:true; owner:rookwr;" 
-		scale="0.2 0.2 0.2" boardPos="h1" position=" 2 1.5 -1  " gltf-model="#rook_w_asset"
+		scale="0.2 0.2 0.2" boardPos="h1" position=" 2 1.5 2" gltf-model="#rook_w_asset"
 		></a-entity>
 		
 		<!--so as you can see, this is generally what a chess piece entity looks like
@@ -222,78 +222,78 @@
 		finally the fun part, networked.-->
 		<a-entity id="w_rook_l"
 		networked="template:#chess-piece-template-w;networkId:rookwl;persistent:true; owner:rookwl;"
-		scale="0.2 0.2 0.2" boardPos="a1" position="-1.5 1.5 -1" gltf-model="#rook_w_asset" 
+		scale="0.2 0.2 0.2" boardPos="a1" position="-1.5 1.5 2" gltf-model="#rook_w_asset" 
 		></a-entity>
 		
 		<a-entity id="b_rook_r"
 		networked="template:#chess-piece-template-b;networkId:rookbr;persistent:true; owner:rookbr;"
-		scale="0.2 0.2 0.2" boardPos="h8" position=" 2 1.5 -4.5" gltf-model="#rook_b_asset"
+		scale="0.2 0.2 0.2" boardPos="h8" position=" 2 1.5 -1.5" gltf-model="#rook_b_asset"
 		></a-entity>
 
 		<a-entity id="b_rook_l"
 		networked="template:#chess-piece-template-b;networkId:rookbl;persistent:true; owner:rookbl;"
-		scale="0.2 0.2 0.2" boardPos="a8" position="-1.5 1.5 -4.5" gltf-model="#rook_b_asset"
+		scale="0.2 0.2 0.2" boardPos="a8" position="-1.5 1.5 -1.5" gltf-model="#rook_b_asset"
 		></a-entity>
 
 		<a-entity id="w_knight_r"
 		networked="template:#chess-piece-template-w;networkId:knightwr;persistent:true; owner:knightwr;"
-		scale="0.2 0.2 0.2" boardPos="g1" position="1.5 1.5 -1" rotation="0 180 0" gltf-model="#knight_w_asset"
+		scale="0.2 0.2 0.2" boardPos="g1" position="1.5 1.5 2" rotation="0 180 0" gltf-model="#knight_w_asset"
 		></a-entity>
 
 		<a-entity id="w_knight_l"
 		networked="template:#chess-piece-template-w;networkId:knightwl;persistent:true; owner:knightwl;"
-		scale="0.2 0.2 0.2" boardPos="b1" position="-1 1.5 -1" rotation="0 180 0" gltf-model="#knight_w_asset"
+		scale="0.2 0.2 0.2" boardPos="b1" position="-1 1.5 2" rotation="0 180 0" gltf-model="#knight_w_asset"
 		></a-entity>
 		
 		<a-entity id="b_knight_r"
 		networked="template:#chess-piece-template-b;networkId:knightbr;persistent:true; owner:knightbr;"
-		scale="0.2 0.2 0.2" boardPos="g8" position=" 1.5 1.5 -4.5" gltf-model="#knight_b_asset"
+		scale="0.2 0.2 0.2" boardPos="g8" position=" 1.5 1.5 -1.5" gltf-model="#knight_b_asset"
 		></a-entity>
 
 		<a-entity id="b_knight_l"
 		networked="template:#chess-piece-template-b;networkId:knightbl;persistent:true; owner:knightbr;"
-		scale="0.2 0.2 0.2" boardPos="b8" position="-1 1.5 -4.5" gltf-model="#knight_b_asset"
+		scale="0.2 0.2 0.2" boardPos="b8" position="-1 1.5 -1.5" gltf-model="#knight_b_asset"
 		></a-entity>
 		
 		<a-entity id="w_bishop_r"
 		networked="template:#chess-piece-template-w;networkId:bishopwr;persistent:true; owner:bishopwr;"
-		scale="0.2 0.2 0.2" boardPos="f1" position="1 1.5 -1" gltf-model="#bishop_w_asset" 
+		scale="0.2 0.2 0.2" boardPos="f1" position="1 1.5 2" gltf-model="#bishop_w_asset" 
 		></a-entity>
 
 		<a-entity id="w_bishop_l"
 		networked="template:#chess-piece-template-w;networkId:bishopwl;persistent:true; owner:bishopwl;"
-		scale="0.2 0.2 0.2" boardPos="c1" position="-0.5 1.5 -1" gltf-model="#bishop_w_asset"
+		scale="0.2 0.2 0.2" boardPos="c1" position="-0.5 1.5 2" gltf-model="#bishop_w_asset"
 		></a-entity>
 
 		<a-entity id="b_bishop_r"
 		networked="template:#chess-piece-template-b;networkId:bishopbr;persistent:true; owner:bishopbr;" 
-		scale="0.2 0.2 0.2" boardPos="f8" position=" 1 1.5 -4.5" gltf-model="#bishop_b_asset"
+		scale="0.2 0.2 0.2" boardPos="f8" position=" 1 1.5 -1.5" gltf-model="#bishop_b_asset"
 		></a-entity>
 
 		<a-entity id="b_bishop_l"
 		networked="template:#chess-piece-template-b;networkId:bishopbl;persistent:true; owner:bishopbl;" 
-		scale="0.2 0.2 0.2" boardPos="c8" position="-0.5 1.5 -4.5" gltf-model="#bishop_b_asset"
+		scale="0.2 0.2 0.2" boardPos="c8" position="-0.5 1.5 -1.5" gltf-model="#bishop_b_asset"
 		></a-entity>
 
 		
 		<a-entity id="b_king"
 		networked="template:#chess-piece-template-b;networkId:kingb;persistent:true; owner:kingb;"
-		scale="0.2 0.2 0.2" boardPos="e8" position="0.5 1.5 -4.5" gltf-model="#king_b_asset"
+		scale="0.2 0.2 0.2" boardPos="e8" position="0.5 1.5 -1.5" gltf-model="#king_b_asset"
 		></a-entity>
 
 		<a-entity id="b_queen"
 		networked="template:#chess-piece-template-b;networkId:queenb;persistent:true; owner:queenb;"
-		scale="0.2 0.2 0.2" boardPos="d8" position="0 1.5 -4.5" gltf-model="#queen_b_asset"
+		scale="0.2 0.2 0.2" boardPos="d8" position="0 1.5 -1.5" gltf-model="#queen_b_asset"
 		></a-entity>
 
 		<a-entity id="w_king"
 		networked="template:#chess-piece-template-w;networkId:kingw;persistent:true; owner:kingw;"
-		scale="0.2 0.2 0.2" boardPos="e1" position="0.5 1.5 -1" gltf-model="#king_w_asset"
+		scale="0.2 0.2 0.2" boardPos="e1" position="0.5 1.5 2" gltf-model="#king_w_asset"
 		></a-entity>
 
 		<a-entity id="w_queen"
 		networked="template:#chess-piece-template-w;networkId:queenw;persistent:true; owner:queenw;"
-		scale="0.2 0.2 0.2" boardPos="d1" position="0 1.5 -1" gltf-model="#queen_w_asset"
+		scale="0.2 0.2 0.2" boardPos="d1" position="0 1.5 2" gltf-model="#queen_w_asset"
 		></a-entity>
 
 
@@ -301,82 +301,82 @@
 		<!-- PAWN -->
 		<a-entity id="w_pawn_1"
 		networked="template:#chess-piece-template-w;networkId:pawnw1;persistent:true; owner:pawnw1;"
-		scale="0.2 0.2 0.2" boardPos="a2" position="-1.5 1.5 -1.5" gltf-model="#pawn_w_asset"
+		scale="0.2 0.2 0.2" boardPos="a2" position="-1.5 1.5 1.5" gltf-model="#pawn_w_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="w_pawn_2"
 		networked="template:#chess-piece-template-w;networkId:pawnw2;persistent:true; owner:pawnw2;"
-		scale="0.2 0.2 0.2" boardPos="b2" position="-1 1.5 -1.5" gltf-model="#pawn_w_asset"
+		scale="0.2 0.2 0.2" boardPos="b2" position="-1 1.5 1.5" gltf-model="#pawn_w_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="w_pawn_3"
 		networked="template:#chess-piece-template-w;networkId:pawnw3;persistent:true; owner:pawnw3;"
-		scale="0.2 0.2 0.2" boardPos="c2" position="-0.5 1.5 -1.5" gltf-model="#pawn_w_asset"
+		scale="0.2 0.2 0.2" boardPos="c2" position="-0.5 1.5 1.5" gltf-model="#pawn_w_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="w_pawn_4"
 		networked="template:#chess-piece-template-w;networkId:pawnw4;persistent:true; owner:pawnw4;"
-		scale="0.2 0.2 0.2" boardPos="d2" position="0 1.5 -1.5" gltf-model="#pawn_w_asset"
+		scale="0.2 0.2 0.2" boardPos="d2" position="0 1.5 1.5" gltf-model="#pawn_w_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="w_pawn_5"
 		networked="template:#chess-piece-template-w;networkId:pawnw5;persistent:true; owner:pawnw5;"
-		scale="0.2 0.2 0.2" boardPos="e2" position="0.5 1.5 -1.5" gltf-model="#pawn_w_asset"
+		scale="0.2 0.2 0.2" boardPos="e2" position="0.5 1.5 1.5" gltf-model="#pawn_w_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="w_pawn_6"
 		networked="template:#chess-piece-template-w;networkId:pawnw6;persistent:true; owner:pawnw6;"
-		scale="0.2 0.2 0.2" boardPos="f2" position="1 1.5 -1.5" gltf-model="#pawn_w_asset"
+		scale="0.2 0.2 0.2" boardPos="f2" position="1 1.5 1.5" gltf-model="#pawn_w_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="w_pawn_7"
 		networked="template:#chess-piece-template-w;networkId:pawnw7;persistent:true; owner:pawnw7;"
-		scale="0.2 0.2 0.2" boardPos="g2" position="1.5 1.5 -1.5" gltf-model="#pawn_w_asset"
+		scale="0.2 0.2 0.2" boardPos="g2" position="1.5 1.5 1.5" gltf-model="#pawn_w_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="w_pawn_8"
 		networked="template:#chess-piece-template-w;networkId:pawnw8;persistent:true; owner:pawnw8;"
-		scale="0.2 0.2 0.2" boardPos="h2" position="2 1.5 -1.5" gltf-model="#pawn_w_asset"
+		scale="0.2 0.2 0.2" boardPos="h2" position="2 1.5 1.5" gltf-model="#pawn_w_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_1"
 		networked="template:#chess-piece-template-b;networkId:pawnb1;persistent:true; owner:pawnb1;"
-		scale-="0.2 0.2 0.2" boardPos="a7" position="-1.5 1.5 -4" gltf-model="#pawn_b_asset"
+		scale-="0.2 0.2 0.2" boardPos="a7" position="-1.5 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_2"
 		networked="template:#chess-piece-template-b;networkId:pawnb2;persistent:true; owner:pawnb2;"
-		scale-="0.2 0.2 0.2" boardPos="b7" position="-1 1.5 -4" gltf-model="#pawn_b_asset"
+		scale-="0.2 0.2 0.2" boardPos="b7" position="-1 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_3"
 		networked="template:#chess-piece-template-b;networkId:pawnb3;persistent:true; owner:pawnb3;"
-		scale-="0.2 0.2 0.2" boardPos="c7" position="-0.5 1.5 -4" gltf-model="#pawn_b_asset"
+		scale-="0.2 0.2 0.2" boardPos="c7" position="-0.5 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_4"
 		networked="template:#chess-piece-template-b;networkId:pawnb4;persistent:true; owner:pawnb4;"
-		scale-="0.2 0.2 0.2" boardPos="d7" position="0 1.5 -4" gltf-model="#pawn_b_asset"
+		scale-="0.2 0.2 0.2" boardPos="d7" position="0 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_5"
 		networked="template:#chess-piece-template-b;networkId:pawnb5;persistent:true; owner:pawnb5;"
-		scale-="0.2 0.2 0.2" boardPos="e7" position="0.5 1.5 -4" gltf-model="#pawn_b_asset"
+		scale-="0.2 0.2 0.2" boardPos="e7" position="0.5 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_6"
 		networked="template:#chess-piece-template-b;networkId:pawnb6;persistent:true; owner:pawnb6;"
-		scale-="0.2 0.2 0.2" boardPos="f7" position="1 1.5 -4" gltf-model="#pawn_b_asset"
+		scale-="0.2 0.2 0.2" boardPos="f7" position="1 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_7"
 		networked="template:#chess-piece-template-b;networkId:pawnb7;persistent:true; owner:pawnb7;"
-		scale-="0.2 0.2 0.2" boardPos="g7" position="1.5 1.5 -4" gltf-model="#pawn_b_asset"
+		scale-="0.2 0.2 0.2" boardPos="g7" position="1.5 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_8"
 		networked="template:#chess-piece-template-b;networkId:pawnb8;persistent:true; owner:pawnb8;"
-		scale-="0.2 0.2 0.2" boardPos="h7" position="2 1.5 -4" gltf-model="#pawn_b_asset"
+		scale-="0.2 0.2 0.2" boardPos="h7" position="2 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 		
 		<!-- PROPS 
@@ -387,7 +387,7 @@
 		<!--These peices represent the squares, or planes. For now as you can see, we've only set up a couple for testing essentially-->
 		
 		<!-- This plane is used to detect clicks on the chessboard-->
-		<a-plane id="cursor-plane" cursor-listener geometry="primitive plane" position=".25, 0.801, -2.75" visible="false"
+		<a-plane id="cursor-plane" cursor-listener geometry="primitive plane" position="0, 0.801, 0" visible="false"
 			rotation="-90 0 0" height="0.64" width="0.64" ></a-plane>	<!--sound="src: #someSound; on: click"-->
 		<!--Height and Width need to be scaled to 0.64-->
 		<!-- This plane is used for highlighting, and is moved around by the "cursor-listener" component-->
