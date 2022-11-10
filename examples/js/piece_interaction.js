@@ -692,6 +692,14 @@ AFRAME.registerComponent('cursor-listener', {
                             pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
                             console.log(pieces[curPiece].getAttribute('boardPos'))
                             
+                            //some quick notes for my man Jacob
+                            //now we could place the following code NAF.utils.takeOwnership(pieces[endPosPiece]); above
+                            //however, I think it's best to only give ownership as needed, I tried giving the player all the pieces during mouse up 
+                            //above, and it broke the entire game.
+                            //so instead, we place it here. 
+
+                            NAF.utils.takeOwnership(pieces[endPosPiece]); //this is a function that takes ownership of the piece we are about to kill
+
                             //KILL/CAPTURE      --> Move KILLED piece into graveyard
                             if(pieces[curPiece].id[0] == 'w'){  //if white, move into white graveyard
                                 pieces[endPosPiece].object3D.position.copy(deadPieceW[dPit_w])
