@@ -1,18 +1,39 @@
 {
     "objects":[
         {
-            "id":"chair",
+            "id":"board",
+            "src":"../src/models/sets/default/board.gltf",
+
+            "position":{
+                "x":0.25, 
+                "y":0.8,
+                "z":-2.75
+            },
+            "scale":{
+                "x":0.08,
+                "y":0.08,
+                "z":0.08
+            },
+            "rotation":{
+                "x":0,
+                "y":90,
+                "z":0
+            }
+        
+        },
+        {
+            "id":"chair1",
             "src":"../src/models/props/basic/chair.gltf",
 
             "position":{
-                "x":2,
+                "x":0.25,
                 "y":0,
-                "z":0
+                "z":-2
             },
             "scale":{
-                "x":0.25,
-                "y":0.25,
-                "z":0.25
+                "x":0.208551946997,
+                "y":0.208551946997,
+                "z":0.208551946997
             },
             "rotation":{
                 "x":0,
@@ -22,22 +43,43 @@
         
         },
         {
+            "id":"chair2",
+            "src":"../src/models/props/basic/chair.gltf",
+
+            "position":{
+                "x":0.25,
+                "y":0,
+                "z":-3.5
+            },
+            "scale":{
+                "x":0.208551946997,
+                "y":0.208551946997,
+                "z":0.208551946997
+            },
+            "rotation":{
+                "x":0,
+                "y":0,
+                "z":0
+            }
+        
+        },
+        {
             "id":"table",
             "src":"../src/models/props/basic/table.gltf",
 
             "position":{
-                "x":0,
+                "x":0.25, 
                 "y":0,
-                "z":0
+                "z":-2.75
             },
             "scale":{
-                "x":0.25,
-                "y":0.25,
-                "z":0.25
+                "x":0.20,
+                "y":0.154685894983,
+                "z":0.20
             },
             "rotation":{
                 "x":0,
-                "y":180,
+                "y":0,
                 "z":0
             }
             

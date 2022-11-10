@@ -12,7 +12,7 @@ below that, have a script tag, which is used add event listeners,
 or just let us know we are connected, once we connect. 
 It fires, expectedly, when you connect. 
 
-Within a-scene you'll see a the networked-scene component and some attributes for
+Within a-scene you'll see a the networked-scene component and some attributes for it.
 tldr: This lets NAF know this is a networked scene. Please see comments or the NAF
 documentaion for more information 
 
