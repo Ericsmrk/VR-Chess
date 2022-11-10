@@ -23,8 +23,7 @@
 	<script src="js/holdable_component.js"></script>
 	<script src="js/piece_color_component.js"></script>
 
-	<!--<script src="js/color_changer.component.js"></script>-->
-
+	
 	<!--Extra movement fun stuff -->
 	<!--
 		temporily disabling as they crashed my version. Don't want to deal with them
@@ -98,7 +97,7 @@
 <body>
 	<!--networked scene is what lets NAF know this is a networked scene, and starts up the processes related to that. 
 	underneath that is options avaliable to us-->
-	<a-scene networked-scene="
+	<a-scene stats networked-scene="
 		room: notBasic;
 		debug: true;
 		adapters: easyrtc;
@@ -378,14 +377,7 @@
 		networked="template:#chess-piece-template-b;networkId:pawnb8;persistent:true; owner:pawnb8;"
 		scale-="0.2 0.2 0.2" boardPos="h7" position="2 1.5 -4" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
-		
-		<!-- PROPS 
-					<a-asset-item id = chair src="../src/models/props/basic/chair.gltf"></a-asset-item>
-					
-					<a-entity gltf-model="#chair" position = "0 0 0" scale = ".25 .25 .25" rotation="0 180 0"></a-entity>-->
-		<!-------------------------------------------------------------------------Testing Area--------------------------------------------------------------------------->
-		<!--These peices represent the squares, or planes. For now as you can see, we've only set up a couple for testing essentially-->
-		
+				
 		<!-- This plane is used to detect clicks on the chessboard-->
 		<a-plane id="cursor-plane" cursor-listener geometry="primitive plane" position=".25, 0.801, -2.75" visible="false"
 			rotation="-90 0 0" height="0.64" width="0.64" ></a-plane>	<!--sound="src: #someSound; on: click"-->
@@ -393,7 +385,6 @@
 		<!-- This plane is used for highlighting, and is moved around by the "cursor-listener" component-->
 		<a-plane id="highlight-plane" id="highPlane" visible="false" geometry="primitive plane" rotation="-90 0 0" color="blue"
 			opacity="0.5" height="0.08" width="0.08"></a-plane>
-		
 		
 		<a-entity loader="/src/scenes/scene2.json"></a-entity>
 		<!--	loads a scene json-->
