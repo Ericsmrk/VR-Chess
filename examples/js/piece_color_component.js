@@ -2,16 +2,22 @@ AFRAME.registerComponent('piece-color', {
     init: function () {
       // Wait for model to load.
       this.el.addEventListener('model-loaded', () => {
-        // Grab the mesh / scene.
-        
         const obj = this.el.getObject3D('mesh');
-        // Go over the submeshes and modify materials we want.
         obj.traverse(node => {
-            //console.log('red')
             node.material.color.set(this.data);
-          
         });
       });
+    },
+    update:function(){
+      
+      const obj = this.el.getObject3D('mesh');
+      obj.traverse(node => {
+          node.material.color.set(this.data);
+      });
+    
+    },
+    remove:function(){
+      
     }
   });
 
@@ -19,21 +25,58 @@ AFRAME.registerComponent('piece-color', {
 //really wishing this was better commented 
 //so of course, everything has to be correctly be a registered component in a frame, color changer is the 
 //function (I think) name here. 
-
+/*
 AFRAME.registerComponent('color-changer', {
   //then we have something called events, im guessing that lets
+  
+  dependencies: ['raycaster'],
+  
+  init:function(){
+    const pieces = document.querySelectorAll(".chessguy");
+    
+    function changeColor(){
+      //whiteColor = getRandomColor();
+      //blackColor = getRandomColor();
+      
+      for(let i=0;i<32;i++){
+        pieceToRecolor=pieces[i];
+        if(pieceToRecolor.id[0]=='w'){
+          pieceToRecolor.removeAttribute('piece-color');
+          pieceToRecolor.setAttribute('piece-color','#FFFF00');
+        }else if(pieceToRecolor.id[0]=='b'){
+          pieceToRecolor.removeAttribute('piece-color');
+          pieceToRecolor.setAttribute('piece-color','#FF00FF');
+        }
+      }
+    }
+    changeColor();
+    console.log('init piece color functions')
+    const button = document.querySelector('#recolorButton');
+    this.el.addEventListener('raycaster-intersection', changeColor());
+    
+  },
+  
+  
   events: {
     //this fire when a click happens, which starts another function, goes to evt (im guessing 
     //environmen? )
+    
     'click': function (evt) {
-      //okay, top part is easy, changes material color
-      
-      const pieces = document.querySelectorAll("a-entity[piece-color-w]");
-      this.el.setAttribute('material', { color: this.getRandomColor() });
+      const pieces = document.querySelectorAll(".chessguy");
+      //whiteColor = getRandomColor();
+      //blackColor = getRandomColor();
+      console.log('changeColor called')
+      for(let i in pieces){
+        
 
-      //however, what the flying pig is this. 
-      //gives ownership to the clicker person maybe? hm. 
-      //NAF.utils.takeOwnership(this.el);
+        if(pieces[i].id[0]=='w'){
+          pieces[i].removeAttribute('piece-color');
+          pieces[i].setAttribute('piece-color','#FFFF00');
+        }else if(pieces[i].id[0]=='b'){
+          pieces[i].removeAttribute('piece-color');
+          pieces[i].setAttribute('piece-color','#FF00FF');
+        }
+      }
     }
   },
 
@@ -41,3 +84,4 @@ AFRAME.registerComponent('color-changer', {
     return `hsl(${Math.random() * 360}, 100%, 50%)`;
   }
 });
+*/

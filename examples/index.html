@@ -2,9 +2,21 @@
 
 <html>
     <head>
-        <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+        <!--Framework scripts-->
+		<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
 		<script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
-        <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
+        <!--
+			<script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
+
+		-->
+		
+		<!--Scripts for preview-->
+		<script src="js/Loader.js"></script>
+		<script src="js/setAtts.js"></script>
+		<script src="js/piece_color_component.js"></script>
+		<script src="js/color_changer_component.js"></script>
+		
+
 		<style>
 			.inputBox{
 				position: fixed;
@@ -14,16 +26,195 @@
     </head>
     <body>
 		<div class="inputBox">
-			<input type="text">
+			<h1><a href="game_scene.html">Start Game</a></h1>
 		</div>
-        <a-scene gui-env stats>
+        <a-scene gui-env>
 
-			<a-entity environment="preset: forest"></a-entity>
+			
 
-            <a-assets>
-                <a-asset-item id="textfont1" src="src/fonts/PermanentMarker-Regular.ttf"></a-asset-item>
-            </a-assets>
 
+
+			<!--PREVIEW ITEMS.-->
+
+				<a-assets>
+					<a-asset-item id="textfont1" src="src/fonts/PermanentMarker-Regular.ttf"></a-asset-item>
+					<a-asset-item id="rook_w_asset" src="src/models/sets/default/white/rook.gltf">
+					</a-asset-item>
+				
+					<a-asset-item id="rook_b_asset" src="src/models/sets/default/black/rook.gltf">
+					</a-asset-item>
+				
+					<a-asset-item id="knight_w_asset" src="src/models/sets/default/white/knight.gltf">
+					</a-asset-item>
+				
+					<a-asset-item id="knight_b_asset" src="src/models/sets/default/black/knight.gltf">
+					</a-asset-item>
+				
+					<a-asset-item id="bishop_w_asset" src="src/models/sets/default/white/bishop.gltf">
+					</a-asset-item>
+				
+					<a-asset-item id="bishop_b_asset" src="src/models/sets/default/black/bishop.gltf">
+					</a-asset-item>
+
+					<a-asset-item id="pawn_w_asset" src="src/models/sets/default/white/pawn.gltf">
+					</a-asset-item>
+
+					<a-asset-item id="pawn_b_asset" src="src/models/sets/default/black/pawn.gltf">
+					</a-asset-item>
+
+					<a-asset-item id="queen_w_asset" src="src/models/sets/default/white/queen.gltf">
+					</a-asset-item>
+
+					<a-asset-item id="queen_b_asset" src="src/models/sets/default/black/queen.gltf">
+					</a-asset-item>
+
+					<a-asset-item id="king_w_asset" src="src/models/sets/default/white/king.gltf">
+					</a-asset-item>
+
+					<a-asset-item id="king_b_asset" src="src/models/sets/default/black/king.gltf">
+					</a-asset-item>
+				</a-assets>
+
+
+				<a-entity id="w_rook_r"
+				scale="0.2 0.2 0.2" boardPos="h1" position=" 2 1.5 2" gltf-model="#rook_w_asset" class="chessguy" material
+				></a-entity>
+				
+				<a-entity id="w_rook_l"
+				scale="0.2 0.2 0.2" boardPos="a1" position="-1.5 1.5 2" gltf-model="#rook_w_asset" class="chessguy" material 
+				></a-entity>
+				
+				<a-entity id="b_rook_r"
+				scale="0.2 0.2 0.2" boardPos="h8" position=" 2 1.5 -1.5" gltf-model="#rook_b_asset" class="chessguy" material
+				></a-entity>
+
+				<a-entity id="b_rook_l"
+				scale="0.2 0.2 0.2" boardPos="a8" position="-1.5 1.5 -1.5" gltf-model="#rook_b_asset" class="chessguy" material
+				></a-entity>
+
+				<a-entity id="w_knight_r"
+				scale="0.2 0.2 0.2" boardPos="g1" position="1.5 1.5 2" rotation="0 180 0" gltf-model="#knight_w_asset" class="chessguy" material
+				></a-entity>
+
+				<a-entity id="w_knight_l"
+				scale="0.2 0.2 0.2" boardPos="b1" position="-1 1.5 2" rotation="0 180 0" gltf-model="#knight_w_asset" class="chessguy" material
+				></a-entity>
+				
+				<a-entity id="b_knight_r"
+				scale="0.2 0.2 0.2" boardPos="g8" position=" 1.5 1.5 -1.5" gltf-model="#knight_b_asset" class="chessguy" material
+				></a-entity>
+
+				<a-entity id="b_knight_l"
+				scale="0.2 0.2 0.2" boardPos="b8" position="-1 1.5 -1.5" gltf-model="#knight_b_asset" class="chessguy" material
+				></a-entity>
+				
+				<a-entity id="w_bishop_r"
+				scale="0.2 0.2 0.2" boardPos="f1" position="1 1.5 2" gltf-model="#bishop_w_asset" class="chessguy" material 
+				></a-entity>
+
+				<a-entity id="w_bishop_l"
+				scale="0.2 0.2 0.2" boardPos="c1" position="-0.5 1.5 2" gltf-model="#bishop_w_asset" class="chessguy" material
+				></a-entity>
+
+				<a-entity id="b_bishop_r"
+				scale="0.2 0.2 0.2" boardPos="f8" position=" 1 1.5 -1.5" gltf-model="#bishop_b_asset" class="chessguy" material
+				></a-entity>
+
+				<a-entity id="b_bishop_l"
+				scale="0.2 0.2 0.2" boardPos="c8" position="-0.5 1.5 -1.5" gltf-model="#bishop_b_asset" class="chessguy" material
+				></a-entity>
+
+				
+				<a-entity id="b_king"
+				scale="0.2 0.2 0.2" boardPos="e8" position="0.5 1.5 -1.5" gltf-model="#king_b_asset" class="chessguy" material
+				></a-entity>
+
+				<a-entity id="b_queen"
+				scale="0.2 0.2 0.2" boardPos="d8" position="0 1.5 -1.5" gltf-model="#queen_b_asset" class="chessguy" material
+				></a-entity>
+
+				<a-entity id="w_king"
+				scale="0.2 0.2 0.2" boardPos="e1" position="0.5 1.5 2" gltf-model="#king_w_asset" class="chessguy" material
+				></a-entity>
+
+				<a-entity id="w_queen"
+				scale="0.2 0.2 0.2" boardPos="d1" position="0 1.5 2" gltf-model="#queen_w_asset" class="chessguy" material
+				></a-entity>
+
+				<!-- PAWN -->
+				<a-entity id="w_pawn_1"
+				scale="0.2 0.2 0.2" boardPos="a2" position="-1.5 1.5 1.5" gltf-model="#pawn_w_asset" class="chessguy" material
+				pawnMoved="false"></a-entity>
+
+				<a-entity id="w_pawn_2"
+				scale="0.2 0.2 0.2" boardPos="b2" position="-1 1.5 1.5" gltf-model="#pawn_w_asset" class="chessguy" material
+				pawnMoved="false"></a-entity>
+
+				<a-entity id="w_pawn_3"
+				scale="0.2 0.2 0.2" boardPos="c2" position="-0.5 1.5 1.5" gltf-model="#pawn_w_asset" class="chessguy" material
+				pawnMoved="false"></a-entity>
+
+				<a-entity id="w_pawn_4"
+				scale="0.2 0.2 0.2" boardPos="d2" position="0 1.5 1.5" gltf-model="#pawn_w_asset" class="chessguy" material
+				pawnMoved="false"></a-entity>
+
+				<a-entity id="w_pawn_5"
+				scale="0.2 0.2 0.2" boardPos="e2" position="0.5 1.5 1.5" gltf-model="#pawn_w_asset" class="chessguy" material
+				pawnMoved="false"></a-entity>
+
+				<a-entity id="w_pawn_6"
+				scale="0.2 0.2 0.2" boardPos="f2" position="1 1.5 1.5" gltf-model="#pawn_w_asset" class="chessguy" material
+				pawnMoved="false"></a-entity>
+
+				<a-entity id="w_pawn_7"
+				scale="0.2 0.2 0.2" boardPos="g2" position="1.5 1.5 1.5" gltf-model="#pawn_w_asset" class="chessguy" material
+				pawnMoved="false"></a-entity>
+
+				<a-entity id="w_pawn_8"
+				scale="0.2 0.2 0.2" boardPos="h2" position="2 1.5 1.5" gltf-model="#pawn_w_asset" class="chessguy" material
+				pawnMoved="false"></a-entity>
+
+				<a-entity id="b_pawn_1"
+				scale="0.2 0.2 0.2" boardPos="a7" position="-1.5 1.5 -1" gltf-model="#pawn_b_asset" class="chessguy" material
+				pawnMoved="false"></a-entity>
+
+				<a-entity id="b_pawn_2"
+				scale="0.2 0.2 0.2" boardPos="b7" position="-1 1.5 -1" gltf-model="#pawn_b_asset" class="chessguy" material
+				pawnMoved="false"></a-entity>
+
+				<a-entity id="b_pawn_3"
+				scale="0.2 0.2 0.2" boardPos="c7" position="-0.5 1.5 -1" gltf-model="#pawn_b_asset" class="chessguy" material
+				pawnMoved="false"></a-entity>
+
+				<a-entity id="b_pawn_4"
+				scale="0.2 0.2 0.2" boardPos="d7" position="0 1.5 -1" gltf-model="#pawn_b_asset" class="chessguy" material
+				pawnMoved="false"></a-entity>
+
+				<a-entity id="b_pawn_5"
+				scale="0.2 0.2 0.2" boardPos="e7" position="0.5 1.5 -1" gltf-model="#pawn_b_asset" class="chessguy" material
+				pawnMoved="false"></a-entity>
+
+				<a-entity id="b_pawn_6"
+				scale="0.2 0.2 0.2" boardPos="f7" position="1 1.5 -1" gltf-model="#pawn_b_asset" class="chessguy" material
+				pawnMoved="false"></a-entity>
+
+				<a-entity id="b_pawn_7"
+				scale="0.2 0.2 0.2" boardPos="g7" position="1.5 1.5 -1" gltf-model="#pawn_b_asset" class="chessguy" material
+				pawnMoved="false"></a-entity>
+
+				<a-entity id="b_pawn_8"
+				scale="0.2 0.2 0.2" boardPos="h7" position="2 1.5 -1" gltf-model="#pawn_b_asset" class="chessguy" material
+				pawnMoved="false"></a-entity>
+
+				
+				<a-entity loader="/src/scenes/scene2.json"></a-entity>
+				<a-entity setatts></a-entity>
+				
+				<a-plane position="0 1.6 0"scale="0.2 0.2 0.2" class="clickable" geometry="primitive plane" color-changer></a-plane>
+
+
+			<!--END PREVIEW-->
+<!--
             <a-gui-flex-container
 			flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1"
 			opacity="0.7" width="3.5" height="4.5" panel-color="#072B73" panel-rounded="0.2"
@@ -98,9 +289,10 @@
                 </a-gui-button>
 
 		</a-gui-flex-container>
+	-->
 
         <!-- Mouse cursor so we can click on the scene with mouse or touch. -->
-		<a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [gui-interactable]"></a-entity>
+		<a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable"></a-entity>
 		<a-entity id="leftHand" laser-controls="hand: left" raycaster="objects: [gui-interactable]"></a-entity>
 		<a-entity id="rightHand" laser-controls="hand: right" raycaster="objects: [gui-interactable]"></a-entity>
 
@@ -109,14 +301,12 @@
 			<a-camera look-controls wasd-controls position="0 0 0">
 			</a-camera> <!-- /camera -->
 		</a-entity>
-
-
             
 
         </a-scene>
 
-        
-	<script type="text/javascript">
+    <!--
+		<script type="text/javascript">
 
 		function startTimer(duration, display) {
 		    var timer = duration, minutes, seconds;
@@ -246,8 +436,6 @@
 
 
 	</script>
-
-        
-
+	--> 
     </body>
 </html>
