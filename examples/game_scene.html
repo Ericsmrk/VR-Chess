@@ -22,8 +22,9 @@
 	<script src="js/setAtts.js"></script>
 	<script src="js/holdable_component.js"></script>
 	<script src="js/piece_color_component.js"></script>
+   
+	<script src="js/color_changer_component.js"></script>
 
-	
 	<!--Extra movement fun stuff -->
 	<!--
 		temporily disabling as they crashed my version. Don't want to deal with them
@@ -171,12 +172,12 @@
 				<!--this gets added to all networked peices. It ties together the schemas, these universal attributes and the ones below
 				when connected, these attribtues and components will be added to the entities which have a networked component, and the correct template-->
 				<template id="chess-piece-template-w">
-					<a-entity class="chessguy" chess-piece material piece-color="gray">
+					<a-entity class="chessguy" chess-piece material>
 					</a-entity>
 				</template>
 
 				<template id="chess-piece-template-b">
-					<a-entity class="chessguy" chess-piece material piece-color="blue">
+					<a-entity class="chessguy" chess-piece material>
 					</a-entity>
 				</template>
 
@@ -193,7 +194,7 @@
 							  If for some reason, you feel you've done everything to try and make sure 
 							  naf should be working, please double check this. 
 							  -->
-				<a-entity cursor="fuse: false; fuseTimeout: 500" raycaster="objects: #cursor-plane" position="0 0 -0.2"
+				<a-entity cursor="fuse: false; fuseTimeout: 500" raycaster="objects: .clickable" position="0 0 -0.2"
 					geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003"
 					material="color: black; shader: flat" touch-controls>
 				</a-entity>
@@ -221,7 +222,7 @@
 		finally the fun part, networked.-->
 		<a-entity id="w_rook_l"
 		networked="template:#chess-piece-template-w;networkId:rookwl;persistent:true; owner:rookwl;"
-		scale="0.2 0.2 0.2" boardPos="a1" position="-1.5 1.5 2" gltf-model="#rook_w_asset" 
+		scale="0.2 0.2 0.2" boardPos="a1" position="-1.5 1.5 2" gltf-model="#rook_w_asset"
 		></a-entity>
 		
 		<a-entity id="b_rook_r"
@@ -340,47 +341,47 @@
 
 		<a-entity id="b_pawn_1"
 		networked="template:#chess-piece-template-b;networkId:pawnb1;persistent:true; owner:pawnb1;"
-		scale-="0.2 0.2 0.2" boardPos="a7" position="-1.5 1.5 -1" gltf-model="#pawn_b_asset"
+		scale="0.2 0.2 0.2" boardPos="a7" position="-1.5 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_2"
 		networked="template:#chess-piece-template-b;networkId:pawnb2;persistent:true; owner:pawnb2;"
-		scale-="0.2 0.2 0.2" boardPos="b7" position="-1 1.5 -1" gltf-model="#pawn_b_asset"
+		scale="0.2 0.2 0.2" boardPos="b7" position="-1 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_3"
 		networked="template:#chess-piece-template-b;networkId:pawnb3;persistent:true; owner:pawnb3;"
-		scale-="0.2 0.2 0.2" boardPos="c7" position="-0.5 1.5 -1" gltf-model="#pawn_b_asset"
+		scale="0.2 0.2 0.2" boardPos="c7" position="-0.5 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_4"
 		networked="template:#chess-piece-template-b;networkId:pawnb4;persistent:true; owner:pawnb4;"
-		scale-="0.2 0.2 0.2" boardPos="d7" position="0 1.5 -1" gltf-model="#pawn_b_asset"
+		scale="0.2 0.2 0.2" boardPos="d7" position="0 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_5"
 		networked="template:#chess-piece-template-b;networkId:pawnb5;persistent:true; owner:pawnb5;"
-		scale-="0.2 0.2 0.2" boardPos="e7" position="0.5 1.5 -1" gltf-model="#pawn_b_asset"
+		scale="0.2 0.2 0.2" boardPos="e7" position="0.5 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_6"
 		networked="template:#chess-piece-template-b;networkId:pawnb6;persistent:true; owner:pawnb6;"
-		scale-="0.2 0.2 0.2" boardPos="f7" position="1 1.5 -1" gltf-model="#pawn_b_asset"
+		scale="0.2 0.2 0.2" boardPos="f7" position="1 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_7"
 		networked="template:#chess-piece-template-b;networkId:pawnb7;persistent:true; owner:pawnb7;"
-		scale-="0.2 0.2 0.2" boardPos="g7" position="1.5 1.5 -1" gltf-model="#pawn_b_asset"
+		scale="0.2 0.2 0.2" boardPos="g7" position="1.5 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 
 		<a-entity id="b_pawn_8"
 		networked="template:#chess-piece-template-b;networkId:pawnb8;persistent:true; owner:pawnb8;"
-		scale-="0.2 0.2 0.2" boardPos="h7" position="2 1.5 -1" gltf-model="#pawn_b_asset"
+		scale="0.2 0.2 0.2" boardPos="h7" position="2 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
 				
 		<!-- This plane is used to detect clicks on the chessboard-->
 		<a-plane id="cursor-plane" cursor-listener geometry="primitive plane" position="0, 0.801, 0" visible="false"
-			rotation="-90 0 0" height="0.64" width="0.64" ></a-plane>	<!--sound="src: #someSound; on: click"-->
+			rotation="-90 0 0" height="0.64" width="0.64" class="clickable"></a-plane>	<!--sound="src: #someSound; on: click"-->
 		<!--Height and Width need to be scaled to 0.64-->
 		<!-- This plane is used for highlighting, and is moved around by the "cursor-listener" component-->
 		<a-plane id="highlight-plane" id="highPlane" visible="false" geometry="primitive plane" rotation="-90 0 0" color="blue"
@@ -390,6 +391,7 @@
 		<!--	loads a scene json-->
 		<a-entity setatts></a-entity>
 		<!--	sets attributes to be applied to many pieces-->
+		<a-plane position="0 1.6 0"scale="0.2 0.2 0.2" class="clickable" geometry="primitive plane" color-changer></a-plane>
 		
 		</a-scene>
 		

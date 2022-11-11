@@ -41,11 +41,4 @@ AFRAME.registerComponent('loader', {
         //<a-entity gltf-model='#table' position = '0 0 0' scale = '.25 .25 .25' rotation='0 0 0'></a-entity>
         
     }
-
-    
-
-
-}
-
-);
-    
+}); 
