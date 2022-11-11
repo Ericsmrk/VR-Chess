@@ -2,7 +2,7 @@ Okay so, easiest way to get started understanding the VR Chess project
 is to start with our main game scene. 
 
 game_scene.html is a an html file which contains the game scene itself
-which is under the tag, <a-scene> (line 94 at the moment)
+which is under the tag, <a-scene> (line 100 at the moment)
 
 Everything visually seem on start up when loading up, specifically 
 the game_scene.html site will be within this tag. 
@@ -29,7 +29,7 @@ In short, these are the templates for the entities that will be spawned
 when we connect to the server. More indepth explation is avaliable here:
 https://github.com/networked-aframe/networked-aframe#documentation 
 
-Finally at the end of all that, begining at line 180, we begin to build the scene
+Finally at the end of all that, begining at line 187, we begin to build the scene
 itself.
 we'll call this section 2.0 for reference.
 
@@ -88,7 +88,7 @@ the ones from line 6-17 are from frameworks. No touchy.
 
 Lines 18-29 are from our own scripts.
 
-At line 33, you'll noitce we have our custom schemas, in short, they allow for things other than 
+At line 39, you'll noitce we have our custom schemas, in short, they allow for things other than 
 just position or rotation to be synced accross the network. 
 
 
