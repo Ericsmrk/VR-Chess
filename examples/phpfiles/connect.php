@@ -4,12 +4,12 @@
 
 
 	// Database connection
-	$conn = new mysqli('localhost','root','','test');
+	$conn = new mysqli('us-cdbr-east-06.cleardb.net','befa68c4d5919a','d684d1fd','heroku_4ad9e7c6144206b');
 	if($conn->connect_error){
 		echo "$conn->connect_error";
 		die("Connection Failed : ". $conn->connect_error);
 	} else {
-		$stmt = $conn->prepare("insert into registration(username, password) values(?, ?)");
+		$stmt = $conn->prepare("INSERT INTO useraccount (username, password) VALUES(?, ?)");
 		$stmt->bind_param("ss", $username, $password);
 		$execval = $stmt->execute();
 		echo $execval;
