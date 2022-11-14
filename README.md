@@ -25,8 +25,6 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 
 
 <!-- PROJECT LOGO -->
@@ -54,6 +52,20 @@
 A multiplayer online VR Chess game. Play chess in various scenes with your
 friends from across the world! Become immersed in a virtual space, sharpen your Chess skills, and have
 fun playing against your friends in the most accessible immersive VR chess experience.
+
+<!--There is documentation in the docs folder.-->
+<!--Steps to setup the project are mentioned here  Installing dependencies on your PC  
+Setting up the Database How to Run -->
+<!--  Steps to deploy are mentioned here -->
+<!-- Finally it is also deployed:  link -->
+<!-- Explain structure of repo Describing where docs, uml diagrams, code etc is stored    -->
+<!-- maybe set up Contributing section 
+The repository is open for ??? contributions from all interested developers ???.
+Or just instructions for how a new team member sould start...
+You can open an Issue or solve a current issue if possible.
+Fork this project to your Github acoount.
+After forking, clone the repository to local system and make the necessary changes.
+Send Pull Requests with explanation what changes you have done.  -->
 
 
 ### Built With
