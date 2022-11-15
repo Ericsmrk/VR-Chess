@@ -86,7 +86,7 @@ See `LICENSE.txt` for more information.
 
 Eric Smrkovsky - ericsmrkovsky@gmail.com  
 Jacob Miller - miller_jacob49@outlook.com  
-Jose Jimenez -  
+Jose Jimenez -  jimenezjosef97@gmail.com
 Christian Leon -   
 Bretton Harris -  
 
