@@ -1,6 +1,19 @@
 AFRAME.registerComponent('color-changer',{
+    schema:{
+        preset:{type:'string',default:'random'},
+        seed:{type:'number',default:-1}
+    },
     init:function(){
         const pieces = document.querySelectorAll('.chessguy');
+        var currentSeed;
+        if(this.data.seed < 0){
+            currentSeed = Math.floor(Math.random()*0xFFFF);
+        }else{
+            currentSeed = this.data.seed;
+            currentSeed = currentSeed % 0xFFFF;
+        }
+        
+        
         //console.log(pieces)
         function getRandomColor() {
             let r = (Math.floor(Math.random()*256)).toString(16);
