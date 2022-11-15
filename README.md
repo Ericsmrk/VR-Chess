@@ -25,17 +25,15 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://cdotli.github.io/Milestone1/">
+  <a href="https://glacial-waters-73707.herokuapp.com/game_scene.html">
     <img src="https://github.com/Ericsmrk/VR-Chess/blob/main/images/chess.PNG" alt="Logo" width="400" height="400">
   </a>
-<h3 align="center">click photo to play</h3>
+<h3 align="center">click photo to play with prototype</h3>
 <h3 align="center">!!!VR CHESS!!!</h3>
 
   <p align="center">
@@ -54,6 +52,20 @@
 A multiplayer online VR Chess game. Play chess in various scenes with your
 friends from across the world! Become immersed in a virtual space, sharpen your Chess skills, and have
 fun playing against your friends in the most accessible immersive VR chess experience.
+
+<!--There is documentation in the docs folder.-->
+<!--Steps to setup the project are mentioned here  Installing dependencies on your PC  
+Setting up the Database How to Run -->
+<!--  Steps to deploy are mentioned here -->
+<!-- Finally it is also deployed:  link -->
+<!-- Explain structure of repo Describing where docs, uml diagrams, code etc is stored    -->
+<!-- maybe set up Contributing section 
+The repository is open for ??? contributions from all interested developers ???.
+Or just instructions for how a new team member sould start...
+You can open an Issue or solve a current issue if possible.
+Fork this project to your Github acoount.
+After forking, clone the repository to local system and make the necessary changes.
+Send Pull Requests with explanation what changes you have done.  -->
 
 
 ### Built With
@@ -74,7 +86,7 @@ See `LICENSE.txt` for more information.
 
 Eric Smrkovsky - ericsmrkovsky@gmail.com  
 Jacob Miller - miller_jacob49@outlook.com  
-Jose Jimenez -  
+Jose Jimenez -  jimenezjosef97@gmail.com  
 Christian Leon -   
 Bretton Harris -  
 
