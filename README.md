@@ -30,10 +30,10 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://vr-chess-azure-showoff.azurewebsites.net/">
+  <a href="https://glacial-waters-73707.herokuapp.com/game_scene.html">
     <img src="https://github.com/Ericsmrk/VR-Chess/blob/main/images/chess.PNG" alt="Logo" width="400" height="400">
   </a>
-<h3 align="center">click photo to play</h3>
+<h3 align="center">click photo to play with prototype</h3>
 <h3 align="center">!!!VR CHESS!!!</h3>
 
   <p align="center">
@@ -86,7 +86,7 @@ See `LICENSE.txt` for more information.
 
 Eric Smrkovsky - ericsmrkovsky@gmail.com  
 Jacob Miller - miller_jacob49@outlook.com  
-Jose Jimenez -  jimenezjosef97@gmail.com
+Jose Jimenez -  jimenezjosef97@gmail.com  
 Christian Leon -   
 Bretton Harris -  
 
