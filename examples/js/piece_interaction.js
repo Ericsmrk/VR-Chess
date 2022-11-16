@@ -622,9 +622,8 @@ AFRAME.registerComponent('cursor-listener', {
             
             let initSound = new Audio('src/sounds/move-self.mp3')
             let badSound = new Audio('src/sounds/notify.mp3')
-            let loading = new Audio('src/sounds/loading.mp3')
             initSound.play()
-            loading.load()
+
             
             
             const startPosition = worldToBoard(obj.detail.intersection.point) //"obj.detail.intersection.point" understand and document this better, appears to grab the position
@@ -646,7 +645,7 @@ AFRAME.registerComponent('cursor-listener', {
             highlightPlane.object3D.visible = true; //while mouse is down, the following three thigns happen. First the highlight becomes visible. 
             highlightPlane.setAttribute("color", "blue"); //next it becomes blue 
             highlightPlane.object3D.position.copy(boardToWorld(startPosition)) //This gives the first position to the highlight plane
-            
+
 //*********************************************************** DEFINITION FOR EVENT OCCURING ON MOUSE UP****************************************************************************************** */
             const onMouseUp = (evt) => { //understand the javascript stuff going on here.  //understand the javascript stuff going on here. 
                 // Cleanup event handlers so we don't get _another_
@@ -703,12 +702,10 @@ AFRAME.registerComponent('cursor-listener', {
                             if(pieces[curPiece].id[0] == 'w'){  //if white, move into white graveyard
                                 pieces[endPosPiece].object3D.position.copy(deadPieceW[dPit_w])
                                 pieces[endPosPiece].setAttribute('boardPos', "dead")
-                                loading.play()
                                 dPit_w++
                             }else{                              //if black, move into black graveyard
                                 pieces[endPosPiece].object3D.position.copy(deadPieceB[dPit_b])
                                 pieces[endPosPiece].setAttribute('boardPos', "dead")
-                                loading.play()
                                 dPit_b++
                             }     
                         }           
