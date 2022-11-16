@@ -645,7 +645,7 @@ AFRAME.registerComponent('cursor-listener', {
             highlightPlane.object3D.visible = true; //while mouse is down, the following three thigns happen. First the highlight becomes visible. 
             highlightPlane.setAttribute("color", "blue"); //next it becomes blue 
             highlightPlane.object3D.position.copy(boardToWorld(startPosition)) //This gives the first position to the highlight plane
-            
+
 //*********************************************************** DEFINITION FOR EVENT OCCURING ON MOUSE UP****************************************************************************************** */
             const onMouseUp = (evt) => { //understand the javascript stuff going on here.  //understand the javascript stuff going on here. 
                 // Cleanup event handlers so we don't get _another_
