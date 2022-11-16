@@ -18,9 +18,9 @@ AFRAME.registerComponent('color-changer',{
             //this.setAttribute('seed', currentSeed);
         }
         function advanceSeed(){
-            currentSeed = (currentSeed*34819)% 0xFFFF;
+            currentSeed = (currentSeed*34819)% 0x10000;
         }
-        //Check if there is a seed, if not, make one. otherwise set seed to max size.
+        
         
         
         
@@ -62,8 +62,8 @@ AFRAME.registerComponent('color-changer',{
             
         });
         
-        let originalSeed = this.data.seed;
-        
+            let originalSeed = this.data.seed;
+            //Check if there is a seed, if not, make one. otherwise set seed to max size.
             if(originalSeed < 0){
                 rerollSeed();
             }else{
