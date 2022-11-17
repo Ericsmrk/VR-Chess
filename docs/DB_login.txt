@@ -1,0 +1,15 @@
+How to login to the project Database.
+1. Install mySQL Workbench
+2. Open mySQL Workbench and click the "+" next to mySQL connections.
+3. For the Connection name input VR-Chess DB or whatever you'd like to name it.
+4. For the Host Name input, "us-cdbr-east-06.cleardb.net"
+5. For the Username input, "befa68c4d5919a"
+6. For the password click on store in keychain then input, "d684d1fd"
+7. Finally near the bottom-right of the window click on "Test Connection".
+        If your connection is fine then click on "Ok" at the bottom right to finish.
+        Otherwise ensure you have done the above steps correctly.
+
+-Important Note:
+Since we are using the free version of clearDB we can only have one database which is "heroku_4ad9e7c6144206b"
+Any tables created will have to be in that database as we are only allocated 1 DB with the free version.
+
