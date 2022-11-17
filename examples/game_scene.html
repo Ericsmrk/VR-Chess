@@ -174,6 +174,8 @@
 						</a-entity>
 					</a-entity>
 				</template>
+
+
 				
 				<!--Universal chess template-->
 				<!--this gets added to all networked peices. It ties together the schemas, these universal attributes and the ones below
@@ -191,22 +193,31 @@
 
 			</a-assets>
 
-		<!--Avatar-->
+		<!--Avatar--
 		<a-entity id="cameraRig" >
 
 			<a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" camera
 				position="0.25 1.2 0" spawn-in-circle="radius:0.5" look-controls="pointerLockEnabled: true"
-				wasd-controls="acceleration:10" movement-controls>
+				wasd-controls="acceleration:10" movement-controls>-->
 				<!--This is the raycaster, controlsl what you look at, and the ring. 
 							  If for some reason, you feel you've done everything to try and make sure 
 							  naf should be working, please double check this. 
-							  -->
+							  --><!--
 				<a-entity cursor="fuse: false; fuseTimeout: 500" raycaster="objects: .clickable" position="0 0 -0.2"
 					geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003"
 					material="color: black; shader: flat" touch-controls>
 				</a-entity>
 
 				<a-sphere class="head" visible="false" random-color></a-sphere>
+			</a-entity>
+		</a-entity>-->
+
+		<a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" position="0.25 1.2 0" wasd-controls="acceleration:10" movement-controls look-controls="pointerLockEnabled:true;">
+			<a-entity id="cameraRig" camera >
+				<a-entity cursor="fuse: false; fuseTimeout: 500" raycaster="objects: .clickable" position="0 0 -0.2"
+				geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003"
+				material="color: black; shader: flat" touch-controls>
+				</a-entity>
 			</a-entity>
 		</a-entity>
 
