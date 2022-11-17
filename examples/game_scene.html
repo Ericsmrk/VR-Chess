@@ -15,6 +15,7 @@
 	<!--Environment and chess js stuff-->
 	<script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
 	<!--<script src="/js/spawn-in-circle.component.js"></script>-->
+	<script src="js/dynamic-room.component.js"></script>
 
 	<script src="js/piece_interaction.js"></script>
 	<script src="js/chess_piece_component.js"></script>
@@ -101,11 +102,7 @@
 	<div class="inputBox" style="visibility:hidden;">
 		<h1><a href="game_scene.html">Start Game</a></h1>
 	</div>
-	<a-scene stats networked-scene="
-		room: notBasic;
-		debug: true;
-		adapters: easyrtc;"
-		>
+	<a-scene dynamic-room>
 
 			<!--Just asset loading -->
 			<a-box id="blackBox"color ="#111111"opaity="1" repo_b visible="false"position="0 0.5 -1" class="clickable" geometry="primitive: box"></a-box>
@@ -114,8 +111,6 @@
 
 			
 			
-				
-				
 			
 				<a-mixin id="highPlane" visible="false" geometry="primitive plane" rotation="-90 0 0" color="blue" opacity="0.5"
 					height="0.08" width="0.08"></a-mixin>
@@ -395,7 +390,7 @@
 		<!--	loads a scene json-->
 		<a-entity setatts></a-entity>
 		<!--	sets attributes to be applied to many pieces-->
-		<a-plane position="0 1.6 0"scale="0.2 0.2 0.2" class="clickable" geometry="primitive plane" color-changer></a-plane>
+		<a-plane position="0 1.6 0"scale="0.2 0.2 0.2" class="clickable" geometry="primitive plane" color-changer="seed:2048"></a-plane>
 		
 		</a-scene>
 		
