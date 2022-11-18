@@ -15,6 +15,8 @@
 		<script src="js/setAtts.js"></script>
 		<script src="js/piece_color_component.js"></script>
 		<script src="js/color_changer_component.js"></script>
+		<script src="js/splash_screen_camera.js"></script>
+		
 		
 
 		<style>
@@ -28,12 +30,19 @@
 		<div class="inputBox">
 			<h1><a href="game_scene.html">Start Game</a></h1>
 			<form action="game_scene.html">
-				<input type="text" name="room"placeholder="Room Code">
-				<input type="text" name="colorType" id="colorType" placeholder="Color Type">
-				<input type="text" name="colorSeed" id="colorSeed" placeholder="Color Seed">
-				<input type="hidden" name="scene" id="scene">
+				<input type="text" name="room"placeholder="Room Code" autocomplete="off">
+				<input type="text" name="colorType" id="colorType" placeholder="Color Type" autocomplete="off">
+				<input type="text" name="colorSeed" id="colorSeed" placeholder="Color Seed" autocomplete="off">
+				<input type="hidden" name="scene" id="scene" autocomplete="off">
 				<input type="submit">
 			</form>
+			<button id="basic">Basic</button><br>
+			<button id="ash">Ashes</button><br>
+			<button id="red-blu">Red vs Blu</button><br>
+			<button id="silver-gold">Gold and Silver</button><br>
+			<button id="random">Random</button><br>
+			<button id="super-random">Super Random</button><br>
+			<button id="gradient-synth">Synth</button>
 		</div>
 		
         <a-scene gui-env>
@@ -218,10 +227,52 @@
 				<a-entity loader="/src/scenes/scene2.json"></a-entity>
 				<a-entity setatts></a-entity>
 				
-				<a-plane position="0 1.6 0"scale="0.2 0.2 0.2" class="clickable" geometry="primitive plane" color-changer="option:random; seed:1201"></a-plane>
-
+				
+				
+				<!--COLOR CHANGERS-->
+				<a-entity position="0 -0.15 -0.2"scale="0.02 0.02 0.02"
+				color-changer="option:basic; onload:true; selector:basic"
+				></a-entity>
+				<a-entity position="0 -0.15 -0.2"scale="0.02 0.02 0.02"
+				color-changer="option:gradient; onload:false; selector:gradient-synth; gradientW:FCAE1EFF00EE; gradientB:D000000000A0"
+				></a-entity>
+				<a-entity position="0 -0.15 -0.2"scale="0.02 0.02 0.02"
+				color-changer="option:red-blu; onload:false; selector:red-blu"
+				></a-entity>
+				<a-entity position="0 -0.15 -0.2"scale="0.02 0.02 0.02"
+				color-changer="option:ash; onload:false; selector:ash"
+				></a-entity>
+				<a-entity position="-0.03 -0.15 -0.2"scale="0.02 0.02 0.02" 
+				color-changer="option:silver-gold; onload:false; selector:silver-gold"
+				></a-entity>
+				<a-entity position="0.03 -0.15 -0.2"scale="0.02 0.02 0.02"  
+				color-changer="option:random; onload:false; selector:random"
+				></a-entity>
+				<a-entity position="0.06 -0.15 -0.2"scale="0.02 0.02 0.02" 
+				color-changer="option:super-random; onload:false; selector:super-random"
+				></a-entity>
+				
+				
 
 			<!--END PREVIEW-->
+
+
+        <!-- Mouse cursor so we can click on the scene with mouse or touch. -->
+		<a-entity id="mouse-cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable"></a-entity>
+		<a-entity id="leftHand" laser-controls="hand: left" raycaster="objects: [gui-interactable]"></a-entity>
+		<a-entity id="rightHand" laser-controls="hand: right" raycaster="objects: [gui-interactable]"></a-entity>
+
+		<!-- Camera + cursor. -->
+		
+		<a-entity id="cameraRig" position="0 1.6 0" rotation splash-camera>
+			
+			<a-camera look-controls="enabled:false" wasd-controls="enabled:false" position="0 0 0" >
+
+			</a-camera> <!-- /camera -->
+		</a-entity>
+            
+
+        </a-scene>
 <!--
             <a-gui-flex-container
 			flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1"
@@ -298,21 +349,6 @@
 
 		</a-gui-flex-container>
 	-->
-
-        <!-- Mouse cursor so we can click on the scene with mouse or touch. -->
-		<a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable"></a-entity>
-		<a-entity id="leftHand" laser-controls="hand: left" raycaster="objects: [gui-interactable]"></a-entity>
-		<a-entity id="rightHand" laser-controls="hand: right" raycaster="objects: [gui-interactable]"></a-entity>
-
-		<!-- Camera + cursor. -->
-		<a-entity id="cameraRig" position="0 1.6 0">
-			<a-camera look-controls wasd-controls position="0 0 0">
-			</a-camera> <!-- /camera -->
-		</a-entity>
-            
-
-        </a-scene>
-
     <!--
 		<script type="text/javascript">
 

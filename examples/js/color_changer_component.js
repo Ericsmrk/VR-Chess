@@ -1,23 +1,35 @@
 AFRAME.registerComponent('color-changer',{
     schema:{
         option:{type:'string',default:'random'},
-        seed:{type:'number',default:-1}
+        seed:{type:'number',default:-1},
+        onload:{default:false},
+        selector:{type:'string',default:'none'},
+        gradientW:{type:'string', default:'000000222222'},
+        gradientB:{type:'string', default:'FFFFFFEEEEEE'}
+    },
+    options:{
+        'basic':{wColor:'#F0F0E0', bColor:'#202030'},
+        'ash':{wColor:'#BBB', bColor:'#555'},
+        'silver-gold':{wColor:'#E0E0E7', bColor:'#E7B53B'},
+        'red-blu':{wColor:'#B8383B', bColor:'#5885A2'}
     },
     init:function(){
         
         const pieces = document.querySelectorAll('.chessguy');
-
-        var currentSeed = this.data.seed;
+        var originalSeed = this.data.seed;
+        var currentSeed = originalSeed;
         currentSeed = currentSeed % 0x10000;
-        var currentOption = this.data.option;
+        var currentOption = this.data.option;   //Programs haven't liked directly checking schema data, unfortunately there's no time to figure out why
+        var optionData = this.options;   //This component is just for buttons anyway, so it shouldn't be that big of an issue
+        var runOnLoad = this.data.onload;       //probably since this.data is different when going down a scope
+        var gradW = this.data.gradientW;
+        var gradB = this.data.gradientB;
+        var currentSelector = this.data.selector;
 
         function rerollSeed(){
-            currentSeed = Math.floor(Math.random()*0x10000);
+            originalSeed = Math.floor(Math.random()*0x10000);
+            currentSeed = originalSeed;
             
-            let seedForm = document.getElementById('colorSeed')
-            if(seedForm){
-                seedForm.value=currentSeed;
-            }
         }
         function getRandomColor(c) {
             let rawColor=Math.floor(currentSeed/16)
@@ -72,7 +84,7 @@ AFRAME.registerComponent('color-changer',{
         function randomColors(){
             colorW = getRandomColor('w');
             colorB = getRandomColor('b');
-            test = pieces[i].id;
+            //test = pieces[i].id;
             for(let i in pieces){
                 if(pieces[i].id[0]=='w'){//Yes, this throws an error, but the function still works. No time to figure out why.
                     pieces[i].removeAttribute('piece-color');
@@ -93,17 +105,33 @@ AFRAME.registerComponent('color-changer',{
             }
         }
 
-        this.el.addEventListener('click', function(){
-            rerollSeed();
-            //console.log(this.data.seed);
-            colorize();
-            
-        });
+        var x = document.querySelector('#'+ currentSelector);
+        console.log(currentOption)
+        if(x){
+            x.addEventListener('click', function(){
+                rerollSeed();
+                //console.log(this.data.seed);
+                colorize();
+                
+            });
+        }
+        
         
         
         //Check if there is a seed, if not, make one. otherwise constrain seed to max size.
         
         function colorize(){
+            let seedForm = document.querySelector('#colorSeed');
+            let typeForm = document.querySelector('#colorType');
+            if(seedForm){
+                seedForm.value=originalSeed;
+            }
+            if(typeForm){
+                typeForm.value=currentOption
+            }
+
+            ;
+
             if(currentOption == 'random'){
                 if(currentSeed < 0){
                     rerollSeed();
@@ -116,22 +144,91 @@ AFRAME.registerComponent('color-changer',{
                 }else{
                     superRandomColors();
                 }
+            }else if(currentOption == 'gradient'){
+                let arrW = Array(8);
+                let arrB = Array(8);
+                let wColor1 = Array(3);
+                let wColor2 = Array(3);
+                let bColor1 = Array(3);
+                let bColor2 = Array(3);
+                wColor1[0] = parseInt(gradW.substr(0,2),16);
+                wColor2[0] = parseInt(gradW.substr(6,2),16);
+                wColor1[1] = parseInt(gradW.substr(2,2),16);
+                wColor2[1] = parseInt(gradW.substr(8,2),16);
+                wColor1[2] = parseInt(gradW.substr(4,2),16);
+                wColor2[2] = parseInt(gradW.substr(10,2),16);
+
+                bColor1[0] = parseInt(gradB.substr(0,2),16);
+                bColor2[0] = parseInt(gradB.substr(6,2),16);
+                bColor1[1] = parseInt(gradB.substr(2,2),16);
+                bColor2[1] = parseInt(gradB.substr(8,2),16);
+                bColor1[2] = parseInt(gradB.substr(4,2),16);
+                bColor2[2] = parseInt(gradB.substr(10,2),16);
+            
+                for(let i = 0;i<8;i++){
+                    arrW[i] = '#';
+                    for(let j = 0;j<3;j++){
+                        let xolor = (Math.round(((7 - i) * wColor1[j] + (i * wColor2[j])) / 7)).toString(16);
+                        if(xolor.length<2){
+                            xolor = '0'+ xolor;
+                        }
+                        arrW[i]+=xolor;
+                        
+                          
+                    }
+                }
+                for(let i = 0;i<8;i++){
+                    arrB[i] = '#';
+                    for(let j = 0;j<3;j++){
+                        let xolor = (Math.round(((7 - i) * bColor1[j] + (i * bColor2[j])) / 7)).toString(16);
+                        if(xolor.length<2){
+                            xolor = '0'+ xolor;
+                        }
+                        arrB[i]+=xolor;
+                          
+                    }
+                }
+                for(let i in pieces){
+                    y = pieces[i].getAttribute('boardpos');
+                    if(pieces[i].id[0]=='w'){//Yes, this throws an error, but the function still works. No time to figure out why.
+                        pieces[i].removeAttribute('piece-color');
+                        pieces[i].setAttribute('piece-color',arrW[y.charCodeAt(0)-97]);
+                    }else{
+                        pieces[i].removeAttribute('piece-color');
+                        pieces[i].setAttribute('piece-color',arrB[y.charCodeAt(0)-97]);
+                    }
+                }
+            }else{
+                colorW = optionData[currentOption].wColor;
+                colorB = optionData[currentOption].bColor;
+                for(let i in pieces){
+                    if(pieces[i].id[0]=='w'){//Yes, this throws an error, but the function still works. No time to figure out why.
+                        pieces[i].removeAttribute('piece-color');
+                        pieces[i].setAttribute('piece-color',colorW);
+                    }else{
+                        pieces[i].removeAttribute('piece-color');
+                        pieces[i].setAttribute('piece-color',colorB);
+                    }
+                }
             }
+            
+            
             
         }
         
-        
-        var promises = Array(32);
+        if(runOnLoad){
+            var promises = Array(32);
             for(let i =0;i<32;i++){
                 promises[i] = new Promise(function(resolve) {
                     pieces[i].addEventListener('model-loaded',resolve,false);
                     
                 });
             }
-        Promise.all(promises).then(function(){
-            colorize();
-            
-        });
+            Promise.all(promises).then(function(){
+                colorize();
+            });
+        }
+        
         
         
     }
