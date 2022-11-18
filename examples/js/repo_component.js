@@ -6,7 +6,7 @@ init: function() {
     const object3D = this.el.object3D; //is this necessary? Still dont understand it
 
     
-    function setPos(){
+    function setPosb(){
 
         //avatar1.object3D.position.copy(whitePos)
         avatar1.removeAttribute('look-controls')
@@ -14,12 +14,12 @@ init: function() {
         avatar1.setAttribute('position', "0 1.2 -0.4")
         //avatar1.setAttribute('rotation', {x:0, y:180, z:0})
         avatar1.object3D.rotation.set(THREE.Math.degToRad(0),THREE.Math.degToRad(180),THREE.Math.degToRad(0))
-        avatar1.setAttribute('look-controls', "pointerLockEnabled:true")
+        //avatar1.setAttribute('look-controls', "pointerLockEnabled:true")
 
         console.log("yup")
     }
 
-    this.el.addEventListener('click', setPos);
+    this.el.addEventListener('click', setPosb);
 
     
 }
@@ -27,7 +27,7 @@ init: function() {
 
 });
 
-/*
+
 AFRAME.registerComponent('repo_w', {
 
     init: function() {
@@ -51,4 +51,3 @@ AFRAME.registerComponent('repo_w', {
     
     
     });
-*/
