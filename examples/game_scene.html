@@ -85,6 +85,14 @@
 				});
 			}
 
+			if (!NAF.schemas.hasTemplate('#empty-template')) {
+				NAF.schemas.add({
+					template: '#empty-template',
+					components: [
+						'whoseTurn'
+					]
+				});
+			}
 			
 			const components = NAF.schemas.getComponentsOriginal(template);
 			return components;
@@ -105,8 +113,8 @@
 	<a-scene dynamic-room>
 
 			<!--Just asset loading -->
-			<a-box id="blackBox"color ="#111111"opaity="1" repo_b visible="false"position="0 0.5 -1" class="clickable" geometry="primitive: box"></a-box>
-			<a-box id="whiteBox"color ="#AAAAAA"opaity="0"visible="false" repo_w position="0 0.5 1" class="clickable" geometry="primitive: box"></a-box>
+			<a-plane id="blackBox" text="value: Player 2" rotation="0 180 0"color ="#111111"opacity="1" repo visible="true"position="4 0.5 2" class="clickable" geometry="primitive: plane"></a-plane>
+			<a-plane id="whiteBox" text="value: Player 1"color ="#AAAAAA" opacity="1"visible="true" repo position="4 0.5 -2" class="clickable" geometry="primitive: plane"></a-plane>
 			<a-assets>
 
 			
@@ -182,6 +190,9 @@
 					</a-entity>
 				</template>
 
+				<template id="empty-template">
+					<a-entity piece-interaction ></a-entity>
+				</template>
 
 			</a-assets>
 
@@ -204,16 +215,19 @@
 			</a-entity>
 		</a-entity>-->
 
-		<a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" position="0.25 1.2 0" wasd-controls="acceleration:10" movement-controls look-controls="pointerLockEnabled:true;">
+		<a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" position="4 1.2 0" wasd-controls="acceleration:10" movement-controls look-controls="pointerLockEnabled:true;">
 			<a-entity id="cameraRig" camera >
-				<a-entity cursor="fuse: false; fuseTimeout: 500" raycaster="objects: .clickable" position="0 0 -0.2"
+				<a-plane id="startText"opacity="0.25"text="value: Please choose Player 1 or Player 2 by clicking the respective box. If the box is see through, it has already been selected. Please turn around and select the remaining box. "
+				scale="0.25 0.1" visible="true" color="blue" position="0 0.125 -0.2"></a-plane>
+
+				<a-entity id="playercursor" cursor="fuse: false; fuseTimeout: 500" raycaster="objects: .clickable" position="0 0 -0.2"
 				geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003"
-				material="color: black; shader: flat" touch-controls>
+				material="color: black; shader: flat" touch-controls playerID="0">
 				</a-entity>
 			</a-entity>
 		</a-entity>
 
-
+		<a-entity id="empty" networked="template:#empty-template;networkID:empty;persistent:true owner:rookwr;"whoseTurn="0"></a-entity>
 		<!------------------------------------------------------------------------ Entity/Asset Loading ------------------------------------------------------------------>
 		<!-- ROOK -->
 		<!-- replaced these with the mixins for promotions; will replace the promoting pawn with player's chosen piece (rook, knight, bishop, queen) -->
