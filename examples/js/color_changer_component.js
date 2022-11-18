@@ -13,7 +13,7 @@ AFRAME.registerComponent('color-changer',{
         'silver-gold':{wColor:'#E0E0E7', bColor:'#E7B53B'},
         'red-blu':{wColor:'#B8383B', bColor:'#5885A2'}
     },
-    init:function(){
+    init:function(){ //Rewrite to an update-based function instead later
         
         const pieces = document.querySelectorAll('.chessguy');
         var originalSeed = this.data.seed;
@@ -33,7 +33,7 @@ AFRAME.registerComponent('color-changer',{
         }
         function getRandomColor(c) {
             let rawColor=Math.floor(currentSeed/16)
-            function weightColors( col){
+            function weightColors(col){
                 
                 x=parseInt(col, 16);
                 
@@ -123,14 +123,19 @@ AFRAME.registerComponent('color-changer',{
         function colorize(){
             let seedForm = document.querySelector('#colorSeed');
             let typeForm = document.querySelector('#colorType');
+            let gradWForm = document.querySelector('#gradW');
+            let gradBForm = document.querySelector('#gradB');
             if(seedForm){
                 seedForm.value=originalSeed;
-            }
-            if(typeForm){
-                typeForm.value=currentOption
+            }if(typeForm){
+                typeForm.value=currentOption;
+            }if(gradWForm){
+                gradWForm.value=gradW;
+            }if(gradBForm){
+                gradBForm.value=gradB;
             }
 
-            ;
+            
 
             if(currentOption == 'random'){
                 if(currentSeed < 0){

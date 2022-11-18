@@ -16,6 +16,7 @@
 		<script src="js/piece_color_component.js"></script>
 		<script src="js/color_changer_component.js"></script>
 		<script src="js/splash_screen_camera.js"></script>
+		<script src="js/selector-component.js"></script>
 		
 		
 
@@ -27,25 +28,39 @@
 		</style>
     </head>
     <body>
-		<div class="inputBox">
-			<h1><a href="game_scene.html">Start Game</a></h1>
+		<div class="inputBox" style="padding:30px">
 			<form action="game_scene.html">
 				<input type="text" name="room"placeholder="Room Code" autocomplete="off">
-				<input type="text" name="colorType" id="colorType" placeholder="Color Type" autocomplete="off">
-				<input type="text" name="colorSeed" id="colorSeed" placeholder="Color Seed" autocomplete="off">
-				<input type="hidden" name="scene" id="scene" autocomplete="off">
+				<input type="hidden" name="colorType" id="colorType" placeholder="Color Type" autocomplete="off">
+				<input type="hidden" name="colorSeed" id="colorSeed" placeholder="Color Seed" autocomplete="off">
+				<input type="hidden" name="gradW" id="gradW" placeholder="gradw" autocomplete="off">
+				<input type="hidden" name="gradB" id="gradB" placeholder="gradB" autocomplete="off">
+				<input type="hidden" name="scene" id="scene" placeholder="scene">
 				<input type="submit">
 			</form>
-			<button id="basic">Basic</button><br>
-			<button id="ash">Ashes</button><br>
-			<button id="red-blu">Red vs Blu</button><br>
-			<button id="silver-gold">Gold and Silver</button><br>
-			<button id="random">Random</button><br>
-			<button id="super-random">Super Random</button><br>
-			<button id="gradient-synth">Synth</button>
+			
+			<table>
+				<tr>
+					<td>
+						<button id="basic">Basic</button><br>
+						<button id="ash">Ashes</button><br>
+						<button id="red-blu">Red vs Blu</button><br>
+						<button id="silver-gold">Gold and Silver</button><br>
+						<button id="random">Random</button><br>
+						<button id="super-random">Super Random</button><br>
+						<button id="gradient-synth">Synth</button>
+					</td>
+					<td>
+						<button id="scene1" class="sceneChanger">Forest</button><br>
+						<button id="scene2" class="sceneChanger">Checkerboard</button>
+					</td>
+				</tr>
+			</table>
+			
+			
 		</div>
 		
-        <a-scene gui-env>
+        <a-scene>
 
 			
 
@@ -224,9 +239,9 @@
 				pawnMoved="false"></a-entity>
 
 				
-				<a-entity loader="/src/scenes/scene2.json"></a-entity>
+				<a-entity id="loader"></a-entity>
 				<a-entity setatts></a-entity>
-				
+				<a-entity env-selector></a-entity>
 				
 				
 				<!--COLOR CHANGERS-->
@@ -273,7 +288,8 @@
             
 
         </a-scene>
-<!--
+		
+		<!--
             <a-gui-flex-container
 			flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1"
 			opacity="0.7" width="3.5" height="4.5" panel-color="#072B73" panel-rounded="0.2"
