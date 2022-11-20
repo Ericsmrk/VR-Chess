@@ -85,11 +85,14 @@
 				});
 			}
 
+			//okie dokie, so we have an empty template for the turn, entity? 
 			if (!NAF.schemas.hasTemplate('#empty-template')) {
 				NAF.schemas.add({
 					template: '#empty-template',
 					components: [
+						'position',
 						'whoseTurn'
+						
 					]
 				});
 			}
@@ -189,10 +192,15 @@
 					<a-entity class="chessguy" chess-piece material>
 					</a-entity>
 				</template>
-
+				<!-- ctrl + / for instant comment -->
+				<!--gonna keep it separate from piece interaction, so no bugs-->
+				<!-- repo component.js, lines 30-36 -->
+				<!-- very nice.  -->
 				<template id="empty-template">
-					<a-entity piece-interaction ></a-entity>
+					<a-entity turns ></a-entity>
 				</template>
+
+				
 
 			</a-assets>
 
@@ -227,7 +235,10 @@
 			</a-entity>
 		</a-entity>
 
-		<a-entity id="empty" networked="template:#empty-template;networkID:empty;persistent:true owner:rookwr;"whoseTurn="0"></a-entity>
+		<!-- And this would its actual entity -->
+		<a-entity id="empty" geometry="primitive:box" networked="template:#empty-template;networkId:emp;persistent:true;owner:emptything;" whoseTurn="0" position="2 0 0"></a-entity>
+		<!-- try changing the owner name to something other than rookwr, as something else is named that, just to remove it as a possible issue -->
+		<!-- gimi sec to read everything -->
 		<!------------------------------------------------------------------------ Entity/Asset Loading ------------------------------------------------------------------>
 		<!-- ROOK -->
 		<!-- replaced these with the mixins for promotions; will replace the promoting pawn with player's chosen piece (rook, knight, bishop, queen) -->

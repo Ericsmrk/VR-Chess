@@ -2,7 +2,7 @@
 // It's a 4x4 plane tiled sideways, so Z is "upwards" instead of Y.
 AFRAME.registerComponent('cursor-listener', {
     schema:{
-        whoseTurn: {type: 'string', default:"0"}
+        
     },      
 
     init: function () {
@@ -655,6 +655,7 @@ AFRAME.registerComponent('cursor-listener', {
                 // Cleanup event handlers so we don't get _another_
                 // listener every time we click
                 NAF.utils.takeOwnership(pieces[curPiece]); //this is a function that takes ownership of all pieces. It work
+                NAF.utils.takeOwnership(emptyThing);
                 //pretty sure the above line is correct but if everything else fine change to pices[curPiece].id
                 //console.log("pieces[curPiece].id: " + pieces[curPiece].id)
                 this.removeEventListener('mouseup', onMouseUp); //ask about this. to whatever subject matter expert we can find  //ask about this. to whatever subject matter expert we can find 
@@ -670,7 +671,7 @@ AFRAME.registerComponent('cursor-listener', {
                // console.log("Whose Turn??" + whoseTurn)
                 let turn = emptyThing.getAttribute('whoseTurn')
 
-                if(play.getAttribute('playerID')==turn){
+                if(turn == play.getAttribute('playerID') || turn == null){
                     if(endPosPiece == -1){  //checking if space is empty, allow move
 
                         if(isMoveValid(pieces[curPiece], startPosition, endPosition)){      //isMoveValid(pieces[curPiece], startPosition, endPosition)
@@ -678,6 +679,7 @@ AFRAME.registerComponent('cursor-listener', {
                             pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
                             initSound.load()
                             initSound.play()
+                            emptyThing.object3D.position.copy(endPosition)
                             if(turn==0){
                                 emptyThing.setAttribute('whoseTurn', "1")
                             }
