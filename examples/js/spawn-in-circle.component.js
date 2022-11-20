@@ -10,7 +10,7 @@ AFRAME.registerComponent('spawn-in-circle', {
 
     var angleRad = this.getRandomAngleInRadians();
     var circlePoint = this.randomPointOnCircle(this.data.radius, angleRad);
-    var worldPoint = {x: circlePoint.x + center.x, y: center.y, z: circlePoint.y + center.z};
+    var worldPoint = {x: 4 + center.x, y: center.y, z: center.z};
     el.setAttribute('position', worldPoint);
     // console.log('world point', worldPoint);
 
