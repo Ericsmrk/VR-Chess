@@ -422,11 +422,11 @@
 		<a-plane id="highlight-plane" id="highPlane" visible="false" geometry="primitive plane" rotation="-90 0 0" color="blue"
 			opacity="0.5" height="0.08" width="0.08"></a-plane>
 		
-		<a-entity loader="/src/scenes/scene2.json"></a-entity>
+		<a-entity id="loader"></a-entity>
 		<!--	loads a scene json-->
 		<a-entity setatts></a-entity>
 		<!--	sets attributes to be applied to many pieces-->
-		<a-plane position="0 1.6 0"scale="0.2 0.2 0.2" class="clickable" geometry="primitive plane" color-changer="seed:2048"></a-plane>
+		<a-entity position="0 1.6 0"scale="0.2 0.2 0.2" id="initial-color-changer"></a-entity>
 		
 		</a-scene>
 		
