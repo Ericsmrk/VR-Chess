@@ -4,23 +4,21 @@ AFRAME.registerComponent('repo', {
         const avatar1 = document.querySelector('#player')
         const sText = document.querySelector('#startText')
         const pCursor = document.querySelector('#playercursor')
+        const kings = document.querySelectorAll('.kings')
         
         
         this.el.addEventListener('click', function() {  //reset position, remove instructions, set playerID for turns
             if(pCursor.getAttribute('playerID')==3){     //prevents players from selecting/removing both spawns
                 if (this.getAttribute('id')=="whiteBox") {
                     avatar1.setAttribute('position', "0 1.2 0.4")
-                    sText.setAttribute('visible', "false")
                     pCursor.setAttribute('playerID', "0")
-                    this.setAttribute('text', "value:Player in session, turn around and select player 2")
                 }
                 else if (this.getAttribute('id')=="blackBox") {   //reset position, remove instructions, set playerID for turns
-                        avatar1.setAttribute('position', "0 1.2 -0.4")
-                        sText.setAttribute('visible', "false")
-                        pCursor.setAttribute('playerID', "1")
-                        this.setAttribute('text', "value:Player in session, turn around and select player 1")
+                    avatar1.setAttribute('position', "0 1.2 -0.4")
+                    pCursor.setAttribute('playerID', "1")
                     }
-
+                sText.setAttribute('visible', "false")
+                this.setAttribute('visible', "false")
                 this.removeAttribute('geometry')
             }
         })

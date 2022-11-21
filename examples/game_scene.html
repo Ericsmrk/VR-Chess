@@ -117,27 +117,15 @@
 	<a-scene dynamic-room>
 
 
-
-			<!--------------------------------------------------- GONNA TRY SOME FUNNY CAMERA STUFF ----------------------------------------------------------------------->
-
-			<a-entity camera="active: false" camrender="cid: cam2"
-				position="0 1.2 -.8" rotation="-35 180 0 ">
-			</a-entity>
-
-			<a-entity camera="active: false" camrender="cid: cam3"
-				position="0 1.2 0.8" rotation="0 0 0 ">
-			</a-entity>
 			
-			<a-plane id="blackBox" material="src:#cam2" rotation="-25 180 0" text="value: Player 2" color ="#AAAAAA"opacity="1" repo visible="true" position="4 0.5 1.5" scale="1.3 1.3 1.3"class="clickable" geometry="primitive: plane"></a-plane>
-			<a-plane id="whiteBox" material="src:#cam2" text="value: Player 1"color ="#AAAAAA" opacity="1"visible="true" repo rotation="-25 0 0" position="4 0.5 -1.5" scale="1.3 1.3 1.3" class="clickable" geometry="primitive: plane"></a-plane>
+			<a-entity id="blackBox" gltf-model="#king_b_asset" rotation="0 180 0" color ="#AAAAAA"opacity="1" repo visible="true" position="4 0 1.5" scale="0.2 0.2 0.2"class="clickable" geometry="primitive: box"></a-entity>
+			<a-entity id="whiteBox" gltf-model="#king_w_asset" color ="#AAAAAA" opacity="1"visible="true" repo rotation="0 0 0" position="4 0 -1.5" scale="0.2 0.2 0.2" class="clickable" geometry="primitive: box"></a-entity>
 			
 
 			<!--Just asset loading -->		
 			<a-assets>
 
-			
-				<canvas id="cam2"></canvas>
-				<canvas id="cam3"></canvas>
+
 			
 				<a-mixin id="highPlane" visible="false" geometry="primitive plane" rotation="-90 0 0" color="blue" opacity="0.5"
 					height="0.08" width="0.08"></a-mixin>
@@ -245,7 +233,7 @@
 
 		<a-entity id="player" camera networked="template:#avatar-template;attachTemplateToLocal:false;" position="4 1.2 0" wasd-controls="acceleration:10" movement-controls  look-controls="pointerLockEnabled:true;">
 			<a-entity id="cameraRig"  >
-				<a-plane id="startText"opacity="0.25"text="value: Please choose Player 1 or Player 2 by clicking the respective box. If the box is see through, it has already been selected. Please turn around and select the remaining box. "
+				<a-plane id="startText"opacity="0.25"text="value: Please choose Player 1 or Player 2 by clicking the king. If a king is missing, it has already been selected. Please turn around and select the remaining king. "
 				scale="0.25 0.1" visible="true" color="blue" position="0 0.125 -0.2"></a-plane>
 
 				<a-entity id="playercursor" cursor="fuse: false; fuseTimeout: 500" raycaster="objects: .clickable" position="0 0 -0.2"
@@ -256,7 +244,7 @@
 		</a-entity>
 
 		<!-- And this would its actual entity -->
-		<a-entity id="empty" geometry="primitive:box" networked="template:#empty-template;networkId:emp;persistent:true;owner:emptything;" whoseTurn="0" position="2 0 0"></a-entity>
+		<a-entity id="empty"  networked="template:#empty-template;networkId:emp;persistent:true;owner:emptything;" whoseTurn="0" ></a-entity>
 		<!-- try changing the owner name to something other than rookwr, as something else is named that, just to remove it as a possible issue -->
 		<!-- gimi sec to read everything -->
 		<!------------------------------------------------------------------------ Entity/Asset Loading ------------------------------------------------------------------>
