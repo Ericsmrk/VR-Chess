@@ -25,6 +25,7 @@
 	<script src="js/piece_color_component.js"></script>
 	<script src="js/color_changer_component.js"></script>
 	<script src="js/repo_component.js"></script>
+	<script src="js/camrender.js"></script>
 
 	<!--Extra movement fun stuff -->
 	<!--
@@ -96,6 +97,16 @@
 					]
 				});
 			}
+
+			if (!NAF.schemas.hasTemplate('#sel-template')) {
+				NAF.schemas.add({
+					template: '#sel-template',
+					components: [
+						'position'
+						
+					]
+				});
+			}
 			
 			const components = NAF.schemas.getComponentsOriginal(template);
 			return components;
@@ -115,13 +126,10 @@
 	</div>
 	<a-scene dynamic-room>
 
-			<!--Just asset loading -->
-			<a-plane id="blackBox" text="value: Player 2" rotation="0 180 0"color ="#111111"opacity="1" repo visible="true"position="4 0.5 2" class="clickable" geometry="primitive: plane"></a-plane>
-			<a-plane id="whiteBox" text="value: Player 1"color ="#AAAAAA" opacity="1"visible="true" repo position="4 0.5 -2" class="clickable" geometry="primitive: plane"></a-plane>
+			<!--Just asset loading -->		
 			<a-assets>
 
-			
-			
+
 			
 				<a-mixin id="highPlane" visible="false" geometry="primitive plane" rotation="-90 0 0" color="blue" opacity="0.5"
 					height="0.08" width="0.08"></a-mixin>
@@ -200,9 +208,21 @@
 					<a-entity turns ></a-entity>
 				</template>
 
+				<template id="sel-template">
+					<a-entity class="clickable" repo ></a-entity>
+				</template>
+
 				
 
 			</a-assets>
+
+
+		<a-entity id="blackBox" networked="template:#sel-template;networkId:bBox;persistent:true; owner:bBox;"
+		gltf-model="#king_b_asset" repo position="4 0 1.5" scale="0.2 0.2 0.2" geometry="primitive: box"></a-entity>
+		<a-entity id="whiteBox" networked="template:#sel-template;networkId:wBox;persistent:true; owner:wBox;"
+		gltf-model="#king_w_asset" repo position="4 0 -1.5"scale="0.2 0.2 0.2" geometry="primitive: box"></a-entity>
+		
+
 
 		<!--Avatar--
 		<a-entity id="cameraRig" >
@@ -223,20 +243,20 @@
 			</a-entity>
 		</a-entity>-->
 
-		<a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" position="4 1.2 0" wasd-controls="acceleration:10" movement-controls look-controls="pointerLockEnabled:true;">
-			<a-entity id="cameraRig" camera >
-				<a-plane id="startText"opacity="0.25"text="value: Please choose Player 1 or Player 2 by clicking the respective box. If the box is see through, it has already been selected. Please turn around and select the remaining box. "
+		<a-entity id="player" camera networked="template:#avatar-template;attachTemplateToLocal:false;" position="4 1.2 0" wasd-controls="acceleration:10" movement-controls  look-controls="pointerLockEnabled:true;">
+			<a-entity id="cameraRig"  >
+				<a-plane id="startText"opacity="0.25"text="value: Please choose Player 1 or Player 2 by clicking the king. If a king is missing, it has already been selected. Please turn around and select the remaining king. "
 				scale="0.25 0.1" visible="true" color="blue" position="0 0.125 -0.2"></a-plane>
 
 				<a-entity id="playercursor" cursor="fuse: false; fuseTimeout: 500" raycaster="objects: .clickable" position="0 0 -0.2"
 				geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003"
-				material="color: black; shader: flat" touch-controls playerID="0">
+				material="color: black; shader: flat" touch-controls playerID="3">
 				</a-entity>
 			</a-entity>
 		</a-entity>
 
 		<!-- And this would its actual entity -->
-		<a-entity id="empty" geometry="primitive:box" networked="template:#empty-template;networkId:emp;persistent:true;owner:emptything;" whoseTurn="0" position="2 0 0"></a-entity>
+		<a-entity id="empty"  networked="template:#empty-template;networkId:emp;persistent:true;owner:emptything;" whoseTurn="0" ></a-entity>
 		<!-- try changing the owner name to something other than rookwr, as something else is named that, just to remove it as a possible issue -->
 		<!-- gimi sec to read everything -->
 		<!------------------------------------------------------------------------ Entity/Asset Loading ------------------------------------------------------------------>
