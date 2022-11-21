@@ -85,6 +85,17 @@
 				});
 			}
 
+			//okie dokie, so we have an empty template for the turn, entity? 
+			if (!NAF.schemas.hasTemplate('#empty-template')) {
+				NAF.schemas.add({
+					template: '#empty-template',
+					components: [
+						'position',
+						'whoseTurn'
+						
+					]
+				});
+			}
 			
 			const components = NAF.schemas.getComponentsOriginal(template);
 			return components;
@@ -105,8 +116,8 @@
 	<a-scene dynamic-room>
 
 			<!--Just asset loading -->
-			<a-box id="blackBox"color ="#111111"opaity="1" repo_b visible="false"position="0 0.5 -1" class="clickable" geometry="primitive: box"></a-box>
-			<a-box id="whiteBox"color ="#AAAAAA"opaity="0"visible="false" repo_w position="0 0.5 1" class="clickable" geometry="primitive: box"></a-box>
+			<a-plane id="blackBox" text="value: Player 2" rotation="0 180 0"color ="#111111"opacity="1" repo visible="true"position="4 0.5 2" class="clickable" geometry="primitive: plane"></a-plane>
+			<a-plane id="whiteBox" text="value: Player 1"color ="#AAAAAA" opacity="1"visible="true" repo position="4 0.5 -2" class="clickable" geometry="primitive: plane"></a-plane>
 			<a-assets>
 
 			
@@ -166,6 +177,8 @@
 						</a-entity>
 					</a-entity>
 				</template>
+
+
 				
 				<!--Universal chess template-->
 				<!--this gets added to all networked peices. It ties together the schemas, these universal attributes and the ones below
@@ -179,20 +192,28 @@
 					<a-entity class="chessguy" chess-piece material>
 					</a-entity>
 				</template>
+				<!-- ctrl + / for instant comment -->
+				<!--gonna keep it separate from piece interaction, so no bugs-->
+				<!-- repo component.js, lines 30-36 -->
+				<!-- very nice.  -->
+				<template id="empty-template">
+					<a-entity turns ></a-entity>
+				</template>
 
+				
 
 			</a-assets>
 
-		<!--Avatar-->
+		<!--Avatar--
 		<a-entity id="cameraRig" >
 
 			<a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" camera
 				position="0.25 1.2 0" spawn-in-circle="radius:0.5" look-controls="pointerLockEnabled: true"
-				wasd-controls="acceleration:10" movement-controls>
+				wasd-controls="acceleration:10" movement-controls>-->
 				<!--This is the raycaster, controlsl what you look at, and the ring. 
 							  If for some reason, you feel you've done everything to try and make sure 
 							  naf should be working, please double check this. 
-							  -->
+							  --><!--
 				<a-entity cursor="fuse: false; fuseTimeout: 500" raycaster="objects: .clickable" position="0 0 -0.2"
 					geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003"
 					material="color: black; shader: flat" touch-controls>
@@ -200,9 +221,24 @@
 
 				<a-sphere class="head" visible="false" random-color></a-sphere>
 			</a-entity>
+		</a-entity>-->
+
+		<a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" position="4 1.2 0" wasd-controls="acceleration:10" movement-controls look-controls="pointerLockEnabled:true;">
+			<a-entity id="cameraRig" camera >
+				<a-plane id="startText"opacity="0.25"text="value: Please choose Player 1 or Player 2 by clicking the respective box. If the box is see through, it has already been selected. Please turn around and select the remaining box. "
+				scale="0.25 0.1" visible="true" color="blue" position="0 0.125 -0.2"></a-plane>
+
+				<a-entity id="playercursor" cursor="fuse: false; fuseTimeout: 500" raycaster="objects: .clickable" position="0 0 -0.2"
+				geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003"
+				material="color: black; shader: flat" touch-controls playerID="0">
+				</a-entity>
+			</a-entity>
 		</a-entity>
 
-
+		<!-- And this would its actual entity -->
+		<a-entity id="empty" geometry="primitive:box" networked="template:#empty-template;networkId:emp;persistent:true;owner:emptything;" whoseTurn="0" position="2 0 0"></a-entity>
+		<!-- try changing the owner name to something other than rookwr, as something else is named that, just to remove it as a possible issue -->
+		<!-- gimi sec to read everything -->
 		<!------------------------------------------------------------------------ Entity/Asset Loading ------------------------------------------------------------------>
 		<!-- ROOK -->
 		<!-- replaced these with the mixins for promotions; will replace the promoting pawn with player's chosen piece (rook, knight, bishop, queen) -->
@@ -386,11 +422,11 @@
 		<a-plane id="highlight-plane" id="highPlane" visible="false" geometry="primitive plane" rotation="-90 0 0" color="blue"
 			opacity="0.5" height="0.08" width="0.08"></a-plane>
 		
-		<a-entity loader="/src/scenes/scene2.json"></a-entity>
+		<a-entity id="loader"></a-entity>
 		<!--	loads a scene json-->
 		<a-entity setatts></a-entity>
 		<!--	sets attributes to be applied to many pieces-->
-		<a-plane position="0 1.6 0"scale="0.2 0.2 0.2" class="clickable" geometry="primitive plane" color-changer="seed:2048"></a-plane>
+		<a-entity position="0 1.6 0"scale="0.2 0.2 0.2" id="initial-color-changer"></a-entity>
 		
 		</a-scene>
 		

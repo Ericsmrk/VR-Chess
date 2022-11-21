@@ -1,9 +1,9 @@
 // The cursor listener represents the "whole" chessboard as a plane.
 // It's a 4x4 plane tiled sideways, so Z is "upwards" instead of Y.
 AFRAME.registerComponent('cursor-listener', {
-    /*schema:{
-        curHolding: {default:' '}
-    },  */      
+    schema:{
+        
+    },      
 
     init: function () {
 				// Grab a reference to the plane we'll use to signify when
@@ -15,7 +15,8 @@ AFRAME.registerComponent('cursor-listener', {
 				//querySelector is just a method that calls up the DOM, and in this specific case goes "AYO GIMI THE FIRST highlight-plane YOU SEE"
 				//that's why there's a hashtag in front of it. hightlightPlane is a js element. 
 				
-				
+				const play = document.querySelector('#playercursor')
+                const emptyThing = document.querySelector('#empty')
                 //Gives us an array of ALL .chessguys
                 const pieces = document.querySelectorAll('.chessguy');
 
@@ -612,6 +613,7 @@ AFRAME.registerComponent('cursor-listener', {
             }
             return curPieceID   //returns a # that can be used in pieces array
         }
+
 //---------------------------------------------------------------- MOUSEDOWN ADDEVENTLISTENER BEGINS -------------------------------------------------------------------------------------------------
       
 
@@ -620,6 +622,8 @@ AFRAME.registerComponent('cursor-listener', {
             if (!obj.detail.intersection) //if there's no intersection(if you don't click on the board) it yeets you
                 return;
             
+            console.log(play.getAttribute('playerID'))
+            console.log("Whose" + emptyThing.getAttribute('whoseTurn'))
             let initSound = new Audio('src/sounds/move-self.mp3')
             let badSound = new Audio('src/sounds/notify.mp3')
             initSound.play()
@@ -651,6 +655,7 @@ AFRAME.registerComponent('cursor-listener', {
                 // Cleanup event handlers so we don't get _another_
                 // listener every time we click
                 NAF.utils.takeOwnership(pieces[curPiece]); //this is a function that takes ownership of all pieces. It work
+                NAF.utils.takeOwnership(emptyThing);
                 //pretty sure the above line is correct but if everything else fine change to pices[curPiece].id
                 //console.log("pieces[curPiece].id: " + pieces[curPiece].id)
                 this.removeEventListener('mouseup', onMouseUp); //ask about this. to whatever subject matter expert we can find  //ask about this. to whatever subject matter expert we can find 
@@ -663,55 +668,68 @@ AFRAME.registerComponent('cursor-listener', {
                 
 //*********************************************************** LOGIC TO PREVENT OCCUPIED SPACE MOVES ******************************************************************************************* */
                 const endPosPiece = getPieceID(endPosition)
-                if(endPosPiece == -1){  //checking if space is empty, allow move
+               // console.log("Whose Turn??" + whoseTurn)
+                let turn = emptyThing.getAttribute('whoseTurn')
 
-                    if(isMoveValid(pieces[curPiece], startPosition, endPosition)){      //isMoveValid(pieces[curPiece], startPosition, endPosition)
-                        pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))
-                        pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
-                        initSound.load()
-                        initSound.play()
-                    }
-                    else{
-                        badSound.play()
-                    }
-                }
-                else{   //if space IS OCCUPIED
+                if(turn == play.getAttribute('playerID') || turn == null){
+                    if(endPosPiece == -1){  //checking if space is empty, allow move
 
-                    console.log("End " + pieces[endPosPiece].id)
-                    if(pieces[curPiece].id[0] == pieces[endPosPiece].id[0]){    //if pieces are same color
-                        //means pieces are the same color, DO NOT MOVE
-                        badSound.play()
-                        console.log("Pieces same color, INVALID MOVE")
-                    }
-                    else{   //KILL/CAPTURE FUNCTION WILL BE PLACED HERE!  ---> Pieces are not some color, KILL
-                        //isMoveValid()
-                        if(isMoveValid(pieces[curPiece], startPosition, endPosition)){      //isMoveValid(pieces[curPiece], startPosition, endPosition) 
-                            pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))      //Move piece into new position
+                        if(isMoveValid(pieces[curPiece], startPosition, endPosition)){      //isMoveValid(pieces[curPiece], startPosition, endPosition)
+                            pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))
                             pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
-                            console.log(pieces[curPiece].getAttribute('boardPos'))
+                            initSound.load()
+                            initSound.play()
+                            emptyThing.object3D.position.copy(endPosition)
+                            if(turn==0){
+                                emptyThing.setAttribute('whoseTurn', "1")
+                            }
+                            else{
+                                emptyThing.setAttribute('whoseTurn', "0")
+                            }
                             
-                            //some quick notes for my man Jacob
-                            //now we could place the following code NAF.utils.takeOwnership(pieces[endPosPiece]); above
-                            //however, I think it's best to only give ownership as needed, I tried giving the player all the pieces during mouse up 
-                            //above, and it broke the entire game.
-                            //so instead, we place it here. 
+                        }
+                        else{
+                            badSound.play()
+                        }
+                    }
+                    else{   //if space IS OCCUPIED
 
-                            NAF.utils.takeOwnership(pieces[endPosPiece]); //this is a function that takes ownership of the piece we are about to kill
+                        console.log("End " + pieces[endPosPiece].id)
+                        if(pieces[curPiece].id[0] == pieces[endPosPiece].id[0]){    //if pieces are same color
+                            //means pieces are the same color, DO NOT MOVE
+                            badSound.play()
+                            console.log("Pieces same color, INVALID MOVE")
+                        }
+                        else{   //KILL/CAPTURE FUNCTION WILL BE PLACED HERE!  ---> Pieces are not some color, KILL
+                            //isMoveValid()
+                            if(isMoveValid(pieces[curPiece], startPosition, endPosition)){      //isMoveValid(pieces[curPiece], startPosition, endPosition) 
+                                pieces[curPiece].object3D.position.copy(boardToWorld(endPosition))      //Move piece into new position
+                                pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
+                                console.log(pieces[curPiece].getAttribute('boardPos'))
+                                
+                                //some quick notes for my man Jacob
+                                //now we could place the following code NAF.utils.takeOwnership(pieces[endPosPiece]); above
+                                //however, I think it's best to only give ownership as needed, I tried giving the player all the pieces during mouse up 
+                                //above, and it broke the entire game.
+                                //so instead, we place it here. 
 
-                            //KILL/CAPTURE      --> Move KILLED piece into graveyard
-                            if(pieces[curPiece].id[0] == 'w'){  //if white, move into white graveyard
-                                pieces[endPosPiece].object3D.position.copy(deadPieceW[dPit_w])
-                                pieces[endPosPiece].setAttribute('boardPos', "dead")
-                                dPit_w++
-                            }else{                              //if black, move into black graveyard
-                                pieces[endPosPiece].object3D.position.copy(deadPieceB[dPit_b])
-                                pieces[endPosPiece].setAttribute('boardPos', "dead")
-                                dPit_b++
-                            }     
-                        }           
+                                NAF.utils.takeOwnership(pieces[endPosPiece]); //this is a function that takes ownership of the piece we are about to kill
+
+                                //KILL/CAPTURE      --> Move KILLED piece into graveyard
+                                if(pieces[curPiece].id[0] == 'w'){  //if white, move into white graveyard
+                                    pieces[endPosPiece].object3D.position.copy(deadPieceW[dPit_w])
+                                    pieces[endPosPiece].setAttribute('boardPos', "dead")
+                                    dPit_w++
+                                }else{                              //if black, move into black graveyard
+                                    pieces[endPosPiece].object3D.position.copy(deadPieceB[dPit_b])
+                                    pieces[endPosPiece].setAttribute('boardPos', "dead")
+                                    dPit_b++
+                                }     
+                            }           
+                        }
                     }
                 }
-
+    
                 highlightPlane.object3D.position.copy(boardToWorld(endPosition))   //positioning highlight plane at endPosition
                 highlightPlane.setAttribute("color", "red");  
 
