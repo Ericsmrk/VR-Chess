@@ -97,6 +97,16 @@
 					]
 				});
 			}
+
+			if (!NAF.schemas.hasTemplate('#sel-template')) {
+				NAF.schemas.add({
+					template: '#sel-template',
+					components: [
+						'position'
+						
+					]
+				});
+			}
 			
 			const components = NAF.schemas.getComponentsOriginal(template);
 			return components;
@@ -115,12 +125,6 @@
 		<h1><a href="game_scene.html">Start Game</a></h1>
 	</div>
 	<a-scene dynamic-room>
-
-
-			
-			<a-entity id="blackBox" gltf-model="#king_b_asset" repo position="4 0 1.5" scale="0.2 0.2 0.2" class="clickable" geometry="primitive: box"></a-entity>
-			<a-entity id="whiteBox" gltf-model="#king_w_asset" repo position="4 0 -1.5"scale="0.2 0.2 0.2" class="clickable" geometry="primitive: box"></a-entity>
-			
 
 			<!--Just asset loading -->		
 			<a-assets>
@@ -204,12 +208,20 @@
 					<a-entity turns ></a-entity>
 				</template>
 
+				<template id="sel-template">
+					<a-entity class="clickable" repo ></a-entity>
+				</template>
+
 				
 
 			</a-assets>
 
 
-
+		<a-entity id="blackBox" networked="template:#sel-template;networkId:bBox;persistent:true; owner:bBox;"
+		gltf-model="#king_b_asset" repo position="4 0 1.5" scale="0.2 0.2 0.2" geometry="primitive: box"></a-entity>
+		<a-entity id="whiteBox" networked="template:#sel-template;networkId:wBox;persistent:true; owner:wBox;"
+		gltf-model="#king_w_asset" repo position="4 0 -1.5"scale="0.2 0.2 0.2" geometry="primitive: box"></a-entity>
+		
 
 
 		<!--Avatar--

@@ -4,7 +4,7 @@ AFRAME.registerComponent('repo', {
         const avatar1 = document.querySelector('#player')
         const sText = document.querySelector('#startText')
         const pCursor = document.querySelector('#playercursor')
-        const kings = document.querySelectorAll('.kings')
+        const white = document.querySelector('#whiteBox')
         
         
         this.el.addEventListener('click', function() {  //reset position, remove instructions, set playerID for turns
@@ -18,8 +18,8 @@ AFRAME.registerComponent('repo', {
                     pCursor.setAttribute('playerID', "1")
                     }
                 sText.setAttribute('visible', "false")
-                this.setAttribute('visible', "false")
-                this.removeAttribute('geometry')
+                NAF.utils.takeOwnership(this);
+                this.setAttribute('position', "0 -10 0")
             }
         })
     }
