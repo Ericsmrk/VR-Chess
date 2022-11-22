@@ -671,7 +671,7 @@ AFRAME.registerComponent('cursor-listener', {
                // console.log("Whose Turn??" + whoseTurn)
                 let turn = emptyThing.getAttribute('whoseTurn')
 
-                if(turn == play.getAttribute('playerID') || turn == null){
+                if(turn == play.getAttribute('playerID')){
                     if(endPosPiece == -1){  //checking if space is empty, allow move
 
                         if(isMoveValid(pieces[curPiece], startPosition, endPosition)){      //isMoveValid(pieces[curPiece], startPosition, endPosition)
@@ -679,7 +679,6 @@ AFRAME.registerComponent('cursor-listener', {
                             pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
                             initSound.load()
                             initSound.play()
-                            emptyThing.object3D.position.copy(endPosition)
                             if(turn==0){
                                 emptyThing.setAttribute('whoseTurn', "1")
                             }
@@ -714,6 +713,13 @@ AFRAME.registerComponent('cursor-listener', {
                                 //so instead, we place it here. 
 
                                 NAF.utils.takeOwnership(pieces[endPosPiece]); //this is a function that takes ownership of the piece we are about to kill
+
+                                if(turn==0){                                    //swap turn
+                                    emptyThing.setAttribute('whoseTurn', "1")
+                                }
+                                else{
+                                    emptyThing.setAttribute('whoseTurn', "0")
+                                }
 
                                 //KILL/CAPTURE      --> Move KILLED piece into graveyard
                                 if(pieces[curPiece].id[0] == 'w'){  //if white, move into white graveyard
