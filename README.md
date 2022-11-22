@@ -30,7 +30,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://glacial-waters-73707.herokuapp.com/game_scene.html">
+  <a href="https://glacial-waters-73707.herokuapp.com/index.html">
     <img src="https://github.com/Ericsmrk/VR-Chess/blob/main/images/chess.PNG" alt="Logo" width="400" height="400">
   </a>
 <h3 align="center">click photo to play with prototype</h3>
