@@ -3,10 +3,18 @@
     "version": "1.0.0",
     "description": "vr-chess",
     "scripts": {
-      "start": "node ./server/easyrtc-server.js"
+        "start": "node ./server/easyrtc-server.js \" node ./index.js \"",
+        "dev": "concurrently --kill-others \"node ./server/easyrtc-server.js\" \"node ./index.js\""
+
     },
     "author": "JOSE_JIMENEZ",
     "dependencies": {
-      "networked-aframe": "^0.10.0"
+        "concurrently": "^7.6.0",
+        "cookie-session": "^2.0.0",
+        "express": "^4.18.2",
+        "mongoose": "^6.7.2",
+        "networked-aframe": "^0.10.0",
+        "passport": "^0.6.0",
+        "passport-google-oauth2": "^0.2.0"
     }
-  }
+}
