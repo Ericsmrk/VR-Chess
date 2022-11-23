@@ -1,3 +1,9 @@
+/*  Repo, char, and turns Component
+*
+*   @author Jacob Miller GH:miller_jacob49
+*   
+*/
+
 AFRAME.registerComponent('repo', {
 
     init: function() {
