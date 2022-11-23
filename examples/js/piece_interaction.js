@@ -1,3 +1,13 @@
+/*  Piece Interaction Component
+*
+*   @author Jacob Miller GH:miller_jacob49
+*   @author Jose Jimenez
+*   @author Brett Harris
+*   @author Luke Kaalim GH:Lukekaalim
+*   
+*/
+
+
 // The cursor listener represents the "whole" chessboard as a plane.
 // It's a 4x4 plane tiled sideways, so Z is "upwards" instead of Y.
 AFRAME.registerComponent('cursor-listener', {
