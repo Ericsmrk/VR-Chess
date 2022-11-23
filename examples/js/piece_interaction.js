@@ -148,6 +148,14 @@ AFRAME.registerComponent('cursor-listener', {
             var iterX = 0
             var iterY = 0
             var direction = 0   //0 for forward/backward | 1 for side-side | 2 for diagnol | 3 for antidiagnol
+            console.log(curP.id[0] + play.getAttribute('playerID'))
+            if(play.getAttribute('playerID')==0 && curP.id[0]=='b'){
+                return false;
+            }
+            else if(play.getAttribute('playerID')==1 && curP.id[1]=='w'){
+                return false;
+            }
+
                 switch(id){
                     case 'pa':  //All logic for WHITE PAWNs, important to note the BLACK PAWNs will require different logic(opposite of this)
                         if(curP.id[0]=='w'){
