@@ -114,15 +114,21 @@
 	</script>
 
 	<script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-
+	<style>
+		.roomCodeBox{
+			position: fixed;
+			z-index: 1;
+			text-shadow: 0px 0px 5px  #fff;
+		}
+	</style>
 
 </head>
 
 <body>
 	<!--networked scene is what lets NAF know this is a networked scene, and starts up the processes related to that. 
 	underneath that is options avaliable to us-->
-	<div class="inputBox" style="visibility:hidden;">
-		<h1><a href="game_scene.html">Start Game</a></h1>
+	<!--Displays room code-->
+	<div class="roomCodeBox">
 	</div>
 	<a-scene dynamic-room>
 
@@ -209,7 +215,7 @@
 				</template>
 
 				<template id="sel-template">
-					<a-entity class="clickable" repo ></a-entity>
+					<a-entity class="clickable" repo material></a-entity>
 				</template>
 
 				
@@ -217,10 +223,7 @@
 			</a-assets>
 
 
-		<a-entity id="blackBox" networked="template:#sel-template;networkId:bBox;persistent:true; owner:bBox;"
-		gltf-model="#king_b_asset" repo position="4 0 1.5" scale="0.2 0.2 0.2" geometry="primitive: box"></a-entity>
-		<a-entity id="whiteBox" networked="template:#sel-template;networkId:wBox;persistent:true; owner:wBox;"
-		gltf-model="#king_w_asset" repo position="4 0 -1.5"scale="0.2 0.2 0.2" geometry="primitive: box"></a-entity>
+		
 		
 
 
@@ -433,6 +436,11 @@
 		networked="template:#chess-piece-template-b;networkId:pawnb8;persistent:true; owner:pawnb8;"
 		scale="0.2 0.2 0.2" boardPos="h7" position="2 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
+
+		<a-entity id="blackBox" networked="template:#sel-template;networkId:bBox;persistent:true; owner:bBox;"
+		gltf-model="#king_b_asset" material piece-color repo position="4 0 1.5" scale="0.2 0.2 0.2" geometry="primitive: box"></a-entity>
+		<a-entity id="whiteBox" networked="template:#sel-template;networkId:wBox;persistent:true; owner:wBox;"
+		gltf-model="#king_w_asset" material piece-color repo position="4 0 -1.5"scale="0.2 0.2 0.2" geometry="primitive: box"></a-entity>
 				
 		<!-- This plane is used to detect clicks on the chessboard-->
 		<a-plane id="cursor-plane" cursor-listener geometry="primitive plane" position="0, 0.801, 0" visible="false"

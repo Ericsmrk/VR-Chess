@@ -24,13 +24,15 @@
 			.inputBox{
 				position: fixed;
 				z-index: 1;
+				text-shadow: 0px 0px 5px  #fff;
 			}
 		</style>
     </head>
     <body>
 		<div class="inputBox" style="padding:30px">
 			<form action="game_scene.html">
-				<input type="text" name="room"placeholder="Room Code" autocomplete="off">
+				<label for="roomCode">Room Code:</label>
+				<input type="text" name="room"placeholder="Room Code" id="roomCode" autocomplete="off">
 				<input type="hidden" name="colorType" id="colorType" placeholder="Color Type" autocomplete="off">
 				<input type="hidden" name="colorSeed" id="colorSeed" placeholder="Color Seed" autocomplete="off">
 				<input type="hidden" name="gradW" id="gradW" placeholder="gradw" autocomplete="off">
@@ -46,20 +48,31 @@
 						<button id="ash">Ashes</button><br>
 						<button id="red-blu">Red vs Blu</button><br>
 						<button id="silver-gold">Gold and Silver</button><br>
+						<button id="gradient-synth">Sunset</button><br>
+						<button id="gradient-temper">Hot and Cold</button><br>
+						<button id="gradient-mint">Mint</button><br>
 						<button id="random">Random</button><br>
-						<button id="super-random">Super Random</button><br>
-						<button id="gradient-synth">Synth</button>
+						<button id="super-random">Super Random</button>
 					</td>
 					<td>
-						<button id="scene1" class="sceneChanger">Forest</button><br>
-						<button id="scene2" class="sceneChanger">Checkerboard</button>
+						<button id="scene1" class="sceneChanger">Woods</button><br>
+						<button id="scene2" class="sceneChanger">Checkerboard</button><br>
+						<button id="scene3" class="sceneChanger">Waves</button><br>
+						<button id="scene4" class="sceneChanger">Volcano</button>
 					</td>
 				</tr>
 			</table>
 			
 			
 		</div>
-		
+		<script>
+			let inpBox = document.querySelector('#roomCode');
+			let randVal = (Math.floor(Math.random()*0x10000)).toString(16);
+			while(randVal.length<4){
+				randVal = '0' + randVal;
+			}
+			inpBox.value = randVal;
+		</script>
         <a-scene>
 
 			
@@ -245,26 +258,32 @@
 				
 				
 				<!--COLOR CHANGERS-->
-				<a-entity position="0 -0.15 -0.2"scale="0.02 0.02 0.02"
+				<a-entity 
 				color-changer="option:basic; onload:true; selector:basic"
 				></a-entity>
-				<a-entity position="0 -0.15 -0.2"scale="0.02 0.02 0.02"
-				color-changer="option:gradient; onload:false; selector:gradient-synth; gradientW:FCAE1EFF00EE; gradientB:D000000000A0"
-				></a-entity>
-				<a-entity position="0 -0.15 -0.2"scale="0.02 0.02 0.02"
+				<a-entity
 				color-changer="option:red-blu; onload:false; selector:red-blu"
 				></a-entity>
-				<a-entity position="0 -0.15 -0.2"scale="0.02 0.02 0.02"
+				<a-entity
 				color-changer="option:ash; onload:false; selector:ash"
 				></a-entity>
-				<a-entity position="-0.03 -0.15 -0.2"scale="0.02 0.02 0.02" 
+				<a-entity 
 				color-changer="option:silver-gold; onload:false; selector:silver-gold"
 				></a-entity>
-				<a-entity position="0.03 -0.15 -0.2"scale="0.02 0.02 0.02"  
+				<a-entity
 				color-changer="option:random; onload:false; selector:random"
 				></a-entity>
-				<a-entity position="0.06 -0.15 -0.2"scale="0.02 0.02 0.02" 
+				<a-entity
 				color-changer="option:super-random; onload:false; selector:super-random"
+				></a-entity>
+				<a-entity 
+				color-changer="option:gradient; onload:false; selector:gradient-synth; gradientW:FCAE1EFF00EE; gradientB:D00000000090"
+				></a-entity>
+				<a-entity 
+				color-changer="option:gradient; onload:false; selector:gradient-temper; gradientW:46ffffdfffff; gradientB:ad0202ff7700"
+				></a-entity>
+				<a-entity 
+				color-changer="option:gradient; onload:false; selector:gradient-mint; gradientW:ff1111ffeeee; gradientB:1b11113eb489"
 				></a-entity>
 				
 				
@@ -289,213 +308,5 @@
 
         </a-scene>
 		
-		<!--
-            <a-gui-flex-container
-			flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1"
-			opacity="0.7" width="3.5" height="4.5" panel-color="#072B73" panel-rounded="0.2"
-			position="0.125 2.500 -6" rotation="0 0 0"
-			>
-                <a-gui-button
-                    id="btn1"
-                    width="2.5" 
-                    height="0.7" 
-                    base-depth="0.05" 
-                    depth="0.2"
-                    gap="0.1"
-                    radius="0"
-                    onclick="testButtonAction1"
-                    value="test button"
-                    font-family="src/fonts/PermanentMarker-Regular.ttf"
-                    font-size="0.35"
-                    margin="0 0 0.05 0"
-                    toggle="true"
-                >
-                </a-gui-button>
-
-				<a-gui-button
-                    id="btn2"
-                    width="2.5" 
-                    height="0.7" 
-                    base-depth="0.05" 
-                    depth="0.2"
-                    gap="0.1"
-                    radius="0"
-                    onclick="testButtonAction2"
-                    value="Light Mode"
-                    font-family="src/fonts/PermanentMarker-Regular.ttf"
-                    font-size="0.35"
-                    margin="0 0 0.05 0"
-                    toggle="true"
-                >
-                </a-gui-button>
-
-				<a-gui-button
-                    id="btn3"
-                    width="2.5" 
-                    height="0.7" 
-                    base-depth="0.05" 
-                    depth="0.2"
-                    gap="0.1"
-                    radius="0"
-                    onclick="testButtonAction3"
-                    value="Dynamic Dark"
-                    font-family="src/fonts/PermanentMarker-Regular.ttf"
-                    font-size="0.35"
-                    margin="0 0 0.05 0"
-                    toggle="true"
-                >
-                </a-gui-button>
-
-				<a-gui-button
-                    id="btn4"
-                    width="2.5" 
-                    height="0.7" 
-                    base-depth="0.05" 
-                    depth="0.2"
-                    gap="0.1"
-                    radius="0"
-                    onclick="testButtonAction4"
-                    value="Dynamic light"
-                    font-family="src/fonts/PermanentMarker-Regular.ttf"
-                    font-size="0.35"
-                    margin="0 0 0.05 0"
-                    toggle="true"
-                >
-                </a-gui-button>
-
-		</a-gui-flex-container>
-	-->
-    <!--
-		<script type="text/javascript">
-
-		function startTimer(duration, display) {
-		    var timer = duration, minutes, seconds;
-		    setInterval(function () {
-		        seconds = parseInt(timer % 60, 10);
-		        seconds = seconds < 10 ? "0" + seconds : seconds;
-		        display.setAttribute('count-down', seconds);
-		        if (--timer < 0) {
-		            timer = duration;
-		        }
-		    }, 1000);
-		}
-
-		window.onload = function () {
-		    var countDownEntity = document.getElementById("timer"),
-		    	duration = countDownEntity.getAttribute('count-down');
- 		    	startTimer(duration, countDownEntity);
-		};
-
-		window.timedout = function () {
-			console.log("GUI timer timed out");
-		}
-
-		window.testButtonAction1 = function () {
-			window.location.href = 'game_scene.html';
-		}
-
-		window.testButtonAction2 = function () {
-			window.location.href = 'game_scene_light.html';
-		}
-
-		window.testButtonAction3 = function () {
-			window.location.href = 'game_scene_dynamic.html';
-		}
-
-		window.testButtonAction4 = function () {
-			window.location.href = 'game_scene_dynamic_light.html';
-		}
-
-		window.testButtonAction5 = function () {
-			console.log("clicked GUI");
-		}
-
-
-
-		window.testButtonAction = function () {
-			console.log("clicked GUI");
-		}
-
-		window.testToggleAction = function () {
-			console.log("clicked GUI");
-		}
-
-		window.testSliderAction = function () {
-			console.log("clicked GUI");
-		}
-
-		window.testInputAction = function () {
-			console.log("clicked GUI");
-		}
-
-
-
-
-		var data = document.querySelector("#btn1");
-		var controls;
-
-		var initControls = function() {
-			this.value = "Start Game :)";
-			this.fontColor = "#F2BB16";
-			this.backgroundColor = "#011C40";
-			this.borderColor = "#F2BB16";
-			this.focusColor = "#ff0000";
-			this.hoverColor = "#2a5b7a";
-			this.activeColor = "#5687A6";
-			this.fontSize = 0.3;
-			this.toggle = true;
-			this.fontFamily = "PressStart2P";
-			// this.width=2.75; 
-			// this.height=0.7; 
-			// this.baseDepth=0.05; 
-			// this.depth=0.2;
-			// this.gap=0.1;
-			// this.radius=0;
-		};
-
-		window.onload = function() {
-			controls = new initControls();
-			setValue();
-			var gui = new data.GUI();
-			gui.add(controls, 'value').onChange(setValue);
-			gui.addColor(controls, 'fontColor').onChange(setValue);
-			gui.addColor(controls, 'hoverColor').onChange(setValue);
-			gui.addColor(controls, 'activeColor').onChange(setValue);
-			gui.addColor(controls, 'borderColor').onChange(setValue);
-			gui.addColor(controls, 'focusColor').onChange(setValue);
-			gui.addColor(controls, 'backgroundColor').onChange(setValue);
-			gui.add(controls, 'fontSize', 0, 1).onChange(setValue);
-			gui.add(controls, 'toggle').onChange(setValue);
-			gui.add(controls, 'fontFamily',["PermanentMarker", "PressStart2P", "Plaster", "DiplomataSC"]).onChange(setValue);
-			// gui.add(controls, 'width', 0, 5).onChange(setValue);
-			// gui.add(controls, 'height', 0, 5).onChange(setValue);
-			// gui.add(controls, 'baseDepth', 0, 1).onChange(setValue);
-			// gui.add(controls, 'depth', 0, 1).onChange(setValue);
-			// gui.add(controls, 'gap', 0, 1).onChange(setValue);
-			// gui.add(controls, 'radius', 0, 1).onChange(setValue);
-		};
-
-		function setValue() {
-			data.setAttribute('value',controls.value);
-			data.setAttribute('font-family',"src/fonts/"+controls.fontFamily+"-Regular.ttf");
-			data.setAttribute('font-size',controls.fontSize);
-			data.setAttribute('font-color',controls.fontColor);
-			data.setAttribute('active-color',controls.activeColor);
-			data.setAttribute('hover-color',controls.hoverColor);
-			data.setAttribute('border-color',controls.borderColor);
-			data.setAttribute('focus-color',controls.focusColor);
-			data.setAttribute('background-color',controls.backgroundColor);
-			data.setAttribute('toggle',controls.toggle);
-			// data.setAttribute('width',controls.width);
-			// data.setAttribute('height',controls.height);
-			// data.setAttribute('base-depth',controls.baseDepth);
-			// data.setAttribute('depth',controls.depth);
-			// data.setAttribute('gap',controls.gap);
-			// data.setAttribute('radius',controls.radius);
-		}
-
-
-	</script>
-	--> 
     </body>
 </html>
