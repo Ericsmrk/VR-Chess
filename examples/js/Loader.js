@@ -3,7 +3,10 @@ AFRAME.registerComponent('loader', {
     
     },
     update:function(){
-        console.log(this.el)
+        
+        const loaded = new Event('load-complete');
+        
+        //console.log(this.el)
         while (this.el.hasChildNodes()) {
             this.el.removeChild(this.el.firstChild);
         }
@@ -41,7 +44,7 @@ AFRAME.registerComponent('loader', {
             this.el.appendChild(special);
         }
         
-        
+        this.el.dispatchEvent(loaded);
         
         //examples in html
         //<a-asset-item id = table src='../src/models/props/basic/table.gltf'></a-asset-item>"
