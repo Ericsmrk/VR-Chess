@@ -2,6 +2,11 @@
 
 <html>
     <head>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+		<script src="/js/OAuth.js"></script>
+		
+
         <!--Framework scripts-->
 		<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
 		<script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
@@ -38,13 +43,14 @@
 				<input type="hidden" name="gradW" id="gradW" placeholder="gradw" autocomplete="off">
 				<input type="hidden" name="gradB" id="gradB" placeholder="gradB" autocomplete="off">
 				<input type="hidden" name="scene" id="scene" placeholder="scene">
+
 				<input type="submit">
 			</form>
 			
 			<table>
 				<tr>
 					<td>
-						<button id="basic">Basic</button><br>
+						<button id="basic" class="w3-btn w3-hover-white">Basic</button><br>
 						<button id="ash">Ashes</button><br>
 						<button id="red-blu">Red vs Blu</button><br>
 						<button id="silver-gold">Gold and Silver</button><br>
@@ -62,6 +68,11 @@
 					</td>
 				</tr>
 			</table>
+
+			<button id="log_in" onclick="window.open(
+				'log_in.html',
+				'_blank' // <- This is what makes it open in a new window.
+			  )">Log In with Google</button>
 			
 			
 		</div>
