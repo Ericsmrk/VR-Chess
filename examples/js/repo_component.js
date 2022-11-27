@@ -25,7 +25,7 @@ AFRAME.registerComponent('repo', {
                     }
                 sText.setAttribute('visible', "false")
                 NAF.utils.takeOwnership(this);
-                this.setAttribute('position', "0 -10 0")
+                this.setAttribute('position', "0 -100 0")
             }
         })
     }

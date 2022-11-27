@@ -142,11 +142,8 @@
 	<!--Displays room code-->
 	<div class="roomCodeBox">
 	</div>
-	<a-scene dynamic-room>
 
-		<div class="inputBox" style="visibility:hidden;">
-			<h1><a href="game_scene.html">Start Game</a></h1>
-		</div>
+
 			<!--Just asset loading -->		
 			<a-assets>
 
@@ -263,8 +260,8 @@
 
 		<a-entity id="player" camera networked="template:#avatar-template;attachTemplateToLocal:false;" position="4 1.2 0" wasd-controls="acceleration:10" movement-controls  look-controls="pointerLockEnabled:true;">
 			<a-entity id="cameraRig"  >
-				<a-plane id="startText"opacity="0.25"text="value: Please choose Player 1 or Player 2 by clicking the king. If a king is missing, it has already been selected. Please turn around and select the remaining king. "
-				scale="0.25 0.1" visible="true" color="blue" position="0 0.125 -0.2"></a-plane>
+				<a-plane id="startText"opacity="0"text="value: Please choose Player 1 or Player 2 by clicking the king. If a king is missing, it has already been selected. Please turn around and select the remaining king.;"
+				scale="0.3 0.18" visible="true" color="blue" position="0 0.125 -0.2"></a-plane>
 
 				<a-entity id="playercursor" cursor="fuse: false; fuseTimeout: 500" raycaster="objects: .clickable" position="0 0 -0.2"
 				geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003"
