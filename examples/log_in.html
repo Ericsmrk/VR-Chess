@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!-- making a basic af log in page  -->
+
+<html>
+
+
+<head>
+    <title>log-in Page</title>
+
+    <script src="/js/OAuth.js"></script>
+
+
+<script>
+    //Using popup
+    OAuth.initialize('QBYzM0NeZPJ9gHFcjVvPR-YY4us');
+
+    
+    OAuth.popup('google')
+    //I would like to request the email scope here
+        .done(function (result) {
+            
+        })
+        .fail(function (err) {
+            //handle error with err
+        });
+</script>
+
+
+</head>
+
+<body>
+
+    <p>after logging in please close this window</p>
+
+
+</body>
+
+</html>

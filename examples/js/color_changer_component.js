@@ -31,7 +31,7 @@ AFRAME.registerComponent('color-changer',{
             currentSeed = originalSeed;
             
         }
-        function getRandomColor(c) {
+        function getRandomColor(c) {//random colors generated in hexadecimal. This function advances the 'random' seed, seed can be easily passed between pages
             let rawColor=Math.floor(currentSeed/16)
             function weightColors(col){
                 
@@ -85,8 +85,9 @@ AFRAME.registerComponent('color-changer',{
             colorW = getRandomColor('w');
             colorB = getRandomColor('b');
             //test = pieces[i].id;
-            for(let i in pieces){
-                if(pieces[i].id[0]=='w'){//Yes, this throws an error, but the function still works. No time to figure out why.
+            
+            for(let i = 0;i<32;i++){
+                if(pieces[i].id[0]=='w'){
                     pieces[i].removeAttribute('piece-color');
                     pieces[i].setAttribute('piece-color',colorW);
                 }else{
@@ -97,18 +98,18 @@ AFRAME.registerComponent('color-changer',{
         }
 
         function superRandomColors(){
-            for (let i in pieces){
+            for (let i = 0;i<32;i++){
                 let color = getRandomColor(pieces[i].id[0]);
                 //console.log(color);
-                pieces[i].removeAttribute('piece-color');//This throws an error, but only once per function call, but the function runs as expected. God knows why
+                pieces[i].removeAttribute('piece-color');
                 pieces[i].setAttribute('piece-color',color);   
             }
         }
 
-        var x = document.querySelector('#'+ currentSelector);
-        console.log(currentOption)
-        if(x){
-            x.addEventListener('click', function(){
+        var button = document.querySelector('#'+ currentSelector);//button grabbed dynamically based on the name. quick and dirty
+        //console.log(currentOption)
+        if(button){
+            button.addEventListener('click', function(){
                 rerollSeed();
                 //console.log(this.data.seed);
                 colorize();
@@ -121,10 +122,16 @@ AFRAME.registerComponent('color-changer',{
         //Check if there is a seed, if not, make one. otherwise constrain seed to max size.
         
         function colorize(){
+            let kingw = document.querySelector('#w_king');
+            let kingb = document.querySelector('#b_king');
+            const wBox = document.querySelector('#whiteBox');//for setting the side selector pieces
+            const bBox = document.querySelector('#blackBox');
+
             let seedForm = document.querySelector('#colorSeed');
             let typeForm = document.querySelector('#colorType');
             let gradWForm = document.querySelector('#gradW');
             let gradBForm = document.querySelector('#gradB');
+
             if(seedForm){
                 seedForm.value=originalSeed;
             }if(typeForm){
@@ -134,7 +141,7 @@ AFRAME.registerComponent('color-changer',{
             }if(gradBForm){
                 gradBForm.value=gradB;
             }
-
+            
             
 
             if(currentOption == 'random'){
@@ -193,9 +200,9 @@ AFRAME.registerComponent('color-changer',{
                           
                     }
                 }
-                for(let i in pieces){
+                for(let i = 0;i<32;i++){
                     y = pieces[i].getAttribute('boardpos');
-                    if(pieces[i].id[0]=='w'){//Yes, this throws an error, but the function still works. No time to figure out why.
+                    if(pieces[i].id[0]=='w'){
                         pieces[i].removeAttribute('piece-color');
                         pieces[i].setAttribute('piece-color',arrW[y.charCodeAt(0)-97]);
                     }else{
@@ -206,8 +213,8 @@ AFRAME.registerComponent('color-changer',{
             }else{
                 colorW = optionData[currentOption].wColor;
                 colorB = optionData[currentOption].bColor;
-                for(let i in pieces){
-                    if(pieces[i].id[0]=='w'){//Yes, this throws an error, but the function still works. No time to figure out why.
+                for(let i = 0;i<32;i++){
+                    if(pieces[i].id[0]=='w'){
                         pieces[i].removeAttribute('piece-color');
                         pieces[i].setAttribute('piece-color',colorW);
                     }else{
@@ -215,7 +222,23 @@ AFRAME.registerComponent('color-changer',{
                         pieces[i].setAttribute('piece-color',colorB);
                     }
                 }
+                
             }
+            
+            
+            if(wBox){
+                wBox.removeAttribute('piece-color');
+                wBox.setAttribute('piece-color',kingw.getAttribute('piece-color'));
+            }
+            if(bBox){
+                bBox.removeAttribute('piece-color');
+                bBox.setAttribute('piece-color',kingb.getAttribute('piece-color'));
+            }
+                
+            
+            
+            
+            
             
             
             
@@ -224,7 +247,7 @@ AFRAME.registerComponent('color-changer',{
         if(runOnLoad){
             var promises = Array(32);
             for(let i =0;i<32;i++){
-                promises[i] = new Promise(function(resolve) {
+                promises[i] = new Promise(function(resolve) {//Gotta wait for models to load properly, separate from the other check in piece_color_component. For some reason
                     pieces[i].addEventListener('model-loaded',resolve,false);
                     
                 });
