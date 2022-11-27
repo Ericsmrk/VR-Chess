@@ -5,6 +5,9 @@ AFRAME.registerComponent('splash-camera',{
         
     },
     tick:function(time, timedelta){
+        //rotates every 8ms, around 120fps limit. Unfortunately, threejs+browser based results in clicking not working when constantly rotating camera.
+        //reason is probably cursor not firing click events if it doesn't think it's clicking something, and moving every frame resets that since cursor 
+        //only seems to check changes when moving
         if(timedelta>8){
             let angle = THREE.Math.degToRad(10*time/1000)%360;
             this.el.object3D.rotation.y= angle;

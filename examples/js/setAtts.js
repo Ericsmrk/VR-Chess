@@ -5,7 +5,13 @@ AFRAME.registerComponent('setatts',{
         var params = this.getUrlParams();
         var colorChanger= document.querySelector('#initial-color-changer');
         var loader = document.querySelector('#loader');
-        let colorAtt = '';
+        var colorAtt = '';
+        var roomCodeBox = document.querySelector('.roomCodeBox');
+        if(roomCodeBox){
+            x = document.createElement('h1');
+            x.innerHTML = 'Room Code: ' + params.room;
+            roomCodeBox.appendChild(x);
+        }
         if(colorChanger){
             if(params.colorType){
                 colorAtt+='option:' + params.colorType + ';';
@@ -25,23 +31,24 @@ AFRAME.registerComponent('setatts',{
            
             
             colorAtt+='onload:true'
-            console.log(colorAtt)
+            //console.log(colorAtt)
             //colorChanger.removeAttribute('color-changer');
             colorChanger.setAttribute('color-changer', colorAtt);  
-                
+              
         }
         if(loader){
             document.querySelector('a-scene').addEventListener('loaded', function () {
                 if(params.scene){
                     loader.setAttribute('loader', '/src/scenes/'+params.scene+'.json');
-                    console.log(params.scene);
+                    //console.log(params.scene);
                 }
             })
             
         }
+        
 
         
-        for(i in pieces){
+        for(let i = 0;i<32;i++){
             pieces[i].object3D.position.x -=0.25;   // removes offset. Currently pieces are spaced throughout the range (x,z) (2,2) to (-1.5,-1.5)
             pieces[i].object3D.position.x *=0.16;   //Shrinks spacing between pieces.
             
@@ -54,7 +61,7 @@ AFRAME.registerComponent('setatts',{
             
         }
         
-         
+        
     },
     getUrlParams: function () {//Copied from dynamic-room-component, itself from networked a-frame.
         var match;

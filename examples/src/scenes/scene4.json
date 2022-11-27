@@ -1,0 +1,163 @@
+{
+    "objects":[
+        {
+            "id":"board",
+            "src":"../src/models/sets/default/board.gltf",
+
+            "position":{
+                "x":0, 
+                "y":0.8,
+                "z":0
+            },
+            "scale":{
+                "x":0.08,
+                "y":0.08,
+                "z":0.08
+            },
+            "rotation":{
+                "x":0,
+                "y":90,
+                "z":0
+            }
+        
+        },
+        {
+            "id":"chair1",
+            "src":"../src/models/props/basic/chair.gltf",
+
+            "position":{
+                "x":0,
+                "y":0,
+                "z":0.75
+            },
+            "scale":{
+                "x":0.208551946997,
+                "y":0.208551946997,
+                "z":0.208551946997
+            },
+            "rotation":{
+                "x":0,
+                "y":180,
+                "z":0
+            }
+        
+        },
+        {
+            "id":"chair2",
+            "src":"../src/models/props/basic/chair.gltf",
+
+            "position":{
+                "x":0,
+                "y":0,
+                "z":-0.75
+            },
+            "scale":{
+                "x":0.208551946997,
+                "y":0.208551946997,
+                "z":0.208551946997
+            },
+            "rotation":{
+                "x":0,
+                "y":0,
+                "z":0
+            }
+        
+        },
+        {
+            "id":"table",
+            "src":"../src/models/props/basic/table.gltf",
+
+            "position":{
+                "x":0, 
+                "y":0,
+                "z":0
+            },
+            "scale":{
+                "x":0.20,
+                "y":0.154685894983,
+                "z":0.20
+            },
+            "rotation":{
+                "x":0,
+                "y":0,
+                "z":0
+            }
+            
+        }     
+    ],
+    "specialobjects":[
+        {"type":"a-entity",
+            "properties":[
+                {
+                    "attribute":"environment",
+                    "data":"preset:volcano;lighting:none;seed:1;ground:canyon;groundYScale:200;groundColor:#553232;groundColor2:#000000;dressing:arches;dressingScale:3;dressingVariance:0 0 0;dressingAmount:1;dressingOnPlayArea:1;dressingColor:#977"
+                },
+                {
+                    "attribute":"position",
+                    "data":"2.4 -12.4 -3"
+                },
+                {
+                    "attribute":"rotation",
+                    "data":"0 90 0"
+                }
+            ]
+        },
+        {"type":"a-entity",
+        "properties":[
+            {
+                "attribute":"light",
+                "data":"type: ambient; color: #FF8888; intensity: 0.3"
+            }
+        ]
+        },
+        {"type":"a-entity",
+            "properties":[
+                {
+                    "attribute":"light",
+                    "data":"type: directional; color: #FFaa55; intensity: 1.5"
+                },
+                {
+                    "attribute":"position",
+                    "data":"0 -1 0.5"
+                }
+            ]
+        },
+        {"type":"a-entity",
+            "properties":[
+                {
+                    "attribute":"light",
+                    "data":"type: directional; color: #FFaa55; intensity: 1.5"
+                },
+                {
+                    "attribute":"position",
+                    "data":"0 -1 -0.5"
+                }
+            ]
+        },
+        {"type":"a-plane",
+            "properties":[
+                {
+                    "attribute":"material",
+                    "data":"color:#FF9900; emissive:#FF9900"
+                },
+                {
+                    "attribute":"rotation",
+                    "data":"-90 0 0"
+                },
+                {
+                    "attribute":"position",
+                    "data":"0 -2 0"
+                },
+                {
+                    "attribute":"width",
+                    "data":"150"
+                },
+                {
+                    "attribute":"height",
+                    "data":"150"
+                }
+            ]
+        }
+        
+    ]
+}
