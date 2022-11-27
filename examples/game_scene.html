@@ -130,11 +130,12 @@
 <body>
 	<!--networked scene is what lets NAF know this is a networked scene, and starts up the processes related to that. 
 	underneath that is options avaliable to us-->
-	<div class="inputBox" style="visibility:hidden;">
-		<h1><a href="game_scene.html">Start Game</a></h1>
-	</div>
-	<a-scene dynamic-room>
+	
+	<a-scene dynamic-room vr-mode-ui="enabled: true;" >
 
+		<div class="inputBox" style="visibility:hidden;">
+			<h1><a href="game_scene.html">Start Game</a></h1>
+		</div>
 			<!--Just asset loading -->		
 			<a-assets>
 
