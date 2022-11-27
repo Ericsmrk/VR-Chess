@@ -1,9 +1,10 @@
 AFRAME.registerComponent('env-selector',{
     init:function(){
+        //just for changing the selected scene.
         const loader = document.querySelector('#loader');
         const validButtons = document.querySelectorAll('.sceneChanger');
         loader.setAttribute('loader','/src/scenes/scene1.json');
-        console.log(loader)
+        //console.log(loader)
         for(i in validButtons){
             validButtons[i].addEventListener('click',function(){
                 loader.removeAttribute('loader');

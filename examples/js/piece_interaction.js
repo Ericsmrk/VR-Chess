@@ -148,6 +148,14 @@ AFRAME.registerComponent('cursor-listener', {
             var iterX = 0
             var iterY = 0
             var direction = 0   //0 for forward/backward | 1 for side-side | 2 for diagnol | 3 for antidiagnol
+            console.log(curP.id[0] + play.getAttribute('playerID'))
+            if(play.getAttribute('playerID')==0 && curP.id[0]=='b'){
+                return false;
+            }
+            else if(play.getAttribute('playerID')==1 && curP.id[1]=='w'){
+                return false;
+            }
+
                 switch(id){
                     case 'pa':  //All logic for WHITE PAWNs, important to note the BLACK PAWNs will require different logic(opposite of this)
                         if(curP.id[0]=='w'){
@@ -671,7 +679,7 @@ AFRAME.registerComponent('cursor-listener', {
                // console.log("Whose Turn??" + whoseTurn)
                 let turn = emptyThing.getAttribute('whoseTurn')
 
-                if(turn == play.getAttribute('playerID') || turn == null){
+                if(turn == play.getAttribute('playerID')){
                     if(endPosPiece == -1){  //checking if space is empty, allow move
 
                         if(isMoveValid(pieces[curPiece], startPosition, endPosition)){      //isMoveValid(pieces[curPiece], startPosition, endPosition)
@@ -679,7 +687,6 @@ AFRAME.registerComponent('cursor-listener', {
                             pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
                             initSound.load()
                             initSound.play()
-                            emptyThing.object3D.position.copy(endPosition)
                             if(turn==0){
                                 emptyThing.setAttribute('whoseTurn', "1")
                             }
@@ -714,6 +721,13 @@ AFRAME.registerComponent('cursor-listener', {
                                 //so instead, we place it here. 
 
                                 NAF.utils.takeOwnership(pieces[endPosPiece]); //this is a function that takes ownership of the piece we are about to kill
+
+                                if(turn==0){                                    //swap turn
+                                    emptyThing.setAttribute('whoseTurn', "1")
+                                }
+                                else{
+                                    emptyThing.setAttribute('whoseTurn', "0")
+                                }
 
                                 //KILL/CAPTURE      --> Move KILLED piece into graveyard
                                 if(pieces[curPiece].id[0] == 'w'){  //if white, move into white graveyard

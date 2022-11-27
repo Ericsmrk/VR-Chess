@@ -83,17 +83,58 @@
                 "z":0
             }
             
-        }        
+        },
+        {
+            "id":"palm",
+            "src":"../src/models/props/palm.gltf",
+
+            "position":{
+                "x":100, 
+                "y":8,
+                "z":0
+            },
+            "scale":{
+                "x":4,
+                "y":4,
+                "z":4
+            },
+            "rotation":{
+                "x":0,
+                "y":0,
+                "z":0
+            }
+        
+        }      
     ],
     "specialobjects":[
         {"type":"a-entity",
             "properties":[
                 {
                     "attribute":"environment",
-                    "data":"preset: forest;groundTexture:walkernoise;groundColor:#263e26;groundColor2:#444444;dressingAmount:1000;dressingColor:#163e16;seed:800;skyColor:#79f;horizonColor:#cccccc"
+                    "data":"skyType: gradient;lighting:none;skyColor: #090017; horizonColor: #606;fog:0.3;dressing:none;playArea:1.4;ground:noise;groundYScale:80;groundColor:#060023;groundColor2:#060023;grid:1x1;gridColor: #fb00fb"
                 }
             ]
-
+        },
+        {"type":"a-entity",
+            "properties":[
+                {
+                    "attribute":"light",
+                    "data":"type: ambient; color: #53E; intensity: 0.7"
+                }
+            ]
+        },
+        {"type":"a-entity",
+            "properties":[
+                {
+                    "attribute":"light",
+                    "data":"type: directional; color: #EFccEF; intensity: 1"
+                },
+                {
+                    "attribute":"position",
+                    "data":"-1.5 1 0"
+                }
+            ]
         }
+        
     ]
 }
