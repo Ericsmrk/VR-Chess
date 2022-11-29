@@ -258,7 +258,7 @@
 			</a-entity>
 		</a-entity>-->
 
-		<a-entity id="player" camera networked="template:#avatar-template;attachTemplateToLocal:false;" position="4 1.2 0" wasd-controls="acceleration:10" movement-controls  look-controls="pointerLockEnabled:true;">
+		<a-entity id="player" camera networked="template:#avatar-template;attachTemplateToLocal:false;" position="4 1.2 0"  look-controls="pointerLockEnabled:true;">
 			<a-entity id="cameraRig"  >
 				<a-plane id="startText"opacity="0"text="value: Please choose Player 1 or Player 2 by clicking the king. If a king is missing, it has already been selected. Please turn around and select the remaining king.;"
 				scale="0.3 0.18" visible="true" color="blue" position="0 0.125 -0.2"></a-plane>
@@ -448,6 +448,8 @@
 		networked="template:#chess-piece-template-b;networkId:pawnb8;persistent:true; owner:pawnb8;"
 		scale="0.2 0.2 0.2" boardPos="h7" position="2 1.5 -1" gltf-model="#pawn_b_asset"
 		pawnMoved="false"></a-entity>
+
+		<a-plane id="spec"class="clickable" geometry="primitive: plane" position="3 1 0" opacity="0"rotation="0 90 0" scale="2 4 2" text="value: Click here to spectate(Grants movement)" repo></a-plane>
 
 		<a-entity id="blackBox" networked="template:#sel-template;networkId:bBox;persistent:true; owner:bBox;"
 		gltf-model="#king_b_asset" material piece-color repo position="4 0 1.5" scale="0.2 0.2 0.2" geometry="primitive: box"></a-entity>
