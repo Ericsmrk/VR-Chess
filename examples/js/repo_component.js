@@ -7,16 +7,16 @@
 AFRAME.registerComponent('repo', {
 
     init: function() {
-        const avatar1 = document.querySelector('#player')
-        const sText = document.querySelector('#startText')
-        const pCursor = document.querySelector('#playercursor')
+        const avatar1 = document.querySelector('#rig');
+        const sText = document.querySelector('#startText');
+        const pCursor = document.querySelector('#playercursor');
         
         
         this.el.addEventListener('click', function() {  //reset position, remove instructions, set playerID for turns
             if(this.getAttribute('id')=="spec"){
                 console.log('yup')
                 pCursor.removeAttribute('cursor')
-                avatar1.object3D.position.set(0, 1.2, 0)
+                avatar1.setAttribute('position', "0 1.2 0")
                 avatar1.setAttribute('movement-controls')
                 avatar1.setAttribute('wasd-controls', "acceleration:15")
             }
