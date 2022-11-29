@@ -7,9 +7,9 @@
 AFRAME.registerComponent('repo', {
 
     init: function() {
-        const avatar1 = document.querySelector('#rig');
-        const sText = document.querySelector('#startText');
-        const pCursor = document.querySelector('#playercursor');
+        const avatar1 = document.querySelector('#rig')
+        const sText = document.querySelector('#startText')
+        const pCursor = document.querySelector('#playercursor')
         
         
         this.el.addEventListener('click', function() {  //reset position, remove instructions, set playerID for turns
