@@ -270,7 +270,7 @@
 			</a-entity>
 		</a-entity> -->
 
-		<a-entity id="rig" position="0.25 0.6 1">
+		<a-entity id="rig" position="0.25 1.2 1">
 
             <a-entity id="camera" networked="template:#avatar-template;attachTemplateToLocal:false;" camera
                  spawn-in-circle="radius:0.5" look-controls="pointerLockEnabled: true"
@@ -279,9 +279,9 @@
                               If for some reason, you feel you've done everything to try and make sure 
                               naf should be working, please double check this. 
                               -->
-                <a-entity cursor="fuse: false; fuseTimeout: 500" raycaster="objects: .clickable" position="0 0 -0.2"
+                <a-entity id="playercursor" cursor="fuse: false; fuseTimeout: 500" raycaster="objects: .clickable" position="0 0 -0.2"
                     geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003"
-                    material="color: black; shader: flat" touch-controls>
+                    material="color: black; shader: flat" playerID="3">
                 </a-entity>
 
                 <a-sphere class="head" visible="false" random-color></a-sphere>
