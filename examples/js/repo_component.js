@@ -16,7 +16,7 @@ AFRAME.registerComponent('repo', {
             if(this.getAttribute('id')=="spec"){
                 console.log('yup')
                 pCursor.removeAttribute('cursor')
-                avatar1.setAttribute('position', "0 1.2 0")
+                avatar1.object3D.position.set(0, 1.2, 0)
                 avatar1.setAttribute('movement-controls')
                 avatar1.setAttribute('wasd-controls', "acceleration:15")
             }
