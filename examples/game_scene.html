@@ -270,11 +270,13 @@
 			</a-entity>
 		</a-entity> -->
 
-		<a-entity id="rig" position="4 1.2 0" networked="template:#avatar-template;attachTemplateToLocal:false;">
+		<a-entity id="rig" position="4 1.2 0" networked="template:#avatar-template;attachTemplateToLocal:false;" movement-controls>
 
             <a-entity id="camera"  camera
-                 spawn-in-circle="radius:0.5" look-controls="pointerLockEnabled: true"
-                wasd-controls="acceleration:10" movement-controls>-->
+                look-controls="pointerLockEnabled: true"
+                wasd-controls="acceleration:10" >
+				<a-plane id="startText"opacity="0"text="value: Please choose Player 1 or Player 2 by clicking the king. If a king is missing, it has already been selected. Please turn around and select the remaining king.;"
+				scale="0.3 0.18" visible="true" color="blue" position="0 0.125 -0.2"></a-plane>
                 <!--This is the raycaster, controlsl what you look at, and the ring. 
                               If for some reason, you feel you've done everything to try and make sure 
                               naf should be working, please double check this. 
