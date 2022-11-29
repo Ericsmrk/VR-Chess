@@ -4,7 +4,7 @@
     <head>
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-		<script src="/js/OAuth.js"></script>
+		<script src="js/oauth.js"></script>
 		
 
         <!--Framework scripts-->
@@ -30,52 +30,76 @@
 				position: fixed;
 				z-index: 1;
 				text-shadow: 0px 0px 5px  #fff;
+				width: 100%;
 			}
+
+			.log_in{
+				position: fixed;
+				z-index: 1;
+				text-shadow: 0px 0px 5px  #fff;
+			}
+
+
 		</style>
     </head>
     <body>
-		<div class="inputBox" style="padding:30px">
-			<form action="game_scene.html">
-				<label for="roomCode">Room Code:</label>
-				<input type="text" name="room"placeholder="Room Code" id="roomCode" autocomplete="off">
-				<input type="hidden" name="colorType" id="colorType" placeholder="Color Type" autocomplete="off">
-				<input type="hidden" name="colorSeed" id="colorSeed" placeholder="Color Seed" autocomplete="off">
-				<input type="hidden" name="gradW" id="gradW" placeholder="gradw" autocomplete="off">
-				<input type="hidden" name="gradB" id="gradB" placeholder="gradB" autocomplete="off">
-				<input type="hidden" name="scene" id="scene" placeholder="scene">
+		<div class="inputBox" style="padding:30px" class="w3-row">
 
-				<input type="submit">
-			</form>
+			<div class="w3-twothird w3-container">
+				<table >
+					<tr>
+						<td class="w3-half w3-container">
+							<label for="colors">Colors:</label>
+							<br>
+							<button id="basic" class="w3-button w3-red">Basic</button><br>
+							<button id="ash" class="w3-button w3-red">Ashes</button><br>
+							<button id="red-blu" class="w3-button w3-red">Red vs Blu</button><br>
+							<button id="silver-gold" class="w3-button w3-red">Gold and Silver</button><br>
+							<button id="gradient-synth" class="w3-button w3-red">Sunset</button><br>
+							<button id="gradient-temper" class="w3-button w3-red ">Hot and Cold</button><br>
+							<button id="gradient-mint" class="w3-button w3-red">Mint</button><br>
+							<button id="random" class="w3-button w3-red">Random</button><br>
+							<button id="super-random" class="w3-button w3-red">Super Random</button>
+						</td>
+						<td class="w3-half w3-container">
+							<label for="pieces">Pieces:</label>
+							<br>
+							<button id="scene1" class="sceneChanger w3-button w3-red" >Woods</button><br>
+							<button id="scene2" class="sceneChanger w3-button w3-red" >Checkerboard</button><br>
+							<button id="scene3" class="sceneChanger w3-button w3-red" >Waves</button><br>
+							<button id="scene4" class="sceneChanger w3-button w3-red" >Volcano</button>
+						</td>
+					</tr>
+				</table>
+			</div>
 			
-			<table>
-				<tr>
-					<td>
-						<button id="basic" class="w3-btn w3-hover-white">Basic</button><br>
-						<button id="ash">Ashes</button><br>
-						<button id="red-blu">Red vs Blu</button><br>
-						<button id="silver-gold">Gold and Silver</button><br>
-						<button id="gradient-synth">Sunset</button><br>
-						<button id="gradient-temper">Hot and Cold</button><br>
-						<button id="gradient-mint">Mint</button><br>
-						<button id="random">Random</button><br>
-						<button id="super-random">Super Random</button>
-					</td>
-					<td>
-						<button id="scene1" class="sceneChanger">Woods</button><br>
-						<button id="scene2" class="sceneChanger">Checkerboard</button><br>
-						<button id="scene3" class="sceneChanger">Waves</button><br>
-						<button id="scene4" class="sceneChanger">Volcano</button>
-					</td>
-				</tr>
-			</table>
-
-			<button id="log_in" onclick="window.open(
-				'log_in.html',
-				'_blank' // <- This is what makes it open in a new window.
-			  )">Log In with Google</button>
+			<div class="w3-third w3-container">
+				<form action="game_scene.html">
+					<label for="roomCode">Room Code:</label>
+					<input type="text" name="room" placeholder="Room Code" id="roomCode" autocomplete="off">
+					<input type="hidden" name="colorType" id="colorType" placeholder="Color Type" autocomplete="off">
+					<input type="hidden" name="colorSeed" id="colorSeed" placeholder="Color Seed" autocomplete="off">
+					<input type="hidden" name="gradW" id="gradW" placeholder="gradw" autocomplete="off">
+					<input type="hidden" name="gradB" id="gradB" placeholder="gradB" autocomplete="off">
+					<input type="hidden" name="scene" id="scene" placeholder="scene">
 			
+					<input type="submit" class="w3-button w3-red">
+				</form>
+			
+				<br>
+			
+				<button onclick="window.open(
+						'log_in.html',
+						'_blank' // <- This is what makes it open in a new window.
+					  )" class="w3-button w3-black">Log In with Google</button>
+			</div>
 			
 		</div>
+		<!-- <div class="log_in" class="w3-row">
+			broken atm
+		</div> -->
+		
+
 		<script>
 			let inpBox = document.querySelector('#roomCode');
 			let randVal = (Math.floor(Math.random()*0x10000)).toString(16);
