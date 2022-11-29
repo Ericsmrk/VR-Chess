@@ -1,3 +1,13 @@
+/*  Piece Interaction Component
+*
+*   @author Jacob Miller GH:miller_jacob49
+*   @author Jose Jimenez
+*   @author Brett Harris
+*   @author Luke Kaalim GH:Lukekaalim
+*   
+*/
+
+
 // The cursor listener represents the "whole" chessboard as a plane.
 // It's a 4x4 plane tiled sideways, so Z is "upwards" instead of Y.
 AFRAME.registerComponent('cursor-listener', {
@@ -20,19 +30,6 @@ AFRAME.registerComponent('cursor-listener', {
                 //Gives us an array of ALL .chessguys
                 const pieces = document.querySelectorAll('.chessguy');
 
-                //SOUND!?!?!?!
-                const sounds = document.querySelectorAll('.soundFX')
-                console.log(sounds.size)
-
-                //I MAY use this to make things easier with logic..not sure right now
-                const spaces = ["a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8",
-                "b1", "ba2", "b3", "b4", "b5", "b6", "b7", "b8",
-                "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8",
-                "d1", "d2", "d3", "d4", "d5", "d6", "d7", "d8",
-                "e1", "e2", "e3", "e4", "e5", "e6", "e7", "e8",
-                "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8",
-                "g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8",
-                "h1", "h2", "h3", "h4", "h5", "h6", "h7", "h8"]
 
 //*************************************************************************** VARIABLES FOR GRAVEYARD ************************************************************************************************ */
             var scl = 0.16;
@@ -55,13 +52,7 @@ AFRAME.registerComponent('cursor-listener', {
             new THREE.Vector3(dPx, dPy, dPz-2.0*scl), new THREE.Vector3(dPx, dPy, dPz-2.5*scl), new THREE.Vector3(dPx, dPy, dPz-3.0*scl), new THREE.Vector3(dPx, dPy, dPz-3.5*scl),
             new THREE.Vector3(dPx-0.5*scl, dPy, dPz),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-0.5*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-1.0*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-1.5*scl),
             new THREE.Vector3(dPx-0.5*scl, dPy, dPz-2.0*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-2.5*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-3.0*scl),new THREE.Vector3(dPx-0.5*scl, dPy, dPz-3.5*scl)]
- 
-                
-				//this.
-				// SUGGESTION: mousevents are oldschool. consider pointer events
-				// https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events
-				/// o: I will let my mate know!
-                
+
 
 				//<<<<<<< HEAD
 				const object3D = this.el.object3D; //Jose: make sure you go back and understand. Narrarator: he did not go back and understand
@@ -687,6 +678,8 @@ AFRAME.registerComponent('cursor-listener', {
                             pieces[curPiece].setAttribute('boardPos', boardToChessTerm(endPosition))
                             initSound.load()
                             initSound.play()
+                            
+                            //switching turns
                             if(turn==0){
                                 emptyThing.setAttribute('whoseTurn', "1")
                             }
