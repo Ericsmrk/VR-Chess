@@ -13,7 +13,7 @@
 	<title>VR Chess: A start</title>
 	<script src="/js/OAuth.js"></script>
 	<!--A frame itself-->
-	<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
 	<!--NAF stuffs-->
 	<!--make sure currVersions work-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.5.0/socket.io.slim.js"></script>
@@ -136,7 +136,7 @@
 	<!--networked scene is what lets NAF know this is a networked scene, and starts up the processes related to that. 
 	underneath that is options avaliable to us-->
 	
-	<a-scene dynamic-room vr-mode-ui="enabled: true;" >
+	<a-scene dynamic-room vr-mode-ui="enabled: false;" >
 	<!--Displays room code-->
 	<div class="roomCodeBox">
 	</div>
@@ -232,8 +232,8 @@
 
 			</a-assets>
 
-		<a-entity id="player" camera networked="template:#avatar-template;attachTemplateToLocal:false;" position="4 1.2 0"  look-controls="pointerLockEnabled:true;">
-			<a-entity id="cameraRig"  >
+		<a-entity id="player"  networked="template:#avatar-template;attachTemplateToLocal:false;" position="4 1.2 0"  look-controls="pointerLockEnabled:true;">
+			<a-entity id="cameraRig"  camera>
 				<a-plane id="startText"opacity="0"text="value: Please choose Player 1 or Player 2 by clicking the king. If a king is missing, it has already been selected. Please turn around and select the remaining king.;"
 				scale="0.3 0.18" visible="true" color="blue" position="0 0.125 -0.2"></a-plane>
 
