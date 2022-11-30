@@ -12,7 +12,7 @@ AFRAME.registerComponent('repo', {
         const pCursor = document.querySelector('#playercursor')
         
         
-        this.el.addEventListener('click', function() {  //reset position, remove instructions, set playerID for turns
+        this.el.addEventListener('click', function() {  //adding movement attributes for spectators
             if(this.getAttribute('id')=="spec"){
                 console.log('yup')
                 pCursor.removeAttribute('cursor')
@@ -50,6 +50,3 @@ AFRAME.registerComponent('turns', {
         whoseTurn: {type: 'string', default:"0"}
     }
 });
-
-
-
