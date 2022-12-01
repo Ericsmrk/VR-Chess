@@ -38,10 +38,13 @@
 
   <p align="center">
     <br />
-    <a href="https://github.com/Ericsmrk/VR-Chess/wiki"><strong>Explore the documentation »</strong></a>
+    <a href="https://github.com/Ericsmrk/VR-Chess/wiki"><strong>Explore the Documentation »</strong></a>
     <br />
     <br />
-    <a href="https://youtu.be/F_E9Rb2Gowc">View Demo</a>
+    <a href="https://github.com/Ericsmrk/VR-Chess/blob/main/docs/vr-chess3.pdf"><strong>View Final Presentation Slides »</strong></a>
+    <br />
+    <br />
+    <a href="https://youtu.be/F_E9Rb2Gowc">View UPDATE ME Demo</a>
     <br />
   </p>
 </div>
