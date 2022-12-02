@@ -89,9 +89,9 @@ See `LICENSE.txt` for more information.
 
 Eric Smrkovsky - ericsmrkovsky@gmail.com  
 Jacob Miller - miller_jacob49@outlook.com  
-Jose Jimenez -  jimenezjosef97@gmail.com  
-Christian Leon -   
-Bretton Harris -  
+Jose Jimenez - jimenezjosef97@gmail.com  
+Christian Leon - cleon5@mail.fresnostate.edu     
+Bretton Harris - brettharris13@mail.fresnostate.edu
 
 Project Link: [https://github.com/Ericsmrk/VR-Chess](https://github.com/Ericsmrk/VR-Chess)
 
