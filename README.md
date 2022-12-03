@@ -38,10 +38,10 @@
 
   <p align="center">
     <br />
-    <a href="https://github.com/Ericsmrk/VR-Chess/wiki"><strong>Explore the Documentation »</strong></a>
+    <a href="https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess/wiki"><strong>Explore the Documentation »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Ericsmrk/VR-Chess/blob/main/docs/vr-chess3.pdf"><strong>View Final Presentation Slides »</strong></a>
+    <a href="https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess/blob/main/docs/vr-chess3.pdf"><strong>View Final Presentation Slides »</strong></a>
     <br />
     <br />
     <a href="https://youtu.be/F_E9Rb2Gowc">View UPDATE ME Demo</a>
@@ -93,7 +93,7 @@ Jose Jimenez - jimenezjosef97@gmail.com
 Christian Leon - cleon5@mail.fresnostate.edu     
 Bretton Harris - brettharris13@mail.fresnostate.edu
 
-Project Link: [https://github.com/Ericsmrk/VR-Chess](https://github.com/Ericsmrk/VR-Chess)
+Project Link: [https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess](https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
