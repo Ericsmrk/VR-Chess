@@ -39,10 +39,17 @@
 				text-shadow: 0px 0px 5px  #fff;
 			}
 
+			.log_in1{
+				position: fixed;
+				z-index: 1;
+				text-shadow: 0px 0px 5px  #fff;
+			}
+
 
 		</style>
     </head>
     <body>
+		<p><a href="https://www.google.com/">Google</a></p>
 		<div class="inputBox" style="padding:30px" class="w3-row">
 
 			<div class="w3-twothird w3-container">
@@ -62,7 +69,7 @@
 							<button id="super-random" class="w3-button w3-red">Super Random</button>
 						</td>
 						<td class="w3-half w3-container">
-							<label for="Scenes">Scenes:</label>
+							<label for="pieces">Pieces:</label>
 							<br>
 							<button id="scene1" class="sceneChanger w3-button w3-red" >Woods</button><br>
 							<button id="scene2" class="sceneChanger w3-button w3-red" >Checkerboard</button><br>
@@ -81,7 +88,7 @@
 					<input type="hidden" name="colorSeed" id="colorSeed" placeholder="Color Seed" autocomplete="off">
 					<input type="hidden" name="gradW" id="gradW" placeholder="gradw" autocomplete="off">
 					<input type="hidden" name="gradB" id="gradB" placeholder="gradB" autocomplete="off">
-					<input type="hidden" name="scene" id="scene" placeholder="scene" value="scene1">
+					<input type="hidden" name="scene" id="scene" placeholder="scene">
 			
 					<input type="submit" class="w3-button w3-red">
 				</form>
@@ -89,13 +96,11 @@
 				<br>
 			
 				<button onclick="window.open(
-						'log_in.html',
+						'/profile',
 						'_blank' // <- This is what makes it open in a new window.
-					  )" class="w3-button w3-black">Log In with Google</button>
-					  <button onclick="window.open(
-						'/login',
-						'_blank' // <- This is what makes it open in a new window.
-					  )" class="w3-button w3-black">Log In without Google</button>
+					  )" class="w3-button w3-black">View Profile</button>
+
+				
 			</div>
 			
 		</div>
@@ -112,7 +117,7 @@
 			}
 			inpBox.value = randVal;
 		</script>
-        <a-scene vr-mode-ui="enabled: false;">
+        <a-scene>
 
 			
 
