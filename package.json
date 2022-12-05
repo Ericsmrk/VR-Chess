@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "vr-chess",
     "scripts": {
-        "start": "node ./server/easyrtc-server.js",
+        "start": "node ./server/easyrtc-server.js & node server.js",
         "dev": "concurrently --kill-others \"node ./server/easyrtc-server.js\" \"npm start examples/src\""
     },
     "author": "JOSE_JIMENEZ",
