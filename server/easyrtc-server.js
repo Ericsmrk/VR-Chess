@@ -4,12 +4,32 @@ const path = require("path");
 const express = require("express");           // web framework external module
 const socketIo = require("socket.io");        // web socket external module
 const easyrtc = require("open-easyrtc");      // EasyRTC external module
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 // Set process name
 process.title = "networked-aframe-server";
 
 // Get port or default to 8080
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8081;
+
+mongoose.connect('mongodb+srv://chris:vrchess@cluster0.stvm6jy.mongodb.net/registrationFormHeruko?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}, (err) => {
+  if (!err) {
+    console.log('MongoDB Connection Succeeded.');
+  } else {
+    console.log('Error in DB connection : ' + err);
+  }
+});
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+});
 
 // Setup and configure Express http server.
 const app = express();
@@ -27,8 +47,40 @@ if (process.env.NODE_ENV === "development") {
   );
 }
 
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: db
+  })
+}));
+
 // Serve the files from the examples folder
 app.use(express.static(path.resolve(__dirname, "..", "examples")));
+
+app.set('views', path.join(__dirname, "..", 'views'));
+app.set('view engine', 'ejs');	
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+var index = require('../routes/index');
+app.use('/', index);
+
+// error handler
+// define as the last app.use callback
+app.use(function (err, req, res, next) {
+  res.status(err.status || 500);
+  res.send(err.message);
+});
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  var err = new Error('File Not Found');
+  err.status = 404;
+  next(err);
+});
 
 // Start Express http server
 const webServer = http.createServer(app);
@@ -78,6 +130,7 @@ easyrtc.events.on("roomJoin", (connectionObj, roomName, roomParameter, callback)
 // Start EasyRTC server
 easyrtc.listen(app, socketServer, null, (err, rtcRef) => {
     console.log("Initiated");
+    // console.log("listening on http://localhost:" + port);
 
     rtcRef.events.on("roomCreate", (appObj, creatorConnectionObj, roomName, roomOptions, callback) => {
         console.log("roomCreate fired! Trying to create: " + roomName);
@@ -88,6 +141,6 @@ easyrtc.listen(app, socketServer, null, (err, rtcRef) => {
 
 
 // Listen on port
-webServer.listen(port, () => {
+app.listen(port, () => {
     console.log("listening on http://localhost:" + port);
 })
