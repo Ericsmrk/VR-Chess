@@ -5,8 +5,12 @@ AFRAME.registerComponent('holdable',{
     tick: function(){
         
             //console.log('animation is pinging');
-            var position = document.querySelector('a-scene').camera.el.object3D.position; 
-            var rotation = document.querySelector('a-scene').camera.el.object3D.rotation;
+            //var position = document.querySelector('a-scene').camera.el.object3D.position; 
+            //var rotation = document.querySelector('a-scene').camera.el.object3D.rotation;
+
+            var position = document.querySelector('#player').object3D.position;
+            var rotation = document.querySelector('#player').object3D.rotation;
+            
             var distance = 0.35;
             var x = position.x; var y = position.y; var z = position.z;
             //console.log(rotation.x);
