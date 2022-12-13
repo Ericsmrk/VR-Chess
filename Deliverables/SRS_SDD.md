@@ -142,7 +142,6 @@ Certain hardware limitations are present during development due to no financial 
 There are three stages to Vr-Chess: Login, preference selection, and gameplay. Below is a general flowchart of the user experience when running the software.
 ![](https://github.com/Ericsmrk/VR-Chess/blob/main/images/User_Journey.png)
 ### 3.1 External Interface Requirements
-(diagram with different hardware options with user stuffs)
 ### 3.1.1 User Interfaces
 * Landing Page
 ![](https://github.com/Ericsmrk/VR-Chess/blob/main/images/Landing_wireframe.png)
