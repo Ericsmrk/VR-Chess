@@ -1,7 +1,7 @@
 # Software Engineering: VR-Chess 
 # System Requirements and Design Document
-> Version 1.0 
-> Prepared by Eric Smrkovsky
+> Version 1.0  
+> Prepared by Eric Smrkovsky  
 > California State University, Fresno
 
 ## VR-Chess Team Members
