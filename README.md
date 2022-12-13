@@ -33,18 +33,24 @@
   <a href="https://glacial-waters-73707.herokuapp.com/index.html">
     <img src="https://github.com/Ericsmrk/VR-Chess/blob/main/images/chess.PNG" alt="Logo" width="400" height="400">
   </a>
-<h3 align="center">click photo to play with prototype</h3>
+<h3 align="center">click photo to play with proff of concept</h3>
 <h3 align="center">!!!VR CHESS!!!</h3>
 
   <p align="center">
     <br />
-    <a href="https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess/wiki"><strong>Explore the Documentation »</strong></a>
+    <a href="C:\Users\Erics\Documents\GitHub\VR-Chess\Deliverables\SRS_SDD.md"><strong>Explore the Documentation »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess/blob/main/docs/vr-chess3.pdf"><strong>View Final Presentation Slides »</strong></a>
+    <a href="https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess/blob/main/Deliverables/VR-Chess-Milestone2.pdf"><strong>View Milestone One Slides »</strong></a>
     <br />
     <br />
-    <a href="https://youtu.be/F_E9Rb2Gowc">View UPDATE ME Demo</a>
+    <a href="https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess/blob/main/Deliverables/VR-Chess-Milestone2.pdf"><strong>View Milestone Two Slides »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess/blob/main/Deliverables/VR-ChessFinalClassPresentation3.pdf"><strong>View Final Presentation Slides »</strong></a>
+    <br />
+    <br />
+    <a href="https://www.youtube.com/watch?v=5w0t5hLX8ts">View HIPS Presentation</a>
     <br />
   </p>
 </div>
@@ -73,7 +79,12 @@ Send Pull Requests with explanation what changes you have done.  -->
 
 ### Built With
 
-* [![Aframe][Aframe.io]][Aframe-url]
+* A-Frame
+* Networked A-Frame
+* Node-JS
+* JavaScript
+* MongoDB
+* Blender
 
 <!-- LICENSE -->
 ## License
