@@ -222,7 +222,7 @@ When the King is put into checkmate, the software presents the user with informa
 Information about winning the game is displayed to the user.
 * FR28: Board Game Logic: Detect Loss (IP)  
 Information about losing the game is displayed to the user.
-* FR29: Website Deployment
+* FR29: Website Deployment  
 The website is deployed to the cloud using Horoku.  
 ### 3.3 UML Diagrams
 ![](https://github.com/Ericsmrk/VR-Chess/blob/main/images/Login_Sequence_diagram.png)
