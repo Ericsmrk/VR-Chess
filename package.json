@@ -3,12 +3,33 @@
     "version": "1.0.0",
     "description": "vr-chess",
     "scripts": {
-        "start": "node ./server/easyrtc-server.js",
+        "start": "node ./server/easyrtc-server.js & node server.js",
         "dev": "concurrently --kill-others \"node ./server/easyrtc-server.js\" \"npm start examples/src\""
     },
     "author": "JOSE_JIMENEZ",
+
+    "main": "server.js",
+
     "dependencies": {
         "networked-aframe": "^0.10.0",
-        "oauthio-web": "^0.6.2"
-    }
+        "oauthio-web": "^0.6.2",
+        
+        "connect-mongo": "^3.0.0",
+        "dotenv": "^8.2.0",
+        "ejs": "^3.0.1",
+        "express": "^4.18.2",
+        "express-session": "^1.16.2",
+        "mongoose": "^5.6.10",
+        "node": "12.11.1",
+        "npm": "6.14.8",
+        "buffered-interpolation": "github:Infinitelee/buffered-interpolation",
+        "open-easyrtc": "^2.0.14",
+        "socket.io": "^2.5.0"
+    },
+    "engines": {
+        "node": ">= 8.10.0",
+        "npm": ">= 4.0.5"
+      }
+    
+
 }
