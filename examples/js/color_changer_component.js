@@ -1,3 +1,8 @@
+/*  Color Changer Component
+*
+*   @author Brett Harris GH:BrettH23
+*   
+*/
 AFRAME.registerComponent('color-changer',{
     schema:{
         option:{type:'string',default:'random'},
