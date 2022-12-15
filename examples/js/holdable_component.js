@@ -1,3 +1,8 @@
+/*  Color Changer Component
+*
+*   @author Brett Harris GH:BrettH23
+*   
+*/
 AFRAME.registerComponent('holdable',{
     init:function(){
         //console.log(this.data +' init holdable')
