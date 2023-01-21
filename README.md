@@ -30,10 +30,9 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://glacial-waters-73707.herokuapp.com/index.html">
+  <a>
     <img src="https://github.com/Ericsmrk/VR-Chess/blob/main/images/chess.PNG" alt="Logo" width="400" height="400">
   </a>
-<h3 align="center">click photo to play with proff of concept</h3>
 <h3 align="center">!!!VR CHESS!!!</h3>
 
   <p align="center">
@@ -41,7 +40,7 @@
     <a href="C:\Users\Erics\Documents\GitHub\VR-Chess\Deliverables\SRS_SDD.md"><strong>Explore the Documentation »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess/blob/main/Deliverables/VR-Chess-Milestone2.pdf"><strong>View Milestone One Slides »</strong></a>
+    <a href="https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess/blob/main/Deliverables/VR-Chess-Milestone1.pdf"><strong>View Milestone One Slides »</strong></a>
     <br />
     <br />
     <a href="https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess/blob/main/Deliverables/VR-Chess-Milestone2.pdf"><strong>View Milestone Two Slides »</strong></a>
