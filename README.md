@@ -105,6 +105,8 @@ Bretton Harris - brettharris13@mail.fresnostate.edu
 
 Project Link: [https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess](https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess/)
 
+Jose's link for Heroku Deployment: https://glacial-waters-73707.herokuapp.com/
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
