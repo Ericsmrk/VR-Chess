@@ -31,7 +31,7 @@
 <br />
 <div align="center">
   <a>
-    <img src="https://github.com/Ericsmrk/VR-Chess/blob/main/images/chess.PNG" alt="Logo" width="400" height="400">
+    <img src="https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess/blob/main/Deliverables/SRS_SDD.md" alt="Logo" width="400" height="400">
   </a>
 <h3 align="center">!!!VR CHESS!!!</h3>
 
