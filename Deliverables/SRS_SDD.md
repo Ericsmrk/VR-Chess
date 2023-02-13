@@ -1,7 +1,7 @@
 # Software Engineering: VR-Chess 
 # System Requirements and Design Document
-> Version 1.0 
-> Prepared by Eric Smrkovsky
+> Version 1.0  
+> Prepared by Eric Smrkovsky  
 > California State University, Fresno
 
 ## VR-Chess Team Members
@@ -142,7 +142,6 @@ Certain hardware limitations are present during development due to no financial 
 There are three stages to Vr-Chess: Login, preference selection, and gameplay. Below is a general flowchart of the user experience when running the software.
 ![](https://github.com/Ericsmrk/VR-Chess/blob/main/images/User_Journey.png)
 ### 3.1 External Interface Requirements
-(diagram with different hardware options with user stuffs)
 ### 3.1.1 User Interfaces
 * Landing Page
 ![](https://github.com/Ericsmrk/VR-Chess/blob/main/images/Landing_wireframe.png)
@@ -222,7 +221,7 @@ When the King is put into checkmate, the software presents the user with informa
 Information about winning the game is displayed to the user.
 * FR28: Board Game Logic: Detect Loss (IP)  
 Information about losing the game is displayed to the user.
-* FR29: Website Deployment
+* FR29: Website Deployment  
 The website is deployed to the cloud using Horoku.  
 ### 3.3 UML Diagrams
 ![](https://github.com/Ericsmrk/VR-Chess/blob/main/images/Login_Sequence_diagram.png)
