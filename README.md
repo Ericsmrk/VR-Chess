@@ -31,13 +31,13 @@
 <br />
 <div align="center">
   <a>
-    <img src="https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess/blob/main/Deliverables/SRS_SDD.md" alt="Logo" width="400" height="400">
+    <img src="https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess/blob/main/images/game1.PNG" alt="Logo" width="800" height="400">
   </a>
 <h3 align="center">!!!VR CHESS!!!</h3>
 
   <p align="center">
     <br />
-    <a href="C:\Users\Erics\Documents\GitHub\VR-Chess\Deliverables\SRS_SDD.md"><strong>Explore the Documentation »</strong></a>
+    <a href="https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess/blob/main/Deliverables/SRS_SDD.md"><strong>Explore the Documentation »</strong></a>
     <br />
     <br />
     <a href="https://github.com/Ericsmrk/FS-CSCI150-F22-Team1-VR-Chess/blob/main/Deliverables/VR-Chess-Milestone1.pdf"><strong>View Milestone One Slides »</strong></a>
